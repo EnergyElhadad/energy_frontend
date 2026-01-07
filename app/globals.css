@@ -12,6 +12,19 @@
 
 }
 
+@theme {
+  --color-primary: #64AD46;
+  --color-black: #161716;
+  --color-WetGray: #464643;
+  --color-signalGray: #8E8D89;
+  --color-SmokyWhite: #EFECE9;
+  --color-Background: #F6F8FF;
+  --color-Alert: #F45959;
+  --color-Stroke: #E6E6E6;
+
+}
+
+
 /* @media (prefers-color-scheme: dark) {
   :root {
     --background: #0a0a0a;
@@ -23,4 +36,35 @@ body {
   background: var(--background);
   color: var(--foreground);
   font-family: var(--font-cairo-sans), Arial, Helvetica, sans-serif;
+}
+
+
+
+
+@layer components {
+  .spinner {
+    margin: 3.2rem auto 1.6rem;
+    width: 60px;
+    aspect-ratio: 1;
+    border-radius: 50%;
+    border: 8px solid var(--color-primary);
+    border-right-color: var(--color-primary);
+    animation: rotate 1s infinite linear;
+  }
+
+  .spinner-mini {
+    margin: 0;
+    width: 20px;
+    aspect-ratio: 1;
+    border-radius: 50%;
+    border: 2px solid var(--color-primary);
+    border-right-color: transparent;
+    animation: rotate 1s infinite linear;
+  }
+
+  @keyframes rotate {
+    to {
+      transform: rotate(1turn);
+    }
+  }
 }

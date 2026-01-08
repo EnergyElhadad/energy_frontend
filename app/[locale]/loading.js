@@ -1,8 +1,8 @@
 
-import Spinner from "./_components/Spinner";
+import { Spinner } from "@/shared/components/Spinner";
 
 const Loading = () => {
   return <Spinner />;
 };
 
-export default  Loading;
+export default Loading;

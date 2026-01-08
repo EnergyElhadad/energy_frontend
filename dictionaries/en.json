@@ -1,0 +1,28 @@
+{
+  "HomePage": {
+    "welcome": "Welcome to Energy Elhadad"
+  },
+  "Auth": {
+    "signin_title": "Welcome to Energy Elhadad",
+    "signin_subtitle": "Use your email or mobile number to login",
+    "signup_title": "Welcome to Energy Elhadad",
+    "signup_subtitle": "Create a new account",
+    "verify_title": "Verify Mobile Number",
+    "verify_subtitle": "A code will be sent to your mobile number",
+    "name_label": "Name",
+    "mobile_label": "Mobile Number",
+    "email_label": "Email / Mobile Number",
+    "signup_email_label": "Email",
+    "password_label": "Password",
+    "forgot_password": "Forgot Password?",
+    "login_button": "Log In",
+    "signup_button": "Create New Account",
+    "resend_button": "Resend",
+    "no_account": "Don't have an account?",
+    "have_account": "Already have an account?",
+    "agree_terms": "Agree to",
+    "terms_link": "Terms and Conditions",
+    "password_hide": "Hide password",
+    "password_show": "Show password"
+  }
+}

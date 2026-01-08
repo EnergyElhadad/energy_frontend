@@ -1,0 +1,28 @@
+{
+  "HomePage": {
+    "welcome": "مرحبا بك في موقعنا"
+  },
+  "Auth": {
+    "signin_title": "مرحبا بك في إينيرجي الحداد",
+    "signin_subtitle": "استخدم بريدك الإلكتروني أو رقم الهاتف لتسجيل الدخول",
+    "signup_title": "مرحبا بك في إينيرجي الحداد",
+    "signup_subtitle": "إنشاء حساب جديد",
+    "verify_title": "تأكيد رقم الجوال",
+    "verify_subtitle": "سيتم إرسال كود إلي رقم الجوال",
+    "name_label": "الاسم",
+    "mobile_label": "رقم الموبايل",
+    "email_label": "البريد الإلكتروني / رقم الموبايل",
+    "signup_email_label": "البريد الإلكتروني",
+    "password_label": "كلمة المرور",
+    "forgot_password": "نسيت كلمة المرور؟",
+    "login_button": "تسجيل الدخول",
+    "signup_button": "إنشاء حساب جديد",
+    "resend_button": "إعادة ارسال",
+    "no_account": "ليس لديك حساب؟",
+    "have_account": "هل لديك حساب؟",
+    "agree_terms": "الموافقة على",
+    "terms_link": "الشروط والأحكام",
+    "password_hide": "إخفاء كلمة المرور",
+    "password_show": "عرض كلمة المرور"
+  }
+}

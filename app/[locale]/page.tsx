@@ -1,5 +1,5 @@
 import { useTranslations } from "next-intl";
-import { LanguageSwitcher } from "@/components/LanguageSwitcher";
+import { LanguageSwitcher } from "@/shared/components/LanguageSwitcher";
 
 export default function Home() {
   const t = useTranslations('HomePage');

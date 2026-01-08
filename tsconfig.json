@@ -19,6 +19,9 @@
       }
     ],
     "paths": {
+      "@/features/*": ["./features/*"],
+      "@/shared/*": ["./shared/*"],
+      "@/core/*": ["./core/*"],
       "@/*": ["./*"]
     }
   },

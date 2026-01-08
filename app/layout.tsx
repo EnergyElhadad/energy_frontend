@@ -4,14 +4,17 @@ import "./globals.css";
 
 const cairo = Cairo({
   variable: "--font-cairo-sans",
-  subsets: ["latin"],
+  subsets: ["arabic"],
 });
 
 
 
 export const metadata: Metadata = {
-  title: "Energy Elhadad",
-  description: "Energy Elhadad Website",
+  title: {
+    default: "اينيرجي الحداد - حلول الطاقة المتكاملة",
+    template: "%s | اينيرجي الحداد",
+  },
+  description: "منصة اينيرجي الحداد الرسمية لتقديم أفضل حلول الطاقة والخدمات المتميزة في مجال الطاقة المتجددة والطاقة التقليدية. اكتشف منتجاتنا وخدماتنا الآن. ",
 };
 
 export default function RootLayout({
@@ -20,11 +23,13 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="ar" dir="rtl">
       <body
         className={`${cairo.variable} antialiased`}
       >
+        <main  className="min-h-screen flex items-center justify-center bg-Background @container container ">      
         {children}
+        </main>
       </body>
     </html>
   );

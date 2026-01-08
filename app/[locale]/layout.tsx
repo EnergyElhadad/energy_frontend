@@ -26,18 +26,16 @@ export default async function RootLayout({
   children: React.ReactNode;
   params: Promise<{ locale: string }>;
 }>) {
-    const { locale } = await params;
+  const { locale } = await params;
   const currentLang = locale === 'en' ? 'en' : 'ar';
   const messages = await getMessages();
 
   return (
     <html lang={currentLang} dir={currentLang === 'ar' ? 'rtl' : 'ltr'}>
       <body className={`${cairo.variable} antialiased`}>
-        <main  className="min-h-screen flex items-center justify-center bg-Background @container container ">      
-          <NextIntlClientProvider messages={messages}>
-            {children}
-          </NextIntlClientProvider>
-        </main>
+        <NextIntlClientProvider messages={messages}>
+          {children}
+        </NextIntlClientProvider>
       </body>
     </html>
   );

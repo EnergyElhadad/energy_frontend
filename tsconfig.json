@@ -19,6 +19,7 @@
       }
     ],
     "paths": {
+      "@/public/*": ["./public/*"],
       "@/features/*": ["./features/*"],
       "@/shared/*": ["./shared/*"],
       "@/core/*": ["./core/*"],

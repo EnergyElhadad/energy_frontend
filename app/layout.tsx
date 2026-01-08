@@ -27,7 +27,7 @@ export default function RootLayout({
       <body
         className={`${cairo.variable} antialiased`}
       >
-        <main  className="min-h-screen flex items-center justify-center bg-Background @container ">      
+        <main  className="min-h-screen flex items-center justify-center bg-Background @container container ">      
         {children}
         </main>
       </body>

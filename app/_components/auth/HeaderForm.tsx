@@ -5,7 +5,7 @@ export function HeaderForm({title,subtitle}:Readonly<{title:string;subtitle:stri
          {title}
         </h1>
 
-        <p className="text-sm text-gray-500 text-center mb-6 font-normal @max-sm:text-[0.875rem]">
+        <p className="text-sm text-WetGray text-center mb-6 font-normal @max-sm:text-[0.875rem]">
        {subtitle}
         </p>
     </>

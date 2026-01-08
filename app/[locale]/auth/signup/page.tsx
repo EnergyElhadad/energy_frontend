@@ -1,6 +1,6 @@
-import { AuthLayout } from "@/app/_components/auth/AuthLayout";
-import { HeaderForm } from "@/app/_components/auth/HeaderForm";
-import SignupForm from "@/app/_components/auth/SignupForm";
+import { AuthLayout } from "@/app/[locale]/_components/auth/AuthLayout";
+import { HeaderForm } from "@/app/[locale]/_components/auth/HeaderForm";
+import SignupForm from "@/app/[locale]/_components/auth/SignupForm";
 
 export const metadata = {
   title: "إنشاء حساب جديد",

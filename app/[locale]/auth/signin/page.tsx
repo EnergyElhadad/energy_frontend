@@ -1,6 +1,6 @@
-import { AuthLayout } from "@/app/_components/auth/AuthLayout";
-import { HeaderForm } from "@/app/_components/auth/HeaderForm";
-import LoginForm from "@/app/_components/auth/SigninForm";
+import { AuthLayout } from "@/app/[locale]/_components/auth/AuthLayout";
+import { HeaderForm } from "@/app/[locale]/_components/auth/HeaderForm";
+import LoginForm from "@/app/[locale]/_components/auth/SigninForm";
 
 export const metadata = {
   title: "تسجيل الدخول",

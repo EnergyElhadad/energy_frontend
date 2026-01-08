@@ -1,7 +1,7 @@
-import { AuthLayout } from "@/app/_components/auth/AuthLayout";
-import { HeaderForm } from "@/app/_components/auth/HeaderForm";
-import { SubmitButton } from "@/app/_components/auth/SubmitButton";
-import VerifyOtpForm from "@/app/_components/auth/VerifyOtpForm";
+import { AuthLayout } from "@/app/[locale]/_components/auth/AuthLayout";
+import { HeaderForm } from "@/app/[locale]/_components/auth/HeaderForm";
+import { SubmitButton } from "@/app/[locale]/_components/auth/SubmitButton";
+import VerifyOtpForm from "@/app/[locale]/_components/auth/VerifyOtpForm";
 
 
 export default function VerifyOtpPage() {

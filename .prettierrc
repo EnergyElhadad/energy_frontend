@@ -1,0 +1,6 @@
+{
+  "tailwindAttributes": [
+    "myClassList",
+    "/data-.*/"
+  ]
+}

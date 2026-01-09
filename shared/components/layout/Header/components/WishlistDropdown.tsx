@@ -1,23 +1,24 @@
 'use client';
 
 import { useTranslations } from 'next-intl';
-import { BagIcon } from '@/shared/components/icons/Bag';
-import { useCart } from '../hooks/useCart';
+import { HeartIcon } from '@/shared/components/icons/Heart';
+import { useWishlist } from '../hooks/useWishlist';
 import { CartItem } from './CartItem';
 import { HeaderDropdownButton } from './HeaderDropdownButton';
 
-export const CartDropdown = () => {
+export const WishlistDropdown = () => {
   const t = useTranslations('Header');
-  const { items, updateQuantity } = useCart();
+  const { items, updateQuantity } = useWishlist();
 
   return (
     <HeaderDropdownButton
-      icon={<BagIcon className="text-primary" />}
+      icon={<HeartIcon className="text-primary" />}
       badgeCount={items.length}
-      aria-label={t('cart')}
-      dropdownTitle={t('cart')}
-      href='/cart'
-      linkText={t('go_to_cart')}
+      href='/wishlist'
+      linkText={t('got_to_wishlist')}
+      aria-label={t('wishlist')}
+      dropdownTitle={t('wishlist')}
+
       trigger="hover"
     >
       {items.map((item) => (

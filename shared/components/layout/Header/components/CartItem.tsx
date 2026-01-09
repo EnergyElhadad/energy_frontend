@@ -1,7 +1,7 @@
 'use client';
 
 import Image from "next/image";
-import { Counter } from "./Counter";
+import { Counter } from "@/shared/components/ui/Counter";
 
 interface Product {
   id: string | number;

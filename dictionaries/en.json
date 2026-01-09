@@ -24,5 +24,10 @@
     "terms_link": "Terms and Conditions",
     "password_hide": "Hide password",
     "password_show": "Show password"
+  },
+  "Header": {
+    "search_placeholder": "Search for a product",
+    "wishlist": "Wishlist",
+    "cart": "Shopping Cart"
   }
 }

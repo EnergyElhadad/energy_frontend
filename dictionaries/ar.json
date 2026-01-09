@@ -24,5 +24,12 @@
     "terms_link": "الشروط والأحكام",
     "password_hide": "إخفاء كلمة المرور",
     "password_show": "عرض كلمة المرور"
+  },
+  "Header": {
+    "search_placeholder": "ابحث عن منتج",
+    "wishlist": "قائمة المفضلة",
+    "cart": "السلة",
+    "got_to_wishlist": "الذهاب إلى قائمة المفضلة",
+    "go_to_cart": "الذهاب إلى السلة"
   }
 }

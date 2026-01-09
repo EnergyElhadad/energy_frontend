@@ -1,3 +1,5 @@
+'use client';
+
 import { MinusIcon } from '../../../icons/Minus'
 import { PlusIcon } from '../../../icons/Plus'
 
@@ -27,19 +29,19 @@ export const Counter = ({
   }
 
   return (
-    <div className="flex items-center border border-Stroke rounded-[8px] h-[40px] ">
+    <div className="flex items-center border border-Stroke rounded-[8px] h-9 sm:h-[40px]">
       <button
         onClick={handleIncrease}
-        className="flex items-center justify-center w-[45px] h-[40px] cursor-pointer border-e border-Stroke hover:bg-[#F5F5F5] hover:text-[#000]"
+        className="flex items-center justify-center w-9 sm:w-[45px] h-9 sm:h-[40px] cursor-pointer border-e border-Stroke hover:bg-[#F5F5F5] hover:text-[#000]"
       >
         <PlusIcon />
       </button>
-      <div className="flex items-center justify-center w-[45px] h-[40px]">
-        <span className="text-[14px]">{value}</span>
+      <div className="flex items-center justify-center w-9 sm:w-[45px] h-9 sm:h-[40px]">
+        <span className="text-[13px] sm:text-[14px]">{value}</span>
       </div>
       <button
         onClick={handleDecrease}
-        className="flex items-center justify-center w-[45px] h-[40px] cursor-pointer border-s border-Stroke hover:bg-[#F5F5F5] hover:text-[#000]"
+        className="flex items-center justify-center w-9 sm:w-[45px] h-9 sm:h-[40px] cursor-pointer border-s border-Stroke hover:bg-[#F5F5F5] hover:text-[#000]"
       >
         <MinusIcon />
       </button>

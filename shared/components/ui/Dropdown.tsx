@@ -117,9 +117,11 @@ export const Dropdown = ({
     }
   };
 
+  const isNativeTag = typeof trigger.type === 'string';
+
   const triggerWithProps = cloneElement(trigger, {
     onClick: handleClick,
-    active: isOpen,
+    ...(isNativeTag ? { 'data-active': isOpen ? 'true' : undefined } : { active: isOpen }),
     className: `${trigger.props.className || ''} ${isOpen ? activeClassName : ''}`.trim(),
     'aria-expanded': isOpen,
     'aria-haspopup': true,

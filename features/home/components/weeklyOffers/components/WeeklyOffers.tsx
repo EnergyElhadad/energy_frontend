@@ -11,7 +11,7 @@ const products = [
     id: 1,
     title:
       "Mini Charger PRO | Dual Port (Type-C & Type-A) + 2 Outlets | Fast Charging",
-    image: "/images/show-1.png",
+    image: "/images/weekOffers/show-1.webp",
     price: 500,
     oldPrice: 650,
     badge: "خصم 25%",
@@ -57,12 +57,14 @@ export default function WeeklyOffers() {
             <div className="absolute end-3 top-3 z-3 flex -translate-y-100 items-center justify-center gap-3 transition-all duration-300 ease-in-out group-hover:translate-y-0">
               <Link
                 href={"#"}
+                aria-label="View product details"
                 className="bg-primary/80 flex h-10.5 w-10.5 items-center justify-center rounded-full text-white"
               >
                 <EyeIcon />
               </Link>
               <Link
                 href={"#"}
+                aria-label="Share product"
                 className="bg-primary/80 flex h-10.5 w-10.5 items-center justify-center rounded-full text-white"
               >
                 <ShareIcon />
@@ -79,7 +81,7 @@ export default function WeeklyOffers() {
 
               {/* Image */}
               <div className="relative mb-4 min-h-63.75 w-full">
-                <Image src={product.image} alt={product.title} fill />
+                <Image src={product.image} alt={product.title} width={268} height={255} />
               </div>
             </div>
 
@@ -116,7 +118,10 @@ export default function WeeklyOffers() {
                   أضف للسلة
                 </Link>
 
-                <button className="text-Stroke hover:Alert border-SmokyWhite hover:border-primary cursor-pointer rounded border bg-transparent p-2.75 transition">
+                <button
+                  aria-label="Add to wishlist"
+                  className="text-Stroke hover:Alert border-SmokyWhite hover:border-primary cursor-pointer rounded border bg-transparent p-2.75 transition"
+                >
                   {<HeartIcon />}
                 </button>
               </div>

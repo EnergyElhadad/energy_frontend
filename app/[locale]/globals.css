@@ -38,13 +38,13 @@ body {
 
 @layer components {
   .container {
-    width: 100%;
-    max-width: 1200px;
+    width: 100% !important;
+    max-width: 1230px !important;
     margin: 0 auto;
     /* min-width: 100%; */
-    padding: 0 1rem;
+    padding-inline: 15px !important;
   }
-
+  /* 
   @media (min-width: 640px) {
     .container {
       padding: 0 2rem;
@@ -55,7 +55,7 @@ body {
     .container {
       padding: 0 3rem;
     }
-  }
+  } */
 
   /* Hero Slider Pagination */
   /* Base style */

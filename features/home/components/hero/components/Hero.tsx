@@ -34,11 +34,17 @@ export default function Hero() {
       </Swiper>
 
       {/* Navigation */}
-      <button className="hero-prev absolute top-1/2 left-6 z-20 hidden h-10 w-10 -translate-y-1/2 items-center justify-center rounded-full border border-white/40 text-white hover:bg-white/20 md:flex">
+      <button
+        aria-label="Previous slide"
+        className="hero-prev absolute top-1/2 left-6 z-20 hidden h-10 w-10 -translate-y-1/2 items-center justify-center rounded-full border border-white/40 text-white hover:bg-white/20 md:flex"
+      >
         <ArrowLeftIcon />
       </button>
 
-      <button className="hero-next absolute top-1/2 right-6 z-20 hidden h-10 w-10 -translate-y-1/2 items-center justify-center rounded-full border border-white/40 text-white hover:bg-white/20 md:flex">
+      <button
+        aria-label="Next slide"
+        className="hero-next absolute top-1/2 right-6 z-20 hidden h-10 w-10 -translate-y-1/2 items-center justify-center rounded-full border border-white/40 text-white hover:bg-white/20 md:flex"
+      >
         <ArrowRightIcon />
       </button>
 

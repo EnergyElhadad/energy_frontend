@@ -1,10 +1,20 @@
 import Image from "next/image";
 import Link from "next/link";
 
+
+
 export default function HeroContent() {
   return (
     <div className="relative h-full w-full">
-      <Image src={"/images/hero.webp"} alt="Hero Banner" fill />
+      <Image
+        src={"/images/hero.webp"}
+        alt="Hero Banner"
+        priority
+        fill
+        loading="eager"
+        sizes="100vw"
+        className="object-cover"
+      />
 
       <div className="absolute inset-0 bg-linear-to-l from-black/90 to-black/20 rtl:bg-linear-to-r" />
 

@@ -4,7 +4,7 @@ import React from 'react'
 
 const layout = ({ children }: { children: React.ReactNode }) => {
   return (
-    <main className="min-h-screen w-full bg-gray-50">
+    <main className="min-h-screen w-full">
       <AnnouncementBar text="شحن مجاني للطلبات فوق 500 جنيه | خصومات تصل إلى 50% على منتجات مختارة" />
       <Header />
       {children}

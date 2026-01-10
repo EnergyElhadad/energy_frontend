@@ -1,3 +1,6 @@
+import Hero from "@/features/home/components/hero/components/Hero";
+import ShopByCategory from "@/features/home/components/marketing/components/ShopByCategory";
+import WeeklyOffers from "@/features/home/components/weeklyOffers/components/WeeklyOffers";
 import { useTranslations } from "next-intl";
 
 export default function Home() {
@@ -5,7 +8,9 @@ export default function Home() {
   return (
 
     <main className="space-y-8">
-      <h1 className="text-4xl font-bold text-center text-primary">{t('welcome')}</h1>
+      <Hero />
+      <ShopByCategory />
+      <WeeklyOffers />
     </main>
 
   );

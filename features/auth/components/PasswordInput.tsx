@@ -3,7 +3,7 @@
 import { useTranslations } from "next-intl";
 
 import { useState } from "react";
-import { EyeIcon } from "@/shared/components/icons/EyeIcon";
+import { EyeIcon } from "@/shared/components/icons/Eye";
 import { EyeOffIcon } from "@/shared/components/icons/EyeOffIcon";
 
 export function PasswordInput() {

@@ -57,16 +57,6 @@ export interface HeaderActionButtonProps {
   className?: string;
 }
 
-export interface HeaderDropdownButtonProps {
-  icon: ReactNode;
-  badgeCount?: number;
-  dropdownTitle: string;
-  trigger?: "click" | "hover";
-  children: ReactNode;
-  className?: string;
-  "aria-label"?: string;
-}
-
 export interface CartItemProps {
   product: Product;
   quantity: number;

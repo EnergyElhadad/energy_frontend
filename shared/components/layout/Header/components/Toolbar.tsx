@@ -16,6 +16,8 @@ export const Toolbar = () => {
       <CartDropdown />
 
 
+
+
     </div>
   );
 };

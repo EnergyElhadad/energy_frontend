@@ -9,21 +9,18 @@
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --font-sans: var(--font-cairo-sans);
-
 }
 
 @theme {
-  --color-primary: #64AD46;
+  --color-primary: #64ad46;
   --color-black: #161716;
   --color-WetGray: #464643;
-  --color-signalGray: #8E8D89;
-  --color-SmokyWhite: #EFECE9;
-  --color-Background: #F6F8FF;
-  --color-Alert: #F45959;
-  --color-Stroke: #E6E6E6;
-
+  --color-signalGray: #8e8d89;
+  --color-SmokyWhite: #efece9;
+  --color-Background: #f6f8ff;
+  --color-Alert: #f45959;
+  --color-Stroke: #e6e6e6;
 }
-
 
 /* @media (prefers-color-scheme: dark) {
   :root {
@@ -38,11 +35,7 @@ body {
   font-family: var(--font-cairo-sans), Arial, Helvetica, sans-serif;
 }
 
-
-
-
 @layer components {
-
   .container {
     width: 100%;
     margin: 0 auto;
@@ -52,16 +45,83 @@ body {
 
   @media (min-width: 640px) {
     .container {
-      padding: 0 2rem; 
+      padding: 0 2rem;
     }
   }
 
   @media (min-width: 1024px) {
     .container {
-      padding: 0 3rem; 
+      padding: 0 3rem;
     }
   }
 
+  /* Hero Slider Pagination */
+  /* Base style */
+  .hero-prev,
+  .hero-next {
+    color: white;
+    border: 1px solid rgba(255, 255, 255, 0.4);
+    background: transparent;
+    transition: all 0.3s ease;
+  }
+
+  /* Active (clickable) */
+  .hero-prev:not(.swiper-button-disabled),
+  .hero-next:not(.swiper-button-disabled) {
+    background: transparent;
+    color: var(--color-primary) !important;
+    border-color: var(--color-primary) !important;
+    cursor: pointer;
+  }
+
+  /* Disabled state */
+  .hero-prev.swiper-button-disabled,
+  .hero-next.swiper-button-disabled {
+    cursor: not-allowed;
+    color: white !important;
+    border-color: white !important;
+    background: transparent;
+  }
+
+  /* Hero Slider Pagination */
+  /* Base style */
+
+  .hero-pagination .swiper-pagination-bullet {
+    width: 14px !important;
+    height: 14px !important;
+    background: var(--color-primary) !important;
+    opacity: 1;
+    border-radius: 50%;
+    margin: 0 4px;
+    transition: all 0.3s ease;
+    margin: 0 !important;
+  }
+
+  .hero-pagination
+    :not(.swiper-pagination-bullet.swiper-pagination-bullet-active) {
+    background: white !important;
+    opacity: 1 !important;
+  }
+
+  /* Category section */
+  .category-swiper {
+    padding-inline: 30px;
+  }
+
+  .category-swiper .swiper-button-next::after,
+  .category-swiper .swiper-button-prev::after {
+    font-size: 12px;
+    color: var(--color-primary);
+  }
+
+  .catetgory-navigation-wrapper .swiper-button-disabled {
+    border-color: var(--color-signalGray) !important;
+    color: var(--color-signalGray) !important;
+    opacity: 1;
+    cursor: not-allowed;
+  }
+
+  /* Spinner */
 
   .spinner {
     margin: 3.2rem auto 1.6rem;

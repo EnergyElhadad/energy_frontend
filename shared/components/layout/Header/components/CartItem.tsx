@@ -1,4 +1,4 @@
-'use client';
+"use client";
 
 import Image from "next/image";
 import { Counter } from "@/shared/components/ui/Counter";
@@ -17,31 +17,34 @@ interface CartItemProps {
   onQuantityChange: (val: number) => void;
 }
 
-export const CartItem = ({ product, quantity, onQuantityChange }: CartItemProps) => {
+export const CartItem = ({
+  product,
+  quantity,
+  onQuantityChange,
+}: CartItemProps) => {
   return (
-    <div className="flex gap-2 sm:gap-[10px] border border-Stroke rounded-[8px] p-2 sm:p-[8px]">
-      <div className="relative w-20 h-20 sm:w-[112px] sm:h-[106px] shrink-0">
+    <div className="border-Stroke flex gap-2 rounded-[8px] border p-2 sm:gap-[10px] sm:p-[8px]">
+      <div className="relative h-20 w-20 shrink-0 sm:h-[106px] sm:w-[112px]">
         <Image
           src={product.image}
           alt={product.title}
           fill
-          className="object-cover rounded-[4px]"
+          className="rounded-[4px] object-cover"
         />
       </div>
-      <div className="flex flex-col grow justify-between min-w-0">
+      <div className="flex min-w-0 grow flex-col justify-between">
         <div>
-          <h4 className="text-[11px] sm:text-[12px] font-semibold mb-1 line-clamp-2 leading-[1.4]">
+          <h4 className="mb-1 line-clamp-2 text-[11px] leading-[1.4] font-semibold sm:text-[12px]">
             {product.title}
           </h4>
-          <p className="text-[9px] sm:text-[10px] text-signalGray mb-1 sm:mb-2">{product.category}</p>
+          <p className="text-signalGray mb-1 text-[9px] sm:mb-2 sm:text-[10px]">
+            {product.category}
+          </p>
         </div>
 
         <div className="flex items-center justify-between gap-2">
           <div className="w-full max-w-[110px] sm:max-w-[120px]">
-            <Counter
-              value={quantity}
-              onChange={onQuantityChange}
-            />
+            <Counter value={quantity} onChange={onQuantityChange} />
           </div>
         </div>
       </div>

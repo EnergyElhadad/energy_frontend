@@ -16,9 +16,9 @@ export default function HeroContent() {
         className="object-cover"
       />
 
-      <div className="absolute inset-0 bg-linear-to-l from-black/90 to-black/20 rtl:bg-linear-to-r" />
+      <div className="absolute inset-0 bg-linear-to-l from-black/90 to-black/20" />
 
-      <div className="relative z-10 flex h-full items-center justify-start px-24 max-lg:px-10 max-sm:px-6">
+      <div className="relative z-10 flex h-full items-center justify-start px-24 max-lg:px-10 max-sm:px-6 container">
         <div className="max-w-full text-right text-white">
           <h1 className="mb-4 text-[2.5rem] font-bold max-xl:text-2xl max-sm:text-[1rem]">
             وفر حتى 50% على جميع المنتجات

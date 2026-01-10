@@ -1,8 +1,15 @@
 import type { Metadata } from "next";
 import { Cairo } from "next/font/google";
-import "./globals.css";
+import "@/styles/globals.css";
+import "@/styles/swiper.css";
 import { NextIntlClientProvider } from "next-intl";
 import { getMessages } from "next-intl/server";
+import { locales } from "@/core/i18n/i18n.config";
+import { setRequestLocale } from "next-intl/server";
+
+export function generateStaticParams() {
+  return locales.map((locale) => ({ locale }));
+}
 
 const cairo = Cairo({
   variable: "--font-cairo-sans",
@@ -26,6 +33,7 @@ export default async function RootLayout({
   params: Promise<{ locale: string }>;
 }>) {
   const { locale } = await params;
+  setRequestLocale(locale);
   const currentLang = locale === 'en' ? 'en' : 'ar';
   const messages = await getMessages();
 

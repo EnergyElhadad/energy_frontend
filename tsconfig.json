@@ -22,6 +22,7 @@
       "@/public/*": ["./public/*"],
       "@/features/*": ["./features/*"],
       "@/shared/*": ["./shared/*"],
+      "@/styles/*": ["./styles/*"],
       "@/core/*": ["./core/*"],
       "@/*": ["./*"]
     }

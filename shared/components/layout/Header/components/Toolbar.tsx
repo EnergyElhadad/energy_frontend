@@ -2,6 +2,7 @@
 
 import { LanguageSwitcher } from "@/shared/components/LanguageSwitcher";
 import { CartDropdown } from "./CartDropdown";
+import { AuthLinksDropdown } from "./AuthLinksDropdown";
 
 export const Toolbar = () => {
   return (
@@ -16,7 +17,7 @@ export const Toolbar = () => {
       <CartDropdown />
 
 
-
+      <AuthLinksDropdown />
 
     </div>
   );

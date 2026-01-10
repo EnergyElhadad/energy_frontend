@@ -28,6 +28,8 @@
   "Header": {
     "search_placeholder": "Search for a product",
     "wishlist": "Wishlist",
-    "cart": "Shopping Cart"
+    "cart": "Shopping Cart",
+    "signin": "Sign In",
+    "signup": "Sign Up"
   }
 }

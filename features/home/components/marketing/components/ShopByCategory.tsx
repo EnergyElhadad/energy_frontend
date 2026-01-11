@@ -9,6 +9,7 @@ import { ArrowRightIcon } from "@/shared/components/icons/ArrowRight";
 import "swiper/css";
 import "swiper/css/navigation";
 import Image from "next/image";
+import Link from "next/link";
 
 const categories = [
   { id: 1, name: "سماعات", image: "/images/category/cat-1.webp" },
@@ -43,19 +44,23 @@ export default function ShopByCategory() {
         >
           {categories.map((item) => (
             <SwiperSlide key={item.id}>
-              <div className="max-w-[174px] border-Stroke hover:border-primary cursor-pointer rounded-2xl border bg-white px-5 py-6 text-center transition hover:shadow-md">
-                <div className="relative mx-auto mb-2 flex h-[135px] w-[135px] items-center justify-center overflow-hidden rounded-full bg-black/4">
-                  <Image
-                    src={item.image}
-                    alt={item.name}
-                    className="absolute inset-0 m-auto max-h-full max-w-full"
-                    width={135}
-                    height={135}
-                  />
-                </div>
+              <Link href={"#"}>
+                <div className="border-Stroke hover:border-primary mx-auto max-w-43.5 cursor-pointer rounded-2xl border bg-white px-5 py-6 text-center transition hover:shadow-md">
+                  <div className="relative mx-auto mb-2 flex h-33.75 w-33.75 items-center justify-center overflow-hidden rounded-full bg-black/4">
+                    <Image
+                      src={item.image}
+                      alt={item.name}
+                      className="absolute inset-0 m-auto max-h-full max-w-full"
+                      width={135}
+                      height={135}
+                    />
+                  </div>
 
-                <p className="text-xl font-semibold text-black">{item.name}</p>
-              </div>
+                  <p className="text-xl font-semibold text-black">
+                    {item.name}
+                  </p>
+                </div>
+              </Link>
             </SwiperSlide>
           ))}
         </Swiper>
@@ -63,14 +68,14 @@ export default function ShopByCategory() {
         <div className="catetgory-navigation-wrapper">
           <button
             aria-label="Previous category"
-            className="category-prev text-primary border-primary absolute top-1/2 left-6 z-20 hidden h-10 w-10 -translate-y-1/2 items-center justify-center rounded-full border hover:bg-white/20 md:flex"
+            className="category-prev text-primary border-primary absolute top-1/2 left-[-13] z-20 hidden h-10 w-10 -translate-y-1/2 items-center justify-center rounded-full border hover:bg-white/20 md:flex"
           >
             <ArrowLeftIcon />
           </button>
 
           <button
             aria-label="Next category"
-            className="category-next text-primary border-primary absolute top-1/2 right-6 z-20 hidden h-10 w-10 -translate-y-1/2 items-center justify-center rounded-full border hover:bg-white/20 md:flex"
+            className="category-next text-primary border-primary absolute top-1/2 right-[-13] z-20 hidden h-10 w-10 -translate-y-1/2 items-center justify-center rounded-full border hover:bg-white/20 md:flex"
           >
             <ArrowRightIcon />
           </button>

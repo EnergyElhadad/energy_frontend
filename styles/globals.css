@@ -103,3 +103,9 @@ body {
     }
   }
 }
+
+/* fix problem comes from tailwind */
+
+:where(.space-y-8 > :not(:last-child)) {
+  margin-block-end: 0;
+}

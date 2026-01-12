@@ -9,7 +9,7 @@ export function LanguageSwitcher() {
   return (
     <button
       onClick={toggleLanguage}
-      className="flex cursor-pointer items-center gap-[4px]"
+      className="flex cursor-pointer items-center gap-1"
       aria-label={isArabic ? "Switch to English" : "التبديل إلى العربية"}
     >
       <span className="text-WetGray text-[14px]">

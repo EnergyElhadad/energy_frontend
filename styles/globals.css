@@ -106,24 +106,6 @@ body {
     }
   } */
 
-  /* Category section */
-  .category-swiper {
-    padding-inline: 30px;
-  }
-
-  .category-swiper .swiper-button-next::after,
-  .category-swiper .swiper-button-prev::after {
-    font-size: 12px;
-    color: var(--color-primary);
-  }
-
-  .catetgory-navigation-wrapper .swiper-button-disabled {
-    border-color: var(--color-signalGray) !important;
-    color: var(--color-signalGray) !important;
-    opacity: 1;
-    cursor: not-allowed;
-  }
-
   /* Spinner */
 
   .spinner {
@@ -153,6 +135,10 @@ body {
   }
 }
 
+/* fix problem comes from tailwind */
+
+:where(.space-y-8 > :not(:last-child)) {
+  margin-block-end: 0;
 :root {
   --radius: 0.625rem;
   --background: oklch(1 0 0);

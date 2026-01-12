@@ -1,10 +1,10 @@
 import { Link } from "@/core/i18n";
 import Image from "next/image";
-import React from "react";
 import { SocialList } from "./components/SocialList";
 import { LocationIcon } from "@/shared/components/icons/Location";
 import { PhoneIcon } from "@/shared/components/icons/Phone";
 import { MailIcon } from "@/shared/components/icons/Mail";
+import { NewsletterForm } from "./components/NewsletterForm";
 
 export const Footer = () => {
   const quickLinks = [
@@ -107,13 +107,7 @@ export const Footer = () => {
               ))}
             </ul>
 
-            <div className="mt-4">
-              <h4>اشترك في النشرة الإخبارية</h4>
-
-              <div className="flex gap-2">
-                <input type="email" placeholder="بريدك الإلكتروني" />
-              </div>
-            </div>
+            <NewsletterForm />
           </div>
         </div>
       </div>

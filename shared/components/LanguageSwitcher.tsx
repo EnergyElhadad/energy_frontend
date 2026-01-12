@@ -1,7 +1,7 @@
-'use client';
+"use client";
 
-import { useLanguageSwitcher } from '@/shared/hooks/useLanguageSwitcher';
-import Image from 'next/image';
+import { useLanguageSwitcher } from "@/shared/hooks/useLanguageSwitcher";
+import Image from "next/image";
 
 export function LanguageSwitcher() {
   const { toggleLanguage, isArabic } = useLanguageSwitcher();
@@ -9,13 +9,20 @@ export function LanguageSwitcher() {
   return (
     <button
       onClick={toggleLanguage}
-      className="flex items-center gap-[4px] cursor-pointer"
-      aria-label={isArabic ? 'Switch to English' : 'التبديل إلى العربية'}
+      className="flex cursor-pointer items-center gap-[4px]"
+      aria-label={isArabic ? "Switch to English" : "التبديل إلى العربية"}
     >
-      <span className="text-[14px] text-WetGray">
-        {isArabic ? 'English' : 'العربية'}
+      <span className="text-WetGray text-[14px]">
+        {isArabic ? "English" : "العربية"}
       </span>
-      <Image src={isArabic ? '/images/flags/english.svg' : '/images/flags/arabic.svg'} alt={isArabic ? 'English' : 'Arabic'} width={24} height={24} />
+      <Image
+        src={
+          isArabic ? "/images/flags/english.svg" : "/images/flags/arabic.svg"
+        }
+        alt="Language Flag"
+        width={24}
+        height={24}
+      />
     </button>
   );
 }

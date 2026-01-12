@@ -45,6 +45,10 @@
     "products": "المنتجات",
     "special_offers": "العروض الخاصة",
     "contact_us": "تواصل معنا",
-    "terms": "الشروط والاحكام"
+    "terms": "الشروط والاحكام",
+    "facebook_label": "فيسبوك",
+    "twitter_label": "تويتر",
+    "instagram_label": "إنستغرام",
+    "youtube_label": "يوتيوب"
   }
 }

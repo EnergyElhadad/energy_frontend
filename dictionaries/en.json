@@ -43,6 +43,10 @@
     "products": "Products",
     "special_offers": "Special Offers",
     "contact_us": "Contact Us",
-    "terms": "Terms and Conditions"
+    "terms": "Terms and Conditions",
+    "facebook_label": "Facebook",
+    "twitter_label": "Twitter",
+    "instagram_label": "Instagram",
+    "youtube_label": "YouTube"
   }
 }

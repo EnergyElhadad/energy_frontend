@@ -33,5 +33,18 @@
     "go_to_cart": "الذهاب إلى السلة",
     "signin": "تسجيل الدخول",
     "signup": "حساب جديد"
+  },
+  "Footer": {
+    "description": "متجرك الموثوق للمنتجات الكهربائية عالية الجودة بأفضل الأسعار في مصر",
+    "quick_links_title": "روابط سريعة",
+    "contact_share_title": "تواصل معنا",
+    "subscribe_title": "اشترك في النشرة الإخبارية",
+    "email_placeholder": "بريدك الإلكتروني",
+    "subscribe_button": "اشترك",
+    "about": "عن الشركة",
+    "products": "المنتجات",
+    "special_offers": "العروض الخاصة",
+    "contact_us": "تواصل معنا",
+    "terms": "الشروط والاحكام"
   }
 }

@@ -31,5 +31,18 @@
     "cart": "Shopping Cart",
     "signin": "Sign In",
     "signup": "Sign Up"
+  },
+  "Footer": {
+    "description": "Your trusted store for high-quality electrical products at the best prices in Egypt",
+    "quick_links_title": "Quick Links",
+    "contact_share_title": "Contact Us",
+    "subscribe_title": "Subscribe to Newsletter",
+    "email_placeholder": "Your Email",
+    "subscribe_button": "Subscribe",
+    "about": "About Us",
+    "products": "Products",
+    "special_offers": "Special Offers",
+    "contact_us": "Contact Us",
+    "terms": "Terms and Conditions"
   }
 }

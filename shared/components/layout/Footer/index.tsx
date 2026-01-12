@@ -10,7 +10,7 @@ export const Footer = () => {
   return (
     <footer className="bg-white py-12">
       <div className="container">
-        <div className="flex justify-between gap-12">
+        <div className="flex flex-col justify-between gap-12 md:flex-row">
           <div className="min-w-84">
             <Image
               src="/images/footer-logo.svg"

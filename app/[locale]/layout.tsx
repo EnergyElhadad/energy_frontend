@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Cairo } from "next/font/google";
 import "@/styles/globals.css";
 import "@/styles/swiper.css";
+import "@/styles/typography.css";
 import { NextIntlClientProvider } from "next-intl";
 import { getMessages } from "next-intl/server";
 import { locales } from "@/core/i18n/i18n.config";
@@ -34,7 +35,7 @@ export default async function RootLayout({
 }>) {
   const { locale } = await params;
   setRequestLocale(locale);
-  const currentLang = locale === 'en' ? 'en' : 'ar';
+  const currentLang = locale === "en" ? "en" : "ar";
   const messages = await getMessages();
 
   return (

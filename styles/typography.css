@@ -1,0 +1,79 @@
+/* H1 */
+.h1 {
+  font-family: var(--font-cairo-sans);
+  font-size: 40px;
+  font-weight: 700;
+  line-height: normal;
+}
+
+/* H2 */
+.h2 {
+  font-family: var(--font-cairo-sans);
+  font-size: 32px;
+  font-weight: 700;
+  line-height: 42px;
+}
+
+/* H3 */
+.h3 {
+  font-family: var(--font-cairo-sans);
+  font-size: 20px;
+  font-weight: 600;
+  line-height: 28px;
+}
+
+/* title-L */
+.title-l {
+  font-family: var(--font-cairo-sans);
+  font-size: 24px;
+  font-weight: 700;
+  line-height: 147%;
+}
+
+/* title-M */
+.title-m {
+  font-family: var(--font-cairo-sans);
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 147%;
+}
+
+/* title-S */
+.title-s {
+  font-family: var(--font-cairo-sans);
+  font-size: 14px;
+  font-weight: 600;
+  line-height: normal;
+}
+
+/* link-L */
+.link-l {
+  font-family: var(--font-cairo-sans);
+  font-size: 16px;
+  font-weight: 700;
+  line-height: normal;
+}
+
+/* link-M */
+.link-m {
+  font-family: var(--font-cairo-sans);
+  font-size: 14px;
+  font-weight: 500;
+  line-height: normal;
+}
+
+/* bodyText-M */
+.body-m {
+  font-family: var(--font-cairo-sans);
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 24px;
+}
+
+/* bodyText-Sm */
+.body-sm {
+  font-family: var(--font-cairo-sans);
+  font-size: 14px;
+  font-weight: 400;
+  line-height: normal;
+}

@@ -13,6 +13,16 @@
 
 @theme {
   --color-primary: #64ad46;
+  --color-primary-10: #f0f7ed;
+  --color-primary-20: #e0efda;
+  --color-primary-30: #d1e7c8;
+  --color-primary-40: #c1deb5;
+  --color-primary-50: #b1d5a2;
+  --color-primary-60: #a2ce90;
+  --color-primary-70: #93c67e;
+  --color-primary-80: #83bd6b;
+  --color-primary-90: #74b659;
+
   --color-black: #161716;
   --color-WetGray: #464643;
   --color-signalGray: #8e8d89;

@@ -19,7 +19,7 @@ export function LanguageSwitcher() {
         src={
           isArabic ? "/images/flags/english.svg" : "/images/flags/arabic.svg"
         }
-        alt="Language Flag"
+        alt=""
         width={24}
         height={24}
       />

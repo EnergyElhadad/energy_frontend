@@ -13,6 +13,7 @@ export const NewsletterForm = () => {
         <Input
           type="email"
           placeholder={t("email_placeholder")}
+          aria-label={t("email_placeholder")}
           className="bg-Stroke h-auto rounded-[8px] border-none px-3 py-1.5 focus-visible:ring-0 focus-visible:ring-offset-0"
         />
         <Button type="submit" className="w-fit text-white">

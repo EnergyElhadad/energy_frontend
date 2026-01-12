@@ -14,7 +14,7 @@ export const Footer = () => {
           <div className="min-w-84">
             <Image
               src="/images/footer-logo.svg"
-              alt="footer-logo"
+              alt="Energy Elhadad Logo"
               width={100}
               height={100}
             />

@@ -1,5 +1,5 @@
 import { Metadata } from "next";
-import { useTranslations } from "next-intl";
+import { getTranslations, setRequestLocale } from "next-intl/server";
 import { AuthLayout } from "@/features/auth/components/AuthLayout";
 import { HeaderForm } from "@/features/auth/components/HeaderForm";
 import { SignupForm } from "@/features/auth/components/SignupForm";
@@ -11,8 +11,14 @@ export const metadata: Metadata = {
     "قم بإنشاء حساب جديد على منصة إينيرجي الحداد للوصول إلى حلول الطاقة المتكاملة والخدمات المتميزة.",
 };
 
-export default function SigninPage() {
-  const t = useTranslations('Auth');
+export default async function SignupPage({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}) {
+  const { locale } = await params;
+  setRequestLocale(locale);
+  const t = await getTranslations('Auth');
   return (
     <AuthLayout>
       <HeaderForm title={t('signup_title')} subtitle={t('signup_subtitle')} />

@@ -1,11 +1,17 @@
-import { useTranslations } from "next-intl";
+import Hero from "@/features/home/components/hero/components/Hero";
+import ShopByCategory from "@/features/home/components/marketing/components/ShopByCategory";
+import WeeklyOffers from "@/features/home/components/weeklyOffers/components/WeeklyOffers";
+import { getTranslations } from "next-intl/server";
 
-export default function Home() {
-  const t = useTranslations('HomePage');
+export default async function Home() {
+  const t = await getTranslations('HomePage');
+
   return (
 
     <main className="space-y-8">
-      <h1 className="text-4xl font-bold text-center text-primary">{t('welcome')}</h1>
+      <Hero />
+      <ShopByCategory />
+      <WeeklyOffers />
     </main>
 
   );

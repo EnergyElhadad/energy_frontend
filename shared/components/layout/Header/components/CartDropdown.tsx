@@ -1,16 +1,16 @@
-'use client';
+"use client";
 
-import { useTranslations } from 'next-intl';
-import { BagIcon } from '@/shared/components/icons/Bag';
-import { useCart } from '../hooks/useCart';
-import { CartItem } from './CartItem';
-import { Dropdown } from '@/shared/components/ui/Dropdown';
-import { HeaderActionButton } from './HeaderActionButton';
+import { useTranslations } from "next-intl";
+import { BagIcon } from "@/shared/components/icons/Bag";
+import { useCart } from "../hooks/useCart";
+import { CartItem } from "./CartItem";
+import { Dropdown } from "@/shared/components/ui/Dropdown";
+import { HeaderActionButton } from "./HeaderActionButton";
 
-import { Link } from '@/core/i18n';
+import { Link } from "@/core/i18n";
 
 export const CartDropdown = () => {
-  const t = useTranslations('Header');
+  const t = useTranslations("Header");
   const { items, updateQuantity } = useCart();
 
   return (
@@ -19,14 +19,14 @@ export const CartDropdown = () => {
         <HeaderActionButton
           icon={<BagIcon className="text-primary" />}
           badgeCount={items.length}
-          aria-label={t('cart')}
+          aria-label={t("cart")}
         />
       }
       triggerMode="hover"
     >
       <div className="">
-        <h3 className="text-[14px] font-semibold mb-[7px]">{t('cart')}</h3>
-        <div className="flex flex-col gap-[8px] max-h-[300px] overflow-y-auto custom-scrollbar">
+        <h3 className="mb-[7px] text-[14px] font-semibold">{t("cart")}</h3>
+        <div className="custom-scrollbar flex max-h-[300px] flex-col gap-[8px] overflow-y-auto">
           {items.map((item) => (
             <CartItem
               key={item.id}
@@ -36,8 +36,11 @@ export const CartDropdown = () => {
             />
           ))}
         </div>
-        <Link href='/cart' className="text-[14px] font-semibold h-[42px] w-full flex items-center justify-center border border-primary rounded-[8px] text-primary mt-[12px] transition-all duration-300 ease-in-out hover:bg-primary hover:text-white">
-          {t('go_to_cart')}
+        <Link
+          href="/cart"
+          className="border-primary text-primary hover:bg-primary mt-[12px] flex h-[42px] w-full items-center justify-center rounded-[8px] border text-[14px] font-semibold transition-all duration-300 ease-in-out hover:text-white"
+        >
+          {t("go_to_cart")}
         </Link>
       </div>
     </Dropdown>

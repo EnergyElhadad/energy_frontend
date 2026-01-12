@@ -1,6 +1,5 @@
 {
-  "tailwindAttributes": [
-    "myClassList",
-    "/data-.*/"
+  "plugins": [
+    "prettier-plugin-tailwindcss"
   ]
 }

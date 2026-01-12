@@ -38,13 +38,13 @@ body {
 
 @layer components {
   .container {
-    width: 100%;
-    max-width: 1200px;
+    width: 100% !important;
+    max-width: 1230px !important;
     margin: 0 auto;
     /* min-width: 100%; */
-    padding: 0 1rem;
+    padding-inline: 15px !important;
   }
-
+  /* 
   @media (min-width: 640px) {
     .container {
       padding: 0 2rem;
@@ -55,7 +55,27 @@ body {
     .container {
       padding: 0 3rem;
     }
+  } */
+
+  /* Category section */
+  .category-swiper {
+    padding-inline: 30px;
   }
+
+  .category-swiper .swiper-button-next::after,
+  .category-swiper .swiper-button-prev::after {
+    font-size: 12px;
+    color: var(--color-primary);
+  }
+
+  .catetgory-navigation-wrapper .swiper-button-disabled {
+    border-color: var(--color-signalGray) !important;
+    color: var(--color-signalGray) !important;
+    opacity: 1;
+    cursor: not-allowed;
+  }
+
+  /* Spinner */
 
   .spinner {
     margin: 3.2rem auto 1.6rem;

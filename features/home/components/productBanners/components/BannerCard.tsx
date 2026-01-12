@@ -7,21 +7,21 @@ type Props = {
   urlImage: string;
 };
 
-const BannerCard: React.FC<Props> = ({
+export const BannerCard: React.FC<Props> = ({
   title,
   descritption,
   textLink,
   urlImage,
 }) => {
   return (
-    <article>
+    <article className="w-full max-w-147">
       <div className="overflow-hidden rounded-sm" aria-label="banner">
         <div className="relative z-2 flex min-h-57.25 w-full max-w-147 items-center">
           <Image
             src={urlImage}
             fill
             alt="banner"
-            className="absolute inset-0 h-full w-full object-cover"
+            className="absolute inset-0 h-full w-full object-cover ltr:-scale-x-100"
           />
 
           <div className="relative z-10 space-y-2 px-8 py-6 text-start">
@@ -36,5 +36,3 @@ const BannerCard: React.FC<Props> = ({
     </article>
   );
 };
-
-export default BannerCard;

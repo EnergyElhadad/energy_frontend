@@ -1,0 +1,61 @@
+import { StarIcon } from "@/shared/components/icons/Star";
+import Image from "next/image";
+
+type ReviwT = {
+  id: number;
+  name: string;
+  date: string;
+  rating: number;
+  avatar: string;
+  text: string;
+};
+type Props = {
+  review: ReviwT;
+};
+
+export const ReviewCard: React.FC<Props> = ({ review }) => {
+  return (
+    <div className="border-Stroke mx-auto flex max-w-[384px] gap-4 rounded-lg border bg-white p-6">
+      {/* Header */}
+      <Image
+        src={review.avatar}
+        alt={review.name}
+        width={50}
+        height={50}
+        className="h-12.5 w-12.5 shrink-0 overflow-hidden rounded-full object-cover"
+      />
+      <div>
+        <div className="mb-4 flex items-center justify-between">
+          <div className="flex items-center gap-4">
+            <div>
+              <p className="mb-1 text-sm font-medium text-black">
+                {review.name}
+              </p>
+              {/* Rating */}
+              <div className="flex items-center gap-1">
+                {Array.from({ length: 5 }).map((_, i) => (
+                  <span
+                    key={i}
+                    className={`text-sm ${
+                      i < review.rating ? "text-[#FFC62A]" : "text-[#D6D6D6]"
+                    }`}
+                  >
+                    <StarIcon />
+                  </span>
+                ))}
+              </div>
+            </div>
+          </div>
+          {/* date */}
+          <p className="text-sm font-normal text-[#666666]">{review.date}</p>
+        </div>
+        {/* Text */}
+        <p className="text-WetGray text-sm leading-relaxed font-normal">
+          {review.text}
+        </p>
+      </div>
+    </div>
+  );
+};
+
+

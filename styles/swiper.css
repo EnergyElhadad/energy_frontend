@@ -29,6 +29,11 @@
 /* Hero Slider Pagination */
 /* Base style */
 
+.hero-pagination {
+  position: absolute;
+  inset-inline-start: -50%;
+  transform: translateX(50%);
+}
 .hero-pagination .swiper-pagination-bullet {
   width: 14px !important;
   height: 14px !important;
@@ -44,4 +49,49 @@
   :not(.swiper-pagination-bullet.swiper-pagination-bullet-active) {
   background: white !important;
   opacity: 1 !important;
+}
+
+/* Category section */
+.category-swiper {
+  padding-inline: 30px;
+}
+
+.category-swiper .swiper-button-next::after,
+.category-swiper .swiper-button-prev::after,
+.review-swiper .swiper-button-next::after,
+.review-swiper .swiper-button-prev::after {
+  font-size: 12px;
+  color: var(--color-primary);
+}
+
+.catetgory-navigation-wrapper .swiper-button-disabled,
+.review-navigation-wrapper .swiper-button-disabled {
+  border-color: var(--color-signalGray) !important;
+  color: var(--color-signalGray) !important;
+  opacity: 1;
+  cursor: not-allowed;
+}
+/* Review Pagination */
+
+.review-pagination .swiper-pagination-bullet {
+  width: 14px !important;
+  height: 14px !important;
+  background: var(--color-primary) !important;
+  opacity: 1;
+  border-radius: 50%;
+  margin: 0 4px;
+  transition: all 0.3s ease;
+  margin: 0 !important;
+}
+
+.review-pagination
+  :not(.swiper-pagination-bullet.swiper-pagination-bullet-active) {
+  background: var(--color-primary) !important;
+  opacity: 30% !important;
+}
+
+.review-pagination {
+  position: absolute;
+  inset-inline-start: -50%;
+  transform: translateX(50%);
 }

@@ -1,7 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 
-export default function HeroContent() {
+export const HeroContent = () => {
   return (
     <div className="relative h-full w-full">
       <Image
@@ -10,8 +10,6 @@ export default function HeroContent() {
         fill
         priority
         loading="eager"
-        sizes="100vw"
-        className="object-cover"
       />
 
       <div className="absolute inset-0 bg-linear-to-l from-black/90 to-black/20" />
@@ -36,4 +34,4 @@ export default function HeroContent() {
       </div>
     </div>
   );
-}
+};

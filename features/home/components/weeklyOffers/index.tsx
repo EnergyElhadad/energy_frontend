@@ -1,7 +1,7 @@
 // app/components/ProductsSection.tsx
-import HeaderSection from "@/shared/components/HeaderSection";
+import { HeaderSection } from "@/shared/components/ui/HeaderSection";
 import OfferCard from "@/shared/components/OfferCard";
-import OffersSwipper from "./OffersSwipper";
+import { OffersSwipper } from "./components/OffersSwipper";
 
 const products = [
   {
@@ -44,7 +44,7 @@ const products = [
   },
 ];
 
-export default function WeeklyOffers() {
+export const WeeklyOffers = () => {
   return (
     <section className="bg-Background py-16">
       <div className="container">
@@ -58,4 +58,4 @@ export default function WeeklyOffers() {
       </div>
     </section>
   );
-}
+};

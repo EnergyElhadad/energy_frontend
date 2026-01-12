@@ -1,13 +1,10 @@
-import BannerCard from "./BannerCard";
+import { BannerCard } from "./components/BannerCard";
 
-export default function ProductBanners() {
+export const ProductBanners = () => {
   return (
-    <section
-      className="bg-Background hidden py-10 lg:block"
-      aria-label="Featured Products"
-    >
+    <section className="bg-Background py-10" aria-label="Featured Products">
       <div className="container">
-        <div className="grid grid-cols-2 gap-6">
+        <div className="grid grid-cols-1 place-items-center gap-6 lg:grid-cols-2">
           <BannerCard
             title="سماعات"
             descritption="أفضل صوت نقي"
@@ -24,4 +21,4 @@ export default function ProductBanners() {
       </div>
     </section>
   );
-}
+};

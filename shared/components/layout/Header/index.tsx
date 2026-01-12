@@ -4,8 +4,8 @@ import { Nav } from "./components/Nav";
 const Header = () => {
   return (
     <header>
-      {/* <MainHeader />
-      <Nav /> */}
+      <MainHeader />
+      <Nav />
     </header>
   );
 };

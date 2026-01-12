@@ -1,8 +1,9 @@
-import Hero from "@/features/home/components/hero/components/Hero";
-import MainBanner from "@/features/home/components/MainBanner";
-import ShopByCategory from "@/features/home/components/marketing/components/ShopByCategory";
-import ProductBanners from "@/features/home/components/productBanners/components/ProductBanners";
-import WeeklyOffers from "@/features/home/components/weeklyOffers/components/WeeklyOffers";
+import { CustomerReviews } from "@/features/home/components/CustomerReviews";
+import { Hero } from "@/features/home/components/Hero";
+import { MainBanner } from "@/features/home/components/MainBanner";
+import { ShopByCategory } from "@/features/home/components/ShopByCategory";
+import { ProductBanners } from "@/features/home/components/ProductBanners";
+import { WeeklyOffers } from "@/features/home/components/WeeklyOffers";
 import { WhyChooseUs } from "@/features/home/components/WhyChooseUs";
 import { getTranslations } from "next-intl/server";
 
@@ -16,6 +17,7 @@ export default async function Home() {
       <WeeklyOffers />
       <ProductBanners />
       <WhyChooseUs />
+      <CustomerReviews />
       <MainBanner />
     </main>
   );

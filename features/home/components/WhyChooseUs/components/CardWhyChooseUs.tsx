@@ -6,7 +6,7 @@ type Props = {
   content: string;
 };
 
-const CardWhyChooseUs: React.FC<Props> = ({ icon, title, content }) => {
+export const CardWhyChooseUs: React.FC<Props> = ({ icon, title, content }) => {
   return (
     <div className="border-Stroke/7 flex items-center gap-3 rounded-lg border bg-white p-6">
       <div className="text-primary bg-primary/10 flex h-16 w-16 items-center justify-center rounded-full">
@@ -23,5 +23,3 @@ const CardWhyChooseUs: React.FC<Props> = ({ icon, title, content }) => {
     </div>
   );
 };
-
-export default CardWhyChooseUs;

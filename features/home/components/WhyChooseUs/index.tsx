@@ -1,14 +1,14 @@
 import React from "react";
-import HeaderWhyChooseUs from "./components/HeaderWhyChooseUs";
+import { HeaderWhyChooseUs } from "./components/HeaderWhyChooseUs";
 import { QualityIcon } from "@/shared/components/icons/Quality";
 import { SupportIcon } from "@/shared/components/icons/Support";
 import { SaftyPayIcon } from "@/shared/components/icons/SaftyPay";
-import CardWhyChooseUs from "./components/CardWhyChooseUs";
+import { CardWhyChooseUs } from "./components/CardWhyChooseUs";
 
 export const WhyChooseUs = () => {
   return (
     <section
-      className="bg-Background hidden py-10 lg:block"
+      className="bg-Background py-10"
       aria-labelledby="why-choose-us-heading "
     >
       <div className="container">

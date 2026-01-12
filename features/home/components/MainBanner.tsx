@@ -1,12 +1,12 @@
 import Image from "next/image";
 import Link from "next/link";
 
-const MainBanner = () => {
+export const MainBanner = () => {
   return (
     <section className="bg-Background py-12.5">
       <div className="container">
         <div className="overflow-hidden rounded-lg" aria-label="main banner ">
-          <div className="relative z-2 flex min-h-81.25 w-full items-center">
+          <div className="relative z-2 min-h-81.25 w-full items-center">
             <picture>
               <source media="(min-width: 768px)" srcSet="/images/hero.webp" />
               <Image
@@ -19,7 +19,7 @@ const MainBanner = () => {
 
             <div className="absolute inset-0 bg-black/50" />
 
-            <div className="relative start-[50%] top-1/2 z-10 translate-x-[50%] space-y-2 px-4 py-2 text-center">
+            <div className="absolute top-1/2 left-1/2 z-10 w-full -translate-x-1/2 -translate-y-1/2 space-y-2 px-4 py-2 text-center">
               <h4 className="text-primary mb-6 text-sm font-normal md:text-[1rem]">
                 عرض لفتره محدوده
               </h4>
@@ -42,5 +42,3 @@ const MainBanner = () => {
     </section>
   );
 };
-
-export default MainBanner;

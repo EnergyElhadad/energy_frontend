@@ -98,7 +98,7 @@ const OfferCard: React.FC<ProductT> = (product) => {
 
           <button
             aria-label="Add to wishlist"
-            className="text-Stroke hover:Alert border-SmokyWhite hover:border-primary cursor-pointer rounded border bg-transparent p-2.75 transition"
+            className="hover:Alert border-SmokyWhite hover:border-primary text-Stroke cursor-pointer rounded border bg-transparent p-2.75 transition"
           >
             {<HeartIcon />}
           </button>

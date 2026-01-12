@@ -16,9 +16,12 @@ export const OffersSwipper: React.FC<ProductsT> = ({ products }) => {
     <div className="swiperWrapper relative lg:hidden">
       <Swiper
         loop={false}
+        autoplay={{ delay: 5000 }}
         spaceBetween={16}
         slidesPerView={1}
         breakpoints={{
+          370: { slidesPerView: 1.4 },
+          400: { slidesPerView: 2 },
           550: { slidesPerView: 2 },
           700: { slidesPerView: 2 },
           768: { slidesPerView: 3 },
@@ -34,5 +37,3 @@ export const OffersSwipper: React.FC<ProductsT> = ({ products }) => {
     </div>
   );
 };
-
-export default OffersSwipper;

@@ -26,6 +26,8 @@ export const metadata: Metadata = {
     "منصة اينيرجي الحداد الرسمية لتقديم أفضل حلول الطاقة والخدمات المتميزة في مجال الطاقة المتجددة والطاقة التقليدية. اكتشف منتجاتنا وخدماتنا الآن. ",
 };
 
+import { SessionProvider } from "@/core/providers/SessionProvider";
+
 export default async function RootLayout({
   children,
   params,
@@ -41,9 +43,11 @@ export default async function RootLayout({
   return (
     <html lang={currentLang} dir={currentLang === "ar" ? "rtl" : "ltr"}>
       <body className={`${cairo.variable} antialiased`}>
-        <NextIntlClientProvider messages={messages}>
-          {children}
-        </NextIntlClientProvider>
+        <SessionProvider>
+          <NextIntlClientProvider messages={messages}>
+            {children}
+          </NextIntlClientProvider>
+        </SessionProvider>
       </body>
     </html>
   );

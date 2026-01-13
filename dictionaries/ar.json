@@ -23,7 +23,19 @@
     "agree_terms": "الموافقة على",
     "terms_link": "الشروط والأحكام",
     "password_hide": "إخفاء كلمة المرور",
-    "password_show": "عرض كلمة المرور"
+    "password_show": "عرض كلمة المرور",
+    "invalid_phone_number": "رقم موبايل مصري غير صحيح",
+    "password_required": "كلمة المرور مطلوبة",
+    "invalid_credentials": "بيانات الدخول غير صحيحة",
+    "generic_error": "حدث خطأ ما",
+    "phone_label": "رقم الموبايل",
+    "profile": "حسابي",
+    "orders": "الطلبات",
+    "logout_button": "تسجيل الخروج",
+    "logout_confirm_title": "هل أنت متأكد أنك تريد تسجيل الخروج؟",
+    "logout_confirm_desc": "ستحتاج إلى تسجيل الدخول مرة أخرى للوصول إلى حسابك.",
+    "confirm": "تأكيد",
+    "cancel": "إلغاء"
   },
   "Header": {
     "search_placeholder": "ابحث عن منتج",

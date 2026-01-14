@@ -1,5 +1,5 @@
-import { StarIcon } from "@/shared/components/icons/Star";
 import Image from "next/image";
+import Rating from "./Rating";
 
 type ReviwT = {
   id: number;
@@ -31,19 +31,7 @@ export const ReviewCard: React.FC<Props> = ({ review }) => {
               <p className="mb-1 text-sm font-medium text-black">
                 {review.name}
               </p>
-              {/* Rating */}
-              <div className="flex items-center gap-1">
-                {Array.from({ length: 5 }).map((_, i) => (
-                  <span
-                    key={i}
-                    className={`text-sm ${
-                      i < review.rating ? "text-[#FFC62A]" : "text-[#D6D6D6]"
-                    }`}
-                  >
-                    <StarIcon />
-                  </span>
-                ))}
-              </div>
+              <Rating rating={review.rating} />
             </div>
           </div>
           {/* date */}
@@ -57,5 +45,3 @@ export const ReviewCard: React.FC<Props> = ({ review }) => {
     </div>
   );
 };
-
-

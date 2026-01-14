@@ -1,6 +1,6 @@
-'use client';
+"use client";
 
-import { ReactNode, ButtonHTMLAttributes } from 'react';
+import { ReactNode, ButtonHTMLAttributes } from "react";
 
 interface HeaderActionButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   icon: ReactNode;
@@ -19,13 +19,15 @@ export const HeaderActionButton = ({
 }: HeaderActionButtonProps) => {
   return (
     <button
-      className={`flex items-center justify-center w-[40px] h-[40px] rounded-full border border-Stroke relative hover:bg-[#F5F5F5] transition-colors ${active ? "bg-[#F5F5F5]" : ""} ${className}`}
+      className={`border-Stroke hover:bg-primary-20 relative flex h-[40px] w-[40px] items-center justify-center rounded-full border transition-colors ${active ? "bg-[#F5F5F5]" : ""} ${className}`}
       {...props}
     >
       {icon}
 
       {badgeCount !== undefined && badgeCount > 0 && (
-        <span className={`absolute top-[-6px] right-[-6px] w-[16px] h-[16px] ${badgeColor} text-white text-[12px] rounded-full flex items-center justify-center shadow-sm`}>
+        <span
+          className={`absolute top-[-2px] right-[-2px] h-[16px] w-[16px] ${badgeColor} flex items-center justify-center rounded-full text-[12px] text-white shadow-sm`}
+        >
           {badgeCount}
         </span>
       )}

@@ -1,24 +1,26 @@
-'use client';
+"use client";
 
 import { LanguageSwitcher } from "@/shared/components/LanguageSwitcher";
 import { CartDropdown } from "./CartDropdown";
 import { AuthLinksDropdown } from "./AuthLinksDropdown";
+import { UserMenu } from "./UserMenu";
+import { useSession } from "next-auth/react";
+import { WishlistDropdown } from "./WishlistDropdown";
 
 export const Toolbar = () => {
+  const { status } = useSession();
+
   return (
-    <div className="flex items-center gap-[15px] sm:gap-[24px] shrink-0">
+    <div className="flex shrink-0 items-center gap-[15px] sm:gap-[24px]">
       <div className="hidden sm:block">
         <LanguageSwitcher />
       </div>
 
-      {/* TODO : Add WishlistDropdown When Authenticated */}
-      {/* <WishlistDropdown /> */}
+      {status === "authenticated" && <WishlistDropdown />}
 
       <CartDropdown />
 
-
-      <AuthLinksDropdown />
-
+      {status === "authenticated" ? <UserMenu /> : <AuthLinksDropdown />}
     </div>
   );
 };

@@ -1,36 +1,85 @@
 "use client";
-import { useTranslations } from "next-intl";
-import { PasswordInput } from "./PasswordInput";
-import { FooterForm } from "./FooterForm";
-import { SubmitButton } from "./SubmitButton";
 
+import { PasswordInput } from "./PasswordInput";
+import { SubmitButton } from "./SubmitButton";
+import { useSignin } from "../hooks/useSignin";
+import { useLocale } from "next-intl";
 
 export function SigninForm() {
-  const t = useTranslations('Auth');
+  const {
+    t,
+    register,
+    handleSubmit,
+    onSubmit,
+    errors,
+    isSubmitting,
+    globalError,
+  } = useSignin();
+
+  const locale = useLocale();
+
   return (
-    <form onSubmit={(e) => e.preventDefault()} className="w-full max-w-md mx-auto">
+    <form onSubmit={handleSubmit(onSubmit)} className="mx-auto w-full max-w-md">
       <div className="mb-2">
-        <label className="block text-sm mb-2 font-semibold @max-sm:text-xs @max-sm:">
-          {t('email_label')}
+        <label
+          className="@max-sm: mb-2 block text-sm font-semibold @max-sm:text-xs"
+          htmlFor="phone_number"
+        >
+          {t("phone_label") || "Phone Number"}
         </label>
         <input
-          type="text"
-          className="w-full min-h-11.25 rounded-sm border bg-Background border-Stroke px-3 py-2 focus:outline-none focus:ring-2 focus:ring-primary  @max-sm:min-h-8"
+          type="tel"
+          dir={locale === "ar" ? "rtl" : "ltr"}
+          id="phone_number"
+          {...register("phone_number")}
+          className={`bg-Background border-Stroke focus:ring-primary min-h-11.25 w-full rounded-sm border px-3 py-2 focus:ring-2 focus:outline-none @max-sm:min-h-8 ${
+            errors.phone_number ? "border-red-500 focus:ring-red-500" : ""
+          }`}
         />
+        {errors.phone_number && (
+          <p className="mt-1 text-xs text-red-500">
+            {errors.phone_number.message}
+          </p>
+        )}
       </div>
 
       <div className="mb-2">
-        <label className="block text-sm mb-2 font-semibold  @max-sm:text-xs">{t('password_label')}</label>
-        <PasswordInput />
+        <label
+          className="mb-2 block text-sm font-semibold @max-sm:text-xs"
+          htmlFor="password"
+        >
+          {t("password_label")}
+        </label>
+        <PasswordInput
+          id="password"
+          {...register("password")}
+          className={errors.password ? "border-red-500 focus:ring-red-500" : ""}
+        />
+        {errors.password && (
+          <p className="mt-1 text-xs text-red-500">{errors.password.message}</p>
+        )}
       </div>
 
       <div className="mb-6 @max-sm:mb-4">
-        <a href="#" className="text-sm text-signalGray hover:underline @max-sm:text-xs ">
-          {t('forgot_password')}
+        <a
+          href="#"
+          className="text-signalGray text-sm hover:underline @max-sm:text-xs"
+        >
+          {t("forgot_password")}
         </a>
       </div>
 
-      <SubmitButton text={t('login_button')} />
+      {globalError && (
+        <div className="mb-4 text-center text-sm font-medium text-red-500">
+          {globalError}
+        </div>
+      )}
+
+      <SubmitButton
+        text={t("login_button")}
+        disabled={isSubmitting}
+        isLoading={isSubmitting}
+      />
     </form>
   );
 }

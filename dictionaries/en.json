@@ -23,7 +23,19 @@
     "agree_terms": "Agree to",
     "terms_link": "Terms and Conditions",
     "password_hide": "Hide password",
-    "password_show": "Show password"
+    "password_show": "Show password",
+    "invalid_phone_number": "Invalid Egyptian phone number",
+    "password_required": "Password is required",
+    "invalid_credentials": "Invalid credentials",
+    "generic_error": "Something went wrong",
+    "phone_label": "Mobile Number",
+    "profile": "Profile",
+    "orders": "Orders",
+    "logout_button": "Log Out",
+    "logout_confirm_title": "Are you sure you want to log out?",
+    "logout_confirm_desc": "You will need to sign in again to access your account.",
+    "confirm": "Confirm",
+    "cancel": "Cancel"
   },
   "Header": {
     "search_placeholder": "Search for a product",

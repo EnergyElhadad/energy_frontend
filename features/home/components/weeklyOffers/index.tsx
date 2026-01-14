@@ -3,6 +3,8 @@ import { HeaderSection } from "@/shared/components/ui/HeaderSection";
 import OfferCard from "@/shared/components/OfferCard";
 import { OffersSwipper } from "./components/OffersSwipper";
 
+import { OfferModal } from "./components/OfferModal";
+
 const products = [
   {
     id: 1,
@@ -56,6 +58,7 @@ export const WeeklyOffers = () => {
         </div>
         <OffersSwipper products={products} />
       </div>
+      <OfferModal />
     </section>
   );
 };

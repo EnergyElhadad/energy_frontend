@@ -1,39 +1,37 @@
-import { ReactNode } from "react";
+import { Spinner } from "@/shared/components/ui/spinner";
 
 type SubmitButtonProps = {
   text: string;
-  variant?: "default" | "otp" | "submit";
-  icon?: ReactNode;
-  iconPosition?: "left" | "right";
+  variant?: "default" | "otp";
+  disabled?: boolean;
+  isLoading?: boolean;
 };
 
 export function SubmitButton({
   text,
   variant = "default",
-  icon,
-  iconPosition = "left",
+  disabled,
+  isLoading = false,
 }: SubmitButtonProps) {
   const base =
-    "font-bold py-2.5 rounded-sm transition cursor-pointer @max-sm:text-sm";
+    "font-bold py-2.5 rounded-sm transition cursor-pointer @max-sm:text-sm disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2";
 
   const variants = {
     default: "w-full bg-primary text-white hover:bg-primary text-[1rem]",
-    otp: "w-fit bg-transparent text-primary hover:bg-transparent hover:underline flex mx-auto font-normal text-[0.875rem] p-[5px]",
-    submit:
-      "w-full bg-primary/90 text-white hover:bg-primary text-[1rem] h-[58px]",
+    otp: "w-fit bg-transparent text-primary hover:bg-transparent  hover:underline flex mx-auto font-normal text-[0.875rem] p-[5px]",
   };
 
   return (
     <button
-      className={`${base} ${variants[variant]} ${icon ? "flex items-center justify-center gap-2" : ""}`}
+      className={`${base} ${variants[variant]}`}
+      disabled={disabled || isLoading}
     >
-      {icon && iconPosition === "left" && (
-        <span className="inline-flex">{icon}</span>
+      {isLoading && (
+        <Spinner
+          className={variant === "default" ? "text-white" : "text-primary"}
+        />
       )}
-      <span>{text}</span>
-      {icon && iconPosition === "right" && (
-        <span className="inline-flex">{icon}</span>
-      )}
+      {text}
     </button>
   );
 }

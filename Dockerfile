@@ -7,10 +7,10 @@ FROM node:22-alpine AS deps
 WORKDIR /app
 
 # Copy package files
-COPY package.json package-lock.json* ./
+COPY package.json ./
 
 # Install dependencies
-RUN npm ci --only=production
+RUN npm install --production --frozen-lockfile=false
 
 # Stage 2: Build the application
 FROM node:22-alpine AS builder

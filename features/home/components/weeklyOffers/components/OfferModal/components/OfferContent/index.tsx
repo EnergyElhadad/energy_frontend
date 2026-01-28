@@ -23,7 +23,7 @@ export const OfferContent = () => {
       <DialogFooter className="mt-6 h-14">
         {/* <DialogClose asChild></DialogClose> */}
         <SubmitButton
-          variant="submit"
+          variant="default"
           text="أضف المنتج"
           icon={<CartIcon />}
           iconPosition="left"

@@ -2,15 +2,15 @@
 # Multi-Stage Production Dockerfile for Next.js Frontend
 # ================================
 
-# Stage 1: Install dependencies
+# Stage 1: Install all dependencies (including dev for build)
 FROM node:22-alpine AS deps
 WORKDIR /app
 
 # Copy package files
 COPY package.json ./
 
-# Install dependencies
-RUN npm install --production --frozen-lockfile=false
+# Install ALL dependencies (needed for build)
+RUN npm install
 
 # Stage 2: Build the application
 FROM node:22-alpine AS builder

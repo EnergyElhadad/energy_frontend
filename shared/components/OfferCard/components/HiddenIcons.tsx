@@ -1,4 +1,4 @@
-import { OfferModal } from "@/features/home/components/WeeklyOffers/components/OfferModal";
+import { OfferModal } from "@/features/home/components/weeklyOffers/components/OfferModal";
 import { EyeIcon } from "../../icons/Eye";
 import Link from "next/link";
 import { ShareIcon } from "../../icons/Share";

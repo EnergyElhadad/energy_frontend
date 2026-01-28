@@ -25,8 +25,6 @@ export const OfferContent = () => {
         <SubmitButton
           variant="default"
           text="أضف المنتج"
-          icon={<CartIcon />}
-          iconPosition="left"
         />
         <Link
           href="#"

@@ -1,39 +1,28 @@
-"use client";
+'use client';
 
-import { Navigation } from "swiper/modules";
-import { Swiper, SwiperSlide } from "swiper/react";
+import { Navigation } from 'swiper/modules';
+import { Swiper, SwiperSlide } from 'swiper/react';
 
-import { HeaderSection } from "@/shared/components/ui/HeaderSection";
-import { ArrowLeftIcon } from "@/shared/components/icons/ArrowLeft";
-import { ArrowRightIcon } from "@/shared/components/icons/ArrowRight";
-import "swiper/css";
-import "swiper/css/navigation";
-import Image from "next/image";
-import Link from "next/link";
+import { HeaderSection } from '@/shared/components/ui/HeaderSection';
+import { ArrowLeftIcon } from '@/shared/components/icons/ArrowLeft';
+import { ArrowRightIcon } from '@/shared/components/icons/ArrowRight';
+import 'swiper/css';
+import 'swiper/css/navigation';
+import { ShopByCategoryCard } from './components/ShopByCategoryCard';
+import { Category } from '@/shared/types/category';
 
-const categories = [
-  { id: 1, name: "سماعات", image: "/images/category/cat-1.webp" },
-  { id: 2, name: "ساعات", image: "/images/category/cat-2.webp" },
-  { id: 3, name: "شواحن", image: "/images/category/cat-2.webp" },
-  { id: 4, name: "كابلات", image: "/images/category/cat-1.webp" },
-  { id: 5, name: "سماعات", image: "/images/category/cat-2.webp" },
-  { id: 7, name: "كابلات", image: "/images/category/cat-3.webp" },
-  { id: 8, name: "كابلات", image: "/images/category/cat-3.webp" },
-  { id: 9, name: "كابلات", image: "/images/category/cat-3.webp" },
-];
-
-export const ShopByCategory = () => {
+export const ShopByCategory = ({ categories }: { categories: Category[] }) => {
   return (
     <section className="relative container py-16">
-      <HeaderSection title="تسوق حسب الفئة" textlink="عرض الكل" urlLink="#" />
+      <HeaderSection title="تسوق حسب الفئة" textlink="عرض الكل" urlLink="/products" />
       <div className="swiperWrapper relative">
         <Swiper
           modules={[Navigation]}
           autoplay={{ delay: 5000 }}
           loop={false}
           navigation={{
-            nextEl: ".category-next",
-            prevEl: ".category-prev",
+            nextEl: '.category-next',
+            prevEl: '.category-prev',
           }}
           spaceBetween={8}
           slidesPerView={1}
@@ -46,25 +35,9 @@ export const ShopByCategory = () => {
           }}
           className="category-swiper"
         >
-          {categories.map((item) => (
-            <SwiperSlide key={item.id}>
-              <Link href={"#"}>
-                <div className="border-Stroke hover:border-primary mx-auto max-w-43.5 cursor-pointer rounded-2xl border bg-white px-4 py-5 text-center transition hover:shadow-md md:px-5 md:py-6">
-                  <div className="relative mx-auto mb-2 flex h-26 w-26 items-center justify-center overflow-hidden rounded-full bg-black/4 md:h-33.75 md:w-33.75">
-                    <Image
-                      src={item.image}
-                      alt={item.name}
-                      className="absolute inset-0 m-auto max-h-full max-w-full"
-                      width={135}
-                      height={135}
-                    />
-                  </div>
-
-                  <p className="text-xl font-semibold text-black">
-                    {item.name}
-                  </p>
-                </div>
-              </Link>
+          {categories.map(({ id, name, image }) => (
+            <SwiperSlide key={id}>
+              <ShopByCategoryCard name={name} image={image || ''} id={id} />
             </SwiperSlide>
           ))}
         </Swiper>

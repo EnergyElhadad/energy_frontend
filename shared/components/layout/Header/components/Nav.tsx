@@ -1,17 +1,23 @@
-import { AboutDropdown } from './AboutDropdown'
-import { CategoriesDropdown } from './CategoriesDropdown'
-import { Link } from '@/core/i18n'
+import { AboutDropdown } from "./AboutDropdown";
+import { CategoriesDropdown } from "./CategoriesDropdown";
+import { Link } from "@/core/i18n";
+import { getCategories } from "@/shared/services/categories.server";
 
-export const Nav = () => {
+export const Nav = async () => {
+  const categoriesData = await getCategories();
+
   return (
-    <nav className='border-t border-Stroke py-[15px]'>
+    <nav className="border-Stroke border-t py-[15px]">
       <div className="container">
-        <ul className='flex items-center gap-[24px] list-none'>
-          <li className='border-e border-Stroke pe-[24px]'>
-            <CategoriesDropdown />
+        <ul className="flex list-none items-center gap-[24px]">
+          <li className="border-Stroke border-e pe-[24px]">
+            <CategoriesDropdown initialData={categoriesData} />
           </li>
           <li>
-            <Link href='/' className='text-[14px] text-WetGray font-semibold hover:text-primary transition-colors'>
+            <Link
+              href="/"
+              className="text-WetGray hover:text-primary text-[14px] font-semibold transition-colors"
+            >
               الرئيسية
             </Link>
           </li>
@@ -19,12 +25,15 @@ export const Nav = () => {
             <AboutDropdown />
           </li>
           <li>
-            <Link href='/contact' className='text-[14px] text-WetGray font-semibold hover:text-primary transition-colors'>
+            <Link
+              href="/contact"
+              className="text-WetGray hover:text-primary text-[14px] font-semibold transition-colors"
+            >
               تواصل معنا
             </Link>
           </li>
         </ul>
       </div>
     </nav>
-  )
-}
+  );
+};

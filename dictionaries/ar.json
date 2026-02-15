@@ -1,4 +1,7 @@
 {
+  "Common": {
+    "link_copied": "تم نسخ الرابط"
+  },
   "HomePage": {
     "welcome": "مرحبا بك في موقعنا"
   },
@@ -9,11 +12,14 @@
     "signup_subtitle": "إنشاء حساب جديد",
     "verify_title": "تأكيد رقم الجوال",
     "verify_subtitle": "سيتم إرسال كود إلي رقم الجوال",
-    "name_label": "الاسم",
+    "forget_password_title": "نسيت كلمة المرور؟",
+    "forget_password_subtitle": "أدخل رقم هاتفك وسنرسل لك كود لإعادة التعيين",
+    "full_name_label": "الاسم",
     "mobile_label": "رقم الموبايل",
     "email_label": "البريد الإلكتروني / رقم الموبايل",
     "signup_email_label": "البريد الإلكتروني",
     "password_label": "كلمة المرور",
+    "confirm_password_label": "تأكيد كلمة المرور",
     "forgot_password": "نسيت كلمة المرور؟",
     "login_button": "تسجيل الدخول",
     "signup_button": "إنشاء حساب جديد",
@@ -28,6 +34,12 @@
     "password_required": "كلمة المرور مطلوبة",
     "invalid_credentials": "بيانات الدخول غير صحيحة",
     "generic_error": "حدث خطأ ما",
+    "name_required": "الاسم مطلوب",
+    "invalid_email": "البريد الإلكتروني غير صحيح",
+    "password_min_length": "كلمة المرور يجب أن تكون 6 أحرف على الأقل",
+    "terms_required": "يجب الموافقة على الشروط والأحكام",
+    "passwords_do_not_match": "كلمتا المرور غير متطابقتين",
+    "signup_success": "تم إنشاء الحساب بنجاح",
     "phone_label": "رقم الموبايل",
     "profile": "حسابي",
     "orders": "الطلبات",
@@ -35,7 +47,12 @@
     "logout_confirm_title": "هل أنت متأكد أنك تريد تسجيل الخروج؟",
     "logout_confirm_desc": "ستحتاج إلى تسجيل الدخول مرة أخرى للوصول إلى حسابك.",
     "confirm": "تأكيد",
-    "cancel": "إلغاء"
+    "cancel": "إلغاء",
+    "too_many_requests": "الكثير من الطلبات. برجاء الانتظار ",
+    "seconds": " ثانية.",
+    "verify_button": "تأكيد",
+    "send_button": "إرسال",
+    "otp_sent_successfully": "تم إرسال رمز التحقق بنجاح"
   },
   "Header": {
     "search_placeholder": "ابحث عن منتج",
@@ -44,6 +61,7 @@
     "got_to_wishlist": "الذهاب إلى قائمة المفضلة",
     "go_to_cart": "الذهاب إلى السلة",
     "signin": "تسجيل الدخول",
+    "empty_cart": "السلة فارغة",
     "signup": "حساب جديد"
   },
   "Footer": {
@@ -62,5 +80,35 @@
     "twitter_label": "تويتر",
     "instagram_label": "إنستغرام",
     "youtube_label": "يوتيوب"
+  },
+  "SingleProduct": {
+    "stock_remaining": "المتبقى",
+    "units": "وحدة",
+    "reviews": "تقييمات",
+    "add_to_wishlist": "أضف للمفضلة",
+    "share_product": "مشاركة المنتج",
+    "add_to_cart": "اضف للسلة",
+    "quick_buy": "شراء سريع",
+    "select_quantity": "حدد الكمية",
+    "currency": "ج",
+    "out_of_stock": "نفذت الكمية",
+    "general_description": "وصف عام",
+    "technical_specifications": "مواصفات فنية",
+    "out_of": "من",
+    "evaluators": "مقيمين",
+    "add_your_review": "أضف تقييم",
+    "add_your_comment": "أضف تعليقك",
+    "comment_placeholder": "برجاء اضافة تعليقك ..",
+    "post_comment": "نشر تعليق"
+  },
+  "WhyChooseUs": {
+    "quality_title": "ضمان الجودة",
+    "quality_content": "جميع منتجاتنا أصلية ومضمونة",
+    "support_title": "دعم فني 24/7",
+    "support_content": "فريق دعم متاح على مدار الساعة",
+    "secure_payment_title": "دفع آمن",
+    "secure_payment_content": "خيارات دفع متعددة وآمنة",
+    "header_title": "لماذا تختار ENERGY ELHADAD؟",
+    "header_description": "هي شركة متخصصة في توفير وبيع المنتجات والحلول الكهربائية عالية الجودة، حيث نعمل على تلبية احتياجات الأفراد والشركات من خلال مجموعة متكاملة من المنتجات الموثوقة التي تجمع بين الكفاءة، الأمان، والأداء العالي"
   }
 }

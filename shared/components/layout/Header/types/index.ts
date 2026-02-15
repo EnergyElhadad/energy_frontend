@@ -1,20 +1,11 @@
-import { ReactNode } from "react";
+import { ReactNode } from 'react';
+import { CartItem, Product, UseCartReturn } from '@/shared/types/cart';
+
+export { type CartItem, type Product };
 
 // ============================================
 // Product & Item Types
 // ============================================
-
-export interface Product {
-  id: string | number;
-  title: string;
-  category: string;
-  image: string;
-  price?: number;
-}
-
-export interface CartItem extends Product {
-  quantity: number;
-}
 
 export interface WishlistItem extends Product {
   quantity: number;
@@ -53,7 +44,7 @@ export interface HeaderActionButtonProps {
   badgeColor?: string;
   active?: boolean;
   onClick?: () => void;
-  "aria-label"?: string;
+  'aria-label'?: string;
   className?: string;
 }
 
@@ -75,14 +66,7 @@ export interface CounterProps {
 // Hook Return Types
 // ============================================
 
-export interface UseCartReturn {
-  items: CartItem[];
-  count: number;
-  addItem: (product: Product) => void;
-  removeItem: (id: string | number) => void;
-  updateQuantity: (id: string | number, quantity: number) => void;
-  clearCart: () => void;
-}
+export { type UseCartReturn };
 
 export interface UseWishlistReturn {
   items: WishlistItem[];

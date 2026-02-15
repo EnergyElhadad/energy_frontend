@@ -3,9 +3,9 @@
 import { MinusIcon } from "@/shared/components/icons/Minus";
 import { PlusIcon } from "@/shared/components/icons/Plus";
 
-interface CounterProps {
+export interface CounterProps {
   value: number;
-  onChange: (value: number) => void;
+  onChange?: (value: number) => void;
   min?: number;
   max?: number;
   variant?: "default" | "large";
@@ -14,14 +14,16 @@ interface CounterProps {
 const variantStyles = {
   default: {
     container: "h-9 sm:h-[40px] rounded-[8px]",
-    button: "w-9 sm:w-[45px] h-9 sm:h-[40px]",
+    button: "w-9 sm:w-[45px] h-9 sm:h-[40px] text-sm",
     value: "w-9 sm:w-[45px] h-9 sm:h-[40px] text-[13px] sm:text-[14px]",
   },
 
   large: {
-    container: "h-[50px] bg-white rounded-[4px]",
-    button: "w-14 h-[50px]",
-    value: "w-17 h-[50px] text-[16px]",
+    container: "h-[25px]   sm:h-[30px] md:h-[50px] bg-white rounded-[4px]",
+    button:
+      "w-8 h-[25px] sm:w-10 sm:h-[30px]  md:w-14 md:h-[50px] text-[10px]  sm:text-sm md:text-base",
+    value:
+      " w-8 h-[25px]   sm:w-10 sm:h-[30px]   md:w-17 md:h-[50px] text-[10px] sm:text-sm md:text-base",
   },
 };
 
@@ -36,13 +38,13 @@ export const Counter = ({
 
   const handleIncrease = () => {
     if (max === undefined || value < max) {
-      onChange(value + 1);
+      onChange?.(value + 1);
     }
   };
 
   const handleDecrease = () => {
     if (value > min) {
-      onChange(value - 1);
+      onChange?.(value - 1);
     }
   };
 

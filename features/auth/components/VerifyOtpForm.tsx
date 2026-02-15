@@ -1,47 +1,41 @@
-"use client";
-import { useRef, useState } from "react";
+'use client';
+import { InputOTP, InputOTPSlot } from '@/shared/components/ui/input-otp';
+import { Button } from '@/shared/components/ui/Button';
+import { useTranslations } from 'next-intl';
+import { useVerifyOtp } from '../hooks/useVerifyOtp';
+import { useResendOtp } from '../hooks/useResendOtp';
+import { Display } from '@/shared/components/layout/Display';
+import { Spinner } from '@/shared/components/ui/spinner';
+import { SubmitButton } from './SubmitButton';
 
 export function VerifyOtpForm() {
-  const [otp, setOtp] = useState(["", "", "", ""]);
-  const inputsRef = useRef<(HTMLInputElement | null)[]>([]);
+  const t = useTranslations('Auth');
+  const { otp, handleOtpChange, handleSubmit, isSubmitting } = useVerifyOtp();
+  const { handleResendOtp, isResending } = useResendOtp();
 
-  const handleChange = (value: string, index: number) => {
-    if (!/^\d?$/.test(value)) return;
-
-    const newOtp = [...otp];
-    newOtp[index] = value;
-    setOtp(newOtp);
-
-    if (value && index < otp.length - 1) {
-      inputsRef.current[index + 1]?.focus();
-    }
-  };
-
-  const handleKeyDown = (
-    e: React.KeyboardEvent<HTMLInputElement>,
-    index: number
-  ) => {
-    if (e.key === "Backspace" && !otp[index] && index > 0) {
-      inputsRef.current[index - 1]?.focus();
-    }
-  };
   return (
-    <div className="flex justify-center gap-3 mb-6">
-      {otp.map((digit, index) => (
-        <input
-          key={index}
-          ref={(el) => {
-            inputsRef.current[index] = el;
-          }}
-          type="text"
-          inputMode="numeric"
-          maxLength={1}
-          value={digit}
-          onChange={(e) => handleChange(e.target.value, index)}
-          onKeyDown={(e) => handleKeyDown(e, index)}
-          className="w-11.25 h-11.25 text-center text-lg border border-signalGray rounded-sm focus:outline-none focus:border-none focus:ring-2 focus:ring-primary bg-Background"
-        />
-      ))}
-    </div>
+    <>
+      <form className="w-full" onSubmit={handleSubmit}>
+        <InputOTP maxLength={6} value={otp} disabled={isSubmitting} onComplete={handleSubmit} onChange={handleOtpChange}>
+          <div className="mb-6 flex w-full justify-center gap-4">
+            <InputOTPSlot index={0} />
+            <InputOTPSlot index={1} />
+            <InputOTPSlot index={2} />
+            <InputOTPSlot index={3} />
+            <InputOTPSlot index={4} />
+            <InputOTPSlot index={5} />
+          </div>
+        </InputOTP>
+
+        <Button className="h-11.25 w-full">
+          <Display when={isSubmitting}>
+            <Spinner />
+          </Display>
+          {t('verify_button')}
+        </Button>
+      </form>
+
+      <SubmitButton text={t('resend_button')} variant="otp" onClick={handleResendOtp} isLoading={isResending} type="button" />
+    </>
   );
 }

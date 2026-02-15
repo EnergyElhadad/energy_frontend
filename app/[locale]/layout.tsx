@@ -27,6 +27,9 @@ export const metadata: Metadata = {
 };
 
 import { SessionProvider } from "@/core/providers/SessionProvider";
+import QueryProvider from "@/core/providers/QueryProvider";
+import { Toaster } from "@/shared/components/ui/sonner";
+import { DirectionProvider } from "@/core/providers/direction-provider";
 
 export default async function RootLayout({
   children,
@@ -44,9 +47,17 @@ export default async function RootLayout({
     <html lang={currentLang} dir={currentLang === "ar" ? "rtl" : "ltr"}>
       <body className={`${cairo.variable} antialiased`}>
         <SessionProvider>
-          <NextIntlClientProvider messages={messages}>
-            {children}
-          </NextIntlClientProvider>
+          <QueryProvider>
+            <NextIntlClientProvider messages={messages}>
+              <DirectionProvider dir={currentLang === "ar" ? "rtl" : "ltr"}>
+                {children}
+                <Toaster
+                  position="top-center"
+                  swipeDirections={["right", "left"]}
+                />
+              </DirectionProvider>
+            </NextIntlClientProvider>
+          </QueryProvider>
         </SessionProvider>
       </body>
     </html>

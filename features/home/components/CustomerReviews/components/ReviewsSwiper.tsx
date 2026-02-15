@@ -1,45 +1,45 @@
-"use client";
-import { Autoplay, Navigation, Pagination } from "swiper/modules";
-import { Swiper, SwiperSlide } from "swiper/react";
-import { ReviewCard } from "./ReviewCard";
+'use client';
+import { Autoplay, Navigation, Pagination } from 'swiper/modules';
+import { Swiper, SwiperSlide } from 'swiper/react';
+import { ReviewCard } from './ReviewCard';
 
-import { ArrowLeftIcon } from "@/shared/components/icons/ArrowLeft";
-import { ArrowRightIcon } from "@/shared/components/icons/ArrowRight";
-import "swiper/css";
-import "swiper/css/pagination";
+import { ArrowLeftIcon } from '@/shared/components/icons/ArrowLeft';
+import { ArrowRightIcon } from '@/shared/components/icons/ArrowRight';
+import 'swiper/css';
+import 'swiper/css/pagination';
 
 const reviews = [
   {
     id: 1,
-    name: "محمد خالد",
-    date: "13/10/2020",
+    name: 'محمد خالد',
+    date: '13/10/2020',
     rating: 4,
-    avatar: "/images/user.webp",
-    text: "منتجاتهم مميزه جدا وبجوده عاليه. قمت بشراء الكابلات والفيش من هنا وصراحه اسعار جيده وخامات عاليه جدا. شكرا لكم.",
+    avatar: '/images/user.webp',
+    text: 'منتجاتهم مميزه جدا وبجوده عاليه. قمت بشراء الكابلات والفيش من هنا وصراحه اسعار جيده وخامات عاليه جدا. شكرا لكم.',
   },
   {
     id: 2,
-    name: "محمد خالد",
-    date: "13/10/2020",
+    name: 'محمد خالد',
+    date: '13/10/2020',
     rating: 4,
-    avatar: "/images/user.webp",
-    text: "منتجاتهم مميزه جدا وبجوده عاليه. قمت بشراء الكابلات والفيش من هنا وصراحه اسعار جيده وخامات عاليه جدا. شكرا لكم.",
+    avatar: '/images/user.webp',
+    text: 'منتجاتهم مميزه جدا وبجوده عاليه. قمت بشراء الكابلات والفيش من هنا وصراحه اسعار جيده وخامات عاليه جدا. شكرا لكم.',
   },
   {
     id: 3,
-    name: "محمد خالد",
-    date: "13/10/2020",
+    name: 'محمد خالد',
+    date: '13/10/2020',
     rating: 4,
-    avatar: "/images/user.webp",
-    text: "منتجاتهم مميزه جدا وبجوده عاليه. قمت بشراء الكابلات والفيش من هنا وصراحه اسعار جيده وخامات عاليه جدا. شكرا لكم.",
+    avatar: '/images/user.webp',
+    text: 'منتجاتهم مميزه جدا وبجوده عاليه. قمت بشراء الكابلات والفيش من هنا وصراحه اسعار جيده وخامات عاليه جدا. شكرا لكم.',
   },
   {
     id: 4,
-    name: "محمد خالد",
-    date: "13/10/2020",
+    name: 'محمد خالد',
+    date: '13/10/2020',
     rating: 4,
-    avatar: "/images/user.webp",
-    text: "منتجاتهم مميزه جدا وبجوده عاليه. قمت بشراء الكابلات والفيش من هنا وصراحه اسعار جيده وخامات عاليه جدا. شكرا لكم.",
+    avatar: '/images/user.webp',
+    text: 'منتجاتهم مميزه جدا وبجوده عاليه. قمت بشراء الكابلات والفيش من هنا وصراحه اسعار جيده وخامات عاليه جدا. شكرا لكم.',
   },
 ];
 export const ReviewsSwiper = () => {
@@ -47,15 +47,14 @@ export const ReviewsSwiper = () => {
     <div className="swiperWrapper relative">
       <Swiper
         modules={[Navigation, Pagination, Autoplay]}
-        loop={false}
-        // autoplay={{ delay: 5000 }}
-        // dir={currentLocale}
+        // loop={false}
+        autoplay={{ delay: 5000 }}
         navigation={{
-          nextEl: ".review-next",
-          prevEl: ".review-prev",
+          nextEl: '.review-next',
+          prevEl: '.review-prev',
         }}
         pagination={{
-          el: ".review-pagination ",
+          el: '.review-pagination ',
           clickable: true,
         }}
         spaceBetween={16}
@@ -67,7 +66,7 @@ export const ReviewsSwiper = () => {
         }}
         className="review-swiper"
       >
-        {reviews.map((review) => (
+        {reviews.map(review => (
           <SwiperSlide key={review.id}>
             <ReviewCard review={review} />
           </SwiperSlide>

@@ -22,7 +22,7 @@ const addressSchema = z.object({
   building: z.string().min(1, 'Building is required'),
   apartment: z.string().min(1, 'Apartment is required'),
   notes: z.string().optional(),
-  is_default: z.boolean().default(false),
+  is_default: z.boolean(),
 });
 
 type AddressFormValues = z.infer<typeof addressSchema>;

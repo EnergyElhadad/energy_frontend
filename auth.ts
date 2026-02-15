@@ -54,6 +54,7 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
   ],
   pages: {
     signIn: '/signin',
+    error: '/signin', // Redirect auth errors to signin page instead of /api/auth/error
   },
   session: {
     strategy: 'jwt',

@@ -19,7 +19,7 @@ export const Axios = async () => {
   }
 
   return axios.create({
-    baseURL: process.env.NEXT_PUBLIC_API_URL,
+    baseURL: process.env.INTERNAL_API_URL || process.env.NEXT_PUBLIC_API_URL,
     headers,
     httpsAgent: new https.Agent({
       rejectUnauthorized: false,

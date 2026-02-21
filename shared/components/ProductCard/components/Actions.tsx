@@ -1,14 +1,14 @@
-import Link from "next/link";
-import { HeartIcon } from "../../icons/Heart";
-import { toSlug } from "@/shared/utils/slug";
+'use client';
 
-export const Actions = ({
-  id,
-  title,
-}: {
-  id: number | string;
-  title: string;
-}) => {
+import Link from 'next/link';
+import { HeartIcon } from '../../icons/Heart';
+import { toSlug } from '@/shared/utils/slug';
+import { useWishlistToggle } from '@/shared/hooks/useWishlistToggle';
+import { cn } from '@/shared/utils';
+
+export const Actions = ({ id, title, is_in_wishlist }: { id: number | string; title: string; is_in_wishlist?: boolean }) => {
+  const { isInWishlist, toggleWishlist, isLoading } = useWishlistToggle(id, is_in_wishlist);
+
   return (
     <div className="flex h-10.5 items-center justify-between gap-2">
       <Link
@@ -19,10 +19,18 @@ export const Actions = ({
       </Link>
 
       <button
-        aria-label="Add to wishlist"
-        className="hover:Alert border-SmokyWhite hover:border-primary text-Stroke cursor-pointer rounded border bg-transparent p-2.75 transition"
+        onClick={e => {
+          e.stopPropagation();
+          toggleWishlist();
+        }}
+        disabled={isLoading}
+        aria-label={isInWishlist ? 'Remove from wishlist' : 'Add to wishlist'}
+        className={cn(
+          'cursor-pointer rounded border bg-transparent p-2.75 transition',
+          isInWishlist ? 'border-primary text-primary' : 'border-SmokyWhite hover:border-primary text-Stroke'
+        )}
       >
-        {<HeartIcon />}
+        <HeartIcon className={cn(isInWishlist && 'fill-current')} />
       </button>
     </div>
   );

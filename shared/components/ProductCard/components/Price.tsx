@@ -1,12 +1,6 @@
-import { Display } from "../../layout/Display";
+import { Display } from '../../layout/Display';
 
-export const Price = ({
-  oldPrice,
-  price,
-}: {
-  oldPrice?: number;
-  price: number;
-}) => {
+export const Price = ({ oldPrice, price }: { oldPrice?: number; price: number }) => {
   return (
     <div className="mb-3 flex items-center justify-center gap-2">
       <Display when={oldPrice !== undefined}>

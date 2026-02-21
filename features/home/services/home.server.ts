@@ -10,7 +10,7 @@ export interface HomeFeature {
   created_at: string;
 }
 
-interface HomeFeaturesResponse {
+export interface HomeFeaturesResponse {
   message: string;
   status: boolean;
   result: HomeFeature[];

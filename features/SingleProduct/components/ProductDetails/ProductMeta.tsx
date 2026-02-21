@@ -11,7 +11,7 @@ interface ProductMetaProps {
   id?: number;
 }
 
-export const ProductMeta = ({ name, rate_count , reviews_count , id  }: ProductMetaProps) => {
+export const ProductMeta = ({ name, rate_count, reviews_count, id }: ProductMetaProps) => {
   const t = useTranslations('SingleProduct');
   const { handleShare } = useShare();
 
@@ -20,15 +20,19 @@ export const ProductMeta = ({ name, rate_count , reviews_count , id  }: ProductM
       <div className="flex space-x-2">
         <Rating rating={rate_count || 0} />
         <p className="text-signalGray text-sm font-normal">
-          <span>({reviews_count}) {t('reviews')}</span>
+          <span>
+            ({reviews_count}) {t('reviews')}
+          </span>
         </p>
       </div>
-      <div className="flex cursor-pointer space-x-2 border-s ps-4">
-        <div className="text-signalGray hover:text-primary">
-          <HeartIcon />
+      <button>
+        <div className="flex cursor-pointer space-x-2 border-s ps-4">
+          <div className="text-signalGray hover:text-primary">
+            <HeartIcon />
+          </div>
+          <p className="text-signalGray text-sm font-normal">{t('add_to_wishlist')}</p>
         </div>
-        <p className="text-signalGray text-sm font-normal">{t('add_to_wishlist')}</p>
-      </div>
+      </button>
       <div className="flex cursor-pointer space-x-2 border-s ps-4" onClick={() => handleShare({ title: name })}>
         <div className="text-signalGray hover:text-primary">
           <ShareProductIcon />

@@ -12,16 +12,15 @@ export const useCheckout = () => {
     mutationFn: checkout,
     onSuccess: data => {
       queryClient.invalidateQueries({ queryKey: ['cart'] });
+      queryClient.removeQueries({ queryKey: ['order-summary'] });
+
+      if (data.result.requires_online_payment && data.result.payment_link) {
+        window.location.href = data.result.payment_link;
+        return;
+      }
+
       toast.success(data.message);
-      // Redirect to a success page or orders page
-      // router.push(`/orders/${data.result.order_number}`); // Example redirect
-      // For now maybe just redirect to home or clear cart?
-      // The requirement says response has order_number/status.
-      // Let's assume we redirect to orders page or home for now.
-      // Better to ask user where to redirect, but I'll stick to a safe default or just show toast.
-      // Actually, usually after checkout we go to order confirmation.
-      // I'll leave the redirect commented out or simple redirect to home or orders if page exists.
-      router.push('/');
+      router.push('/'); // Redirect to home or success page for cash/manual payments
     },
     onError: error => {
       if (isAxiosError(error)) {

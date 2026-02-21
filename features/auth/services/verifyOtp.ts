@@ -6,7 +6,8 @@ export type VerifyOtpValues = {
 };
 
 export type VerifyOtpResponse = {
-  detail: string;
+  detail?: string;
+  message?: string;
 };
 
 export async function tryVerifyOtp(formData: VerifyOtpValues): Promise<VerifyOtpResponse> {

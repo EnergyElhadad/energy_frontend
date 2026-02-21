@@ -10,6 +10,7 @@ export const usePromoCode = () => {
     mutationFn: applyPromoCode,
     onSuccess: data => {
       queryClient.invalidateQueries({ queryKey: ['cart'] });
+      queryClient.invalidateQueries({ queryKey: ['order-summary'] });
       toast.success(data.message);
     },
     onError: (error: unknown) => {

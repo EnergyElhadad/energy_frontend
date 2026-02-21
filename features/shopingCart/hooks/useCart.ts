@@ -19,7 +19,7 @@ export const useCart = (): UseCartReturn => {
       id: item.product.id,
       title: item.product.name,
       category: '', // TODO: API doesn't provide category for cart items yet
-      image: item.product.primary_image,
+      image: item.product.primary_image || '/images/products/product-placeholder.webp',
       quantity: item.quantity,
       price: item.product.offer_price,
       itemTotal: item.item_total,

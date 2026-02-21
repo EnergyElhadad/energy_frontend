@@ -1,11 +1,17 @@
 'use client';
 import { useState, useEffect } from 'react';
 import { useRouter } from '@/core/i18n';
-import { tryVerifyOtp } from '../services/verifyOtp';
 import { isAxiosError } from 'axios';
 import { toast } from 'sonner';
+import type { VerifyOtpValues, VerifyOtpResponse } from '../services/verifyOtp';
 
-export const useVerifyOtp = () => {
+export type VerifyOtpConfig = {
+  verifyFn: (data: VerifyOtpValues) => Promise<VerifyOtpResponse>;
+  onSuccess: (data: { phone_number: string; otp: string }) => void;
+  fallbackRoute: string;
+};
+
+export const useVerifyOtp = ({ verifyFn, onSuccess, fallbackRoute }: VerifyOtpConfig) => {
   const router = useRouter();
   const [otp, setOtp] = useState('');
   const [phoneNumber, setPhoneNumber] = useState<string | null>(null);
@@ -13,15 +19,14 @@ export const useVerifyOtp = () => {
 
   useEffect(() => {
     const storedPhoneNumber = localStorage.getItem('verify_phone_number');
-    const otpSource = localStorage.getItem('otp_source') || '/signup';
 
     if (!storedPhoneNumber) {
       toast.error('Phone number not found. Please try again.');
-      router.push(otpSource as string);
+      router.push(fallbackRoute);
       return;
     }
     setPhoneNumber(storedPhoneNumber);
-  }, [router]);
+  }, [router, fallbackRoute]);
 
   const handleOtpChange = (value: string) => {
     setOtp(value);
@@ -33,9 +38,8 @@ export const useVerifyOtp = () => {
     }
 
     if (!phoneNumber) {
-      const otpSource = localStorage.getItem('otp_source') || '/signup';
       toast.error('Phone number not found. Please try again.');
-      router.push(otpSource as string);
+      router.push(fallbackRoute);
       return;
     }
 
@@ -47,20 +51,14 @@ export const useVerifyOtp = () => {
     setIsSubmitting(true);
 
     try {
-      const otpSource = localStorage.getItem('otp_source') || '/signup';
-      const response = await tryVerifyOtp({
+      const response = await verifyFn({
         phone_number: phoneNumber,
         otp: otp,
       });
 
-      toast.success(response.detail);
-      if (otpSource === '/signup') {
-        localStorage.removeItem('verify_phone_number');
-        localStorage.removeItem('otp_source');
-        router.push('/signin');
-      } else if (otpSource === '/forgot-password') {
-        router.push('/new-password');
-      }
+      toast.success(response.message || response.detail || 'Verified successfully');
+      onSuccess({ phone_number: phoneNumber, otp });
+      localStorage.removeItem('verify_phone_number');
     } catch (error: unknown) {
       if (isAxiosError(error)) {
         const errorMessage = error.response?.data?.detail || error.response?.data?.message || 'Verification failed';

@@ -52,7 +52,11 @@
     "seconds": " seconds.",
     "verify_button": "Verify",
     "send_button": "Send",
-    "otp_sent_successfully": "OTP sent successfully"
+    "otp_sent_successfully": "OTP sent successfully",
+    "new_password_title": "Set New Password",
+    "new_password_subtitle": "Enter your new password below",
+    "new_password_label": "New Password",
+    "reset_password_button": "Reset Password"
   },
   "Header": {
     "search_placeholder": "Search for a product",
@@ -99,7 +103,11 @@
     "add_your_review": "Add your review",
     "add_your_comment": "Add your comment",
     "comment_placeholder": "Please add your comment ..",
-    "post_comment": "Post Comment"
+    "post_comment": "Post Comment",
+    "no_ratings_yet": "No ratings yet",
+    "be_the_first_to_rate": "Be the first to rate this product",
+    "remove_from_wishlist": "Remove from Wishlist",
+    "product_details": "Product Details"
   },
   "WhyChooseUs": {
     "quality_title": "Quality Guarantee",

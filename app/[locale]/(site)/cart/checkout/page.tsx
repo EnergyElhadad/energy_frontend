@@ -2,6 +2,8 @@ import { CheckoutContent } from '@/features/checkout/components/CheckoutContent'
 import { Breadcrumb } from '@/shared/components/layout/Breadcrumb';
 import { Metadata } from 'next';
 
+export const dynamic = 'force-dynamic';
+
 export const metadata: Metadata = {
   title: 'سلة التسوق',
 };

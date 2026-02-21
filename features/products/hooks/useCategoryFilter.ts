@@ -1,31 +1,17 @@
-"use client";
+'use client';
 
-import { useSearchParams,useRouter } from "next/navigation";
-
-
+import { useFiltersContext } from '../context/FiltersContext';
 
 export const useCategoryFilter = () => {
-
-
-  const router = useRouter();
-  const searchParams = useSearchParams();
+  const { filters, setFilters } = useFiltersContext();
 
   const handleCategoryToggle = (id: string, name: string) => {
-    const current = new URLSearchParams(searchParams.toString());
-
     if (!id || id === 'all') {
-      current.delete('categoryId');
-      current.delete('categoryName');
+      setFilters({ categoryId: undefined, categoryName: undefined });
     } else {
-      current.set('categoryId', id);
-      current.set('categoryName', name);
+      setFilters({ categoryId: id, categoryName: name });
     }
-
-    router.push(`?${current.toString()}`);
   };
-  
 
-  return {
- handleCategoryToggle
-  };
+  return { handleCategoryToggle, selectedCategoryId: filters.categoryId || 'all' };
 };

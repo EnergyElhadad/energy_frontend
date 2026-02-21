@@ -2,10 +2,10 @@ import React from 'react';
 
 import { useInfiniteCategories } from '@/shared/hooks/useInfiniteCategories';
 import { CategoriesResponse } from '@/shared/services/categories';
-import { useSearchParams } from 'next/navigation';
 import { RadioGroup } from '@/shared/components/ui/radio-group';
 import { RadioGroupItem } from '@/shared/components/ui/radio-group';
 import { Label } from '@/shared/components/ui/label';
+import { useCategoryFilter } from '../../../hooks/useCategoryFilter';
 
 interface CategoryFilterProps {
   handleCategoryToggle?: (id: string, name: string) => void;
@@ -14,9 +14,7 @@ interface CategoryFilterProps {
 
 export const CategoryFilter: React.FC<CategoryFilterProps> = ({ handleCategoryToggle, initialCategories }) => {
   const { categories, fetchNextPage, hasNextPage, isFetchingNextPage } = useInfiniteCategories(initialCategories);
-
-  const searchParams = useSearchParams();
-  const selectedCategoryId = searchParams.get('categoryId') || 'all';
+  const { selectedCategoryId } = useCategoryFilter();
 
   return (
     <div className="space-y-2">
@@ -44,9 +42,12 @@ export const CategoryFilter: React.FC<CategoryFilterProps> = ({ handleCategoryTo
         {categories.map(category => (
           <div key={category.id} className="flex items-center gap-2">
             <RadioGroupItem value={category.id.toString()} id={`r${category.id}`} className="peer size-4.5" />
-            <Label htmlFor={`r${category.id}`} className="peer-data-[state=checked]:text-gray600 text-gray400 cursor-pointer text-sm">
-              {category.name}
-            </Label>
+            <div className="flex flex-1 items-center justify-between">
+              <Label htmlFor={`r${category.id}`} className="peer-data-[state=checked]:text-gray600 text-gray400 cursor-pointer text-sm">
+                {category.name}
+              </Label>
+              <span className="text-xs text-[#666]">({category.products_count ?? 0})</span>
+            </div>
           </div>
         ))}
       </RadioGroup>

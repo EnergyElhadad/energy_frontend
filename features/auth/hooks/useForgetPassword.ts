@@ -25,9 +25,8 @@ export function useForgetPassword() {
     try {
       await tryForgetPassword(data);
       localStorage.setItem('verify_phone_number', data.phone_number);
-      localStorage.setItem('otp_source', '/forgot-password');
       toast.success(t('otp_sent_successfully'));
-      router.push('/verify-otp');
+      router.push('/verify-forgot-password');
     } catch (error: unknown) {
       if (isAxiosError(error)) {
         const { message } = error.response?.data || {};

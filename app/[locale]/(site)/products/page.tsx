@@ -1,5 +1,4 @@
-import { ProductFilters } from '@/features/products/components/ProductFilters';
-import { ProductsView } from '@/features/products/components/ProductsView';
+import { ProductsContent } from '@/features/products/components/ProductsContent';
 import { getProducts } from '@/features/products/services/getProducts.server';
 import { getCategories, CategoriesResponse } from '@/shared/services/categories';
 import { Metadata } from 'next';
@@ -8,6 +7,8 @@ import { ProductsResponse } from '@/features/products/types/productsResponse';
 import { Breadcrumb } from '@/shared/components/layout/Breadcrumb';
 import { getCategoryDetails } from '@/shared/services/categoryDetails';
 import { Category } from '@/shared/types/category';
+
+export const dynamic = 'force-dynamic';
 
 export async function generateMetadata({ searchParams }: { searchParams: Promise<{ [key: string]: string | string[] | undefined }> }): Promise<Metadata> {
   const { categoryName } = await searchParams;
@@ -58,15 +59,7 @@ export default async function ProductsPage({ searchParams }: { searchParams: Pro
 
         {/* Main Content */}
         <div className="mx-auto max-w-7xl px-4 pt-4 pb-33">
-          <div className="grid grid-cols-1 gap-6 md:grid-cols-4">
-            {/* Sidebar */}
-            <div className="md:col-span-1">
-              <ProductFilters initialCategories={initialCategories!} />
-            </div>
-
-            {/* Products Logic & View */}
-            <ProductsView initialData={initialData} categeoryDescription={categoryDetails?.name || 'الكل'} />
-          </div>
+          <ProductsContent initialData={initialData} initialCategories={initialCategories!} categeoryDescription={categoryDetails?.name || 'الكل'} />
         </div>
       </div>
     </main>

@@ -28,7 +28,13 @@ export const OfferModal = ({ onClose, product }: OfferModalProps) => {
         <ImagesOfferSwipper images={product.images} />
 
         <div className="flex flex-1 flex-col">
-          <OfferContent title={product.name} description={product.short_description} price={product.price} linkUrl={`/products/${product.id}-${toSlug(product.name)}`} />
+          <OfferContent
+            title={product.name}
+            description={product.short_description}
+            price={product.price}
+            linkUrl={`/products/${product.id}-${toSlug(product.name)}`}
+            product={product}
+          />
         </div>
       </DialogContent>
     </Dialog>

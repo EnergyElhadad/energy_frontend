@@ -1,5 +1,5 @@
 import { Axios } from '@/core/lib/axios';
-import { CartResponse } from '@/shared/types/cart';
+import { CartResponse, OrderSummaryResponse } from '@/shared/types/cart';
 
 interface AddToCartParams {
   product_id: number | string;
@@ -49,5 +49,19 @@ interface RemoveCartItemParams {
 
 export const removeCartItem = async ({ product_id }: RemoveCartItemParams): Promise<RemoveCartItemResponse> => {
   const res = await Axios.delete(`/cart/items/remove/`, { data: { product_id } });
+  return res.data;
+};
+
+interface OrderSummaryParams {
+  addressId?: number | null;
+  cityId?: number | null;
+}
+
+export const getOrderSummary = async ({ addressId, cityId }: OrderSummaryParams): Promise<OrderSummaryResponse> => {
+  const params: Record<string, number> = {};
+  if (addressId) params.address_id = addressId;
+  else if (cityId) params.city_id = cityId;
+
+  const res = await Axios.get('/cart/summary/', { params });
   return res.data;
 };

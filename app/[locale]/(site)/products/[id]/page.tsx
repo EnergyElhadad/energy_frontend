@@ -6,6 +6,8 @@ import { getProductById } from '@/features/SingleProduct/services/product-servic
 import { ProductTabs } from '@/features/SingleProduct/components/ProductTabs';
 import { getIdFromSlug } from '@/shared/utils/slug';
 
+export const dynamic = 'force-dynamic';
+
 interface SingleProductPageProps {
   params: Promise<{ id: string }>;
 }
@@ -46,7 +48,7 @@ const SingleProductPage: React.FC<SingleProductPageProps> = async ({ params }) =
         </div>
 
         <div className="mt-10">
-          <ProductTabs generalDescription={description} technicalSpecifications={description} reviewsCount={ratings_count || 0} />
+          <ProductTabs generalDescription={description} technicalSpecifications={description} reviewsCount={ratings_count || 0} productId={Number(productId)} />
         </div>
       </div>
     </main>

@@ -52,7 +52,11 @@
     "seconds": " ثانية.",
     "verify_button": "تأكيد",
     "send_button": "إرسال",
-    "otp_sent_successfully": "تم إرسال رمز التحقق بنجاح"
+    "otp_sent_successfully": "تم إرسال رمز التحقق بنجاح",
+    "new_password_title": "تعيين كلمة مرور جديدة",
+    "new_password_subtitle": "أدخل كلمة المرور الجديدة أدناه",
+    "new_password_label": "كلمة المرور الجديدة",
+    "reset_password_button": "إعادة تعيين كلمة المرور"
   },
   "Header": {
     "search_placeholder": "ابحث عن منتج",
@@ -99,7 +103,11 @@
     "add_your_review": "أضف تقييم",
     "add_your_comment": "أضف تعليقك",
     "comment_placeholder": "برجاء اضافة تعليقك ..",
-    "post_comment": "نشر تعليق"
+    "post_comment": "نشر تعليق",
+    "no_ratings_yet": "لا يوجد تقييمات بعد",
+    "be_the_first_to_rate": "كن أول من يقيم هذا المنتج",
+    "remove_from_wishlist": "إزالة من المفضلة",
+    "product_details": "تفاصيل المنتج"
   },
   "WhyChooseUs": {
     "quality_title": "ضمان الجودة",

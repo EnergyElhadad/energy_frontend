@@ -1,10 +1,15 @@
-import { useState } from "react";
+'use client';
+
+import { useFiltersContext } from '../context/FiltersContext';
 
 export const useRating = () => {
-  const [selectedRating, setSelectedRating] = useState<number>(0); 
+  const { filters, setFilter } = useFiltersContext();
+
+  const selectedRating = Number(filters.rating) || 0;
 
   const handleRatingChange = (rating: number | string) => {
-    setSelectedRating(Number(rating));
+    const value = Number(rating);
+    setFilter('rating', value > 0 ? String(value) : undefined);
   };
 
   return {

@@ -4,8 +4,15 @@ import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuSepara
 import { ArrowDownIcon } from '@/shared/components/icons/ArrowDown';
 import { useLocale } from 'next-intl';
 import { useOrderingFilter } from '../hooks/useOrderingFilter';
+import { SlidersHorizontal } from 'lucide-react';
 
-export const ProductsHeader = ({ productsLength, title }: { productsLength: number; title: string | null }) => {
+interface ProductsHeaderProps {
+  productsLength: number;
+  title: string | null;
+  onOpenFilters?: () => void;
+}
+
+export const ProductsHeader = ({ productsLength, title, onOpenFilters }: ProductsHeaderProps) => {
   const locale = useLocale();
   const isRTL = locale === 'ar';
 
@@ -21,32 +28,46 @@ export const ProductsHeader = ({ productsLength, title }: { productsLength: numb
         </p>
       </div>
 
-      {/* Ordering Dropdown */}
-      <DropdownMenu dir={isRTL ? 'rtl' : 'ltr'}>
-        <DropdownMenuTrigger>
-          <div className="text-WetGray border-Stroke hover:bg-primary flex h-10.5 w-fit items-center justify-center gap-1 rounded-sm border bg-white px-2 text-sm font-medium hover:border-none hover:text-white">
-            ترتيب حسب <ArrowDownIcon />
-          </div>
-        </DropdownMenuTrigger>
-
-        <DropdownMenuContent>
-          <DropdownMenuItem
-            onClick={() => updateOrdering('id')}
-            className={`hover:bg-primary! h-11.5 px-3 hover:text-white! ${currentOrdering === 'id' ? 'bg-primary text-white' : ''}`}
+      {/* Actions */}
+      <div className="flex items-center gap-2">
+        {/* Filter Button — mobile/tablet only */}
+        {onOpenFilters && (
+          <button
+            onClick={onOpenFilters}
+            className="text-WetGray border-Stroke hover:bg-primary flex h-10.5 items-center justify-center gap-1 rounded-sm border bg-white px-2 text-sm font-medium hover:border-none hover:text-white min-[769px]:hidden"
           >
-            تصاعدي
-          </DropdownMenuItem>
+            <SlidersHorizontal className="h-4 w-4" />
+            الفلتر
+          </button>
+        )}
 
-          <DropdownMenuSeparator />
+        {/* Ordering Dropdown */}
+        <DropdownMenu dir={isRTL ? 'rtl' : 'ltr'}>
+          <DropdownMenuTrigger>
+            <div className="text-WetGray border-Stroke hover:bg-primary flex h-10.5 w-fit items-center justify-center gap-1 rounded-sm border bg-white px-2 text-sm font-medium hover:border-none hover:text-white">
+              ترتيب حسب <ArrowDownIcon />
+            </div>
+          </DropdownMenuTrigger>
 
-          <DropdownMenuItem
-            onClick={() => updateOrdering('-id')}
-            className={`hover:bg-primary! h-11.5 px-3 hover:text-white! ${currentOrdering === '-id' ? 'bg-primary text-white' : ''}`}
-          >
-            تنازلي
-          </DropdownMenuItem>
-        </DropdownMenuContent>
-      </DropdownMenu>
+          <DropdownMenuContent>
+            <DropdownMenuItem
+              onClick={() => updateOrdering('id')}
+              className={`hover:bg-primary! h-11.5 px-3 hover:text-white! ${currentOrdering === 'id' ? 'bg-primary text-white' : ''}`}
+            >
+              تصاعدي
+            </DropdownMenuItem>
+
+            <DropdownMenuSeparator />
+
+            <DropdownMenuItem
+              onClick={() => updateOrdering('-id')}
+              className={`hover:bg-primary! h-11.5 px-3 hover:text-white! ${currentOrdering === '-id' ? 'bg-primary text-white' : ''}`}
+            >
+              تنازلي
+            </DropdownMenuItem>
+          </DropdownMenuContent>
+        </DropdownMenu>
+      </div>
     </div>
   );
 };

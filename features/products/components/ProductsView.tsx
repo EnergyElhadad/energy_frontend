@@ -11,29 +11,39 @@ import { ProductGrid } from './ProductGrid';
 import { ProductsHeader } from './ProductsHeader';
 import { OfferModal } from '@/features/home/components/OfferModal';
 import { useState } from 'react';
+import { ProductCardSkeleton } from '@/shared/components/skeletons/ProductCardSkeleton';
+import { useFiltersContext } from '../context/FiltersContext';
 
 interface ProductsViewProps {
   initialData: ProductsResponse | null;
   categeoryDescription: string | null;
+  onOpenFilters?: () => void;
 }
 
-export const ProductsView = ({ initialData, categeoryDescription }: ProductsViewProps) => {
+export const ProductsView = ({ initialData, categeoryDescription, onOpenFilters }: ProductsViewProps) => {
   const { filters, shouldUseInitialData } = useProductsView();
-  const { products, fetchNextPage, hasNextPage, isFetchingNextPage, totalCount, isFetching } = useInfiniteProducts(filters, shouldUseInitialData ? initialData : null);
+  const { products, fetchNextPage, hasNextPage, isFetchingNextPage, totalCount, isLoading } = useInfiniteProducts(filters, shouldUseInitialData ? initialData : null);
+  const { filters: contextFilters } = useFiltersContext();
 
+  const activeTitle = contextFilters.categoryName || categeoryDescription;
   const [selectedProduct, setSelectedProduct] = useState<Product | null>(null);
 
-  if (isFetching) {
+  if (isLoading) {
     return (
-      <div className="flex w-full items-center justify-center md:col-span-3">
-        <Spinner className="text-primary h-12 w-12" />
+      <div className="min-[769px]:col-span-3">
+        <ProductsHeader productsLength={totalCount} title={activeTitle} onOpenFilters={onOpenFilters} />
+        <div className="grid grid-cols-2 gap-4 md:grid-cols-2 lg:grid-cols-3">
+          {Array.from({ length: 9 }).map((_, i) => (
+            <ProductCardSkeleton key={i} />
+          ))}
+        </div>
       </div>
     );
   }
 
   return (
-    <div className="md:col-span-3">
-      <ProductsHeader productsLength={totalCount} title={categeoryDescription} />
+    <div className="min-[769px]:col-span-3">
+      <ProductsHeader productsLength={totalCount} title={activeTitle} onOpenFilters={onOpenFilters} />
 
       <ProductGrid<Product>
         items={products}
@@ -48,6 +58,7 @@ export const ProductsView = ({ initialData, categeoryDescription }: ProductsView
             oldPrice={product.discount_percentage ? Number(product.price) - (Number(product.price) * Number(product.discount_percentage)) / 100 : undefined}
             badge={product.discount_label}
             onClick={() => setSelectedProduct(product)}
+            is_in_wishlist={product.is_in_wishlist}
           />
         )}
       />

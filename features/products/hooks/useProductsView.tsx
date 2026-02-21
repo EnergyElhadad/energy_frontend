@@ -1,26 +1,33 @@
-import { useSearchParams } from 'next/navigation';
+'use client';
+
 import { useMemo } from 'react';
+import { useFiltersContext } from '../context/FiltersContext';
 
 export const useProductsView = () => {
-  const searchParams = useSearchParams();
-  const orderingParam = searchParams.get('ordering');
-  const categoryId = searchParams.get('categoryId');
-  const minPrice = searchParams.get('min_price');
-  const maxPrice = searchParams.get('max_price');
-  const search = searchParams.get('search');
+  const { filters: contextFilters } = useFiltersContext();
 
   const filters = useMemo(
     () => ({
-      category: categoryId ? Number(categoryId) : undefined,
-      ordering: (orderingParam as 'id' | '-id') || 'id',
-      min_price: minPrice ? Number(minPrice) : undefined,
-      max_price: maxPrice ? Number(maxPrice) : undefined,
-      search: search || undefined,
+      category: contextFilters.categoryId ? Number(contextFilters.categoryId) : undefined,
+      ordering: contextFilters.ordering || ('id' as 'id' | '-id'),
+      min_price: contextFilters.min_price ? Number(contextFilters.min_price) : undefined,
+      max_price: contextFilters.max_price ? Number(contextFilters.max_price) : undefined,
+      search: contextFilters.search || undefined,
+      rating: contextFilters.rating ? Number(contextFilters.rating) : undefined,
+      home_sections: contextFilters.home_sections ? Number(contextFilters.home_sections) : undefined,
     }),
-    [categoryId, minPrice, maxPrice, search, orderingParam]
+    [contextFilters]
   );
 
-  const shouldUseInitialData = !categoryId && !minPrice && !maxPrice && !orderingParam && !search;
+  const shouldUseInitialData =
+    !contextFilters.categoryId &&
+    !contextFilters.min_price &&
+    !contextFilters.max_price &&
+    !contextFilters.ordering?.replace('id', '') &&
+    !contextFilters.search &&
+    !contextFilters.rating &&
+    !contextFilters.home_sections;
+
   return {
     filters,
     shouldUseInitialData,

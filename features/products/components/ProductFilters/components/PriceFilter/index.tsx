@@ -20,13 +20,15 @@ export const PriceFilter: React.FC<PriceFilterProps> = ({ priceRange, onPriceCha
         fromValue={priceRange[0]}
         toValue={priceRange[1]}
         onChangeFrom={e => {
-          const val = parseInt(e.target.value) || 0;
+          const val = Math.max(0, Math.min(1000000, parseInt(e.target.value) || 0));
           onPriceInputChange('min', val);
         }}
         onChangeTo={e => {
-          const val = parseInt(e.target.value) || 0;
+          const val = Math.max(0, Math.min(1000000, parseInt(e.target.value) || 0));
           onPriceInputChange('max', val);
         }}
+        min={0}
+        max={1000000}
       />
     </div>
   );

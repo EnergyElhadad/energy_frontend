@@ -40,7 +40,6 @@ export function useSignup() {
       const response = await trySignup(data);
       toast.success(response.message);
       localStorage.setItem('verify_phone_number', data.phone_number);
-      localStorage.setItem('otp_source', '/signup');
       router.push('/verify-otp');
     } catch (error: unknown) {
       if (isAxiosError(error)) {

@@ -22,4 +22,5 @@ export interface Product {
   images: ProductImage[];
   created_at: string;
   updated_at: string;
+  is_in_wishlist?: boolean;
 }

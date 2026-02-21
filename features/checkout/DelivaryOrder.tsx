@@ -1,4 +1,5 @@
 'use client';
+import React from 'react';
 import { AddressLocationIcon } from '@/shared/components/icons/AddressLocation';
 import { NewAddressIcon } from '@/shared/components/icons/NewAddress';
 import { cn } from '@/shared/utils';
@@ -15,10 +16,16 @@ interface DelivaryOrderProps {
 export const DelivaryOrder = ({ selectedAddressId, onSelectAddress }: DelivaryOrderProps) => {
   const { addresses, isLoading } = useAddresses();
 
+  const [hasSetInitial, setHasSetInitial] = React.useState(false);
+
   // Set default address when data loads
-  if (addresses.length > 0 && selectedAddressId === null) {
-    onSelectAddress(addresses[0].id);
-  }
+  React.useEffect(() => {
+    if (addresses.length > 0 && !hasSetInitial && selectedAddressId === null) {
+      const defaultAddr = addresses.find((a: Address) => a.is_default);
+      onSelectAddress(defaultAddr ? defaultAddr.id : addresses[0].id);
+      setHasSetInitial(true);
+    }
+  }, [addresses, selectedAddressId, hasSetInitial, onSelectAddress]);
 
   if (isLoading) {
     return (

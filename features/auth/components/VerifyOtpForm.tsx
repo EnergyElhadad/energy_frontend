@@ -2,15 +2,17 @@
 import { InputOTP, InputOTPSlot } from '@/shared/components/ui/input-otp';
 import { Button } from '@/shared/components/ui/Button';
 import { useTranslations } from 'next-intl';
-import { useVerifyOtp } from '../hooks/useVerifyOtp';
+import { useVerifyOtp, VerifyOtpConfig } from '../hooks/useVerifyOtp';
 import { useResendOtp } from '../hooks/useResendOtp';
 import { Display } from '@/shared/components/layout/Display';
 import { Spinner } from '@/shared/components/ui/spinner';
 import { SubmitButton } from './SubmitButton';
 
-export function VerifyOtpForm() {
+type VerifyOtpFormProps = VerifyOtpConfig;
+
+export function VerifyOtpForm({ verifyFn, onSuccess, fallbackRoute }: VerifyOtpFormProps) {
   const t = useTranslations('Auth');
-  const { otp, handleOtpChange, handleSubmit, isSubmitting } = useVerifyOtp();
+  const { otp, handleOtpChange, handleSubmit, isSubmitting } = useVerifyOtp({ verifyFn, onSuccess, fallbackRoute });
   const { handleResendOtp, isResending } = useResendOtp();
 
   return (

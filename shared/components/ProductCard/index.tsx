@@ -15,11 +15,12 @@ export type ProductT = {
   category?: string;
   imageProps?: Omit<ImageProps, 'src' | 'alt'>;
   onClick?: () => void;
+  is_in_wishlist?: boolean;
 };
 
-export const ProductCard: React.FC<ProductT> = ({ id, title, image, originalPrice, oldPrice, badge, category, imageProps, onClick }) => {
+export const ProductCard: React.FC<ProductT> = ({ id, title, image, originalPrice, oldPrice, badge, category, imageProps, onClick, is_in_wishlist }) => {
   return (
-    <div className="group border-Stroke/50 hover:border-primary relative mx-auto flex max-w-70.5 cursor-pointer flex-col overflow-hidden rounded-sm border bg-white p-2 pb-3 transition hover:shadow-[0_8px_24px_0_rgba(0,0,0,0.08)]">
+    <div className="group border-Stroke/50 hover:border-primary relative mx-auto flex w-full cursor-pointer flex-col overflow-hidden rounded-sm border bg-white p-2 pb-3 transition hover:shadow-[0_8px_24px_0_rgba(0,0,0,0.08)]">
       <HiddenIcons title={title} id={id} onView={onClick} />
       <div className="flex max-h-63.75 min-h-63.75 w-full flex-col items-center justify-center overflow-hidden">
         <Display when={!!badge}>
@@ -29,7 +30,7 @@ export const ProductCard: React.FC<ProductT> = ({ id, title, image, originalPric
           <Image src={image} alt={title} width={268} height={255} className="mx-auto" {...imageProps} />
         </div>
       </div>
-      <BodyCard category={category} title={title} id={id} originalPrice={originalPrice} oldPrice={oldPrice} />
+      <BodyCard category={category} title={title} id={id} originalPrice={originalPrice} oldPrice={oldPrice} is_in_wishlist={is_in_wishlist} />
     </div>
   );
 };

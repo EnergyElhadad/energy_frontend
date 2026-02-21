@@ -24,7 +24,7 @@ export const CartDropdown = () => {
           </div>
         ) : (
           <>
-            <div className="custom-scrollbar flex max-h-[300px] flex-col gap-[8px] overflow-y-auto">
+            <div className="scrollbar-thin flex max-h-[300px] flex-col gap-[8px] overflow-y-auto">
               {items.map(item => (
                 <CartItem key={item.id} product={item} quantity={item.quantity} onQuantityChange={val => updateQuantity(item.id, val)} />
               ))}

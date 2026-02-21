@@ -1,7 +1,9 @@
-import { AboutSection } from "@/features/about/AboutSection";
-import { WhySection } from "@/features/about/WhySection";
-import aboutImage from "@/public/images/about.webp";
-import { HeaderPage } from "@/shared/components/ui/HeaderPage";
+import { AboutSection } from '@/features/about/AboutSection';
+import { WhySection } from '@/features/about/WhySection';
+import aboutImage from '@/public/images/about.webp';
+import { HeaderPage } from '@/shared/components/ui/HeaderPage';
+
+export const dynamic = 'force-dynamic';
 
 const imagePath: string = aboutImage.src;
 

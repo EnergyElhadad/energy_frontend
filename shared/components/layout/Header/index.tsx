@@ -1,5 +1,5 @@
-import { MainHeader } from "./components/MainHeader";
-import { Nav } from "./components/Nav";
+import { MainHeader } from './components/MainHeader';
+import { Nav } from './components/Nav';
 
 const Header = () => {
   return (

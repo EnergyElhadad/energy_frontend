@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 'use client';
 
 import { useForm, Controller, useWatch, SubmitHandler } from 'react-hook-form';
@@ -75,26 +74,40 @@ export const EditAddressModal = ({ addressId, open, onOpenChange }: EditAddressM
     getCountries().then(setCountries).catch(console.error);
   }, []);
 
-  // Populate form when address data is loaded
+  // 1. Hydrate text inputs immediately when addressData is available
   useEffect(() => {
     if (addressData && open) {
       setValue('area', addressData.area);
       setValue('street', addressData.street);
       setValue('building', addressData.building);
       setValue('apartment', addressData.apartment);
-      setValue('notes', addressData.notes);
+      setValue('notes', addressData.notes || '');
       setValue('is_default', addressData.is_default);
-
-      if ((addressData as any).city?.country_id) {
-        const countryId = String((addressData as any).city.country_id);
-        setValue('country_id', countryId);
-        setValue('city_id', String(addressData.city.id));
-        getCities(Number(countryId))
-          .then(data => setCities(Array.isArray(data) ? data : []))
-          .catch(console.error);
-      }
     }
   }, [addressData, open, setValue]);
+
+  // 2. Hydrate country ONLY after the countries array has finished fetching
+  useEffect(() => {
+    if (addressData?.country?.id && countries.length > 0 && open) {
+      const cId = String(addressData.country.id);
+      setValue('country_id', cId);
+
+      // As soon as we set the country, kick off the cities fetch for this country
+      getCities(Number(cId))
+        .then(data => setCities(Array.isArray(data) ? data : []))
+        .catch(console.error);
+    }
+  }, [addressData, countries, open, setValue]);
+
+  // 3. Hydrate city ONLY after the cities array has finished fetching
+  useEffect(() => {
+    if (addressData?.city?.id && cities.length > 0 && open) {
+      // Ensure the exact city id actually exists in the fetched list before forcing it
+      if (cities.some(c => c.id === addressData.city.id)) {
+        setValue('city_id', String(addressData.city.id));
+      }
+    }
+  }, [addressData, cities, open, setValue]);
 
   const onSubmit: SubmitHandler<AddressFormValues> = data => {
     if (!addressId) return;

@@ -63,3 +63,27 @@ export interface UseCartReturn {
   updateQuantity: (id: string | number, quantity: number) => void;
   isAddingToCart?: boolean;
 }
+
+export interface OrderSummaryDiscountBreakdown {
+  original_total: string;
+  offer_discount: string;
+  promo_discount: string;
+  promo_code: string | null;
+  total_savings: string;
+  final_total: string;
+}
+
+export interface OrderSummaryResult {
+  subtotal: string;
+  discount_total: string;
+  cart_total: string;
+  shipping_cost: string;
+  total_amount: string;
+  discount_breakdown: OrderSummaryDiscountBreakdown;
+}
+
+export interface OrderSummaryResponse {
+  message: string;
+  status: boolean;
+  result: OrderSummaryResult;
+}

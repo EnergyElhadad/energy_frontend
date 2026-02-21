@@ -1,28 +1,22 @@
-"use client";
+'use client';
 
-import { useRouter, useSearchParams } from "next/navigation";
-import { useCallback } from "react";
+import { useState, useCallback, useEffect } from 'react';
+import { useFiltersContext } from '../context/FiltersContext';
+import { useDebounce } from '@/shared/hooks/useDebounce';
 
 export const useSearchProduct = () => {
-  const router = useRouter();
-  const searchParams = useSearchParams();
+  const { filters, setFilter } = useFiltersContext();
 
-  const search = searchParams.get("search") ?? "";
+  const [search, setSearchLocal] = useState(filters.search ?? '');
+  const debouncedSearch = useDebounce(search, 400);
 
-  const setSearch = useCallback(
-    (value: string) => {
-      const params = new URLSearchParams(searchParams.toString());
+  useEffect(() => {
+    setFilter('search', debouncedSearch || undefined);
+  }, [debouncedSearch, setFilter]);
 
-      if (!value) {
-        params.delete("search");
-      } else {
-        params.set("search", value);
-      }
-
-      router.push(`?${params.toString()}`, { scroll: false });
-    },
-    [router, searchParams]
-  );
+  const setSearch = useCallback((value: string) => {
+    setSearchLocal(value);
+  }, []);
 
   return {
     search,

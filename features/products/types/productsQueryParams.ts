@@ -8,4 +8,5 @@ export interface ProductsQueryParams {
   on_sale?: boolean;
   search?: string;
   ordering?: 'id' | '-id';
+  rating?: number;
 }

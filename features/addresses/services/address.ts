@@ -8,6 +8,7 @@ export interface City {
 export interface Address {
   id: number;
   city: City;
+  country: City; // Reusing City interface as it's just id and name
   area: string;
   street: string;
   building: string;

@@ -9,9 +9,10 @@ type ProfileAddressCardProps = {
   onDelete?: () => void;
   onEdit?: () => void;
   isMainAddress: boolean;
+  isEditing?: boolean;
 };
 
-export const ProfileAddressCard: React.FC<ProfileAddressCardProps> = ({ name, address, phone, onClick, onDelete, onEdit, isMainAddress }) => {
+export const ProfileAddressCard: React.FC<ProfileAddressCardProps> = ({ name, address, phone, onClick, onDelete, onEdit, isMainAddress, isEditing }) => {
   return (
     <div className="border-signalGray flex flex-col justify-between gap-x-1 gap-y-3 rounded-md border px-6 py-4 md:flex-row">
       <div>
@@ -23,8 +24,13 @@ export const ProfileAddressCard: React.FC<ProfileAddressCardProps> = ({ name, ad
 
       <div className="flex flex-col gap-2 sm:flex-row">
         {!isMainAddress && (
-          <Button onClick={onClick} variant="outline" className="text-primary border-primary hover:bg-primary/10 hover:text-primary rounded-sm text-sm font-medium">
-            جعله العنوان الاساسي
+          <Button
+            disabled={isEditing}
+            onClick={onClick}
+            variant="outline"
+            className="text-primary border-primary hover:bg-primary/10 hover:text-primary rounded-sm text-sm font-medium"
+          >
+            {isEditing ? 'جاري التحميل...' : 'جعله العنوان الاساسي'}
           </Button>
         )}
 

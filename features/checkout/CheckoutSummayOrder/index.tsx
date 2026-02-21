@@ -9,29 +9,38 @@ import { Total } from './components/Total';
 import { Tax } from './components/Tax';
 import { PayMethod } from './components/PayMethod';
 import { Button } from '@/shared/components/ui/Button';
+import { useOrderSummary } from '../hooks/useOrderSummary';
 
 interface CheckoutSummaryOrderProps {
   selectedPaymentId: number | null;
   onSelectPayment: (id: number) => void;
   onSubmit: () => void;
   isSubmitting: boolean;
+  selectedAddressId?: number | null;
+  selectedCityId?: number | null;
 }
 
-export const CheckoutSummaryOrder = ({ selectedPaymentId, onSelectPayment, onSubmit, isSubmitting }: CheckoutSummaryOrderProps) => {
-  const { items, cartTotal, discountBreakdown } = useCart();
+export const CheckoutSummaryOrder = ({ selectedPaymentId, onSelectPayment, onSubmit, isSubmitting, selectedAddressId, selectedCityId }: CheckoutSummaryOrderProps) => {
+  const { items, discountBreakdown: cartDiscountBreakdown } = useCart();
+  const { summary, isLoading: isSummaryLoading } = useOrderSummary({
+    addressId: selectedAddressId,
+    cityId: selectedCityId,
+  });
   const { applyPromo, isPending } = usePromoCode();
   const [promoCode, setPromoCode] = useState('');
 
-  const isPromoApplied = !!discountBreakdown?.promo_code;
-  const appliedPromoCode = discountBreakdown?.promo_code || '';
+  const isPromoApplied = summary ? !!summary.discount_breakdown.promo_code : !!cartDiscountBreakdown?.promo_code;
+
+  const appliedPromoCode = summary ? summary.discount_breakdown.promo_code || '' : cartDiscountBreakdown?.promo_code || '';
 
   const handleApplyPromo = () => {
     if (!promoCode) return;
     applyPromo({ code: promoCode });
   };
 
-  const finalPrice = discountBreakdown ? parseFloat(discountBreakdown.final_total) : cartTotal;
-  const discountAmount = discountBreakdown ? parseFloat(discountBreakdown.total_savings) : 0;
+  const shippingCost = summary ? parseFloat(summary.shipping_cost) : 0;
+  const discountAmount = summary ? parseFloat(summary.discount_total) : cartDiscountBreakdown ? parseFloat(cartDiscountBreakdown.total_savings) : 0;
+  const totalAmount = summary ? parseFloat(summary.total_amount) : 0;
 
   return (
     <>
@@ -46,7 +55,7 @@ export const CheckoutSummaryOrder = ({ selectedPaymentId, onSelectPayment, onSub
         </div>
         <div className="bg-Background flex items-center justify-between gap-4 rounded-md p-4">
           <h5 className="text-gray400 text-base font-normal">التوصيل</h5>
-          <p className="text-gray400 text-base font-normal">{0} ج</p>
+          {isSummaryLoading ? <div className="h-5 w-16 animate-pulse rounded bg-gray-200" /> : <p className="text-gray400 text-base font-normal">{shippingCost} ج</p>}
         </div>
         <div className="bg-Background rounded-md p-4">
           <NetCode
@@ -68,7 +77,7 @@ export const CheckoutSummaryOrder = ({ selectedPaymentId, onSelectPayment, onSub
         </div>
 
         <div className="bg-Background rounded-md p-4">
-          <Total title="الإجمالي" price={finalPrice} />
+          {isSummaryLoading ? <div className="mb-3 h-6 w-full animate-pulse rounded bg-gray-200 md:mb-6" /> : <Total title="الإجمالي" price={totalAmount} />}
           <Tax title="الأسعار شاملة الضريبة" />
         </div>
         <PayMethod selectedPaymentId={selectedPaymentId} onSelectPayment={onSelectPayment} />

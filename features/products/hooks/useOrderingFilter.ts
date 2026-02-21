@@ -1,16 +1,15 @@
-import { useSearchParams,useRouter } from "next/navigation";
+'use client';
 
+import { useFiltersContext } from '../context/FiltersContext';
 
-export const useOrderingFilter= ()=>{
-      const router = useRouter();
-  const searchParams = useSearchParams();
-  const currentOrdering = searchParams.get('ordering') || 'id';
+export const useOrderingFilter = () => {
+  const { filters, setFilter } = useFiltersContext();
+
+  const currentOrdering = filters.ordering || 'id';
 
   const updateOrdering = (ordering: 'id' | '-id') => {
-    const params = new URLSearchParams(searchParams.toString());
-    params.set('ordering', ordering);
-    router.push(`?${params.toString()}`);
+    setFilter('ordering', ordering);
   };
 
-  return{currentOrdering, updateOrdering}
-}
+  return { currentOrdering, updateOrdering };
+};

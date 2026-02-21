@@ -22,10 +22,10 @@ const addressSchema = z.object({
   building: z.string().min(1, 'Building is required'),
   apartment: z.string().min(1, 'Apartment is required'),
   notes: z.string().optional(),
-  is_default: z.boolean(),
+  is_default: z.boolean().optional(),
 });
 
-type AddressFormValues = z.infer<typeof addressSchema>;
+type AddressFormValues = z.input<typeof addressSchema>;
 
 export const AddAddressModal = () => {
   const [open, setOpen] = useState(false);
@@ -73,7 +73,7 @@ export const AddAddressModal = () => {
         building: data.building,
         apartment: data.apartment,
         notes: data.notes || '',
-        is_default: data.is_default,
+        is_default: data.is_default ?? false,
       },
       {
         onSuccess: () => {

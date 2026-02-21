@@ -4,5 +4,5 @@ export interface Category {
   image?: string;
   is_active?: boolean;
   order?: number;
+  products_count?: number;
 }
-

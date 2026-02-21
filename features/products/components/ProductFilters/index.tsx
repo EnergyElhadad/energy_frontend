@@ -13,14 +13,9 @@ import { useSearchProduct } from '../../hooks/useSearchProduct';
 import { usePriceRange } from '../../hooks/usePriceRange';
 import { ResetButton } from './components/ResetButton';
 import { useCategoryFilter } from '../../hooks/useCategoryFilter';
-
-const ratingOptions = [
-  { label: 'الكل', stars: 0, count: 100 },
-  { label: '5 نجوم', stars: 5, count: 32 },
-  { label: '4 نجوم', stars: 4, count: 36 },
-  { label: '3 نجوم', stars: 3, count: 21 },
-  { label: 'نجمتين', stars: 2, count: 2 },
-];
+import { useFiltersContext } from '../../context/FiltersContext';
+import { useQuery } from '@tanstack/react-query';
+import { getRatingDistribution } from '../../services/getRatingDistribution';
 
 interface ProductFiltersProps {
   initialCategories: CategoriesResponse;
@@ -30,11 +25,38 @@ export const ProductFilters: React.FC<ProductFiltersProps> = ({ initialCategorie
   const { search, setSearch } = useSearchProduct();
   const { priceRange, handlePriceRangeChange, handlePriceInputChange, resetPriceRange } = usePriceRange();
   const { handleCategoryToggle } = useCategoryFilter();
+  const { setFilters } = useFiltersContext();
+
+  const { data: ratingData } = useQuery({
+    queryKey: ['ratingDistribution'],
+    queryFn: getRatingDistribution,
+    staleTime: 5 * 60 * 1000,
+  });
+
+  const ratingOptions = React.useMemo(() => {
+    const dist = ratingData?.result || {};
+    const total = Object.values(dist).reduce((sum, count) => sum + count, 0);
+    return [
+      { label: 'الكل', stars: 0, count: total },
+      { label: '5 نجوم', stars: 5, count: dist['5'] ?? 0 },
+      { label: '4 نجوم', stars: 4, count: dist['4'] ?? 0 },
+      { label: '3 نجوم', stars: 3, count: dist['3'] ?? 0 },
+      { label: 'نجمتين', stars: 2, count: dist['2'] ?? 0 },
+      { label: 'نجمة', stars: 1, count: dist['1'] ?? 0 },
+    ];
+  }, [ratingData]);
 
   const reset = () => {
-    setSearch('');
+    setFilters({
+      categoryId: undefined,
+      categoryName: undefined,
+      ordering: 'id',
+      min_price: undefined,
+      max_price: undefined,
+      search: undefined,
+      rating: undefined,
+    });
     resetPriceRange();
-    handleCategoryToggle?.('', '');
   };
 
   return (

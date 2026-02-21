@@ -1,25 +1,5 @@
-import { Skeleton } from "@/shared/components/ui/skeleton";
-
-const ProductCardSkeleton = () => (
-  <div className="border-Stroke flex flex-col gap-3 rounded-2xl border p-3">
-    <Skeleton className="h-[255px] w-full rounded-xl" />
-    <div className="flex flex-col gap-2 px-1">
-      <div className="flex flex-col gap-1.5 align-middle">
-        <Skeleton className="mx-auto h-4 w-full" />
-        <Skeleton className="mx-auto h-4 w-3/4" />
-      </div>
-      <Skeleton className="mx-auto mt-2 h-3 w-1/3" />
-      <div className="mt-3 flex items-center justify-center gap-4">
-        <Skeleton className="h-5 w-16" />
-        <Skeleton className="h-5 w-16 opacity-50" />
-      </div>
-      <div className="mt-4 flex gap-2">
-        <Skeleton className="h-10 flex-1 rounded-lg" />
-        <Skeleton className="h-10 w-10 shrink-0 rounded-lg" />
-      </div>
-    </div>
-  </div>
-);
+import { Skeleton } from '@/shared/components/ui/skeleton';
+import { ProductCardSkeleton } from '@/shared/components/skeletons/ProductCardSkeleton';
 
 export const PageSkeletonLoader = () => {
   return (
@@ -36,7 +16,7 @@ export const PageSkeletonLoader = () => {
         <div className="my-10 flex gap-6">
           <div className="flex gap-4">
             <div className="flex flex-col gap-2">
-              {[1, 2, 3, 4].map((i) => (
+              {[1, 2, 3, 4].map(i => (
                 <Skeleton key={i} className="h-[105px] w-[119px] rounded-lg" />
               ))}
             </div>
@@ -90,7 +70,7 @@ export const PageSkeletonLoader = () => {
         </div>
 
         <div className="mt-14 grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-4">
-          {[1, 2, 3, 4].map((i) => (
+          {[1, 2, 3, 4].map(i => (
             <ProductCardSkeleton key={i} />
           ))}
         </div>

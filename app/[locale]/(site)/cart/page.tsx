@@ -2,6 +2,8 @@ import { Breadcrumb } from '@/shared/components/layout/Breadcrumb';
 import { CartContent } from '@/features/shopingCart/components/CartContent';
 import { Metadata } from 'next';
 
+export const dynamic = 'force-dynamic';
+
 export const metadata: Metadata = {
   title: 'سلة التسوق',
 };

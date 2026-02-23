@@ -8,6 +8,7 @@ import { ProductsResponse } from '../types/productsResponse';
 import { CategoriesResponse } from '@/shared/services/categories';
 import { Drawer, DrawerContent, DrawerHeader, DrawerTitle, DrawerClose } from '@/shared/components/ui/drawer';
 import { X } from 'lucide-react';
+import { useTranslations } from 'next-intl';
 
 interface ProductsContentProps {
   initialData: ProductsResponse | null;
@@ -17,6 +18,7 @@ interface ProductsContentProps {
 
 export const ProductsContent = ({ initialData, initialCategories, categeoryDescription }: ProductsContentProps) => {
   const [drawerOpen, setDrawerOpen] = useState(false);
+  const t = useTranslations('Products');
 
   return (
     <FiltersProvider>
@@ -34,7 +36,7 @@ export const ProductsContent = ({ initialData, initialCategories, categeoryDescr
       <Drawer open={drawerOpen} onOpenChange={setDrawerOpen} direction="right">
         <DrawerContent className="h-full w-4/5 max-w-sm">
           <DrawerHeader className="flex flex-row items-center justify-between border-b pb-3">
-            <DrawerTitle className="text-lg">الفلاتر</DrawerTitle>
+            <DrawerTitle className="text-lg">{t('filters')}</DrawerTitle>
             <DrawerClose asChild>
               <button className="rounded-full p-1 hover:bg-gray-100">
                 <X className="h-5 w-5" />

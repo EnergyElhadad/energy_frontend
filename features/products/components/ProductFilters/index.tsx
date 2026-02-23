@@ -17,11 +17,14 @@ import { useFiltersContext } from '../../context/FiltersContext';
 import { useQuery } from '@tanstack/react-query';
 import { getRatingDistribution } from '../../services/getRatingDistribution';
 
+import { useTranslations } from 'next-intl';
+
 interface ProductFiltersProps {
   initialCategories: CategoriesResponse;
 }
 
 export const ProductFilters: React.FC<ProductFiltersProps> = ({ initialCategories }) => {
+  const t = useTranslations('Products');
   const { search, setSearch } = useSearchProduct();
   const { priceRange, handlePriceRangeChange, handlePriceInputChange, resetPriceRange } = usePriceRange();
   const { handleCategoryToggle } = useCategoryFilter();
@@ -37,14 +40,14 @@ export const ProductFilters: React.FC<ProductFiltersProps> = ({ initialCategorie
     const dist = ratingData?.result || {};
     const total = Object.values(dist).reduce((sum, count) => sum + count, 0);
     return [
-      { label: 'الكل', stars: 0, count: total },
-      { label: '5 نجوم', stars: 5, count: dist['5'] ?? 0 },
-      { label: '4 نجوم', stars: 4, count: dist['4'] ?? 0 },
-      { label: '3 نجوم', stars: 3, count: dist['3'] ?? 0 },
-      { label: 'نجمتين', stars: 2, count: dist['2'] ?? 0 },
-      { label: 'نجمة', stars: 1, count: dist['1'] ?? 0 },
+      { label: t('rating_all'), stars: 0, count: total },
+      { label: t('rating_5'), stars: 5, count: dist['5'] ?? 0 },
+      { label: t('rating_4'), stars: 4, count: dist['4'] ?? 0 },
+      { label: t('rating_3'), stars: 3, count: dist['3'] ?? 0 },
+      { label: t('rating_2'), stars: 2, count: dist['2'] ?? 0 },
+      { label: t('rating_1'), stars: 1, count: dist['1'] ?? 0 },
     ];
-  }, [ratingData]);
+  }, [ratingData, t]);
 
   const reset = () => {
     setFilters({
@@ -64,21 +67,21 @@ export const ProductFilters: React.FC<ProductFiltersProps> = ({ initialCategorie
       <SearchFilter value={search} handleSearchChange={setSearch} />
       <Accordion type="multiple" className="w-full" defaultValue={['price', 'category', 'reviews']}>
         <AccordionItem value="price">
-          <AccordionTrigger className="text-gray600 text-base font-medium">السعر</AccordionTrigger>
+          <AccordionTrigger className="text-gray600 text-base font-medium">{t('price')}</AccordionTrigger>
           <AccordionContent>
             <PriceFilter priceRange={priceRange} onPriceChange={handlePriceRangeChange} onPriceInputChange={handlePriceInputChange} />
           </AccordionContent>
         </AccordionItem>
 
         <AccordionItem value="category">
-          <AccordionTrigger className="text-gray600 text-base font-medium">الفئة</AccordionTrigger>
+          <AccordionTrigger className="text-gray600 text-base font-medium">{t('category')}</AccordionTrigger>
           <AccordionContent>
             <CategoryFilter initialCategories={initialCategories} handleCategoryToggle={handleCategoryToggle} />
           </AccordionContent>
         </AccordionItem>
 
         <AccordionItem value="reviews">
-          <AccordionTrigger className="text-gray600 text-base font-medium">التقييم</AccordionTrigger>
+          <AccordionTrigger className="text-gray600 text-base font-medium">{t('rating')}</AccordionTrigger>
           <AccordionContent>
             <RatingFilter ratingOptions={ratingOptions} />
           </AccordionContent>

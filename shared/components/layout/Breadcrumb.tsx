@@ -1,5 +1,6 @@
 import { Link } from '@/core/i18n';
 import React from 'react';
+import { useTranslations } from 'next-intl';
 
 export interface BreadcrumbItem {
   label: string;
@@ -14,12 +15,14 @@ interface BreadcrumbProps {
 }
 
 export const Breadcrumb = ({ items, separator = '/', homeAsFirstItem = false, className = '' }: BreadcrumbProps) => {
+  const t = useTranslations('Common');
+
   return (
     <div className={`flex items-center gap-1 ${className}`}>
       {homeAsFirstItem && (
         <React.Fragment>
           <Link href="/" className="text-signalGray hover:text-primary text-[16px]">
-            الرئيسية
+            {t('home')}
           </Link>
           <span className="text-signalGray mx-0.5">{separator}</span>
         </React.Fragment>

@@ -5,11 +5,13 @@ import { useState, useEffect } from 'react';
 import { addToWishlist, removeFromWishlist } from '@/shared/services/wishlist';
 import { useSession } from 'next-auth/react';
 import { toast } from 'sonner';
+import { useTranslations } from 'next-intl';
 
 export const useWishlistToggle = (productId: number | string, initialIsInWishlist: boolean = false) => {
   const { data: session } = useSession();
   const queryClient = useQueryClient();
   const [isInWishlist, setIsInWishlist] = useState(initialIsInWishlist);
+  const t = useTranslations('Common');
 
   useEffect(() => {
     setIsInWishlist(initialIsInWishlist);
@@ -24,7 +26,7 @@ export const useWishlistToggle = (productId: number | string, initialIsInWishlis
       queryClient.invalidateQueries({ queryKey: ['products'] });
     },
     onError: () => {
-      toast.error('فشل إضافة المنتج للمفضلة');
+      toast.error(t('wishlist_add_failed'));
     },
   });
 
@@ -37,13 +39,13 @@ export const useWishlistToggle = (productId: number | string, initialIsInWishlis
       queryClient.invalidateQueries({ queryKey: ['products'] });
     },
     onError: () => {
-      toast.error('فشل إزالة المنتج من المفضلة');
+      toast.error(t('wishlist_remove_failed'));
     },
   });
 
   const toggleWishlist = () => {
     if (!session?.user) {
-      toast.error('يجب تسجيل الدخول أولاً');
+      toast.error(t('login_required'));
       return;
     }
 

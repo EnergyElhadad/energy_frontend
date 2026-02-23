@@ -5,6 +5,7 @@ import { ShopingCardDesc } from './components/ShopingCardDesc';
 import { ShopingButtonCard } from './components/ShopingButtonCard';
 import { useEffect, useRef, useState } from 'react';
 import { useDebounce } from '@/shared/hooks/useDebounce';
+import { useTranslations } from 'next-intl';
 
 interface ShopingCardProps {
   id: string | number;
@@ -20,6 +21,7 @@ export const ShopingCard: React.FC<ShopingCardProps> = ({ id, price, itemTotal, 
   const [localQuantity, setLocalQuantity] = useState(quantity);
   const debouncedQuantity = useDebounce(localQuantity, 500);
   const isMounted = useRef(false);
+  const t = useTranslations('Products');
 
   useEffect(() => {
     if (!isMounted.current) {
@@ -51,7 +53,7 @@ export const ShopingCard: React.FC<ShopingCardProps> = ({ id, price, itemTotal, 
       <div className="flex flex-wrap items-center justify-end gap-2 md:gap-4 lg:gap-8">
         <Counter value={localQuantity} onChange={setLocalQuantity} variant="large" />
         <p className="shrink-0 text-sm font-bold text-black md:text-base">
-          {itemTotal || Number(price) * quantity} {''} ج
+          {itemTotal || Number(price) * quantity} {t('egp')}
         </p>
         <ShopingButtonCard onClick={() => removeItem(id)} />
       </div>

@@ -1,5 +1,6 @@
 'use client';
 
+import { useTranslations } from 'next-intl';
 import React, { useState } from 'react';
 import { useInfiniteQuery } from '@tanstack/react-query';
 import { Search } from 'lucide-react';
@@ -22,6 +23,7 @@ interface WishlistContentProps {
 export const WishlistContent = ({ initialData }: WishlistContentProps) => {
   const [search, setSearch] = useState('');
   const debouncedSearch = useDebounce(search, 400);
+  const t = useTranslations('Wishlist');
 
   const shouldUseInitialData = !debouncedSearch;
 
@@ -51,14 +53,14 @@ export const WishlistContent = ({ initialData }: WishlistContentProps) => {
       {/* Header with count and search */}
       <div className="mb-6 flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
         <h1 className="text-gray600 text-xl font-bold">
-          المفضلة <span className="text-signalGray text-base font-normal">({totalCount} منتج)</span>
+          {t('title')} <span className="text-signalGray text-base font-normal">{t('product_count', { count: totalCount })}</span>
         </h1>
 
         <div className="group border-signalGray hover:border-primary focus-within:border-primary flex h-10 w-full items-center rounded-lg border bg-white px-3 py-2 transition-colors sm:max-w-xs">
           <Search className="text-signalGray group-focus-within:text-primary me-3 h-5 w-5 shrink-0 transition-colors" />
           <input
             type="text"
-            placeholder="ابحث في المفضلة"
+            placeholder={t('search_placeholder')}
             value={search}
             onChange={e => setSearch(e.target.value)}
             className="caret-primary text-signalGray placeholder-signalGray flex-1 bg-transparent text-right text-sm outline-none"
@@ -75,7 +77,7 @@ export const WishlistContent = ({ initialData }: WishlistContentProps) => {
         </div>
       ) : products.length === 0 && !isFetching ? (
         <div className="py-20 text-center">
-          <p className="text-signalGray text-lg">لا توجد منتجات في المفضلة</p>
+          <p className="text-signalGray text-lg">{t('empty')}</p>
         </div>
       ) : (
         <>
@@ -102,7 +104,7 @@ export const WishlistContent = ({ initialData }: WishlistContentProps) => {
                 disabled={isFetchingNextPage}
                 className="border-primary text-primary hover:bg-primary rounded-lg border px-8 py-2.5 text-sm font-semibold transition hover:text-white disabled:opacity-50"
               >
-                {isFetchingNextPage ? 'جاري التحميل...' : 'عرض المزيد'}
+                {isFetchingNextPage ? t('loading') : t('load_more')}
               </button>
             </div>
           )}

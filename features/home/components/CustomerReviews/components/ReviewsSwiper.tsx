@@ -2,52 +2,36 @@
 import { Autoplay, Navigation, Pagination } from 'swiper/modules';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { ReviewCard } from './ReviewCard';
+import { useQuery } from '@tanstack/react-query';
+import { getHomepageRatings } from '@/features/home/services/ratings';
 
 import { ArrowLeftIcon } from '@/shared/components/icons/ArrowLeft';
 import { ArrowRightIcon } from '@/shared/components/icons/ArrowRight';
 import 'swiper/css';
 import 'swiper/css/pagination';
 
-const reviews = [
-  {
-    id: 1,
-    name: 'محمد خالد',
-    date: '13/10/2020',
-    rating: 4,
-    avatar: '/images/user.webp',
-    text: 'منتجاتهم مميزه جدا وبجوده عاليه. قمت بشراء الكابلات والفيش من هنا وصراحه اسعار جيده وخامات عاليه جدا. شكرا لكم.',
-  },
-  {
-    id: 2,
-    name: 'محمد خالد',
-    date: '13/10/2020',
-    rating: 4,
-    avatar: '/images/user.webp',
-    text: 'منتجاتهم مميزه جدا وبجوده عاليه. قمت بشراء الكابلات والفيش من هنا وصراحه اسعار جيده وخامات عاليه جدا. شكرا لكم.',
-  },
-  {
-    id: 3,
-    name: 'محمد خالد',
-    date: '13/10/2020',
-    rating: 4,
-    avatar: '/images/user.webp',
-    text: 'منتجاتهم مميزه جدا وبجوده عاليه. قمت بشراء الكابلات والفيش من هنا وصراحه اسعار جيده وخامات عاليه جدا. شكرا لكم.',
-  },
-  {
-    id: 4,
-    name: 'محمد خالد',
-    date: '13/10/2020',
-    rating: 4,
-    avatar: '/images/user.webp',
-    text: 'منتجاتهم مميزه جدا وبجوده عاليه. قمت بشراء الكابلات والفيش من هنا وصراحه اسعار جيده وخامات عاليه جدا. شكرا لكم.',
-  },
-];
 export const ReviewsSwiper = () => {
+  const { data: response, isLoading } = useQuery({
+    queryKey: ['homepage-ratings'],
+    queryFn: getHomepageRatings,
+  });
+
+  const reviews = response?.result || [];
+
+  if (isLoading) {
+    return (
+      <div className="flex justify-center p-12">
+        <div className="border-primary h-8 w-8 animate-spin rounded-full border-t-2 border-b-2"></div>
+      </div>
+    );
+  }
+
+  if (reviews.length === 0) return null;
+
   return (
     <div className="swiperWrapper relative">
       <Swiper
         modules={[Navigation, Pagination, Autoplay]}
-        // loop={false}
         autoplay={{ delay: 5000 }}
         navigation={{
           nextEl: '.review-next',

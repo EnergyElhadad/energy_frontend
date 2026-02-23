@@ -1,9 +1,127 @@
 {
+  "OrdersPage": {
+    "title": "Orders"
+  },
+  "ProfilePages": {
+    "profile_title": "Profile",
+    "personal_data_title": "Personal Data",
+    "addresses_title": "Addresses",
+    "payments_title": "Payments"
+  },
+  "Layout": {
+    "default_title": "Energy Elhadad - Integrated Energy Solutions",
+    "title_template": "%s | Energy Elhadad",
+    "description": "Energy Elhadad's official platform for providing the best energy solutions and outstanding services in renewable and conventional energy. Discover our products and services now."
+  },
+  "ProfileTabs": {
+    "personal_data": "Personal Data",
+    "addresses": "Addresses",
+    "payments": "Payments"
+  },
+  "Wishlist": {
+    "title": "Wishlist",
+    "product_count": "({count} products)",
+    "search_placeholder": "Search in Wishlist",
+    "empty": "No products in wishlist",
+    "load_more": "Load More",
+    "loading": "Loading...",
+    "remove_failed": "Failed to remove product from wishlist",
+    "remove": "Remove"
+  },
+  "Cart": {
+    "title": "Shopping Cart",
+    "empty_title": "Shopping Cart is Empty",
+    "empty_desc": "You haven't added any products to your shopping cart yet. Browse our products and add what you like.",
+    "browse_products": "Browse Products",
+    "order_summary": "Order Summary",
+    "total_products": "Total Products ({count})",
+    "have_promo": "Do you have a promo code?",
+    "enter_promo": "Enter promo code",
+    "apply": "Apply",
+    "applied": "Applied",
+    "applying": "Applying...",
+    "discount": "Discount",
+    "total": "Total",
+    "tax_included": "Prices include tax",
+    "checkout": "Checkout"
+  },
+  "SingleProduct": {
+    "meta_title": "Product Details",
+    "meta_description": "View details, specifications, and reviews for this product.",
+    "general_description": "General Description",
+    "technical_specifications": "Technical Specifications",
+    "reviews": "Reviews",
+    "stock_remaining": "Remaining in stock:",
+    "units": "units",
+    "add_to_wishlist": "Add to Wishlist",
+    "share_product": "Share Product",
+    "add_to_cart": "Add to Cart",
+    "quick_buy": "Quick Buy",
+    "out_of_stock": "Out of Stock",
+    "select_quantity": "Select Quantity",
+    "currency": "EGP",
+    "rating_submitted_successfully": "Rating submitted successfully",
+    "failed_to_submit_rating": "Failed to submit rating",
+    "please_select_rating": "Please select a rating",
+    "out_of": "out of",
+    "evaluators": "ratings",
+    "add_your_review": "Add your review",
+    "add_your_comment": "Add your comment",
+    "comment_placeholder": "Write your comment here...",
+    "submitting": "Submitting...",
+    "post_comment": "Post Comment",
+    "no_ratings_yet": "No ratings yet",
+    "be_the_first_to_rate": "Be the first to rate",
+    "anonymous_user": "Anonymous User"
+  },
+  "Products": {
+    "meta_title": "Products",
+    "all_products": "All Products",
+    "all_products_desc": "All",
+    "product_singular": "Product",
+    "product_plural": "Products",
+    "filters": "Filters",
+    "sort_by": "Sort by",
+    "ascending": "Ascending",
+    "descending": "Descending",
+    "price": "Price",
+    "from": "From",
+    "to": "To",
+    "category": "Category",
+    "rating": "Rating",
+    "rating_all": "All",
+    "rating_5": "5 Stars",
+    "rating_4": "4 Stars",
+    "rating_3": "3 Stars",
+    "rating_2": "2 Stars",
+    "rating_1": "1 Star",
+    "all": "All",
+    "loading": "Loading...",
+    "show_more": "Show More",
+    "reset": "Reset",
+    "search_placeholder": "Search for a product",
+    "no_products": "No products available based on the selected filters.",
+    "add_to_cart": "Add to Cart",
+    "egp": "EGP"
+  },
   "Common": {
-    "link_copied": "Link copied to clipboard"
+    "link_copied": "Link copied to clipboard",
+    "home": "Home",
+    "switch_lang": "Switch to Arabic",
+    "wishlist_add_failed": "Failed to add product to wishlist",
+    "wishlist_remove_failed": "Failed to remove product from wishlist",
+    "login_required": "You must login first"
   },
   "HomePage": {
-    "welcome": "Welcome to Energy Elhadad"
+    "welcome": "Welcome to Energy Elhadad",
+    "meta_title": "Home",
+    "meta_description": "Energy Elhadad platform for accessing integrated energy solutions and outstanding services.",
+    "shop_by_category": "Shop by Category",
+    "view_all": "View All",
+    "customer_reviews": "Customer Reviews",
+    "main_banner_title": "Limited Time Offer",
+    "main_banner_desc1": "Save up to 50% on all products",
+    "main_banner_desc2": "Get the best prices on high-quality electrical products"
   },
   "Auth": {
     "signin_title": "Welcome to Energy Elhadad",
@@ -66,7 +184,20 @@
     "go_to_cart": "Go to Cart",
     "signin": "Sign In",
     "empty_cart": "Empty Cart",
-    "signup": "Sign Up"
+    "signup": "Sign Up",
+    "home": "Home",
+    "contact_us": "Contact Us",
+    "about_us": "About Us",
+    "company_profile": "Company Profile",
+    "quality_policy": "Quality Policy",
+    "cancel": "Cancel",
+    "no_results": "No results",
+    "all_categories": "All Categories",
+    "all_products": "All Products",
+    "show_more": "Show More",
+    "empty": "Empty",
+    "egp": "EGP",
+    "remove": "Remove"
   },
   "Footer": {
     "description": "Your trusted store for high-quality electrical products at the best prices in Egypt",
@@ -83,31 +214,10 @@
     "facebook_label": "Facebook",
     "twitter_label": "Twitter",
     "instagram_label": "Instagram",
-    "youtube_label": "YouTube"
-  },
-  "SingleProduct": {
-    "stock_remaining": "Stock Remaining",
-    "units": "Units",
-    "reviews": "Reviews",
-    "add_to_wishlist": "Add to Wishlist",
-    "share_product": "Share Product",
-    "add_to_cart": "Add to Cart",
-    "quick_buy": "Quick Buy",
-    "select_quantity": "Select Quantity",
-    "currency": "EGP",
-    "out_of_stock": "Out of Stock",
-    "general_description": "General Description",
-    "technical_specifications": "Technical Specifications",
-    "out_of": "out of",
-    "evaluators": "Evaluators",
-    "add_your_review": "Add your review",
-    "add_your_comment": "Add your comment",
-    "comment_placeholder": "Please add your comment ..",
-    "post_comment": "Post Comment",
-    "no_ratings_yet": "No ratings yet",
-    "be_the_first_to_rate": "Be the first to rate this product",
-    "remove_from_wishlist": "Remove from Wishlist",
-    "product_details": "Product Details"
+    "youtube_label": "YouTube",
+    "address_fallback": "123 Tahrir Street, Cairo, Egypt",
+    "phone_fallback": "+20 123 456 7890",
+    "email_fallback": "info@electrostore.com"
   },
   "WhyChooseUs": {
     "quality_title": "Quality Guarantee",
@@ -118,5 +228,85 @@
     "secure_payment_content": "Multiple and safe payment options",
     "header_title": "Why Choose ENERGY ELHADAD?",
     "header_description": "A company specialized in providing and selling high-quality electrical products and solutions, where we work to meet the needs of individuals and companies through an integrated range of reliable products that combine efficiency, safety, and high performance"
+  },
+  "About": {
+    "page_title": "Company Overview",
+    "section_title": "About the Company",
+    "section_text": "A leading company in manufacturing and supplying high-quality electrical tools and supplies, Energy Elhadad provides safe and reliable products that meet the needs of homes, industrial, and commercial projects. Energy Elhadad was founded with the aim of offering electrical products that combine high quality, safety, and affordable price. We have extensive experience in the field of manufacturing electrical tools, and we always strive to develop practical solutions that help our customers accomplish their work with efficiency and confidence. We serve thousands of customers, including individuals, companies, and contractors, through products designed according to the highest technical and engineering standards."
+  },
+  "Terms": {
+    "page_title": "Terms and Conditions",
+    "sections": [
+      {
+        "title": "Terms of Use",
+        "items": [
+          "The user must be 18 years of age or older, or use the site under parental supervision.",
+          "The user is obligated to provide correct and accurate information when registering or purchasing.",
+          "It is prohibited to use the site for any illegal purposes or in violation of applicable regulations."
+        ]
+      },
+      {
+        "title": "Accounts",
+        "items": [
+          "The user is responsible for maintaining the confidentiality of their account data.",
+          "Store management reserves the right to suspend or delete any account in the event of suspicion of illegal use or violation of the terms."
+        ]
+      },
+      {
+        "title": "Products and Pricing",
+        "items": [
+          "We strive to display products and prices accurately; however, unintentional errors may occur.",
+          "The store reserves the right to modify prices or suspend any product at any time without prior notice.",
+          "Images shown are for illustrative purposes and the actual product may differ slightly."
+        ]
+      },
+      {
+        "title": "Orders and Payment",
+        "items": [
+          "The order is confirmed upon successful completion of the payment process.",
+          "All payments are processed through secure and verified payment gateways.",
+          "The store reserves the right to cancel any order if there is a problem with payment or product availability."
+        ]
+      },
+      {
+        "title": "Shipping and Delivery",
+        "items": [
+          "Orders are delivered to the address determined by the customer during purchase.",
+          "Delivery times vary depending on the geographical location and shipping company.",
+          "The store is not responsible for any delay caused by the shipping company or circumstances beyond its control."
+        ]
+      },
+      {
+        "title": "Returns and Exchanges",
+        "items": [
+          "The customer has the right to request a return or exchange within 14 days from the date of receipt, provided the product is in its original condition.",
+          "The return policy does not cover used, damaged, or customized products.",
+          "The customer bears the shipping costs in cases of return unless the error was from the store."
+        ]
+      },
+      {
+        "title": "General Terms of Use",
+        "items": [
+          "These terms and conditions are subject to the laws and regulations in force in the local country.",
+          "The store reserves the right to update these terms at any time, and users will be notified of any significant changes."
+        ]
+      }
+    ]
+  },
+  "ContactUs": {
+    "page_title": "Contact Us",
+    "section_title": "Get in Touch",
+    "section_description": "We'd love to hear from you. Please fill out the form below and we will get back to you as soon as possible.",
+    "name_label": "Name",
+    "email_label": "Email",
+    "phone_label": "Phone Number",
+    "message_label": "Message",
+    "submit_button": "Send Message",
+    "invalid_name": "Name must be at least 2 characters",
+    "invalid_email": "Please enter a valid email address",
+    "invalid_phone_number": "Please enter a valid Egyptian phone number",
+    "invalid_message": "Message must be at least 10 characters",
+    "success_message": "Your message has been sent successfully.",
+    "error_message": "Failed to send message. Please try again."
   }
 }

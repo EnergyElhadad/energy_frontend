@@ -10,6 +10,7 @@ import { useSession } from 'next-auth/react';
 import Image from 'next/image';
 import { Link } from '@/core/i18n';
 import { X, Home } from 'lucide-react';
+import { useTranslations } from 'next-intl';
 
 interface MobileMenuDrawerProps {
   categoriesData: CategoriesResponse;
@@ -17,6 +18,7 @@ interface MobileMenuDrawerProps {
 
 export const MobileMenuDrawer = ({ categoriesData }: MobileMenuDrawerProps) => {
   const { status } = useSession();
+  const t = useTranslations('Header');
 
   return (
     <Drawer direction="right">
@@ -37,7 +39,7 @@ export const MobileMenuDrawer = ({ categoriesData }: MobileMenuDrawerProps) => {
 
           <DrawerClose asChild>
             <Link href="/" className="flex items-center gap-2 rounded-md bg-gray-100 px-4 py-2 text-sm font-medium transition-colors hover:bg-gray-200">
-              الرئيسية
+              {t('home')}
               <Home className="h-4 w-4 text-green-600" />
             </Link>
           </DrawerClose>
@@ -64,22 +66,22 @@ export const MobileMenuDrawer = ({ categoriesData }: MobileMenuDrawerProps) => {
           {/* Static Links */}
           <DrawerClose asChild>
             <Link href="/products" className="flex w-full items-center justify-between border-b border-gray-100 px-6 py-4 transition-colors hover:bg-gray-50">
-              <span className="text-sm font-medium text-gray-700">كل المنتجات</span>
+              <span className="text-sm font-medium text-gray-700">{t('all_products')}</span>
             </Link>
           </DrawerClose>
           <DrawerClose asChild>
             <Link href="/about" className="flex w-full items-center justify-between border-b border-gray-100 px-6 py-4 transition-colors hover:bg-gray-50">
-              <span className="text-sm font-medium text-gray-700">تعريف بالشركة</span>
+              <span className="text-sm font-medium text-gray-700">{t('company_profile')}</span>
             </Link>
           </DrawerClose>
           <DrawerClose asChild>
             <Link href="/quality-policy" className="flex w-full items-center justify-between border-b border-gray-100 px-6 py-4 transition-colors hover:bg-gray-50">
-              <span className="text-sm font-medium text-gray-700">سياسة الجودة</span>
+              <span className="text-sm font-medium text-gray-700">{t('quality_policy')}</span>
             </Link>
           </DrawerClose>
           <DrawerClose asChild>
             <Link href="/contact" className="flex w-full items-center justify-between border-b border-gray-100 px-6 py-4 transition-colors hover:bg-gray-50">
-              <span className="text-sm font-medium text-gray-700">تواصل معنا</span>
+              <span className="text-sm font-medium text-gray-700">{t('contact_us')}</span>
             </Link>
           </DrawerClose>
         </div>

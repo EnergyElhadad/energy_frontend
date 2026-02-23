@@ -30,7 +30,7 @@ export const ProductDetails = ({ product }: ProductDetailsProps) => {
   return (
     <>
       <ProductHeader name={name} available_stock={available_stock} />
-      <ProductMeta name={name} rate_count={ratings_count} reviews_count={ratings_count} id={id} />
+      <ProductMeta name={name} rate_count={ratings_count} reviews_count={ratings_count} id={id} is_in_wishlist={product.is_in_wishlist} />
       <ProductInfo description={short_description} />
 
       <Display when={available_stock > 0}>

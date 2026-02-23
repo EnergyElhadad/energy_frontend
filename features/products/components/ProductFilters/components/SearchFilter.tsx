@@ -3,6 +3,7 @@
 import { Search } from 'lucide-react';
 import React, { useEffect, useRef } from 'react';
 import { useSearchAutocomplete } from '@/features/products/hooks/useSearchAutocomplete';
+import { useTranslations } from 'next-intl';
 
 interface SearchFilterProps {
   value: string;
@@ -10,6 +11,7 @@ interface SearchFilterProps {
 }
 
 export const SearchFilter: React.FC<SearchFilterProps> = ({ value, handleSearchChange }) => {
+  const t = useTranslations('Products');
   const wrapperRef = useRef<HTMLDivElement>(null);
   const { query, setQuery, setQueryExternal, results, isOpen, setIsOpen, onSelection } = useSearchAutocomplete(value);
 
@@ -52,7 +54,7 @@ export const SearchFilter: React.FC<SearchFilterProps> = ({ value, handleSearchC
 
         <input
           type="text"
-          placeholder="ابحث عن منتج"
+          placeholder={t('search_placeholder')}
           value={query}
           onChange={handleChange}
           onFocus={() => {

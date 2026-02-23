@@ -1,7 +1,9 @@
 import Image from 'next/image';
 import { MainBannerContent } from './components/MainBannerContent';
+import { useTranslations } from 'next-intl';
 
 export const MainBanner = () => {
+  const t = useTranslations('HomePage');
   return (
     <section className="bg-Background py-12.5">
       <div className="container">
@@ -13,12 +15,7 @@ export const MainBanner = () => {
             </picture>
 
             <div className="absolute inset-0 bg-black/50" />
-            <MainBannerContent
-              title="عرض لفترة محدودة"
-              desc1="وفر حتى 50% على جميع المنتجات"
-              desc2="احصل على أفضل الأسعار على المنتجات الكهربائية عالية الجودة"
-              linkUrl="#"
-            />
+            <MainBannerContent title={t('main_banner_title')} desc1={t('main_banner_desc1')} desc2={t('main_banner_desc2')} linkUrl="#" />
           </div>
         </div>
       </div>

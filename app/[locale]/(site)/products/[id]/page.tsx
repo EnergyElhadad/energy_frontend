@@ -5,11 +5,12 @@ import { ProductDetails } from '@/features/SingleProduct/components/ProductDetai
 import { getProductById } from '@/features/SingleProduct/services/product-service';
 import { ProductTabs } from '@/features/SingleProduct/components/ProductTabs';
 import { getIdFromSlug } from '@/shared/utils/slug';
+import { getTranslations } from 'next-intl/server';
 
 export const dynamic = 'force-dynamic';
 
 interface SingleProductPageProps {
-  params: Promise<{ id: string }>;
+  params: Promise<{ id: string; locale: string }>;
 }
 
 export const generateMetadata = async ({ params }: SingleProductPageProps): Promise<Metadata> => {
@@ -17,21 +18,28 @@ export const generateMetadata = async ({ params }: SingleProductPageProps): Prom
   const productId = getIdFromSlug(id);
   const product = await getProductById(productId);
 
+  const t = await getTranslations({ locale: (await params).locale, namespace: 'SingleProduct' });
+
   return {
-    title: product?.name || 'Single Product',
-    description: product?.short_description || 'Single Product',
+    title: product?.name || t('meta_title'),
+    description: product?.short_description || t('meta_description'),
   };
 };
 
 const SingleProductPage: React.FC<SingleProductPageProps> = async ({ params }) => {
-  const { id } = await params;
+  const { id, locale } = await params;
   const productId = getIdFromSlug(id);
   const data = await getProductById(productId);
   const { name, category, images, description, ratings_count } = data || {};
+  const commonT = await getTranslations({ locale, namespace: 'Header' });
 
   const imagesData = images.map(image => image.image);
 
-  const breadcrumbItems = [{ label: 'الرئيسية', href: '/' }, { label: category.name, href: `/products?category=${category.id}` }, { label: name }];
+  const breadcrumbItems = [
+    { label: commonT('home'), href: '/' },
+    { label: category.name, href: `/products?categoryId=${category.id}&categoryName=${category.name}` },
+    { label: name },
+  ];
 
   return (
     <main className="bg-Background min-h-[45dvh] pt-4 pb-20">

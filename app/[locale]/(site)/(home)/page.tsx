@@ -6,6 +6,7 @@ import { WhyChooseUs } from '@/features/home/components/WhyChooseUs';
 import { Hero } from '@/features/home/components/hero';
 import { ProductBanners } from '@/features/home/components/productBanners';
 import { getCategories } from '@/shared/services/categories.server';
+import { getTranslations } from 'next-intl/server';
 
 import { getHomeFeatures } from '@/features/home/services/home.server';
 import { getBanners } from '@/features/home/services/banners.server';
@@ -14,10 +15,18 @@ import { HomeFeaturesList } from '@/features/home/components/HomeFeaturesList';
 
 export const dynamic = 'force-dynamic';
 
-export const metadata: Metadata = {
-  title: 'الرئيسية',
-  description: ' منصة إينيرجي الحداد للوصول إلى حلول الطاقة المتكاملة والخدمات المتميزة.',
+type Props = {
+  params: { locale: string };
 };
+
+export async function generateMetadata({ params: { locale } }: Props): Promise<Metadata> {
+  const t = await getTranslations({ locale, namespace: 'HomePage' });
+
+  return {
+    title: t('meta_title'),
+    description: t('meta_description'),
+  };
+}
 
 export default async function Home() {
   const heroData = await getBanners('header');

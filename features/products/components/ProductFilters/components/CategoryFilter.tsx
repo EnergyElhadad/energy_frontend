@@ -6,6 +6,7 @@ import { RadioGroup } from '@/shared/components/ui/radio-group';
 import { RadioGroupItem } from '@/shared/components/ui/radio-group';
 import { Label } from '@/shared/components/ui/label';
 import { useCategoryFilter } from '../../../hooks/useCategoryFilter';
+import { useTranslations } from 'next-intl';
 
 interface CategoryFilterProps {
   handleCategoryToggle?: (id: string, name: string) => void;
@@ -13,6 +14,7 @@ interface CategoryFilterProps {
 }
 
 export const CategoryFilter: React.FC<CategoryFilterProps> = ({ handleCategoryToggle, initialCategories }) => {
+  const t = useTranslations('Products');
   const { categories, fetchNextPage, hasNextPage, isFetchingNextPage } = useInfiniteCategories(initialCategories);
   const { selectedCategoryId } = useCategoryFilter();
 
@@ -35,7 +37,7 @@ export const CategoryFilter: React.FC<CategoryFilterProps> = ({ handleCategoryTo
         <div className="flex items-center gap-2">
           <RadioGroupItem value="all" id="rall" className="peer size-4.5" />
           <Label htmlFor="rall" className="peer-data-[state=checked]:text-gray600 text-gray400 cursor-pointer text-sm">
-            الكل
+            {t('all')}
           </Label>
         </div>
 
@@ -54,7 +56,7 @@ export const CategoryFilter: React.FC<CategoryFilterProps> = ({ handleCategoryTo
 
       {hasNextPage && (
         <button onClick={() => fetchNextPage()} disabled={isFetchingNextPage} className="text-primary mt-2 text-sm hover:text-green-700 disabled:opacity-50">
-          {isFetchingNextPage ? 'جاري التحميل...' : 'عرض المزيد'}
+          {isFetchingNextPage ? t('loading') : t('show_more')}
         </button>
       )}
     </div>

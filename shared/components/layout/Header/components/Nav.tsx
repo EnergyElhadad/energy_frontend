@@ -2,9 +2,11 @@ import { AboutDropdown } from './AboutDropdown';
 import { CategoriesDropdown } from './CategoriesDropdown';
 import { Link } from '@/core/i18n';
 import { getCategories } from '@/shared/services/categories.server';
+import { getTranslations } from 'next-intl/server';
 
 export const Nav = async () => {
   const categoriesData = await getCategories();
+  const t = await getTranslations('Header');
 
   return (
     <nav className="border-Stroke hidden border-t py-[15px] lg:block">
@@ -15,15 +17,15 @@ export const Nav = async () => {
           </li>
           <li>
             <Link href="/" className="text-WetGray hover:text-primary text-[14px] font-semibold transition-colors">
-              الرئيسية
+              {t('home')}
             </Link>
           </li>
           <li>
             <AboutDropdown />
           </li>
           <li>
-            <Link href="/contact" className="text-WetGray hover:text-primary text-[14px] font-semibold transition-colors">
-              تواصل معنا
+            <Link href="/contact-us" className="text-WetGray hover:text-primary text-[14px] font-semibold transition-colors">
+              {t('contact_us')}
             </Link>
           </li>
         </ul>

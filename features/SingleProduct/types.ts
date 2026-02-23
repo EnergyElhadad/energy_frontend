@@ -21,6 +21,7 @@ export interface ProductData {
   discount_label: string;
   is_active: boolean;
   is_in_stock: boolean;
+  is_in_wishlist: boolean;
   available_stock: number;
   ratings_count: number;
   images: ImagesData[];

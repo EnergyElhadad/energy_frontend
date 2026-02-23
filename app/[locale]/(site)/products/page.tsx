@@ -8,17 +8,28 @@ import { Breadcrumb } from '@/shared/components/layout/Breadcrumb';
 import { getCategoryDetails } from '@/shared/services/categoryDetails';
 import { Category } from '@/shared/types/category';
 
+import { getTranslations } from 'next-intl/server';
+
 export const dynamic = 'force-dynamic';
 
-export async function generateMetadata({ searchParams }: { searchParams: Promise<{ [key: string]: string | string[] | undefined }> }): Promise<Metadata> {
+type Props = {
+  params: { locale: string };
+  searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
+};
+
+export async function generateMetadata({ params: { locale }, searchParams }: Props): Promise<Metadata> {
   const { categoryName } = await searchParams;
+  const t = await getTranslations({ locale, namespace: 'Products' });
+
   return {
-    title: (categoryName as string) || 'المنتجات',
+    title: (categoryName as string) || t('meta_title'),
   };
 }
 
-export default async function ProductsPage({ searchParams }: { searchParams: Promise<{ [key: string]: string | string[] | undefined }> }) {
+export default async function ProductsPage({ params: { locale }, searchParams }: Props) {
   const { categoryId, categoryName } = await searchParams;
+  const t = await getTranslations({ locale, namespace: 'Products' });
+  const commonT = await getTranslations({ locale, namespace: 'Header' });
   let initialData: ProductsResponse | null = null;
 
   try {
@@ -36,15 +47,15 @@ export default async function ProductsPage({ searchParams }: { searchParams: Pro
   }
 
   const breadcrumbItems = [
-    { label: 'الرئيسية', href: '/' },
+    { label: commonT('home'), href: '/' },
     ...(categoryId && categoryName
       ? [
           {
             label: categoryName as string,
-            href: `/products?category=${categoryId}`,
+            href: `/products?categoryId=${categoryId}&categoryName=${categoryName}`,
           },
         ]
-      : [{ label: 'كل المنتجات', href: '/products' }]),
+      : [{ label: commonT('all_products'), href: '/products' }]),
   ];
   let categoryDetails: Category | null = null;
 
@@ -59,7 +70,7 @@ export default async function ProductsPage({ searchParams }: { searchParams: Pro
 
         {/* Main Content */}
         <div className="mx-auto max-w-7xl px-4 pt-4 pb-33">
-          <ProductsContent initialData={initialData} initialCategories={initialCategories!} categeoryDescription={categoryDetails?.name || 'الكل'} />
+          <ProductsContent initialData={initialData} initialCategories={initialCategories!} categeoryDescription={categoryDetails?.name || t('all_products_desc')} />
         </div>
       </div>
     </main>

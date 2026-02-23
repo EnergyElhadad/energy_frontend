@@ -1,23 +1,23 @@
-import { useTranslations } from "next-intl";
-import { Dropdown } from "@/shared/components/ui/Dropdown";
+import { useTranslations } from 'next-intl';
+import { Dropdown } from '@/shared/components/ui/Dropdown';
 
-import { Link } from "@/core/i18n";
-import { CategoriesIcon } from "@/shared/components/icons/Categories";
-import { ArrowDownIcon } from "@/shared/components/icons/ArrowDown";
+import { Link } from '@/core/i18n';
+import { CategoriesIcon } from '@/shared/components/icons/Categories';
+import { ArrowDownIcon } from '@/shared/components/icons/ArrowDown';
 
 export const AboutDropdown = () => {
-  const t = useTranslations("Header");
+  const t = useTranslations('Header');
 
   const links = [
     {
-      href: "/about",
+      href: '/about',
       icon: <CategoriesIcon className="text-primary" />,
-      label: "تعريف بالشركة",
+      label: t('company_profile'),
     },
     {
-      href: "/quality-policy",
+      href: '/terms-and-conditions',
       icon: <CategoriesIcon className="text-primary" />,
-      label: "سياسة الجودة",
+      label: t('quality_policy'),
     },
   ];
 
@@ -25,9 +25,7 @@ export const AboutDropdown = () => {
     <Dropdown
       trigger={
         <button className="flex h-[24px] items-center gap-[8px]">
-          <span className="text-WetGray hover:text-primary line-height-[2] text-[14px] font-semibold transition-colors">
-            عن الشركة
-          </span>
+          <span className="text-WetGray hover:text-primary line-height-[2] text-[14px] font-semibold transition-colors">{t('about_us')}</span>
           <ArrowDownIcon className="aria-expanded:text-primary aria-expanded:rotate-180" />
         </button>
       }
@@ -36,7 +34,7 @@ export const AboutDropdown = () => {
       menuClassName="!max-w-[220px] !p-0 overflow-hidden !top-full"
     >
       <div>
-        {links.map((link) => (
+        {links.map(link => (
           <Link
             key={link.href}
             href={link.href}

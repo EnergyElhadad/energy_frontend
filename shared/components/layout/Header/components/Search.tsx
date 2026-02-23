@@ -113,7 +113,7 @@ export const Search = () => {
               />
             </div>
             <button type="button" className="p-2 text-sm font-medium text-gray-600" onClick={() => setIsMobileOpen(false)}>
-              إلغاء
+              {t('cancel')}
             </button>
           </div>
 
@@ -133,7 +133,7 @@ export const Search = () => {
                 </button>
               ))
             ) : query.length > 0 ? (
-              <p className="py-8 text-center text-gray-500">لا توجد نتائج</p>
+              <p className="py-8 text-center text-gray-500">{t('no_results')}</p>
             ) : null}
           </div>
         </div>

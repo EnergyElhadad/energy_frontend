@@ -23,7 +23,7 @@ export const WishlistDropdown = () => {
       queryClient.invalidateQueries({ queryKey: ['wishlistPage'] });
       queryClient.invalidateQueries({ queryKey: ['products'] }); // Ensure `ProductsView` and hook sink
     } catch {
-      toast.error('فشل إزالة المنتج من المفضلة');
+      toast.error(t('remove_failed'));
     }
   };
 
@@ -32,7 +32,7 @@ export const WishlistDropdown = () => {
       <div className="">
         <h3 className="mb-[7px] text-[14px] font-semibold">{t('wishlist')}</h3>
         {items.length === 0 ? (
-          <p className="text-signalGray py-4 text-center text-sm">لا توجد منتجات في المفضلة</p>
+          <p className="text-signalGray py-4 text-center text-sm">{t('empty')}</p>
         ) : (
           <div className="scrollbar-thin flex max-h-[300px] flex-col gap-[8px] overflow-y-auto">
             {items.map(item => (
@@ -46,13 +46,15 @@ export const WishlistDropdown = () => {
                     <p className="text-signalGray mb-1 text-[9px] sm:mb-2 sm:text-[10px]">{item.category}</p>
                   </div>
                   <div className="flex items-center justify-between">
-                    <span className="text-primary text-sm font-bold">{item.price} ج.م</span>
+                    <span className="text-primary text-sm font-bold">
+                      {item.price} {t('egp', { namespace: 'Products' })}
+                    </span>
                     <button
                       onClick={() => handleRemove(item.id)}
                       className="border-Alert text-Alert hover:bg-Alert cursor-pointer rounded border px-3 py-1 text-xs font-medium transition hover:text-white"
                       aria-label="Remove from wishlist"
                     >
-                      حذف
+                      {t('remove')}
                     </button>
                   </div>
                 </div>

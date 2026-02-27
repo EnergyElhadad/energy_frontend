@@ -8,7 +8,7 @@ import { ArrowLeftIcon } from '@/shared/components/icons/ArrowLeft';
 import { ArrowRightIcon } from '@/shared/components/icons/ArrowRight';
 import 'swiper/css';
 import 'swiper/css/navigation';
-import { ShopByCategoryCard } from './components/ShopByCategoryCard';
+import { CategoryCard } from '@/features/categories/components/CategoryCard';
 import { Category } from '@/shared/types/category';
 import { useTranslations } from 'next-intl';
 
@@ -16,7 +16,7 @@ export const ShopByCategory = ({ categories }: { categories: Category[] }) => {
   const t = useTranslations('HomePage');
   return (
     <section className="relative container py-16">
-      <HeaderSection title={t('shop_by_category')} textlink={t('view_all')} urlLink="/products" />
+      <HeaderSection title={t('shop_by_category')} textlink={t('view_all')} urlLink="/categories" />
       <div className="swiperWrapper relative">
         <Swiper
           modules={[Navigation]}
@@ -39,7 +39,7 @@ export const ShopByCategory = ({ categories }: { categories: Category[] }) => {
         >
           {categories.map(({ id, name, image }) => (
             <SwiperSlide key={id}>
-              <ShopByCategoryCard name={name} image={image || ''} id={id} />
+              <CategoryCard name={name} image={image || ''} id={id} />
             </SwiperSlide>
           ))}
         </Swiper>

@@ -6,6 +6,8 @@ import { ShopingButtonCard } from './components/ShopingButtonCard';
 import { useEffect, useRef, useState } from 'react';
 import { useDebounce } from '@/shared/hooks/useDebounce';
 import { useTranslations } from 'next-intl';
+import Link from 'next/link';
+import { toSlug } from '@/shared/utils/slug';
 
 interface ShopingCardProps {
   id: string | number;
@@ -22,6 +24,7 @@ export const ShopingCard: React.FC<ShopingCardProps> = ({ id, price, itemTotal, 
   const debouncedQuantity = useDebounce(localQuantity, 500);
   const isMounted = useRef(false);
   const t = useTranslations('Products');
+  const productUrl = `/products/${id}-${toSlug(title)}`;
 
   useEffect(() => {
     if (!isMounted.current) {
@@ -42,12 +45,17 @@ export const ShopingCard: React.FC<ShopingCardProps> = ({ id, price, itemTotal, 
   return (
     <div className="border-gray100 relative flex w-full max-w-223.5 items-center gap-2 rounded-sm border bg-white p-4 md:gap-4">
       <div className="flex items-center gap-4">
-        <div className="border-Stroke s relative aspect-square min-h-20 w-full min-w-29.25 shrink-0 overflow-hidden rounded-sm border md:aspect-auto md:h-20 md:w-29.25">
+        <Link
+          href={productUrl}
+          className="border-Stroke s relative aspect-square min-h-20 w-full min-w-29.25 shrink-0 overflow-hidden rounded-sm border transition-opacity hover:opacity-80 md:aspect-auto md:h-20 md:w-29.25"
+        >
           <Image src={imageUrl} fill className="object-cover" alt="shoping-cart-image" />
-        </div>
+        </Link>
       </div>
       <div className="flex flex-1 flex-col gap-2 md:items-start md:gap-1">
-        <ShopingCardDesc title={title} price={price} />
+        <Link href={productUrl} className="hover:text-primary transition-colors">
+          <ShopingCardDesc title={title} price={price} />
+        </Link>
       </div>
 
       <div className="flex flex-wrap items-center justify-end gap-2 md:gap-4 lg:gap-8">

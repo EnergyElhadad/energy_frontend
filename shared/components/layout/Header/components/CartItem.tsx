@@ -4,6 +4,8 @@ import { useEffect, useRef, useState } from 'react';
 import Image from 'next/image';
 import { Counter } from '@/shared/components/ui/Counter';
 import { useDebounce } from '@/shared/hooks/useDebounce';
+import Link from 'next/link';
+import { toSlug } from '@/shared/utils/slug';
 
 interface Product {
   id: string | number;
@@ -23,6 +25,7 @@ export const CartItem = ({ product, quantity, onQuantityChange }: CartItemProps)
   const [localQuantity, setLocalQuantity] = useState(quantity);
   const debouncedQuantity = useDebounce(localQuantity, 500);
   const isMounted = useRef(false);
+  const productUrl = `/products/${product.id}-${toSlug(product.title)}`;
 
   useEffect(() => {
     if (!isMounted.current) {
@@ -42,12 +45,14 @@ export const CartItem = ({ product, quantity, onQuantityChange }: CartItemProps)
 
   return (
     <div className="border-Stroke flex gap-2 rounded-[8px] border p-2 sm:gap-[10px] sm:p-[8px]">
-      <div className="relative h-20 w-20 shrink-0 sm:h-[106px] sm:w-[112px]">
+      <Link href={productUrl} className="relative h-20 w-20 shrink-0 transition-opacity hover:opacity-80 sm:h-[106px] sm:w-[112px]">
         <Image src={product.image} alt={product.title} fill className="rounded-[4px] object-cover" />
-      </div>
+      </Link>
       <div className="flex min-w-0 grow flex-col justify-between">
         <div>
-          <h4 className="mb-1 line-clamp-2 text-[11px] leading-[1.4] font-semibold sm:text-[12px]">{product.title}</h4>
+          <Link href={productUrl} className="hover:text-primary transition-colors">
+            <h4 className="mb-1 line-clamp-2 text-[11px] leading-[1.4] font-semibold sm:text-[12px]">{product.title}</h4>
+          </Link>
           <p className="text-signalGray mb-1 text-[9px] sm:mb-2 sm:text-[10px]">{product.category}</p>
         </div>
 

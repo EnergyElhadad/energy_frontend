@@ -23,11 +23,11 @@ export const ProfileSidebar = () => {
       href: '/profile/addresses',
       isActive: (path: string) => path.includes('/profile/addresses'),
     },
-    // {
-    //   label: 'المدفوعات',
-    //   href: '/profile/payments',
-    //   isActive: (path: string) => path.includes('/profile/payments'),
-    // },
+    {
+      label: 'المدفوعات',
+      href: '/profile/payments',
+      isActive: (path: string) => path.includes('/profile/payments'),
+    },
   ];
 
   return (

@@ -4,6 +4,8 @@ import { Badge } from './components/Badge';
 import { BodyCard } from './components/BodyCard';
 import { HiddenIcons } from './components/HiddenIcons';
 import { Display } from '../layout/Display';
+import Link from 'next/link';
+import { toSlug } from '@/shared/utils/slug';
 
 export type ProductT = {
   id: number | string;
@@ -21,6 +23,8 @@ export type ProductT = {
 export const ProductCard: React.FC<ProductT> = ({ id, title, image, originalPrice, oldPrice, badge, category, imageProps, onClick, is_in_wishlist }) => {
   return (
     <div className="group border-Stroke/50 hover:border-primary relative mx-auto flex w-full cursor-pointer flex-col overflow-hidden rounded-sm border bg-white p-2 pb-3 transition hover:shadow-[0_8px_24px_0_rgba(0,0,0,0.08)]">
+      <Link href={`/products/${id}-${toSlug(title)}`} className="absolute inset-0 z-1" aria-label={`View ${title}`} />
+
       <HiddenIcons title={title} id={id} onView={onClick} />
       <div className="flex max-h-63.75 min-h-63.75 w-full flex-col items-center justify-center overflow-hidden">
         <Display when={!!badge}>

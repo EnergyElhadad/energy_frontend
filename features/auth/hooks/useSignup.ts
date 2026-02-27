@@ -37,8 +37,7 @@ export function useSignup() {
 
   const onSubmit = async (data: SignupValues) => {
     try {
-      const response = await trySignup(data);
-      toast.success(response.message);
+      await trySignup(data);
       localStorage.setItem('verify_phone_number', data.phone_number);
       router.push('/verify-otp');
     } catch (error: unknown) {

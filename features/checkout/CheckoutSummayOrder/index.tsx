@@ -21,7 +21,7 @@ interface CheckoutSummaryOrderProps {
 }
 
 export const CheckoutSummaryOrder = ({ selectedPaymentId, onSelectPayment, onSubmit, isSubmitting, selectedAddressId, selectedCityId }: CheckoutSummaryOrderProps) => {
-  const { items, discountBreakdown: cartDiscountBreakdown } = useCart();
+  const { items, discountBreakdown: cartDiscountBreakdown, cartTotal } = useCart();
   const { summary, isLoading: isSummaryLoading } = useOrderSummary({
     addressId: selectedAddressId,
     cityId: selectedCityId,
@@ -40,7 +40,7 @@ export const CheckoutSummaryOrder = ({ selectedPaymentId, onSelectPayment, onSub
 
   const shippingCost = summary ? parseFloat(summary.shipping_cost) : 0;
   const discountAmount = summary ? parseFloat(summary.discount_total) : cartDiscountBreakdown ? parseFloat(cartDiscountBreakdown.total_savings) : 0;
-  const totalAmount = summary ? parseFloat(summary.total_amount) : 0;
+  const totalAmount = summary ? parseFloat(summary.total_amount) : cartDiscountBreakdown?.final_total ? parseFloat(cartDiscountBreakdown.final_total) : cartTotal || 0;
 
   return (
     <>

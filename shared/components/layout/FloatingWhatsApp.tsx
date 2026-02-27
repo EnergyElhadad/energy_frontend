@@ -21,7 +21,7 @@ export const FloatingWhatsApp = ({ phoneNumber }: FloatingWhatsAppProps) => {
       className="fixed right-6 bottom-6 z-50 flex items-center justify-center drop-shadow-lg transition-transform hover:scale-110 ltr:right-6 rtl:right-auto rtl:left-6"
       aria-label="Chat on WhatsApp"
     >
-      <Image src="/images/whatsapp.webp" alt="Whatsapp" width={100} height={100} />
+      <Image src="/images/whatsapp.webp" alt="Whatsapp" width={70} height={70} />
     </Link>
   );
 };

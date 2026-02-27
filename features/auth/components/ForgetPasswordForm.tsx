@@ -12,7 +12,7 @@ export function ForgetPasswordForm() {
     <form onSubmit={handleSubmit(onSubmit)} className="mx-auto w-full max-w-md">
       <div className="mb-6">
         <label className="@max-sm: mb-2 block text-sm font-semibold @max-sm:text-xs" htmlFor="phone_number">
-          {t('phone_label') || 'Phone Number'}
+          {t('phone_label')}
         </label>
         <input
           type="tel"

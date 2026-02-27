@@ -24,12 +24,9 @@ export default async function WishlistPage() {
 
   return (
     <main className="bg-Background">
-      <div className="container">
+      <div className="container pb-33">
         <Breadcrumb className="py-5" items={breadcrumbItems} />
-
-        <div className="mx-auto max-w-7xl px-4 pt-4 pb-33">
-          <WishlistContent initialData={initialData} />
-        </div>
+        <WishlistContent initialData={initialData} />
       </div>
     </main>
   );

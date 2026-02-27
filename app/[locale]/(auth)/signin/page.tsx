@@ -5,7 +5,8 @@ import { SigninForm } from '@/features/auth/components/SigninForm';
 import { FooterForm } from '@/features/auth/components/FooterForm';
 import { getTranslations, setRequestLocale } from 'next-intl/server';
 
-export async function generateMetadata({ params: { locale } }: { params: { locale: string } }): Promise<Metadata> {
+export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
+  const { locale } = await params;
   const t = await getTranslations({ locale, namespace: 'Auth' });
   return {
     title: t('signin_title'),

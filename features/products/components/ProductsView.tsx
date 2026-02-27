@@ -52,7 +52,7 @@ export const ProductsView = ({ initialData, categeoryDescription, onOpenFilters 
             key={product.id}
             id={product.id}
             title={product.name}
-            image={product.images?.[0]?.image || ''}
+            image={product.images.find(img => img.is_primary)?.image || '/images/logo.png'}
             originalPrice={Number(product.price)}
             category={product.category?.name}
             oldPrice={product.discount_percentage ? Number(product.price) - (Number(product.price) * Number(product.discount_percentage)) / 100 : undefined}

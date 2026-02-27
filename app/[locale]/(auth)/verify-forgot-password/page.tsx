@@ -1,28 +1,27 @@
-'use client';
-
-import { useTranslations } from 'next-intl';
-import { useRouter } from '@/core/i18n';
+import { Metadata } from 'next';
+import { getTranslations, setRequestLocale } from 'next-intl/server';
 import { AuthLayout } from '@/features/auth/components/AuthLayout';
 import { HeaderForm } from '@/features/auth/components/HeaderForm';
-import { VerifyOtpForm } from '@/features/auth/components/VerifyOtpForm';
-import { tryVerifyForgotPasswordOtp } from '@/features/auth/services/verifyForgotPasswordOtp';
+import { VerifyForgotPasswordContent } from '@/features/auth/components/VerifyForgotPasswordContent';
 
-export default function VerifyForgotPasswordPage() {
-  const t = useTranslations('Auth');
-  const router = useRouter();
+export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
+  const { locale } = await params;
+  const t = await getTranslations({ locale, namespace: 'Auth' });
+  return {
+    title: t('verify_title'),
+    description: t('verify_otp_meta_description'),
+  };
+}
+
+export default async function VerifyForgotPasswordPage({ params }: { params: Promise<{ locale: string }> }) {
+  const { locale } = await params;
+  setRequestLocale(locale);
+  const t = await getTranslations('Auth');
 
   return (
     <AuthLayout>
       <HeaderForm title={t('verify_title')} subtitle={t('verify_subtitle')} />
-      <VerifyOtpForm
-        verifyFn={tryVerifyForgotPasswordOtp}
-        onSuccess={({ phone_number, otp }) => {
-          localStorage.setItem('reset_phone_number', phone_number);
-          localStorage.setItem('reset_otp', otp);
-          router.push('/new-password');
-        }}
-        fallbackRoute="/forgot-password"
-      />
+      <VerifyForgotPasswordContent />
     </AuthLayout>
   );
 }

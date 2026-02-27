@@ -10,7 +10,14 @@ import { ProductsQueryParams } from '../types/productsQueryParams';
 export const useInfiniteProducts = (filters: ProductsQueryParams, initialData: ProductsResponse | null) => {
   const { data, fetchNextPage, hasNextPage, isFetchingNextPage, isFetching, isLoading } = useInfiniteQuery({
     queryKey: ['products', filters],
-    queryFn: ({ pageParam }) => getProducts({ ...filters, page: pageParam }),
+    queryFn: async ({ pageParam }) => {
+      const result = await getProducts({ ...filters, page: pageParam });
+      window.scroll({
+        top: 0,
+        behavior: 'smooth',
+      });
+      return result;
+    },
     initialPageParam: 1,
     getNextPageParam: (lastPage: ProductsResponse) => {
       if (lastPage.next && lastPage.current_page < lastPage.num_pages) {

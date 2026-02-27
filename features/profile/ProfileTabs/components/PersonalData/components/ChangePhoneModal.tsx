@@ -9,7 +9,7 @@ import { Button } from '@/shared/components/ui/Button';
 import { Input } from '@/shared/components/ui/input';
 import { InputOTP, InputOTPSlot } from '@/shared/components/ui/input-otp';
 import { useChangePhone } from '@/features/profile/hooks/useChangePhone';
-import { useTranslations } from 'next-intl';
+import { useLocale } from 'next-intl';
 
 const phoneSchema = z.object({
   new_phone_number: z.string().min(10, 'رقم الهاتف غير صحيح').regex(/^\d+$/, 'يجب أن يحتوي رقم الهاتف على أرقام فقط'),
@@ -26,6 +26,8 @@ export const ChangePhoneModal = ({ trigger }: ChangePhoneModalProps) => {
   const [step, setStep] = useState<'input' | 'verify'>('input');
   const [newPhone, setNewPhone] = useState('');
   const [otp, setOtp] = useState('');
+  const locale = useLocale();
+  const dir = locale === 'ar' ? 'rtl' : 'ltr';
 
   const { requestChangePhone, isRequesting, confirmChangePhone, isConfirming } = useChangePhone();
 
@@ -120,7 +122,7 @@ export const ChangePhoneModal = ({ trigger }: ChangePhoneModalProps) => {
               <p className="mb-6 text-center text-gray-600">أدخل الكود المكون من 6 أرقام المرسل إلى رقم الهاتف</p>
 
               <div className="flex flex-col items-center space-y-6">
-                <InputOTP maxLength={6} value={otp} onChange={setOtp} disabled={isConfirming}>
+                <InputOTP autoFocus maxLength={6} value={otp} onChange={setOtp} disabled={isConfirming} dir={dir}>
                   <div className="flex w-full justify-center gap-2">
                     <InputOTPSlot index={0} className="h-12 w-12 rounded-md border" />
                     <InputOTPSlot index={1} className="h-12 w-12 rounded-md border" />

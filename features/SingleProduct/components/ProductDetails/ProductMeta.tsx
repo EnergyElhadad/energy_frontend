@@ -35,7 +35,9 @@ export const ProductMeta = ({ name, rate_count, reviews_count, id, is_in_wishlis
           <div className={cn('text-signalGray hover:text-primary', isInWishlist && 'text-primary')}>
             {isLoading ? <Loader2 className="h-5 w-5 animate-spin" /> : <HeartIcon className={cn(isInWishlist && 'fill-current')} />}
           </div>
-          <p className={cn('text-signalGray text-sm font-normal', isInWishlist && 'text-primary font-medium')}>{t('add_to_wishlist')}</p>
+          <p className={cn('text-signalGray text-sm font-normal', isInWishlist && 'text-primary font-medium')}>
+            {isInWishlist ? t('remove_from_wishlist') : t('add_to_wishlist')}
+          </p>
         </div>
       </button>
       <div className="flex cursor-pointer space-x-2 border-s ps-4" onClick={() => handleShare({ title: name })}>

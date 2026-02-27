@@ -1,34 +1,26 @@
-import React from "react";
-import { ProfileTilte } from "../ProfileTilte";
-import { ProfilePaymentsCard } from "./components/ProfilePaymentsCard";
+import React from 'react';
+import { ProfileTilte } from '../ProfileTilte';
+import { ProfilePaymentsCard } from './components/ProfilePaymentsCard';
+import { getTransactions } from '@/features/payments/services/payments.server';
 
-const paymentsData = [
-  {
-    id: 1,
-    date: "Septemper 1, 2025",
-    masterCard: "Mastercard ****1234",
-    orderNumber: "17156789",
-  },
-  {
-    id: 2,
-    date: "Septemper 1, 2025",
-    masterCard: "Mastercard ****1234",
-    orderNumber: "17156789",
-  },
-];
+export const ProfilePayments = async () => {
+  const transactionsRes = await getTransactions();
+  const transactions = transactionsRes.result || [];
 
-export const ProfilePayments = () => {
   return (
     <>
       <ProfileTilte title="المدفوعات" />
 
       <div className="flex flex-col gap-3">
-        {paymentsData.map((payment) => (
+        {transactions.map(payment => (
           <ProfilePaymentsCard
             key={payment.id}
-            date={payment.date}
-            masterCard={payment.masterCard}
-            orderNumber={payment.orderNumber}
+            date={payment.created_at}
+            masterCard={payment.payment_details}
+            orderNumber={payment.order_number}
+            amount={payment.amount}
+            currency={payment.currency}
+            // status={payment.status}
           />
         ))}
       </div>

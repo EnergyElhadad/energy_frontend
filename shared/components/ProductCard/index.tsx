@@ -1,4 +1,4 @@
-import Image, { ImageProps } from 'next/image';
+import { ImageProps } from 'next/image';
 import React from 'react';
 import { Badge } from './components/Badge';
 import { BodyCard } from './components/BodyCard';
@@ -6,6 +6,7 @@ import { HiddenIcons } from './components/HiddenIcons';
 import { Display } from '../layout/Display';
 import Link from 'next/link';
 import { toSlug } from '@/shared/utils/slug';
+import { ImageWithPlaceholder } from './components/ImageWithPlaceholder';
 
 export type ProductT = {
   id: number | string;
@@ -31,7 +32,7 @@ export const ProductCard: React.FC<ProductT> = ({ id, title, image, originalPric
           <Badge text={badge!} />
         </Display>
         <div className="relative w-full overflow-hidden rounded-xl">
-          <Image src={image} alt={title} width={268} height={255} className="mx-auto" {...imageProps} />
+          <ImageWithPlaceholder image={image} title={title} imageProps={imageProps} />
         </div>
       </div>
       <BodyCard category={category} title={title} id={id} originalPrice={originalPrice} oldPrice={oldPrice} is_in_wishlist={is_in_wishlist} />

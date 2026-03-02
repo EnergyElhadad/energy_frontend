@@ -4,6 +4,8 @@ import aboutImage from '@/public/images/about.webp';
 import { HeaderPage } from '@/shared/components/ui/HeaderPage';
 import { useTranslations } from 'next-intl';
 
+export const dynamic = 'force-dynamic';
+
 const imagePath: string = aboutImage.src;
 
 export default function AboutPage() {

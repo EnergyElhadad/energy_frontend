@@ -7,11 +7,11 @@ const nextConfig: NextConfig = {
     remotePatterns: [
       {
         protocol: "http",
-        hostname: "staging.energyelhadad.com",
+        hostname: "new-staging.energyelhadad.com",
       },
       {
         protocol: "https",
-        hostname: "staging.energyelhadad.com",
+        hostname: "new-staging.energyelhadad.com",
       },
     ],
     formats: ["image/avif", "image/webp"],

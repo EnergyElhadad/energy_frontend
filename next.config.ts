@@ -2,16 +2,16 @@ import type { NextConfig } from "next";
 import createNextIntlPlugin from "next-intl/plugin";
 
 const nextConfig: NextConfig = {
-  /* config options here */
+  output: "standalone",
   images: {
     remotePatterns: [
       {
         protocol: "http",
-        hostname: "staging.energyelhadad.com",
+        hostname: "new-staging.energyelhadad.com",
       },
       {
         protocol: "https",
-        hostname: "staging.energyelhadad.com",
+        hostname: "new-staging.energyelhadad.com",
       },
     ],
     formats: ["image/avif", "image/webp"],

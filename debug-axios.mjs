@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const API_URL = "https://staging.energyelhadad.com/api";
+const API_URL = "https://new-staging.energyelhadad.com/api";
 
 const instance = axios.create({
   baseURL: API_URL,

@@ -36,7 +36,9 @@ export default async function Home() {
 
   return (
     <main className="space-y-8">
-      <Hero data={heroData.result} />
+      <Display when={heroData.result.length > 0}>
+        <Hero data={heroData.result} />
+      </Display>
       <ShopByCategory categories={categoriesData.result} />
       <Display when={homeFeaturesData.result.length > 0}>
         <HomeFeaturesList initialData={homeFeaturesData} />

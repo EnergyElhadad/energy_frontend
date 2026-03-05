@@ -20,7 +20,7 @@ import {
   AlertDialogTrigger,
 } from '@/shared/components/ui/alert-dialog';
 
-export const UserMenu = () => {
+export const UserMenu = ({ direction }: { direction?: 'up' | 'down' }) => {
   const { data: session } = useSession();
   const t = useTranslations('Auth');
   const { logout, isLoading } = useLogout();
@@ -53,6 +53,7 @@ export const UserMenu = () => {
       triggerMode="hover"
       menuClassName="!max-w-[220px] !p-0 overflow-hidden"
       activeClassName="!bg-primary"
+      direction={direction}
     >
       <div>
         {links.map(link => (

@@ -88,7 +88,7 @@ export const MobileMenuDrawer = ({ categoriesData }: MobileMenuDrawerProps) => {
 
         {/* Footer (Auth & Language) */}
         <div className="mt-auto space-y-6 border-t border-gray-100 p-6">
-          <div className="flex w-full justify-center">{status === 'authenticated' ? <UserMenu /> : <AuthLinksDropdown />}</div>
+          <div className="flex w-full justify-center">{status === 'authenticated' ? <UserMenu direction="up" /> : <AuthLinksDropdown direction="up" />}</div>
           <div className="flex w-full justify-center">
             <LanguageSwitcher />
           </div>

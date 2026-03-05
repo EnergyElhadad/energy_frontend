@@ -33,11 +33,11 @@ export const ProductsContent = ({ initialData, initialCategories, categeoryDescr
       </div>
 
       {/* Mobile/Tablet Side Drawer */}
-      <Drawer open={drawerOpen} onOpenChange={setDrawerOpen} direction="right">
-        <DrawerContent className="h-full w-4/5 max-w-sm">
+      <Drawer open={drawerOpen} onOpenChange={setDrawerOpen} direction="right" dismissible={false}>
+        <DrawerContent className="h-full w-4/5 max-w-sm" onInteractOutside={() => setDrawerOpen(false)}>
           <DrawerHeader className="flex flex-row items-center justify-between border-b pb-3">
             <DrawerTitle className="text-lg">{t('filters')}</DrawerTitle>
-            <DrawerClose asChild>
+            <DrawerClose asChild onClick={() => setDrawerOpen(false)}>
               <button className="rounded-full p-1 hover:bg-gray-100">
                 <X className="h-5 w-5" />
               </button>

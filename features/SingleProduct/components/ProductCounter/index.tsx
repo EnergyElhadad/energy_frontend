@@ -14,7 +14,7 @@ export const ProductCounter: React.FC<ProductCounterProps> = ({ value, price, on
   const t = useTranslations('SingleProduct');
 
   return (
-    <div className="flex items-center justify-between">
+    <div className="flex flex-wrap items-center justify-between gap-3">
       <div className="flex items-center gap-4">
         <h4 className="text-base font-bold">{t('select_quantity')}</h4>
         <Counter {...props} value={value} onChange={onChange} onLimitReached={() => toast.error(t('stock_limit_reached'))} />

@@ -29,9 +29,9 @@ export const HomeProductsSection = ({ title, products, urlLink }: HomeProductsSe
               id={product.id}
               title={product.name}
               image={product.images.find(img => img.is_primary)?.image || '/images/logo.png'}
-              originalPrice={Number(product.price)}
-              oldPrice={product.offer_price}
-              badge={product.discount_percentage > 0 ? `${product.discount_percentage}%` : undefined}
+              originalPrice={Number(product.offer_price)}
+              oldPrice={Number(product.price)}
+              badge={product.discount_label}
               is_in_wishlist={product.is_in_wishlist}
               onClick={() => setSelectedProduct(product)}
             />

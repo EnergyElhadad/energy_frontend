@@ -17,25 +17,25 @@ export const ProductTabs: React.FC<Props> = ({ generalDescription = '', technica
     <Tabs defaultValue="general" style={{ direction: locale === 'ar' ? 'rtl' : 'ltr' }}>
       <TabsList className="border-Stroke min-h-10 w-full justify-start rounded-none border-b bg-white p-0">
         <TabsTrigger
-          className="data-[state=active]:bg-primary max-w-[226px] min-w-[150px] rounded-none border-none bg-white py-3 text-base text-gray-500 shadow-none data-[state=active]:text-white"
+          className="data-[state=active]:bg-primary flex-1 rounded-none border-none bg-white py-2.5 text-sm text-gray-500 shadow-none data-[state=active]:text-white md:max-w-[226px] md:min-w-[150px] md:py-3 md:text-base"
           value="general"
         >
           {t('general_description')}
         </TabsTrigger>
         <TabsTrigger
-          className="data-[state=active]:bg-primary max-w-[226px] min-w-[150px] rounded-none border-none bg-white py-3 text-base text-gray-500 shadow-none data-[state=active]:text-white"
+          className="data-[state=active]:bg-primary flex-1 rounded-none border-none bg-white py-2.5 text-sm text-gray-500 shadow-none data-[state=active]:text-white md:max-w-[226px] md:min-w-[150px] md:py-3 md:text-base"
           value="specs"
         >
           {t('technical_specifications')}
         </TabsTrigger>
         <TabsTrigger
-          className="data-[state=active]:bg-primary max-w-[226px] min-w-[150px] rounded-none border-none bg-white py-3 text-base text-gray-500 shadow-none data-[state=active]:text-white"
+          className="data-[state=active]:bg-primary flex-1 rounded-none border-none bg-white py-2.5 text-sm text-gray-500 shadow-none data-[state=active]:text-white md:max-w-[226px] md:min-w-[150px] md:py-3 md:text-base"
           value="reviews"
         >
           {t('reviews')} ({reviewsCount})
         </TabsTrigger>
       </TabsList>
-      <div className="-mt-2 min-h-[265px] bg-white p-6">
+      <div className="-mt-2 min-h-[200px] bg-white p-4 md:min-h-[265px] md:p-6">
         <TabsContent value="general">
           <p dangerouslySetInnerHTML={{ __html: generalDescription }} />
         </TabsContent>

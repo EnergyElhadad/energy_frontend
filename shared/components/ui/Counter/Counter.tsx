@@ -22,9 +22,9 @@ const variantStyles = {
   },
 
   large: {
-    container: 'h-[25px]   sm:h-[30px] md:h-[50px] bg-white rounded-[4px]',
-    button: 'w-8 h-[25px] sm:w-10 sm:h-[30px]  md:w-14 md:h-[50px] text-[10px]  sm:text-sm md:text-base',
-    value: ' w-8 h-[25px]   sm:w-10 sm:h-[30px]   md:w-17 md:h-[50px] text-[10px] sm:text-sm md:text-base',
+    container: 'h-10 sm:h-[30px] md:h-[50px] bg-white rounded-[4px]',
+    button: 'w-10 h-10 sm:w-10 sm:h-[30px] md:w-14 md:h-[50px] text-sm sm:text-sm md:text-base',
+    value: 'w-10 h-10 sm:w-10 sm:h-[30px] md:w-17 md:h-[50px] text-sm sm:text-sm md:text-base',
   },
 };
 

@@ -5,7 +5,7 @@ export const Price = ({ oldPrice, price }: { oldPrice?: number; price: number })
   const t = useTranslations('Products');
   return (
     <div className="mb-3 flex items-center justify-center gap-2">
-      <Display when={oldPrice !== undefined}>
+      <Display when={oldPrice !== undefined && oldPrice !== price}>
         <span className="text-signalGray relative text-[16px]">
           {oldPrice} {t('egp')}
           <span className="bg-signalGray absolute inset-x-0 top-1/2 h-px"></span>

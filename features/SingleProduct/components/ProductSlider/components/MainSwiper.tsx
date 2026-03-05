@@ -1,9 +1,9 @@
-import React from "react";
-import { Swiper, SwiperSlide } from "swiper/react";
-import type { SwiperClass } from "swiper/react";
-import { Thumbs, FreeMode } from "swiper/modules";
-import Image from "next/image";
-import { Maximize2 } from "lucide-react";
+import React from 'react';
+import { Swiper, SwiperSlide } from 'swiper/react';
+import type { SwiperClass } from 'swiper/react';
+import { Thumbs, FreeMode } from 'swiper/modules';
+import Image from 'next/image';
+import { Maximize2 } from 'lucide-react';
 
 interface MainSwiperProps {
   images: string[];
@@ -13,13 +13,7 @@ interface MainSwiperProps {
   onOpenPopup: () => void;
 }
 
-export const MainSwiper = ({
-  images,
-  name,
-  thumbsSwiper,
-  onSlideChange,
-  onOpenPopup,
-}: MainSwiperProps) => {
+export const MainSwiper = ({ images, name, thumbsSwiper, onSlideChange, onOpenPopup }: MainSwiperProps) => {
   return (
     <div className="border-Stroke relative flex-1 overflow-hidden rounded-xl border bg-white p-4 shadow-sm">
       <Swiper
@@ -29,18 +23,12 @@ export const MainSwiper = ({
           swiper: thumbsSwiper && !thumbsSwiper.destroyed ? thumbsSwiper : null,
         }}
         modules={[FreeMode, Thumbs]}
-        className="h-[412px] w-full"
+        className="h-[250px] w-full md:h-[412px]"
       >
         {images.map((src, index) => (
           <SwiperSlide key={index}>
             <div className="relative flex h-full w-full items-center justify-center">
-              <Image
-                src={src}
-                alt={`${name} - Image ${index + 1}`}
-                fill
-                className="object-contain"
-                preload
-              />
+              <Image src={src} alt={`${name} - Image ${index + 1}`} fill className="object-contain" preload />
             </div>
           </SwiperSlide>
         ))}

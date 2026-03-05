@@ -4,6 +4,7 @@ import { UserIcon } from '@/shared/components/icons/User';
 import { useTranslations } from 'next-intl';
 import Link from 'next/link';
 import { BagIcon } from '@/shared/components/icons/Bag';
+import { HeartIcon } from '@/shared/components/icons/Heart';
 import { LogoutIcon } from '@/shared/components/icons/Logout';
 import { ArrowDownIcon } from '@/shared/components/icons/ArrowDown';
 import { useLogout } from '@/features/auth/hooks/useLogout';
@@ -23,6 +24,7 @@ import {
 export const UserMenu = ({ direction }: { direction?: 'up' | 'down' }) => {
   const { data: session } = useSession();
   const t = useTranslations('Auth');
+  const headerT = useTranslations('Header');
   const { logout, isLoading } = useLogout();
 
   const userName = session?.user?.full_name || 'User';
@@ -37,6 +39,12 @@ export const UserMenu = ({ direction }: { direction?: 'up' | 'down' }) => {
       href: '/orders',
       icon: <BagIcon className="text-primary" />,
       label: t('orders'),
+    },
+    {
+      href: '/wishlist',
+      icon: <HeartIcon className="text-primary" />,
+      label: headerT('wishlist'),
+      className: 'lg:hidden',
     },
   ];
 
@@ -57,7 +65,11 @@ export const UserMenu = ({ direction }: { direction?: 'up' | 'down' }) => {
     >
       <div>
         {links.map(link => (
-          <Link key={link.href} href={link.href} className="hover:text-primary flex items-center gap-[8px] px-[16px] py-[20px] transition-colors hover:bg-gray-50">
+          <Link
+            key={link.href}
+            href={link.href}
+            className={`hover:text-primary flex items-center gap-[8px] px-[16px] py-[20px] transition-colors hover:bg-gray-50 ${link.className || ''}`}
+          >
             {link.icon}
             <span className="text-[14px] font-semibold">{link.label}</span>
           </Link>

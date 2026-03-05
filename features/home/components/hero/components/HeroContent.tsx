@@ -14,7 +14,7 @@ type HeroContentProps = {
 export const HeroContent = ({ title, imageUrl, description, linkUrl, linkText }: HeroContentProps) => {
   return (
     <div className="relative h-full w-full">
-      <Image src={imageUrl} alt="Hero Banner" fill priority loading="eager" />
+      <Image src={imageUrl} alt="Hero Banner" fill priority loading="eager" className="object-cover" />
       <OverlayHero />
       <HeroDescription title={title} desc={description} linkUrl={linkUrl} linkText={linkText} />
     </div>

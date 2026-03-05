@@ -21,7 +21,7 @@ export const ProductMeta = ({ name, rate_count, reviews_count, id, is_in_wishlis
   const { isInWishlist, toggleWishlist, isLoading } = useWishlistToggle(id || 0, is_in_wishlist);
 
   return (
-    <div className="mt-4 flex items-center gap-4">
+    <div className="mt-4 flex flex-wrap items-center gap-3 md:gap-4">
       <div className="flex space-x-2">
         <Rating rating={rate_count || 0} />
         <p className="text-signalGray text-sm font-normal">

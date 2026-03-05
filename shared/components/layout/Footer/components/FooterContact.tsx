@@ -14,43 +14,29 @@ interface FooterContactProps {
 export const FooterContact = ({ contactInfo }: FooterContactProps) => {
   const t = useTranslations('Footer');
 
-  const contactsLinks = contactInfo
-    ? [
-        {
-          title: contactInfo.address,
-          icon: <LocationIcon className="text-primary" />,
-          href: contactInfo.map_url,
-          target: '_blank',
-          rel: 'noopener noreferrer',
-        },
-        {
-          title: contactInfo.phone_primary,
-          icon: <PhoneIcon className="text-primary" />,
-          href: `tel:${contactInfo.phone_primary}`,
-        },
-        {
-          title: contactInfo.email,
-          icon: <MailIcon className="text-primary" />,
-          href: `mailto:${contactInfo.email}`,
-        },
-      ]
-    : [
-        {
-          title: t('address_fallback'), // Fallback
-          icon: <LocationIcon className="text-primary" />,
-          href: '/',
-        },
-        {
-          title: t('phone_fallback'), // Fallback
-          icon: <PhoneIcon className="text-primary" />,
-          href: '/',
-        },
-        {
-          title: t('email_fallback'), // Fallback
-          icon: <MailIcon className="text-primary" />,
-          href: '/',
-        },
-      ];
+  const { address, phone_primary, email, map_url } = contactInfo || {};
+
+  const contactsLinks = [
+    {
+      title: address,
+      icon: <LocationIcon className="text-primary" />,
+      href: map_url,
+      target: '_blank',
+      rel: 'noopener noreferrer',
+    },
+    {
+      title: phone_primary,
+      icon: <PhoneIcon className="text-primary" />,
+      href: phone_primary ? `tel:${phone_primary}` : undefined,
+    },
+    {
+      title: email,
+      icon: <MailIcon className="text-primary" />,
+      href: email ? `mailto:${email}` : undefined,
+    },
+  ].filter(link => Boolean(link.title));
+
+  if (contactsLinks.length === 0) return null;
 
   return (
     <div className="w-full max-w-115">
@@ -59,12 +45,19 @@ export const FooterContact = ({ contactInfo }: FooterContactProps) => {
       <ul className="flex list-none flex-col gap-2">
         {contactsLinks.map((link, index) => (
           <li key={index}>
-            <Link href={link.href} className="text-signalGray hover:text-primary" {...(link.target ? { target: link.target, rel: link.rel } : {})}>
-              <div className="flex items-center gap-2">
+            {link.href ? (
+              <Link href={link.href} className="text-signalGray hover:text-primary" {...(link.target ? { target: link.target, rel: link.rel } : {})}>
+                <div className="flex items-center gap-2">
+                  {link.icon}
+                  <span className="body-m">{link.title}</span>
+                </div>
+              </Link>
+            ) : (
+              <div className="text-signalGray flex items-center gap-2">
                 {link.icon}
                 <span className="body-m">{link.title}</span>
               </div>
-            </Link>
+            )}
           </li>
         ))}
       </ul>

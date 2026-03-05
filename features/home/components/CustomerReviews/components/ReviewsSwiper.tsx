@@ -3,28 +3,25 @@ import { Autoplay, Navigation, Pagination } from 'swiper/modules';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { ReviewCard } from './ReviewCard';
 import { useQuery } from '@tanstack/react-query';
-import { getHomepageRatings } from '@/features/home/services/ratings';
+import { getHomepageRatings, HomepageReview } from '@/features/home/services/ratings';
 
 import { ArrowLeftIcon } from '@/shared/components/icons/ArrowLeft';
 import { ArrowRightIcon } from '@/shared/components/icons/ArrowRight';
 import 'swiper/css';
 import 'swiper/css/pagination';
 
-export const ReviewsSwiper = () => {
-  const { data: response, isLoading } = useQuery({
+interface ReviewsSwiperProps {
+  initialReviews: HomepageReview[];
+}
+
+export const ReviewsSwiper = ({ initialReviews }: ReviewsSwiperProps) => {
+  const { data: response } = useQuery({
     queryKey: ['homepage-ratings'],
     queryFn: getHomepageRatings,
+    initialData: { status: true, message: '', result: initialReviews },
   });
 
   const reviews = response?.result || [];
-
-  if (isLoading) {
-    return (
-      <div className="flex justify-center p-12">
-        <div className="border-primary h-8 w-8 animate-spin rounded-full border-t-2 border-b-2"></div>
-      </div>
-    );
-  }
 
   if (reviews.length === 0) return null;
 

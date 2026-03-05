@@ -53,9 +53,9 @@ export const ProductsView = ({ initialData, categeoryDescription, onOpenFilters 
             id={product.id}
             title={product.name}
             image={product.images.find(img => img.is_primary)?.image || '/images/logo.png'}
-            originalPrice={Number(product.price)}
+            originalPrice={Number(product.offer_price)}
             category={product.category?.name}
-            oldPrice={product.discount_percentage ? Number(product.price) - (Number(product.price) * Number(product.discount_percentage)) / 100 : undefined}
+            oldPrice={Number(product.price)}
             badge={product.discount_label}
             onClick={() => setSelectedProduct(product)}
             is_in_wishlist={product.is_in_wishlist}

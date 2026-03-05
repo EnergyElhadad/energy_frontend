@@ -44,13 +44,13 @@ const SingleProductPage: React.FC<SingleProductPageProps> = async ({ params }) =
   return (
     <main className="bg-Background min-h-[45dvh] pt-4 pb-20">
       <div className="container">
-        <Breadcrumb items={breadcrumbItems} className="mb-10" />
+        <Breadcrumb items={breadcrumbItems} className="mb-6 md:mb-10" />
 
-        <div className="flex gap-6">
-          <div className="w-full max-w-[590px]">
+        <div className="flex flex-col gap-6 md:flex-row">
+          <div className="w-full md:max-w-[590px]">
             <ProductSlider images={imagesData} name={name} />
           </div>
-          <div className="flex min-h-[444px] w-full flex-col">
+          <div className="flex w-full flex-col md:min-h-[444px]">
             <ProductDetails product={data} />
           </div>
         </div>

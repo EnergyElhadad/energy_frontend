@@ -12,6 +12,7 @@ import { getHomeFeatures } from '@/features/home/services/home.server';
 import { getBanners } from '@/features/home/services/banners.server';
 import { Display } from '@/shared/components/layout/Display';
 import { HomeFeaturesList } from '@/features/home/components/HomeFeaturesList';
+import { getServerHomepageRatings } from '@/features/home/services/ratings.server';
 
 export const dynamic = 'force-dynamic';
 
@@ -33,19 +34,24 @@ export default async function Home() {
   const categoriesData = await getCategories();
   const homeFeaturesData = await getHomeFeatures();
   const bannersData = await getBanners('footer');
+  const reviewsData = await getServerHomepageRatings();
 
   return (
     <main className="space-y-8">
       <Display when={heroData.result.length > 0}>
         <Hero data={heroData.result} />
       </Display>
-      <ShopByCategory categories={categoriesData.result} />
+      <Display when={categoriesData.result.length > 0}>
+        <ShopByCategory categories={categoriesData.result} />
+      </Display>
       <Display when={homeFeaturesData.result.length > 0}>
         <HomeFeaturesList initialData={homeFeaturesData} />
       </Display>
       <ProductBanners banners={bannersData.result} />
       <WhyChooseUs />
-      <CustomerReviews />
+      <Display when={reviewsData.result.length > 0}>
+        <CustomerReviews reviews={reviewsData.result} />
+      </Display>
       <MainBanner />
     </main>
   );

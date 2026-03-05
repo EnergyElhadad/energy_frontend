@@ -56,7 +56,7 @@ export const Search = () => {
   return (
     <div ref={wrapperRef} className="relative w-full lg:max-w-[583px]">
       {/* Desktop Search Input */}
-      <div className="border-Stroke focus-within:border-primary hidden h-[40px] w-full items-center gap-[10px] rounded-[8px] border px-[18px] py-[11px] lg:flex">
+      <div className="border-Stroke focus-within:border-primary hidden h-[40px] w-full items-center gap-[10px] rounded-[8px] border px-[18px] lg:flex">
         <button onClick={() => handleSearch(query)} type="button">
           <SearchIcon />
         </button>

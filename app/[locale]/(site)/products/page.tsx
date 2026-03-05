@@ -4,7 +4,6 @@ import { getCategories, CategoriesResponse } from '@/shared/services/categories'
 import { Metadata } from 'next';
 import { toast } from 'sonner';
 import { ProductsResponse } from '@/features/products/types/productsResponse';
-import { Breadcrumb } from '@/shared/components/layout/Breadcrumb';
 import { getCategoryDetails } from '@/shared/services/categoryDetails';
 import { Category } from '@/shared/types/category';
 
@@ -46,17 +45,6 @@ export default async function ProductsPage({ params: { locale }, searchParams }:
     console.error('Failed to fetch initial categories:', error);
   }
 
-  const breadcrumbItems = [
-    { label: commonT('home'), href: '/' },
-    ...(categoryId && categoryName
-      ? [
-          {
-            label: categoryName as string,
-            href: `/products?categoryId=${categoryId}&categoryName=${categoryName}`,
-          },
-        ]
-      : [{ label: commonT('all_products'), href: '/products' }]),
-  ];
   let categoryDetails: Category | null = null;
 
   if (categoryId) {
@@ -66,8 +54,6 @@ export default async function ProductsPage({ params: { locale }, searchParams }:
   return (
     <main className="bg-Background">
       <div className="container">
-        <Breadcrumb className="py-5" items={breadcrumbItems} />
-
         {/* Main Content */}
         <div className="mx-auto max-w-7xl px-4 pt-4 pb-33">
           <ProductsContent initialData={initialData} initialCategories={initialCategories!} categeoryDescription={categoryDetails?.name || t('all_products_desc')} />

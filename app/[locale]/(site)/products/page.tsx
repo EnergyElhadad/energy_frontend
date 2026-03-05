@@ -4,7 +4,6 @@ import { getCategories, CategoriesResponse } from '@/shared/services/categories'
 import { Metadata } from 'next';
 import { toast } from 'sonner';
 import { ProductsResponse } from '@/features/products/types/productsResponse';
-import { ProductsResponse } from '@/features/products/types/productsResponse';
 import { getCategoryDetails } from '@/shared/services/categoryDetails';
 import { Category } from '@/shared/types/category';
 

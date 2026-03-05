@@ -10,7 +10,7 @@ export const WhySection = () => {
 
   return (
     <section className="mt-10 sm:mt-20 md:mt-40.75">
-      <div className="mx-auto mb-10 max-w-100 text-center sm:max-w-[67%]">
+      <div className="mx-auto mb-10 max-w-full text-center md:max-w-[67%]">
         <h3 className="text-WetGray mb-4 text-2xl font-bold md:text-[32px]">{t('header_title')}</h3>
         <p className="text-WetGray text-base leading-7 font-medium">{t('header_description')}</p>
       </div>

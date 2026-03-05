@@ -4,6 +4,7 @@ import { useState } from 'react';
 import { ProductFilters } from './ProductFilters';
 import { ProductsView } from './ProductsView';
 import { FiltersProvider } from '../context/FiltersContext';
+import { ProductsBreadcrumb } from './ProductsBreadcrumb';
 import { ProductsResponse } from '../types/productsResponse';
 import { CategoriesResponse } from '@/shared/services/categories';
 import { Drawer, DrawerContent, DrawerHeader, DrawerTitle, DrawerClose } from '@/shared/components/ui/drawer';
@@ -22,6 +23,9 @@ export const ProductsContent = ({ initialData, initialCategories, categeoryDescr
 
   return (
     <FiltersProvider>
+      <div className="-mx-4 md:mx-0">
+        <ProductsBreadcrumb />
+      </div>
       <div className="grid grid-cols-1 gap-6 min-[769px]:grid-cols-4">
         {/* Desktop Sidebar — hidden on mobile/tablet */}
         <div className="hidden min-[769px]:col-span-1 min-[769px]:block">

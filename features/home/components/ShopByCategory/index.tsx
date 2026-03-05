@@ -35,7 +35,7 @@ export const ShopByCategory = ({ categories }: { categories: Category[] }) => {
             768: { slidesPerView: 4 },
             1250: { slidesPerView: 6 },
           }}
-          className="category-swiper !h-auto [&_.swiper-slide]:!h-auto [&>.swiper-wrapper]:items-stretch"
+          className="category-swiper h-auto! [&_.swiper-slide]:h-auto! [&>.swiper-wrapper]:items-stretch"
         >
           {categories.map(({ id, name, image }) => (
             <SwiperSlide key={id}>

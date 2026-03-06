@@ -22,7 +22,7 @@ export const HomeFeaturesList = ({ initialData }: HomeFeaturesListProps) => {
   return (
     <Display when={data.result.length > 0}>
       {data.result.map(feature => (
-        <HomeProductsSection key={feature.id} title={feature.title} products={feature.products} urlLink={`/products?home_sections=${feature.id}`} />
+        <HomeProductsSection key={feature.id} title={feature.title} products={feature.products} urlLink={`/products?home_section=${feature.id}`} />
       ))}
     </Display>
   );

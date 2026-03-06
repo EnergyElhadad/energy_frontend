@@ -73,6 +73,8 @@
     "applied": "Applied",
     "applying": "Applying...",
     "discount": "Discount",
+    "offer_discount": "Offer Discount",
+    "promo_discount": "Promo Code Discount",
     "total": "Total",
     "tax_included": "Prices include tax",
     "checkout": "Checkout"

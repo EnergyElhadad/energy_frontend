@@ -11,7 +11,7 @@ export type FiltersState = {
   max_price: string | undefined;
   search: string | undefined;
   rating: string | undefined;
-  home_sections: string | undefined;
+  home_section: string | undefined;
 };
 
 type FiltersContextType = {
@@ -42,7 +42,7 @@ export const FiltersProvider = ({ children }: { children: ReactNode }) => {
     max_price: searchParams.get('max_price') || undefined,
     search: searchParams.get('search') || undefined,
     rating: searchParams.get('rating') || undefined,
-    home_sections: searchParams.get('home_sections') || undefined,
+    home_section: searchParams.get('home_section') || undefined,
   }));
 
   // Sync state → URL via replaceState (no server navigation)
@@ -70,8 +70,8 @@ export const FiltersProvider = ({ children }: { children: ReactNode }) => {
     if (filters.rating) {
       params.set('rating', filters.rating);
     }
-    if (filters.home_sections) {
-      params.set('home_sections', filters.home_sections);
+    if (filters.home_section) {
+      params.set('home_section', filters.home_section);
     }
 
     const queryString = params.toString();

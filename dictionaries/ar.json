@@ -73,6 +73,8 @@
     "applied": "تم الخصم",
     "applying": "جاري...",
     "discount": "الخصم",
+    "offer_discount": "خصم العرض",
+    "promo_discount": "خصم كود الخصم",
     "total": "الإجمالي",
     "tax_included": "الأسعار شاملة الضريبة",
     "checkout": "اتمام الطلب"

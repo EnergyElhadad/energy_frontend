@@ -26,7 +26,7 @@ export const ProductCard: React.FC<ProductT> = ({ id, title, image, originalPric
       <Link href={`/products/${id}-${toSlug(title)}`} className="absolute inset-0 z-1" aria-label={`View ${title}`} />
 
       <HiddenIcons title={title} id={id} onView={onClick} />
-      <div className="flex max-h-63.75 min-h-63.75 w-full flex-col items-center justify-center overflow-hidden">
+      <div className="flex h-40 max-h-63.75 w-full flex-col items-center justify-center overflow-hidden md:min-h-63.75">
         <Display when={!!badge}>
           <Badge text={badge!} />
         </Display>

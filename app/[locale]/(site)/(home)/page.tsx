@@ -17,10 +17,11 @@ import { getServerHomepageRatings } from '@/features/home/services/ratings.serve
 export const dynamic = 'force-dynamic';
 
 type Props = {
-  params: { locale: string };
+  params: Promise<{ locale: string }>;
 };
 
-export async function generateMetadata({ params: { locale } }: Props): Promise<Metadata> {
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const { locale } = await params;
   const t = await getTranslations({ locale, namespace: 'HomePage' });
 
   return {
@@ -30,11 +31,13 @@ export async function generateMetadata({ params: { locale } }: Props): Promise<M
 }
 
 export default async function Home() {
-  const heroData = await getBanners('header');
-  const categoriesData = await getCategories();
-  const homeFeaturesData = await getHomeFeatures();
-  const bannersData = await getBanners('footer');
-  const reviewsData = await getServerHomepageRatings();
+  const [heroData, categoriesData, homeFeaturesData, bannersData, reviewsData] = await Promise.all([
+    getBanners('header'),
+    getCategories(),
+    getHomeFeatures(),
+    getBanners('footer'),
+    getServerHomepageRatings(),
+  ]);
 
   return (
     <main className="space-y-8">

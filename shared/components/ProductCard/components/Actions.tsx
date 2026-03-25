@@ -28,7 +28,7 @@ export const Actions = ({ id, title, is_in_wishlist }: { id: number | string; ti
         disabled={isLoading}
         aria-label={isInWishlist ? 'Remove from wishlist' : 'Add to wishlist'}
         className={cn(
-          'cursor-pointer rounded border bg-transparent p-2.75 transition',
+          'cursor-pointer rounded border bg-transparent p-2 transition md:p-2.75',
           isInWishlist ? 'border-primary text-primary' : 'border-SmokyWhite hover:border-primary text-Stroke'
         )}
       >

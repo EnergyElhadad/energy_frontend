@@ -1,15 +1,16 @@
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/shared/components/ui/tabs';
 import { ReviewsTab } from './components/ReviewsTab';
 import { useLocale, useTranslations } from 'next-intl';
+import { ProductSpecification } from '../../types';
 
 type Props = {
   generalDescription: string;
-  technicalSpecifications: string;
+  specifications: ProductSpecification[];
   reviewsCount: number;
   productId: number;
 };
 
-export const ProductTabs: React.FC<Props> = ({ generalDescription = '', technicalSpecifications = '', reviewsCount = 0, productId }) => {
+export const ProductTabs: React.FC<Props> = ({ generalDescription = '', specifications = [], reviewsCount = 0, productId }) => {
   const locale = useLocale();
   const t = useTranslations('SingleProduct');
 
@@ -40,7 +41,27 @@ export const ProductTabs: React.FC<Props> = ({ generalDescription = '', technica
           <p dangerouslySetInnerHTML={{ __html: generalDescription }} />
         </TabsContent>
         <TabsContent value="specs">
-          <p dangerouslySetInnerHTML={{ __html: technicalSpecifications }} />
+          {specifications && specifications.length > 0 ? (
+            <div className="flex flex-col overflow-hidden rounded-md">
+              {specifications.map((spec, index) => (
+                <div
+                  key={index}
+                  className={`flex flex-col sm:flex-row sm:items-center px-4 py-3 md:px-6 md:py-4 ${
+                    index % 2 === 0 ? 'bg-slate-50' : 'bg-white'
+                  }`}
+                >
+                  <div className="w-full sm:w-1/3 text-sm text-gray-600 md:text-base mb-1 sm:mb-0">
+                    {spec.spec_name}
+                  </div>
+                  <div className="w-full sm:w-2/3 text-sm text-gray-800 md:text-base">
+                    {spec.spec_value}
+                  </div>
+                </div>
+              ))}
+            </div>
+          ) : (
+            <p className="text-sm text-gray-500 md:text-base">{t('no_specifications') || 'No specifications available'}</p>
+          )}
         </TabsContent>
         <TabsContent value="reviews">
           <ReviewsTab productId={productId} />

@@ -30,7 +30,7 @@ const SingleProductPage: React.FC<SingleProductPageProps> = async ({ params }) =
   const { id, locale } = await params;
   const productId = getIdFromSlug(id);
   const data = await getProductById(productId);
-  const { name, category, images, description, ratings_count } = data || {};
+  const { name, category, images, description, ratings_count, specifications } = data || {};
   const commonT = await getTranslations({ locale, namespace: 'Header' });
 
   const imagesData = images.map(image => image.image);
@@ -56,7 +56,7 @@ const SingleProductPage: React.FC<SingleProductPageProps> = async ({ params }) =
         </div>
 
         <div className="mt-10">
-          <ProductTabs generalDescription={description} technicalSpecifications={description} reviewsCount={ratings_count || 0} productId={Number(productId)} />
+          <ProductTabs generalDescription={description} specifications={specifications || []} reviewsCount={ratings_count || 0} productId={Number(productId)} />
         </div>
       </div>
     </main>

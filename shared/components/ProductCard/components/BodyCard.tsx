@@ -13,7 +13,7 @@ type Props = {
 
 export const BodyCard: React.FC<Props> = ({ category, title, id, originalPrice, oldPrice, is_in_wishlist }) => {
   return (
-    <div className="relative z-10 mt-auto p-2">
+    <div className="relative z-10 mt-auto p-2 pointer-events-none">
       <p className="line-clamp-2 min-h-10 text-center text-sm font-semibold text-black">{title}</p>
 
       <Display when={category !== undefined}>

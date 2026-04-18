@@ -5,7 +5,12 @@ import { auth } from '@/auth';
 
 export const Axios = async () => {
   const cookieStore = await cookies();
-  const session = await auth();
+  let session = null;
+  try {
+    session = await auth();
+  } catch (error) {
+    console.error('Failed to get auth session:', error);
+  }
   const locale = cookieStore.get('NEXT_LOCALE')?.value || 'en';
 
   const headers: Record<string, string> = {

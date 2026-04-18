@@ -12,7 +12,7 @@ export const Actions = ({ id, title, is_in_wishlist }: { id: number | string; ti
   const t = useTranslations('Products');
 
   return (
-    <div className="relative z-10 flex h-10.5 items-center justify-between gap-2">
+    <div className="relative z-10 flex h-10.5 items-center justify-between gap-2 pointer-events-auto">
       <Link
         href={`/products/${id}-${toSlug(title)}`}
         onClick={e => e.stopPropagation()}

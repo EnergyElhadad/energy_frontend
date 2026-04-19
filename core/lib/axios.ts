@@ -2,6 +2,7 @@ import axios from 'axios';
 import https from 'https';
 import { getCookie } from 'cookies-next';
 import { getSession } from 'next-auth/react';
+import { getLocale } from 'next-intl/server';
 
 export const Axios = axios.create({
   baseURL: process.env.NEXT_PUBLIC_API_URL,
@@ -13,8 +14,9 @@ export const Axios = axios.create({
 
 Axios.interceptors.request.use(async config => {
   if (typeof document !== 'undefined') {
-    const pathLocale = window.location.pathname.split('/')[1];
-    const lang = ['ar', 'en'].includes(pathLocale) ? pathLocale : (getCookie('NEXT_LOCALE') as string) || 'ar';
+    // const pathLocale = window.location.pathname.split('/')[1];
+    // const lang = ['ar', 'en'].includes(pathLocale) ? pathLocale : (getCookie('NEXT_LOCALE') as string) || 'ar';
+    const lang = await getLocale();
 
     config.headers['Accept-Language'] = lang;
 

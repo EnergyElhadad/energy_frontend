@@ -26,9 +26,8 @@ export async function generateMetadata({ params: { locale }, searchParams }: Pro
 }
 
 export default async function ProductsPage({ params: { locale }, searchParams }: Props) {
-  const { categoryId, categoryName } = await searchParams;
+  const { categoryId } = await searchParams;
   const t = await getTranslations({ locale, namespace: 'Products' });
-  const commonT = await getTranslations({ locale, namespace: 'Header' });
   let initialData: ProductsResponse | null = null;
 
   try {

@@ -13,6 +13,7 @@ import { getBanners } from '@/features/home/services/banners.server';
 import { Display } from '@/shared/components/layout/Display';
 import { HomeFeaturesList } from '@/features/home/components/HomeFeaturesList';
 import { getServerHomepageRatings } from '@/features/home/services/ratings.server';
+import { getContentImages } from '@/features/home/services/contentImages.server copy';
 
 export const dynamic = 'force-dynamic';
 
@@ -31,12 +32,13 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 }
 
 export default async function Home() {
-  const [heroData, categoriesData, homeFeaturesData, bannersData, reviewsData] = await Promise.all([
+  const [heroData, categoriesData, homeFeaturesData, bannersData, reviewsData, contentImagesData] = await Promise.all([
     getBanners('header'),
     getCategories(),
     getHomeFeatures(),
     getBanners('footer'),
     getServerHomepageRatings(),
+    getContentImages(),
   ]);
 
   return (
@@ -50,12 +52,12 @@ export default async function Home() {
       <Display when={homeFeaturesData.result.length > 0}>
         <HomeFeaturesList initialData={homeFeaturesData} />
       </Display>
-      <ProductBanners banners={bannersData.result} />
+      <ProductBanners banners={contentImagesData.result} />
       <WhyChooseUs />
       <Display when={reviewsData.result.length > 0}>
         <CustomerReviews reviews={reviewsData.result} />
       </Display>
-      <MainBanner />
+      <MainBanner data={bannersData.result} />
     </main>
   );
 }

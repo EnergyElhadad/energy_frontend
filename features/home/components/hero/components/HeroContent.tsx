@@ -6,15 +6,24 @@ import { HeroDescription } from './HeroDescription';
 type HeroContentProps = {
   title: string;
   imageUrl: string;
+  mobileImageUrl?: string;
   description?: string;
   linkUrl: string;
   linkText: string;
 };
 
-export const HeroContent = ({ title, imageUrl, description, linkUrl, linkText }: HeroContentProps) => {
+export const HeroContent = ({ title, imageUrl, mobileImageUrl, description, linkUrl, linkText }: HeroContentProps) => {
   return (
     <div className="relative h-full w-full">
-      <Image src={imageUrl} alt="Hero Banner" fill priority loading="eager" className="object-cover" />
+      {mobileImageUrl ? (
+        <picture>
+          <source media="(max-width: 767px)" srcSet={mobileImageUrl} />
+          <source media="(min-width: 768px)" srcSet={imageUrl} />
+          <Image src={imageUrl} alt="Hero Banner" fill priority loading="eager" className="object-cover" />
+        </picture>
+      ) : (
+        <Image src={imageUrl} alt="Hero Banner" fill priority loading="eager" className="object-cover" />
+      )}
       <OverlayHero />
       <HeroDescription title={title} desc={description} linkUrl={linkUrl} linkText={linkText} />
     </div>

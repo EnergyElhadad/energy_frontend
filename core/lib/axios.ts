@@ -13,9 +13,8 @@ export const Axios = axios.create({
 
 Axios.interceptors.request.use(async config => {
   if (typeof document !== 'undefined') {
-    const cookieLang = getCookie('NEXT_LOCALE');
-
-    const lang = cookieLang || document.documentElement.lang || 'en';
+    const pathLocale = window.location.pathname.split('/')[1];
+    const lang = ['ar', 'en'].includes(pathLocale) ? pathLocale : (getCookie('NEXT_LOCALE') as string) || 'ar';
 
     config.headers['Accept-Language'] = lang;
 

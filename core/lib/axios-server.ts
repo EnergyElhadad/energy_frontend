@@ -2,6 +2,7 @@ import axios from 'axios';
 import { cookies } from 'next/headers';
 import https from 'https';
 import { auth } from '@/auth';
+import { getLocale } from 'next-intl/server';
 
 export const Axios = async () => {
   const cookieStore = await cookies();
@@ -11,7 +12,12 @@ export const Axios = async () => {
   } catch (error) {
     console.error('Failed to get auth session:', error);
   }
-  const locale = cookieStore.get('NEXT_LOCALE')?.value || 'en';
+  let locale = 'ar';
+  try {
+    locale = await getLocale();
+  } catch {
+    locale = cookieStore.get('NEXT_LOCALE')?.value || 'ar';
+  }
 
   const headers: Record<string, string> = {
     'Accept-Language': locale,

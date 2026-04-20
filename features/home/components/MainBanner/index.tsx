@@ -25,7 +25,7 @@ export const MainBanner = ({ data }: MainBannerProps) => {
             <MainBannerContent
               title={banner?.title ?? t('main_banner_title')}
               desc1={banner?.banner_text ?? t('main_banner_desc1')}
-              desc2={t('main_banner_desc2')}
+              // desc2={t('main_banner_desc2')}
               linkUrl={banner?.link ?? '#'}
               linkText={banner?.button}
             />

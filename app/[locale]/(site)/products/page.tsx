@@ -12,11 +12,12 @@ import { getTranslations } from 'next-intl/server';
 export const dynamic = 'force-dynamic';
 
 type Props = {
-  params: { locale: string };
+  params: Promise<{ locale: string }>;
   searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
 };
 
-export async function generateMetadata({ params: { locale }, searchParams }: Props): Promise<Metadata> {
+export async function generateMetadata({ params, searchParams }: Props): Promise<Metadata> {
+  const { locale } = await params;
   const { categoryName } = await searchParams;
   const t = await getTranslations({ locale, namespace: 'Products' });
 
@@ -25,13 +26,17 @@ export async function generateMetadata({ params: { locale }, searchParams }: Pro
   };
 }
 
-export default async function ProductsPage({ params: { locale }, searchParams }: Props) {
+export default async function ProductsPage({ params, searchParams }: Props) {
+  const { locale } = await params;
   const { categoryId } = await searchParams;
   const t = await getTranslations({ locale, namespace: 'Products' });
   let initialData: ProductsResponse | null = null;
 
   try {
-    initialData = await getProducts({ page: 1 });
+    initialData = await getProducts({
+      page: 1,
+      category: categoryId ? Number(categoryId) : undefined,
+    });
   } catch (error) {
     toast.error('Failed to fetch initial products');
     console.error('Failed to fetch initial products:', error);

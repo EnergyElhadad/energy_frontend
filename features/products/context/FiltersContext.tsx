@@ -63,7 +63,10 @@ export const FiltersProvider = ({ children }: { children: ReactNode }) => {
     if (filters.rating) params.set('rating', filters.rating);
     if (filters.home_section) params.set('home_section', filters.home_section);
     const qs = params.toString();
-    window.history.replaceState(null, '', qs ? `?${qs}` : window.location.pathname);
+    const currentQs = window.location.search.replace(/^\?/, '');
+    if (qs !== currentQs) {
+      window.history.replaceState(null, '', qs ? `?${qs}` : window.location.pathname);
+    }
   }, [filters]);
 
   const setFilter = useCallback((key: keyof FiltersState, value: string | undefined) => {

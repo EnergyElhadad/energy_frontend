@@ -13,6 +13,8 @@ type HeroContentProps = {
 };
 
 export const HeroContent = ({ title, imageUrl, mobileImageUrl, description, linkUrl, linkText }: HeroContentProps) => {
+  const hasText = Boolean(title?.trim() || description?.trim() || linkText?.trim());
+
   return (
     <div className="relative h-full w-full">
       {mobileImageUrl ? (
@@ -24,8 +26,8 @@ export const HeroContent = ({ title, imageUrl, mobileImageUrl, description, link
       ) : (
         <Image src={imageUrl} alt="Hero Banner" fill priority loading="eager" className="object-cover" />
       )}
-      <OverlayHero />
-      <HeroDescription title={title} desc={description} linkUrl={linkUrl} linkText={linkText} />
+      <OverlayHero show={hasText} />
+      {hasText && <HeroDescription title={title} desc={description} linkUrl={linkUrl} linkText={linkText} />}
     </div>
   );
 };

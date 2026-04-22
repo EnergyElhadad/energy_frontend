@@ -22,7 +22,7 @@ export type ProductT = {
 
 export const ProductCard: React.FC<ProductT> = ({ id, title, image, originalPrice, oldPrice, badge, category, imageProps, onClick, is_in_wishlist }) => {
   return (
-    <div className="group border-Stroke/50 hover:border-primary relative mx-auto flex w-full cursor-pointer flex-col overflow-hidden rounded-sm border bg-white p-2 pb-3 transition hover:shadow-[0_8px_24px_0_rgba(0,0,0,0.08)]">
+    <div className="group border-Stroke/50 hover:border-primary relative mx-auto flex w-full cursor-pointer flex-col overflow-hidden rounded-sm border bg-white p-2 pb-3 transition-[border-color,box-shadow] duration-200 hover:shadow-[0_8px_24px_0_rgba(0,0,0,0.08)] [backface-visibility:hidden] [transform:translateZ(0)]">
       <Link href={`/products/${id}-${toSlug(title)}`} className="absolute inset-0 z-1" aria-label={`View ${title}`} />
 
       <HiddenIcons title={title} id={id} onView={onClick} />
@@ -31,7 +31,7 @@ export const ProductCard: React.FC<ProductT> = ({ id, title, image, originalPric
           <Badge text={badge!} />
         </Display>
         <div className="relative w-full overflow-hidden rounded-xl">
-          <Image src={image} alt={title} width={268} height={255} className="mx-auto" {...imageProps} />
+          <Image src={image} alt={title} width={268} height={255} loading="eager" decoding="async" fetchPriority="low" className="mx-auto" {...imageProps} />
         </div>
       </div>
       <BodyCard category={category} title={title} id={id} originalPrice={originalPrice} oldPrice={oldPrice} is_in_wishlist={is_in_wishlist} />

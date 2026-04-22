@@ -13,12 +13,15 @@ type ProductsT = {
 
 export const OffersSwipper: React.FC<ProductsT> = ({ products }) => {
   return (
-    <div className="swiperWrapper relative lg:hidden">
+    <div className="swiperWrapper relative lg:hidden [transform:translateZ(0)]">
       <Swiper
         loop={false}
-        autoplay={{ delay: 5000 }}
         spaceBetween={16}
         slidesPerView={1}
+        observer={false}
+        observeParents={false}
+        resizeObserver={false}
+        updateOnWindowResize={false}
         breakpoints={{
           370: { slidesPerView: 1.4 },
           400: { slidesPerView: 2 },

@@ -16,8 +16,8 @@ export const BannerCard: React.FC<Props> = ({ title, descritption, textLink, url
 
         <div className="relative z-10 space-y-2 px-8 py-6 text-start">
           <h4 className="text-[1rem] font-normal text-[#EEEEEE]">{title}</h4>
-          <p className="mb-4 text-2xl font-medium text-white">{descritption}</p>
-          <p className="text-base font-medium text-white">{textLink}</p>
+          {descritption && <p className="mb-4 text-2xl font-medium text-white">{descritption}</p>}
+          {textLink && <p className="text-base font-medium text-white">{textLink}</p>}
         </div>
       </div>
     </div>

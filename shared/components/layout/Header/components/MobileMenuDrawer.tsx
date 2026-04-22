@@ -1,5 +1,7 @@
 'use client';
 
+import { useState, useEffect } from 'react';
+import { usePathname, useSearchParams } from 'next/navigation';
 import { Menu } from 'lucide-react';
 import { Drawer, DrawerContent, DrawerTrigger, DrawerClose } from '@/shared/components/ui/drawer';
 import { CategoriesResponse } from '@/shared/services/categories';
@@ -19,9 +21,16 @@ interface MobileMenuDrawerProps {
 export const MobileMenuDrawer = ({ categoriesData }: MobileMenuDrawerProps) => {
   const { status } = useSession();
   const t = useTranslations('Header');
+  const [isOpen, setIsOpen] = useState(false);
+  const pathname = usePathname();
+  const searchParams = useSearchParams();
+
+  useEffect(() => {
+    setIsOpen(false);
+  }, [pathname, searchParams]);
 
   return (
-    <Drawer direction="right">
+    <Drawer direction="right" open={isOpen} onOpenChange={setIsOpen}>
       <DrawerTrigger asChild>
         <button className="flex items-center justify-center p-2 text-gray-700 lg:hidden">
           <Menu className="h-6 w-6" />
@@ -88,7 +97,7 @@ export const MobileMenuDrawer = ({ categoriesData }: MobileMenuDrawerProps) => {
 
         {/* Footer (Auth & Language) */}
         <div className="mt-auto space-y-6 border-t border-gray-100 p-6">
-          <div className="flex w-full justify-center">{status === 'authenticated' ? <UserMenu /> : <AuthLinksDropdown />}</div>
+          <div className="flex w-full justify-center">{status === 'authenticated' ? <UserMenu direction="up" /> : <AuthLinksDropdown direction="up" />}</div>
           <div className="flex w-full justify-center">
             <LanguageSwitcher />
           </div>

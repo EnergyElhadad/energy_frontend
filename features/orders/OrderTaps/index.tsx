@@ -3,6 +3,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/shared/components/ui
 import { useLocale } from 'next-intl';
 import { OrderCardDesc } from './components/OrderCardDesc/indext';
 import { Order } from '../types/order';
+import { Link } from '@/core/i18n';
 
 interface OrderTapsProps {
   orders: Order[];
@@ -43,7 +44,7 @@ export const OrderTaps: React.FC<OrderTapsProps> = ({ orders }) => {
     return (
       <div className="flex flex-col gap-6">
         {list.map(order => (
-          <div key={order.order_number} className="flex flex-col gap-5 rounded-md bg-white p-4">
+          <Link key={order.order_number} href={`/orders/${order.order_number}`} className="flex flex-col gap-5 rounded-md bg-white p-4 transition-shadow hover:shadow-md">
             <OrderCardDesc
               purchasedDate={formatDate(order.created_at)}
               deliveryDate={order.delivered_at ? formatDate(order.delivered_at) : '—'}
@@ -51,7 +52,7 @@ export const OrderTaps: React.FC<OrderTapsProps> = ({ orders }) => {
               orderCode={order.order_number}
               status={STATUS_LABELS[order.status]}
             />
-          </div>
+          </Link>
         ))}
       </div>
     );

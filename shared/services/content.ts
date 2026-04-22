@@ -1,4 +1,5 @@
 import { Axios } from '@/core/lib/axios';
+import { getLocale } from 'next-intl/server';
 
 export interface Message {
   id: number;
@@ -53,8 +54,13 @@ export interface SocialMediaResponse {
 
 export const getMessages = async (): Promise<MessagesResponse> => {
   try {
-    const { data } = await Axios.get<MessagesResponse>(`/content/messages/`);
-    return data;
+    const lang = await getLocale();
+    const response = await Axios.get<MessagesResponse>(`/content/messages/`, {
+      headers: {
+        'Accept-Language': lang,
+      },
+    });
+    return response.data;
   } catch (error) {
     console.error('Failed to fetch messages:', error);
     return {

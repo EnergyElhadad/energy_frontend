@@ -12,9 +12,10 @@ export const Actions = ({ id, title, is_in_wishlist }: { id: number | string; ti
   const t = useTranslations('Products');
 
   return (
-    <div className="flex h-10.5 items-center justify-between gap-2">
+    <div className="relative z-10 flex h-10.5 items-center justify-between gap-2 pointer-events-auto">
       <Link
         href={`/products/${id}-${toSlug(title)}`}
+        onClick={e => e.stopPropagation()}
         className="hover:bg-primary/90 border-primary text-primary flex min-h-full w-full items-center justify-center rounded border bg-transparent p-2 px-3 py-1.5 text-sm font-semibold transition hover:text-white"
       >
         {t('add_to_cart')}
@@ -28,7 +29,7 @@ export const Actions = ({ id, title, is_in_wishlist }: { id: number | string; ti
         disabled={isLoading}
         aria-label={isInWishlist ? 'Remove from wishlist' : 'Add to wishlist'}
         className={cn(
-          'cursor-pointer rounded border bg-transparent p-2.75 transition',
+          'cursor-pointer rounded border bg-transparent p-2 transition md:p-2.75',
           isInWishlist ? 'border-primary text-primary' : 'border-SmokyWhite hover:border-primary text-Stroke'
         )}
       >

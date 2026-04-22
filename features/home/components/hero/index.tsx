@@ -17,7 +17,7 @@ interface HeroProps {
 export const Hero: React.FC<HeroProps> = ({ data }) => {
   return (
     <section className="relative w-full overflow-hidden">
-      <div className="relative">
+      <div className="group relative h-[300px] lg:h-auto lg:aspect-1440/405">
         <Swiper
           modules={[Navigation, Pagination, Autoplay]}
           loop={false}
@@ -30,11 +30,11 @@ export const Hero: React.FC<HeroProps> = ({ data }) => {
             el: '.hero-pagination',
             clickable: true,
           }}
-          className="h-105 w-full"
+          className="h-full w-full"
         >
           {data?.map(item => (
             <SwiperSlide key={item.id}>
-              <HeroContent title={item.title} imageUrl={item.image} linkUrl={item.link} linkText={item.button} description={item.banner_text} />
+              <HeroContent title={item.title} imageUrl={item.image} mobileImageUrl={item.mobile_image} linkUrl={item.link} linkText={item.button} description={item.banner_text} />
             </SwiperSlide>
           ))}
         </Swiper>
@@ -42,14 +42,14 @@ export const Hero: React.FC<HeroProps> = ({ data }) => {
         {/* Navigation */}
         <button
           aria-label="Previous slide"
-          className="hero-prev absolute top-1/2 z-20 hidden h-10 w-10 -translate-y-1/2 items-center justify-center rounded-full border border-white/40 text-white hover:bg-white/20 xl:left-6 xl:flex"
+          className="hero-prev absolute top-1/2 z-20 hidden h-10 w-10 -translate-y-1/2 items-center justify-center rounded-full border border-white/40 text-white opacity-0 transition-opacity hover:bg-white/20 group-hover:opacity-100 xl:left-6 xl:flex"
         >
           <ArrowLeftIcon />
         </button>
 
         <button
           aria-label="Next slide"
-          className="hero-next absolute top-1/2 z-20 hidden h-10 w-10 -translate-y-1/2 items-center justify-center rounded-full border border-white/40 text-white hover:bg-white/20 xl:right-6 xl:flex"
+          className="hero-next absolute top-1/2 z-20 hidden h-10 w-10 -translate-y-1/2 items-center justify-center rounded-full border border-white/40 text-white opacity-0 transition-opacity hover:bg-white/20 group-hover:opacity-100 xl:right-6 xl:flex"
         >
           <ArrowRightIcon />
         </button>

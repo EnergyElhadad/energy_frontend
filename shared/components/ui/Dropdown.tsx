@@ -11,6 +11,7 @@ export interface DropdownProps {
   activeClassName?: string;
   showArrow?: boolean;
   menuAlign?: 'start' | 'center' | 'end';
+  direction?: 'up' | 'down';
 }
 
 export const Dropdown = ({
@@ -22,6 +23,7 @@ export const Dropdown = ({
   activeClassName = 'active',
   showArrow = true,
   menuAlign,
+  direction = 'down',
 }: DropdownProps) => {
   const [isOpen, setIsOpen] = useState(false);
   const [isTouchDevice] = useState(() => typeof window !== 'undefined' && ('ontouchstart' in window || navigator.maxTouchPoints > 0));
@@ -147,10 +149,18 @@ export const Dropdown = ({
 
       {isOpen && (
         <>
-          {showArrow && <div className="arrow-up absolute top-[43px] left-1/2 z-50 w-[20px] -translate-x-1/2 border-[6px] border-transparent border-b-white"></div>}
+          {showArrow && direction === 'down' && (
+            <div className="arrow-up absolute top-[43px] left-1/2 z-50 w-[20px] -translate-x-1/2 border-[6px] border-transparent border-b-white"></div>
+          )}
+          {showArrow && direction === 'up' && (
+            <div className="arrow-down absolute bottom-[43px] left-1/2 z-50 w-[20px] -translate-x-1/2 border-[6px] border-transparent border-t-white"></div>
+          )}
+
           <div
             ref={menuRef}
-            className={`absolute top-[55px] z-50 w-[calc(100vw-32px)] max-w-[370px] cursor-default rounded-[12px] bg-white p-4 shadow-[0px_4px_20px_0px_rgba(0,0,0,0.1)] sm:w-[370px] sm:p-5 ${getAlignmentClasses()} ${menuClassName || ''}`}
+            className={`absolute z-50 w-[calc(100vw-32px)] max-w-[370px] cursor-default rounded-[12px] bg-white p-4 shadow-[0px_4px_20px_0px_rgba(0,0,0,0.1)] sm:w-[370px] sm:p-5 ${
+              direction === 'up' ? 'bottom-[calc(100%+8px)]' : 'top-[55px]'
+            } ${getAlignmentClasses()} ${menuClassName || ''}`}
           >
             {children}
           </div>

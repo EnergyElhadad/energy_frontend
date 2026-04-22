@@ -26,7 +26,7 @@ export const FooterOffer = ({ linkUrl, onAddToCart, isLoading }: FooterOfferProp
         href={linkUrl}
         className="border-primary hover:bg-primary/80 text-primary flex h-full w-full flex-1 shrink-0 items-center justify-center rounded-sm border bg-transparent px-6 py-2 text-sm font-semibold hover:text-white"
       >
-        {t('product_details')}
+        {t('quick_buy')}
       </Link>
     </div>
   );

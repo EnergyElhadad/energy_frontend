@@ -7,6 +7,10 @@ import { NextIntlClientProvider } from 'next-intl';
 import { getMessages } from 'next-intl/server';
 import { locales } from '@/core/i18n/i18n.config';
 import { setRequestLocale } from 'next-intl/server';
+import { SessionProvider } from '@/core/providers/SessionProvider';
+import QueryProvider from '@/core/providers/QueryProvider';
+import { Toaster } from '@/shared/components/ui/sonner';
+import { DirectionProvider } from '@/core/providers/direction-provider';
 
 export function generateStaticParams() {
   return locales.map(locale => ({ locale }));
@@ -19,8 +23,7 @@ const cairo = Cairo({
 
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
   const { locale } = await params;
-  const t = await getMessages({ locale });
-  const messages = t as any;
+  const messages = await getMessages({ locale });
 
   return {
     title: {
@@ -30,11 +33,6 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
     description: messages?.Layout?.description || "Energy Elhadad's official platform for providing the best energy solutions and outstanding services.",
   };
 }
-
-import { SessionProvider } from '@/core/providers/SessionProvider';
-import QueryProvider from '@/core/providers/QueryProvider';
-import { Toaster } from '@/shared/components/ui/sonner';
-import { DirectionProvider } from '@/core/providers/direction-provider';
 
 export default async function RootLayout({
   children,
@@ -56,7 +54,7 @@ export default async function RootLayout({
             <NextIntlClientProvider messages={messages}>
               <DirectionProvider dir={currentLang === 'ar' ? 'rtl' : 'ltr'}>
                 {children}
-                <Toaster position="top-center" swipeDirections={['right', 'left']} />
+                <Toaster position="top-center" swipeDirections={['right', 'left', 'top']} />
               </DirectionProvider>
             </NextIntlClientProvider>
           </QueryProvider>

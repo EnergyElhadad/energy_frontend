@@ -20,13 +20,13 @@ WORKDIR /app
 COPY --from=deps /app/node_modules ./node_modules
 COPY . .
 
+# NEXT_PUBLIC_* vars must be available at build time — they're baked into the client bundle
+ARG NEXT_PUBLIC_API_URL
+ENV NEXT_PUBLIC_API_URL=${NEXT_PUBLIC_API_URL}
+
 # Set production environment variables
 ENV NODE_ENV=production
 ENV NEXT_TELEMETRY_DISABLED=1
-
-# Pass in the build argument from docker-compose
-ARG NEXT_PUBLIC_API_URL
-ENV NEXT_PUBLIC_API_URL=$NEXT_PUBLIC_API_URL
 
 # Build Next.js application
 RUN npm run build

@@ -1,4 +1,4 @@
-import Link from 'next/link';
+import { Link } from '@/core/i18n';
 import React from 'react';
 import { ArrowLeftIcon } from '@/shared/components/icons/ArrowLeft';
 

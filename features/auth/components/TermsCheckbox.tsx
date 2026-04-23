@@ -2,7 +2,7 @@
 import { useTranslations } from "next-intl";
 
 import { forwardRef, ComponentProps } from "react";
-import Link from "next/link";
+import { Link } from "@/core/i18n";
 import { CheckMark } from "@/shared/components/icons/CheckMark";
 
 export const TermsCheckbox = forwardRef<

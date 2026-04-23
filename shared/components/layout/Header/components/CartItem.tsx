@@ -4,7 +4,7 @@ import { useEffect, useRef, useState } from 'react';
 import Image from 'next/image';
 import { Counter } from '@/shared/components/ui/Counter';
 import { useDebounce } from '@/shared/hooks/useDebounce';
-import Link from 'next/link';
+import { Link } from '@/core/i18n';
 import { toSlug } from '@/shared/utils/slug';
 
 interface Product {

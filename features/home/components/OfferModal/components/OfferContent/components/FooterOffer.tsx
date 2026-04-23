@@ -1,7 +1,7 @@
 import { CartIcon } from '@/shared/components/icons/Cart';
 import { Button } from '@/shared/components/ui/Button';
 import { Loader2 } from 'lucide-react';
-import Link from 'next/link';
+import { Link } from '@/core/i18n';
 import { useTranslations } from 'next-intl';
 import React from 'react';
 

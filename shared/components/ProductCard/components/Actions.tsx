@@ -1,6 +1,6 @@
 'use client';
 
-import Link from 'next/link';
+import { Link } from '@/core/i18n';
 import { HeartIcon } from '../../icons/Heart';
 import { toSlug } from '@/shared/utils/slug';
 import { useWishlistToggle } from '@/shared/hooks/useWishlistToggle';

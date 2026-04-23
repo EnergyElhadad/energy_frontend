@@ -6,7 +6,7 @@ import { ShopingButtonCard } from './components/ShopingButtonCard';
 import { useEffect, useRef, useState } from 'react';
 import { useDebounce } from '@/shared/hooks/useDebounce';
 import { useTranslations } from 'next-intl';
-import Link from 'next/link';
+import { Link } from '@/core/i18n';
 import { toSlug } from '@/shared/utils/slug';
 
 interface ShopingCardProps {

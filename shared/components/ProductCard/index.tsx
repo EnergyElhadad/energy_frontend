@@ -4,7 +4,7 @@ import { Badge } from './components/Badge';
 import { BodyCard } from './components/BodyCard';
 import { HiddenIcons } from './components/HiddenIcons';
 import { Display } from '../layout/Display';
-import Link from 'next/link';
+import { Link } from '@/core/i18n';
 import { toSlug } from '@/shared/utils/slug';
 
 export type ProductT = {

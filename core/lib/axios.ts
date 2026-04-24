@@ -28,6 +28,7 @@ const forceHttps = (data: unknown): unknown => {
 
 export const Axios = axios.create({
   baseURL: process.env.NEXT_PUBLIC_API_URL,
+  withCredentials: true,
 });
 
 Axios.interceptors.response.use(response => {

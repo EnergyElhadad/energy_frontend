@@ -34,7 +34,7 @@ export const ProductCard: React.FC<ProductT> = ({ id, title, image, originalPric
           <Image src={image} alt={title} width={268} height={255} loading="eager" decoding="async" fetchPriority="low" className="mx-auto" {...imageProps} />
         </div>
       </div>
-      <BodyCard category={category} title={title} id={id} originalPrice={originalPrice} oldPrice={oldPrice} is_in_wishlist={is_in_wishlist} />
+      <BodyCard category={category} title={title} id={id} image={image} originalPrice={originalPrice} oldPrice={oldPrice} is_in_wishlist={is_in_wishlist} />
     </div>
   );
 };

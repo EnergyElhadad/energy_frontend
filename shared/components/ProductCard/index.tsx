@@ -22,7 +22,7 @@ export type ProductT = {
 
 export const ProductCard: React.FC<ProductT> = ({ id, title, image, originalPrice, oldPrice, badge, category, imageProps, onClick, is_in_wishlist }) => {
   return (
-    <div className="group border-Stroke/50 hover:border-primary relative mx-auto flex w-full cursor-pointer flex-col overflow-hidden rounded-sm border bg-white p-2 pb-3 transition-[border-color,box-shadow] duration-200 hover:shadow-[0_8px_24px_0_rgba(0,0,0,0.08)] [backface-visibility:hidden] [transform:translateZ(0)]">
+    <div className="group border-Stroke hover:border-primary relative mx-auto flex w-full cursor-pointer flex-col overflow-hidden rounded-2xl border bg-white p-2 pb-3 transition-[border-color,box-shadow] duration-200 hover:shadow-[0_8px_24px_0_rgba(0,0,0,0.08)] [backface-visibility:hidden] [transform:translateZ(0)]">
       <Link href={`/products/${id}-${toSlug(title)}`} className="absolute inset-0 z-1" aria-label={`View ${title}`} />
 
       <HiddenIcons title={title} id={id} onView={onClick} />

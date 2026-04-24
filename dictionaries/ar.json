@@ -146,6 +146,8 @@
     "switch_lang": "Switch to English",
     "wishlist_add_failed": "فشل إضافة المنتج للمفضلة",
     "wishlist_remove_failed": "فشل إزالة المنتج من المفضلة",
+    "wishlist_added": "تمت إضافة المنتج إلى المفضلة",
+    "wishlist_removed": "تمت إزالة المنتج من المفضلة",
     "login_required": "يجب تسجيل الدخول أولاً"
   },
   "HomePage": {

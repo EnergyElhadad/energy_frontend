@@ -146,6 +146,8 @@
     "switch_lang": "Switch to Arabic",
     "wishlist_add_failed": "Failed to add product to wishlist",
     "wishlist_remove_failed": "Failed to remove product from wishlist",
+    "wishlist_added": "Added to wishlist",
+    "wishlist_removed": "Removed from wishlist",
     "login_required": "You must login first"
   },
   "HomePage": {

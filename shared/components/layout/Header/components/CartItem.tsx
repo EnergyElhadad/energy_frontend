@@ -19,9 +19,10 @@ interface CartItemProps {
   product: Product;
   quantity: number;
   onQuantityChange: (val: number) => void;
+  onDelete?: () => void;
 }
 
-export const CartItem = ({ product, quantity, onQuantityChange }: CartItemProps) => {
+export const CartItem = ({ product, quantity, onQuantityChange, onDelete }: CartItemProps) => {
   const [localQuantity, setLocalQuantity] = useState(quantity);
   const debouncedQuantity = useDebounce(localQuantity, 500);
   const isMounted = useRef(false);
@@ -58,7 +59,7 @@ export const CartItem = ({ product, quantity, onQuantityChange }: CartItemProps)
 
         <div className="flex items-center justify-between gap-2">
           <div className="w-full max-w-[110px] sm:max-w-[120px]">
-            <Counter value={localQuantity} onChange={setLocalQuantity} />
+            <Counter value={localQuantity} onChange={setLocalQuantity} onDelete={onDelete} />
           </div>
         </div>
       </div>

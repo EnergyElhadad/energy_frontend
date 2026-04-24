@@ -26,7 +26,7 @@ export const Actions = ({
   is_in_wishlist?: boolean;
 }) => {
   const { isInWishlist, toggleWishlist, isLoading } = useWishlistToggle(id, is_in_wishlist);
-  const { items, addItem, updateQuantity, isAddingToCart } = useCart();
+  const { items, addItem, updateQuantity, removeItem, isAddingToCart } = useCart();
   const t = useTranslations('Products');
 
   const cartItem = items.find(item => String(item.id) === String(id));
@@ -72,7 +72,7 @@ export const Actions = ({
             e.stopPropagation();
           }}
         >
-          <Counter value={localQuantity} onChange={setLocalQuantity} min={1} fullWidth />
+          <Counter value={localQuantity} onChange={setLocalQuantity} min={1} fullWidth onDelete={() => removeItem(id)} />
         </div>
       ) : (
         <button

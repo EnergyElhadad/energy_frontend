@@ -10,7 +10,7 @@ import { Link } from '@/core/i18n';
 
 export const CartDropdown = () => {
   const t = useTranslations('Header');
-  const { items, updateQuantity } = useCart();
+  const { items, updateQuantity, removeItem } = useCart();
 
   return (
     <Dropdown
@@ -43,7 +43,13 @@ export const CartDropdown = () => {
           <>
             <div className="scrollbar-thin flex max-h-[300px] flex-col gap-[8px] overflow-y-auto">
               {items.map(item => (
-                <CartItem key={item.id} product={item} quantity={item.quantity} onQuantityChange={val => updateQuantity(item.id, val)} />
+                <CartItem
+                  key={item.id}
+                  product={item}
+                  quantity={item.quantity}
+                  onQuantityChange={val => updateQuantity(item.id, val)}
+                  onDelete={() => removeItem(item.id)}
+                />
               ))}
             </div>
           </>

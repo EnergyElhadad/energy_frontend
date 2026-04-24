@@ -59,7 +59,7 @@ export const ShopingCard: React.FC<ShopingCardProps> = ({ id, price, itemTotal, 
       </div>
 
       <div className="flex flex-wrap items-center justify-between gap-2 md:justify-end md:gap-4 lg:gap-8">
-        <Counter value={localQuantity} onChange={setLocalQuantity} variant="large" />
+        <Counter value={localQuantity} onChange={setLocalQuantity} variant="large" onDelete={() => removeItem(id)} />
         <p className="shrink-0 text-sm font-bold text-black md:text-base">
           {itemTotal || Number(price) * quantity} {t('egp')}
         </p>

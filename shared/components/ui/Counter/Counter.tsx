@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react';
 
 import { MinusIcon } from '@/shared/components/icons/Minus';
 import { PlusIcon } from '@/shared/components/icons/Plus';
+import { TrashIcon } from '@/shared/components/icons/Trash';
 
 export interface CounterProps {
   value: number;
@@ -14,6 +15,8 @@ export interface CounterProps {
   onLimitReached?: () => void;
   className?: string;
   fullWidth?: boolean;
+  /** When provided, the decrement button shows a trash icon and calls this instead of decrementing once `value === min`. */
+  onDelete?: () => void;
 }
 
 const variantStyles = {
@@ -34,10 +37,11 @@ const variantStyles = {
   },
 };
 
-export const Counter = ({ value, onChange, min = 1, max, variant = 'default', onLimitReached, className, fullWidth = false }: CounterProps) => {
+export const Counter = ({ value, onChange, min = 1, max, variant = 'default', onLimitReached, className, fullWidth = false, onDelete }: CounterProps) => {
   const styles = variantStyles[variant];
   const buttonClass = fullWidth ? styles.buttonFull : styles.button;
   const valueClass = fullWidth ? styles.valueFull : styles.value;
+  const showDelete = Boolean(onDelete) && value <= min;
 
   const handleIncrease = () => {
     if (max !== undefined && value >= max) {
@@ -50,6 +54,10 @@ export const Counter = ({ value, onChange, min = 1, max, variant = 'default', on
   };
 
   const handleDecrease = () => {
+    if (showDelete) {
+      onDelete?.();
+      return;
+    }
     if (value > min) {
       onChange?.(value - 1);
     }
@@ -110,9 +118,10 @@ export const Counter = ({ value, onChange, min = 1, max, variant = 'default', on
       </div>
       <button
         onClick={handleDecrease}
-        className={`border-Stroke flex cursor-pointer items-center justify-center border-s transition-all duration-300 ease-in-out hover:bg-[#F5F5F5] hover:text-[#000] ${buttonClass}`}
+        aria-label={showDelete ? 'remove from cart' : 'decrease quantity'}
+        className={`border-Stroke flex cursor-pointer items-center justify-center border-s transition-all duration-300 ease-in-out ${showDelete ? 'text-primary' : 'hover:bg-[#F5F5F5] hover:text-[#000]'} ${buttonClass}`}
       >
-        <MinusIcon />
+        {showDelete ? <TrashIcon /> : <MinusIcon />}
       </button>
     </div>
   );

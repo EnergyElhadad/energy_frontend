@@ -148,7 +148,14 @@
     "wishlist_remove_failed": "فشل إزالة المنتج من المفضلة",
     "wishlist_added": "تمت إضافة المنتج إلى المفضلة",
     "wishlist_removed": "تمت إزالة المنتج من المفضلة",
-    "login_required": "يجب تسجيل الدخول أولاً"
+    "login_required": "يجب تسجيل الدخول أولاً",
+    "error_title": "حدث خطأ ما",
+    "error_description": "حدث خطأ غير متوقع. حاول مرة أخرى أو عُد إلى الصفحة الرئيسية.",
+    "error_retry": "إعادة المحاولة",
+    "error_go_home": "الذهاب للرئيسية",
+    "not_found_title": "الصفحة غير موجودة",
+    "not_found_description": "الصفحة التي تبحث عنها غير موجودة أو تم نقلها.",
+    "not_found_go_home": "العودة للرئيسية"
   },
   "HomePage": {
     "welcome": "مرحبا بك في موقعنا",

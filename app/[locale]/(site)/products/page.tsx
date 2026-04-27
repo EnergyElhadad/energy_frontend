@@ -11,9 +11,9 @@ import { getTranslations, setRequestLocale } from 'next-intl/server';
 import { CollectionJsonLd, type CollectionItem } from '@/shared/components/seo/CollectionJsonLd';
 import { toSlug } from '@/shared/utils/slug';
 
-// Listing page reads searchParams (filters, category, page) so it's effectively
-// dynamic per query, but allowing ISR lets the bare /products URL be cached.
-export const revalidate = 600;
+// HOT FIX: see (home)/page.tsx note. Falling back to dynamic until
+// build-time API access is sorted.
+export const dynamic = 'force-dynamic';
 
 type Props = {
   params: Promise<{ locale: string }>;

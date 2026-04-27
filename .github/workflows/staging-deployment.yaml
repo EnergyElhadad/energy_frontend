@@ -7,7 +7,12 @@ on:
 
 jobs:
   deploy:
-    runs-on: self-hosted
+    # Pin to the staging runner specifically. Plain `self-hosted` was
+    # ambiguous — any registered self-hosted runner could pick up the job,
+    # including the production one (which doesn't have /opt/energy-staging/).
+    # The staging runner must be tagged with the `energy-staging` label in
+    # GitHub repo settings → Actions → Runners.
+    runs-on: energy-staging
 
     steps:
       - name: Pull Frontend

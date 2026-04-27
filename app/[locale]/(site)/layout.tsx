@@ -4,8 +4,20 @@ import Header from '@/shared/components/layout/Header';
 import { getMessages, getContactInfo, getSocialMedia } from '@/shared/services/content';
 import React from 'react';
 import { FloatingWhatsApp } from '@/shared/components/layout/FloatingWhatsApp';
+import { setRequestLocale } from 'next-intl/server';
 
-const layout = async ({ children }: { children: React.ReactNode }) => {
+interface LayoutProps {
+  children: React.ReactNode;
+  params: Promise<{ locale: string }>;
+}
+
+const layout = async ({ children, params }: LayoutProps) => {
+  const { locale } = await params;
+  // Required for static rendering with next-intl. Called here on the (site)
+  // layout so every wrapped page inherits a request-scoped locale before any
+  // useTranslations / getTranslations call below.
+  setRequestLocale(locale);
+
   const [{ result: messages }, { result: contactInfoArray }, { result: socialMediaArray }] = await Promise.all([getMessages(), getContactInfo(), getSocialMedia()]);
 
   const contactInfo = contactInfoArray?.[0] || null;

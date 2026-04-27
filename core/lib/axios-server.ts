@@ -28,20 +28,48 @@ const forceHttps = (data: unknown): unknown => {
   return rewrite(data);
 };
 
-export const Axios = async () => {
-  const cookieStore = await cookies();
-  let session = null;
+/**
+ * Tries to read the session and request locale from the current request scope.
+ * Returns safe anonymous defaults when there is no request scope (build time,
+ * `generateStaticParams`, ISR regeneration). This is what lets public pages
+ * (home, products, categories, sitemap) actually be statically rendered/ISR'd
+ * — without this guard, even a single `cookies()` call forces the page into
+ * dynamic rendering on every request.
+ */
+const readRequestContext = async () => {
+  let cookieLocale: string | undefined;
   try {
-    session = await auth();
-  } catch (error) {
-    console.error('Failed to get auth session:', error);
+    const cookieStore = await cookies();
+    cookieLocale = cookieStore.get('NEXT_LOCALE')?.value;
+  } catch {
+    // No request scope — that's fine, we'll fetch as anonymous with default locale.
   }
+
+  // `auth()` from NextAuth has overloads (middleware vs server-call); strip
+  // them down to the direct-call shape we use here.
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  let session: any = null;
+  try {
+    session = await (auth as () => Promise<unknown>)();
+  } catch (error) {
+    // `auth()` reads cookies internally — same story. Anonymous fallback.
+    if (process.env.NODE_ENV !== 'production') {
+      console.error('Failed to get auth session:', error);
+    }
+  }
+
   let locale = 'ar';
   try {
     locale = await getLocale();
   } catch {
-    locale = cookieStore.get('NEXT_LOCALE')?.value || 'ar';
+    locale = cookieLocale || 'ar';
   }
+
+  return { session, locale };
+};
+
+export const Axios = async () => {
+  const { session, locale } = await readRequestContext();
 
   const headers: Record<string, string> = {
     'Accept-Language': locale,

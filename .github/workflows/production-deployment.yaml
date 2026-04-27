@@ -1,7 +1,6 @@
-name: Deploy to Staging
+name: Deploy to production
 
 on:
-  workflow-dispatch:
   push:
     branches:
       - main

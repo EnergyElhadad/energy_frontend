@@ -21,6 +21,7 @@ export const useWishlistToggle = (productId: number | string, initialIsInWishlis
     mutationFn: () => addToWishlist(Number(productId)),
     onSuccess: () => {
       setIsInWishlist(true);
+      toast.success(t('wishlist_added'));
       queryClient.invalidateQueries({ queryKey: ['wishlistProducts'] });
       queryClient.invalidateQueries({ queryKey: ['wishlistPage'] });
       queryClient.invalidateQueries({ queryKey: ['products'] });
@@ -34,6 +35,7 @@ export const useWishlistToggle = (productId: number | string, initialIsInWishlis
     mutationFn: () => removeFromWishlist(Number(productId)),
     onSuccess: () => {
       setIsInWishlist(false);
+      toast.success(t('wishlist_removed'));
       queryClient.invalidateQueries({ queryKey: ['wishlistProducts'] });
       queryClient.invalidateQueries({ queryKey: ['wishlistPage'] });
       queryClient.invalidateQueries({ queryKey: ['products'] });

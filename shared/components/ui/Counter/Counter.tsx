@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react';
 
 import { MinusIcon } from '@/shared/components/icons/Minus';
 import { PlusIcon } from '@/shared/components/icons/Plus';
+import { TrashIcon } from '@/shared/components/icons/Trash';
 
 export interface CounterProps {
   value: number;
@@ -12,24 +13,35 @@ export interface CounterProps {
   max?: number;
   variant?: 'default' | 'large';
   onLimitReached?: () => void;
+  className?: string;
+  fullWidth?: boolean;
+  /** When provided, the decrement button shows a trash icon and calls this instead of decrementing once `value === min`. */
+  onDelete?: () => void;
 }
 
 const variantStyles = {
   default: {
     container: 'h-9 sm:h-[40px] rounded-[8px]',
     button: 'w-9 sm:w-[45px] h-9 sm:h-[40px] text-sm',
+    buttonFull: 'flex-1 basis-0 h-9 sm:h-[40px] text-sm',
     value: 'w-9 sm:w-[45px] h-9 sm:h-[40px] text-[13px] sm:text-[14px]',
+    valueFull: 'flex-1 basis-0 h-9 sm:h-[40px] text-[13px] sm:text-[14px]',
   },
 
   large: {
     container: 'h-10 sm:h-[30px] md:h-[50px] bg-white rounded-[4px]',
     button: 'w-10 h-10 sm:w-10 sm:h-[30px] md:w-14 md:h-[50px] text-sm sm:text-sm md:text-base',
+    buttonFull: 'flex-1 basis-0 h-10 sm:h-[30px] md:h-[50px] text-sm sm:text-sm md:text-base',
     value: 'w-10 h-10 sm:w-10 sm:h-[30px] md:w-17 md:h-[50px] text-sm sm:text-sm md:text-base',
+    valueFull: 'flex-1 basis-0 h-10 sm:h-[30px] md:h-[50px] text-sm sm:text-sm md:text-base',
   },
 };
 
-export const Counter = ({ value, onChange, min = 1, max, variant = 'default', onLimitReached }: CounterProps) => {
+export const Counter = ({ value, onChange, min = 1, max, variant = 'default', onLimitReached, className, fullWidth = false, onDelete }: CounterProps) => {
   const styles = variantStyles[variant];
+  const buttonClass = fullWidth ? styles.buttonFull : styles.button;
+  const valueClass = fullWidth ? styles.valueFull : styles.value;
+  const showDelete = Boolean(onDelete) && value <= min;
 
   const handleIncrease = () => {
     if (max !== undefined && value >= max) {
@@ -42,6 +54,10 @@ export const Counter = ({ value, onChange, min = 1, max, variant = 'default', on
   };
 
   const handleDecrease = () => {
+    if (showDelete) {
+      onDelete?.();
+      return;
+    }
     if (value > min) {
       onChange?.(value - 1);
     }
@@ -82,14 +98,14 @@ export const Counter = ({ value, onChange, min = 1, max, variant = 'default', on
   };
 
   return (
-    <div className={`border-Stroke flex w-fit items-center border ${styles.container}`}>
+    <div className={`border-Stroke flex items-center border ${fullWidth ? 'w-full' : 'w-fit'} ${styles.container} ${className ?? ''}`}>
       <button
         onClick={handleIncrease}
-        className={`border-Stroke flex cursor-pointer items-center justify-center border-e transition-all duration-300 ease-in-out hover:bg-[#F5F5F5] hover:text-[#000] ${styles.button}`}
+        className={`border-Stroke flex cursor-pointer items-center justify-center border-e transition-all duration-300 ease-in-out hover:bg-[#F5F5F5] hover:text-[#000] ${buttonClass}`}
       >
         <PlusIcon />
       </button>
-      <div className={`flex items-center justify-center overflow-hidden ${styles.value}`}>
+      <div className={`flex items-center justify-center overflow-hidden ${valueClass}`}>
         <input
           type="number"
           min={min}
@@ -102,9 +118,10 @@ export const Counter = ({ value, onChange, min = 1, max, variant = 'default', on
       </div>
       <button
         onClick={handleDecrease}
-        className={`border-Stroke flex cursor-pointer items-center justify-center border-s transition-all duration-300 ease-in-out hover:bg-[#F5F5F5] hover:text-[#000] ${styles.button}`}
+        aria-label={showDelete ? 'remove from cart' : 'decrease quantity'}
+        className={`border-Stroke flex cursor-pointer items-center justify-center border-s transition-all duration-300 ease-in-out ${showDelete ? 'text-primary' : 'hover:bg-[#F5F5F5] hover:text-[#000]'} ${buttonClass}`}
       >
-        <MinusIcon />
+        {showDelete ? <TrashIcon /> : <MinusIcon />}
       </button>
     </div>
   );

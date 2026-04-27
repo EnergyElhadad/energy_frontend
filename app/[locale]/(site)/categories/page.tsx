@@ -1,16 +1,18 @@
 import { CategoriesContent } from '@/features/categories/components/CategoriesContent';
 import { getCategories, CategoriesResponse } from '@/shared/services/categories';
 import { Metadata } from 'next';
-import { getTranslations } from 'next-intl/server';
+import { getTranslations, setRequestLocale } from 'next-intl/server';
 import { Breadcrumb } from '@/shared/components/layout/Breadcrumb';
+import { CollectionJsonLd, type CollectionItem } from '@/shared/components/seo/CollectionJsonLd';
 
-export const dynamic = 'force-dynamic';
+export const revalidate = 600;
 
 type Props = {
-  params: { locale: string };
+  params: Promise<{ locale: string }>;
 };
 
-export async function generateMetadata({ params: { locale } }: Props): Promise<Metadata> {
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const { locale } = await params;
   const t = await getTranslations({ locale, namespace: 'Header' });
 
   return {
@@ -18,7 +20,9 @@ export async function generateMetadata({ params: { locale } }: Props): Promise<M
   };
 }
 
-export default async function CategoriesPage({ params: { locale } }: Props) {
+export default async function CategoriesPage({ params }: Props) {
+  const { locale } = await params;
+  setRequestLocale(locale);
   const commonT = await getTranslations({ locale, namespace: 'Header' });
 
   let initialCategories: CategoriesResponse | null = null;
@@ -33,8 +37,25 @@ export default async function CategoriesPage({ params: { locale } }: Props) {
     { label: commonT('all_categories'), href: '/categories' },
   ];
 
+  // Each category links to its filtered /products view — the same URL the
+  // header/sidebar uses, so the breadcrumb and link target stay consistent.
+  const collectionItems: CollectionItem[] = (initialCategories?.result || []).map(c => ({
+    name: c.name,
+    path: `/products?categoryId=${c.id}&categoryName=${encodeURIComponent(c.name)}`,
+    image: c.image,
+  }));
+
   return (
     <main className="bg-Background min-h-screen">
+      {collectionItems.length > 0 && (
+        <CollectionJsonLd
+          locale={locale}
+          path="/categories"
+          name={commonT('all_categories')}
+          items={collectionItems}
+          itemType="Thing"
+        />
+      )}
       <div className="container">
         <Breadcrumb className="py-5" items={breadcrumbItems} />
 

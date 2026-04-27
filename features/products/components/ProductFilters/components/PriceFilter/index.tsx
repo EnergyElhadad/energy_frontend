@@ -15,20 +15,20 @@ export const PriceFilter: React.FC<PriceFilterProps> = ({ priceRange, onPriceCha
 
   return (
     <div className="flex w-full max-w-md flex-col gap-2">
-      <Slider dir={isRTL ? 'rtl' : 'ltr'} max={1000000} min={0} onValueChange={onPriceChange} value={priceRange} className="py-6" />
+      <Slider dir={isRTL ? 'rtl' : 'ltr'} max={10000} min={0} onValueChange={onPriceChange} value={priceRange} className="py-6" />
       <DisplayPrice
         fromValue={priceRange[0]}
         toValue={priceRange[1]}
         onChangeFrom={e => {
-          const val = Math.max(0, Math.min(1000000, parseInt(e.target.value) || 0));
+          const val = Math.max(0, Math.min(10000, parseInt(e.target.value) || 0));
           onPriceInputChange('min', val);
         }}
         onChangeTo={e => {
-          const val = Math.max(0, Math.min(1000000, parseInt(e.target.value) || 0));
+          const val = Math.max(0, Math.min(10000, parseInt(e.target.value) || 0));
           onPriceInputChange('max', val);
         }}
         min={0}
-        max={1000000}
+        max={10000}
       />
     </div>
   );

@@ -14,6 +14,7 @@ import { toSlug } from '@/shared/utils/slug';
 
 export const WishlistDropdown = () => {
   const t = useTranslations('Header');
+  const tCommon = useTranslations('Common');
   const { items, count, removeItem } = useWishlist();
   const queryClient = useQueryClient();
 
@@ -21,6 +22,7 @@ export const WishlistDropdown = () => {
     removeItem(id); // optimistic removal from UI
     try {
       await removeFromWishlist(id);
+      toast.success(tCommon('wishlist_removed'));
       queryClient.invalidateQueries({ queryKey: ['wishlistPage'] });
       queryClient.invalidateQueries({ queryKey: ['products'] }); // Ensure `ProductsView` and hook sink
     } catch {

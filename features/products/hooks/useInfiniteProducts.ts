@@ -31,7 +31,7 @@ export const useInfiniteProducts = (filters: ProductsQueryParams, initialData: P
   });
 
   const products = useMemo(() => {
-    const allProducts: Product[] = data?.pages.flatMap(page => page?.result || []) || [];
+    const allProducts: Product[] = data?.pages?.flatMap(page => page?.result ?? []) ?? [];
 
     return allProducts;
   }, [data]);

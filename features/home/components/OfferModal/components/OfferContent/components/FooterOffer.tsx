@@ -1,7 +1,7 @@
 import { CartIcon } from '@/shared/components/icons/Cart';
 import { Button } from '@/shared/components/ui/Button';
 import { Loader2 } from 'lucide-react';
-import Link from 'next/link';
+import { Link } from '@/core/i18n';
 import { useTranslations } from 'next-intl';
 import React from 'react';
 
@@ -26,7 +26,7 @@ export const FooterOffer = ({ linkUrl, onAddToCart, isLoading }: FooterOfferProp
         href={linkUrl}
         className="border-primary hover:bg-primary/80 text-primary flex h-full w-full flex-1 shrink-0 items-center justify-center rounded-sm border bg-transparent px-6 py-2 text-sm font-semibold hover:text-white"
       >
-        {t('product_details')}
+        {t('quick_buy')}
       </Link>
     </div>
   );

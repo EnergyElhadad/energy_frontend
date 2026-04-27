@@ -6,15 +6,16 @@ type Props = {
   category?: string;
   title: string;
   id: string | number;
+  image: string;
   originalPrice: number;
   oldPrice?: number;
   is_in_wishlist?: boolean;
 };
 
-export const BodyCard: React.FC<Props> = ({ category, title, id, originalPrice, oldPrice, is_in_wishlist }) => {
+export const BodyCard: React.FC<Props> = ({ category, title, id, image, originalPrice, oldPrice, is_in_wishlist }) => {
   return (
-    <div className="relative z-10 mt-auto p-2">
-      <p className="line-clamp-2 text-center text-sm font-semibold text-black">{title}</p>
+    <div className="relative z-10 mt-auto p-2 pointer-events-none">
+      <p className="line-clamp-2 min-h-10 text-center text-sm font-semibold text-black">{title}</p>
 
       <Display when={category !== undefined}>
         <h3 className="text-signalGray my-3 text-center text-[14px]">{category}</h3>
@@ -22,7 +23,7 @@ export const BodyCard: React.FC<Props> = ({ category, title, id, originalPrice, 
 
       <Price oldPrice={oldPrice} price={originalPrice} />
 
-      <Actions id={id} title={title} is_in_wishlist={is_in_wishlist} />
+      <Actions id={id} title={title} image={image} price={originalPrice} category={category} is_in_wishlist={is_in_wishlist} />
     </div>
   );
 };

@@ -1,21 +1,45 @@
 import axios from 'axios';
-import https from 'https';
 import { getCookie } from 'cookies-next';
 import { getSession } from 'next-auth/react';
 
+const forceHttps = (data: unknown): unknown => {
+  const apiHost = process.env.NEXT_PUBLIC_API_URL
+    ? new URL(process.env.NEXT_PUBLIC_API_URL).host
+    : null;
+  if (!apiHost) return data;
+
+  const rewrite = (val: unknown): unknown => {
+    if (typeof val === 'string') {
+      return val.startsWith(`http://${apiHost}`)
+        ? val.replace(`http://${apiHost}`, `https://${apiHost}`)
+        : val;
+    }
+    if (Array.isArray(val)) return val.map(rewrite);
+    if (val && typeof val === 'object') {
+      return Object.fromEntries(
+        Object.entries(val as Record<string, unknown>).map(([k, v]) => [k, rewrite(v)])
+      );
+    }
+    return val;
+  };
+
+  return rewrite(data);
+};
+
 export const Axios = axios.create({
   baseURL: process.env.NEXT_PUBLIC_API_URL,
+  withCredentials: true,
+});
 
-  httpsAgent: new https.Agent({
-    rejectUnauthorized: false,
-  }),
+Axios.interceptors.response.use(response => {
+  response.data = forceHttps(response.data);
+  return response;
 });
 
 Axios.interceptors.request.use(async config => {
   if (typeof document !== 'undefined') {
-    const cookieLang = getCookie('NEXT_LOCALE');
-
-    const lang = cookieLang || document.documentElement.lang || 'en';
+    const pathLocale = window.location.pathname.split('/')[1];
+    const lang = ['ar', 'en'].includes(pathLocale) ? pathLocale : (getCookie('NEXT_LOCALE') as string) || 'ar';
 
     config.headers['Accept-Language'] = lang;
 

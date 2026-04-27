@@ -15,7 +15,7 @@ import { useTranslations } from 'next-intl';
 export const ShopByCategory = ({ categories }: { categories: Category[] }) => {
   const t = useTranslations('HomePage');
   return (
-    <section className="relative container py-16">
+    <section className="relative container py-8 md:py-16">
       <HeaderSection title={t('shop_by_category')} textlink={t('view_all')} urlLink="/categories" />
       <div className="swiperWrapper relative">
         <Swiper
@@ -35,7 +35,7 @@ export const ShopByCategory = ({ categories }: { categories: Category[] }) => {
             768: { slidesPerView: 4 },
             1250: { slidesPerView: 6 },
           }}
-          className="category-swiper !h-auto [&_.swiper-slide]:!h-auto [&>.swiper-wrapper]:items-stretch"
+          className="category-swiper h-auto! [&_.swiper-slide]:h-auto! [&>.swiper-wrapper]:items-stretch"
         >
           {categories.map(({ id, name, image }) => (
             <SwiperSlide key={id}>

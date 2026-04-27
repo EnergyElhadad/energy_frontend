@@ -47,8 +47,12 @@ export const SummaryOrder = ({ total: initialTotal, itemsCount: initialCount }: 
         disabled={isPromoApplied}
       />
 
+      {discountBreakdown?.offer_discount && parseFloat(discountBreakdown.offer_discount) > 0 && (
+        <Discount title={t('offer_discount')} price={parseFloat(discountBreakdown.offer_discount)} />
+      )}
+
       {discountBreakdown?.promo_discount && parseFloat(discountBreakdown.promo_discount) > 0 && (
-        <Discount title={t('discount')} price={parseFloat(discountBreakdown.promo_discount)} />
+        <Discount title={t('promo_discount')} price={parseFloat(discountBreakdown.promo_discount)} />
       )}
 
       <Separator className="bg-gray100 my-4 h-px" />

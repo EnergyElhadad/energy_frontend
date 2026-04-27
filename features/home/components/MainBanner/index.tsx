@@ -18,7 +18,15 @@ export const MainBanner = ({ data }: MainBannerProps) => {
             <picture>
               <source media="(max-width: 767px)" srcSet={banner?.mobile_image ?? banner?.image ?? '/images/banner-mobile.webp'} />
               <source media="(min-width: 768px)" srcSet={banner?.image ?? '/images/hero.webp'} />
-              <Image src={banner?.image ?? '/images/hero.webp'} fill alt={banner?.title ?? 'main banner'} className="absolute inset-0 h-full w-full object-cover" />
+              <Image
+                src={banner?.image ?? '/images/hero.webp'}
+                fill
+                // Banner sits inside the .container which clamps width — full
+                // width on mobile, capped to ~1200 on desktop.
+                sizes="(max-width: 1200px) 100vw, 1200px"
+                alt={banner?.title ?? 'main banner'}
+                className="absolute inset-0 h-full w-full object-cover"
+              />
             </picture>
 
             <div className="absolute inset-0 bg-black/50" />

@@ -31,7 +31,11 @@ export const ProductCard: React.FC<ProductT> = ({ id, title, image, originalPric
           <Badge text={badge!} />
         </Display>
         <div className="relative w-full overflow-hidden rounded-xl">
-          <Image src={image} alt={title} width={268} height={255} loading="eager" decoding="async" fetchPriority="low" className="mx-auto" {...imageProps} />
+          {/* Default lazy loading: only the visible cards above the fold are
+              fetched eagerly by the browser; everything else loads on scroll.
+              Pass `imageProps={{ priority: true }}` from the page when a card
+              is the LCP element. */}
+          <Image src={image} alt={title} width={268} height={255} decoding="async" className="mx-auto" {...imageProps} />
         </div>
       </div>
       <BodyCard category={category} title={title} id={id} image={image} originalPrice={originalPrice} oldPrice={oldPrice} is_in_wishlist={is_in_wishlist} />

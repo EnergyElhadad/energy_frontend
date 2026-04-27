@@ -32,9 +32,20 @@ export const Hero: React.FC<HeroProps> = ({ data }) => {
           }}
           className="h-full w-full"
         >
-          {data?.map(item => (
+          {data?.map((item, index) => (
             <SwiperSlide key={item.id}>
-              <HeroContent title={item.title} imageUrl={item.image} mobileImageUrl={item.mobile_image} linkUrl={item.link} linkText={item.button} description={item.banner_text} />
+              <HeroContent
+                title={item.title}
+                imageUrl={item.image}
+                mobileImageUrl={item.mobile_image}
+                linkUrl={item.link}
+                linkText={item.button}
+                description={item.banner_text}
+                // First slide is the LCP candidate — priority preloads it. Every
+                // other slide is offscreen behind Swiper's transform, so leave
+                // them at the default (lazy).
+                priority={index === 0}
+              />
             </SwiperSlide>
           ))}
         </Swiper>

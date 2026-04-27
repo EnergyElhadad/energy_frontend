@@ -17,10 +17,24 @@ export const BannerCard: React.FC<Props> = ({ title, descritption, textLink, url
           <picture>
             <source media="(max-width: 767px)" srcSet={mobileUrlImage} />
             <source media="(min-width: 768px)" srcSet={urlImage} />
-            <Image src={urlImage} fill alt="banner" className="absolute inset-0 h-full w-full object-cover ltr:-scale-x-100" />
+            <Image
+              src={urlImage}
+              fill
+              // 1 column on mobile (full width), 2 columns on lg up — each card
+              // takes ~half the viewport, so cap to ~590px on the larger side.
+              sizes="(max-width: 1024px) 100vw, 590px"
+              alt="banner"
+              className="absolute inset-0 h-full w-full object-cover ltr:-scale-x-100"
+            />
           </picture>
         ) : (
-          <Image src={urlImage} fill alt="banner" className="absolute inset-0 h-full w-full object-cover ltr:-scale-x-100" />
+          <Image
+            src={urlImage}
+            fill
+            sizes="(max-width: 1024px) 100vw, 590px"
+            alt="banner"
+            className="absolute inset-0 h-full w-full object-cover ltr:-scale-x-100"
+          />
         )}
 
         <div className="relative z-10 space-y-2 px-8 py-6 text-start">

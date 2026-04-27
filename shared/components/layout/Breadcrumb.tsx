@@ -30,11 +30,11 @@ export const Breadcrumb = ({ items, separator = '/', homeAsFirstItem = false, cl
       {items.map((item, index) => (
         <React.Fragment key={index}>
           {item.href ? (
-            <Link href={item.href} className="text-signalGray hover:text-primary line-clamp-1 text-[16px]">
+            <Link href={item.href} className="text-signalGray hover:text-primary text-[16px]">
               {item.label}
             </Link>
           ) : (
-            <span className="text-signalGray line-clamp-1 text-[16px]">{item.label}</span>
+            <span className="text-signalGray text-[16px]">{item.label}</span>
           )}
           {index < items.length - 1 && <span className="text-signalGray mx-0.5">{separator}</span>}
         </React.Fragment>

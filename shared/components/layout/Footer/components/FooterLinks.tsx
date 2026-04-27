@@ -27,9 +27,9 @@ export const FooterLinks = () => {
 
   return (
     <div className="w-full">
-      <h3 className="mb-4 text-center text-2xl font-semibold text-black">{t('quick_links_title')}</h3>
+      <h3 className="mb-4 text-2xl font-semibold text-black">{t('quick_links_title')}</h3>
 
-      <ul className="mx-auto flex w-fit list-none flex-col gap-2">
+      <ul className="flex list-none flex-col gap-2">
         {quickLinks.map((link, index) => (
           <li key={index}>
             <Link href={link.href} className="text-signalGray hover:text-primary">

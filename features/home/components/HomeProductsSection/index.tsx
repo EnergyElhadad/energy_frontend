@@ -19,7 +19,7 @@ export const HomeProductsSection = ({ title, products, urlLink }: HomeProductsSe
   const t = useTranslations('HomePage');
 
   return (
-    <section className="bg-Background py-8 md:py-16 [contain:layout_paint] [isolation:isolate] [transform:translateZ(0)]">
+    <section className="bg-Background py-16">
       <div className="container">
         <HeaderSection title={title} textlink={t('view_all')} urlLink={urlLink || '#'} />
         <div className="hidden gap-x-2 gap-y-4 lg:grid lg:grid-cols-4">

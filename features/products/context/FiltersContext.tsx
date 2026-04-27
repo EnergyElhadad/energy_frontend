@@ -11,7 +11,7 @@ export type FiltersState = {
   max_price: string | undefined;
   search: string | undefined;
   rating: string | undefined;
-  home_section: string | undefined;
+  home_sections: string | undefined;
 };
 
 type FiltersContextType = {
@@ -30,43 +30,53 @@ export const useFiltersContext = () => {
   return context;
 };
 
-const parseFilters = (searchParams: URLSearchParams): FiltersState => ({
-  categoryId: searchParams.get('categoryId') || undefined,
-  categoryName: searchParams.get('categoryName') || undefined,
-  ordering: (searchParams.get('ordering') as 'id' | '-id') || 'id',
-  min_price: searchParams.get('min_price') || undefined,
-  max_price: searchParams.get('max_price') || undefined,
-  search: searchParams.get('search') || undefined,
-  rating: searchParams.get('rating') || undefined,
-  home_section: searchParams.get('home_section') || undefined,
-});
-
 export const FiltersProvider = ({ children }: { children: ReactNode }) => {
   const searchParams = useSearchParams();
 
-  const [filters, setFiltersState] = useState<FiltersState>(() => parseFilters(searchParams));
+  // Initialize from URL on mount
+  const [filters, setFiltersState] = useState<FiltersState>(() => ({
+    categoryId: searchParams.get('categoryId') || undefined,
+    categoryName: searchParams.get('categoryName') || undefined,
+    ordering: (searchParams.get('ordering') as 'id' | '-id') || 'id',
+    min_price: searchParams.get('min_price') || undefined,
+    max_price: searchParams.get('max_price') || undefined,
+    search: searchParams.get('search') || undefined,
+    rating: searchParams.get('rating') || undefined,
+    home_sections: searchParams.get('home_sections') || undefined,
+  }));
 
-  // Sync URL → state on Next.js navigation (e.g., header category links)
-  useEffect(() => {
-    setFiltersState(parseFilters(searchParams));
-  }, [searchParams]);
-
-  // Sync state → URL for local filter changes
+  // Sync state → URL via replaceState (no server navigation)
   useEffect(() => {
     const params = new URLSearchParams();
-    if (filters.categoryId) params.set('categoryId', filters.categoryId);
-    if (filters.categoryName) params.set('categoryName', filters.categoryName);
-    if (filters.ordering && filters.ordering !== 'id') params.set('ordering', filters.ordering);
-    if (filters.min_price) params.set('min_price', filters.min_price);
-    if (filters.max_price) params.set('max_price', filters.max_price);
-    if (filters.search) params.set('search', filters.search);
-    if (filters.rating) params.set('rating', filters.rating);
-    if (filters.home_section) params.set('home_section', filters.home_section);
-    const qs = params.toString();
-    const currentQs = window.location.search.replace(/^\?/, '');
-    if (qs !== currentQs) {
-      window.history.replaceState(null, '', qs ? `?${qs}` : window.location.pathname);
+
+    if (filters.categoryId) {
+      params.set('categoryId', filters.categoryId);
     }
+    if (filters.categoryName) {
+      params.set('categoryName', filters.categoryName);
+    }
+    if (filters.ordering && filters.ordering !== 'id') {
+      params.set('ordering', filters.ordering);
+    }
+    if (filters.min_price) {
+      params.set('min_price', filters.min_price);
+    }
+    if (filters.max_price) {
+      params.set('max_price', filters.max_price);
+    }
+    if (filters.search) {
+      params.set('search', filters.search);
+    }
+    if (filters.rating) {
+      params.set('rating', filters.rating);
+    }
+    if (filters.home_sections) {
+      params.set('home_sections', filters.home_sections);
+    }
+
+    const queryString = params.toString();
+    const newUrl = queryString ? `?${queryString}` : window.location.pathname;
+    window.history.replaceState(null, '', newUrl);
   }, [filters]);
 
   const setFilter = useCallback((key: keyof FiltersState, value: string | undefined) => {

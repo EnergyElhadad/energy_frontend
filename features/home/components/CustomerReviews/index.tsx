@@ -13,7 +13,7 @@ export const CustomerReviews = ({ reviews }: CustomerReviewsProps) => {
   if (!reviews || reviews.length === 0) return null;
 
   return (
-    <section className="w-full overflow-hidden bg-white pt-5 pb-6 md:pt-18 md:pb-14">
+    <section className="w-full overflow-hidden bg-white pt-18 pb-14">
       <div className="container">
         <div className="mx-auto">
           <HeaderReviewsSection text={t('customer_reviews')} />

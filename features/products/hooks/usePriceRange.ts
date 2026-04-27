@@ -8,7 +8,7 @@ export const usePriceRange = () => {
   const { filters, setFilters } = useFiltersContext();
 
   const minFromContext = Number(filters.min_price) || 0;
-  const maxFromContext = Number(filters.max_price) || 10000;
+  const maxFromContext = Number(filters.max_price) || 1000000;
 
   const [priceRange, setPriceRange] = useState<[number, number]>([minFromContext, maxFromContext]);
 
@@ -18,7 +18,7 @@ export const usePriceRange = () => {
   useEffect(() => {
     setFilters({
       min_price: debouncedMin > 0 ? String(debouncedMin) : undefined,
-      max_price: debouncedMax < 10000 ? String(debouncedMax) : undefined,
+      max_price: debouncedMax < 1000000 ? String(debouncedMax) : undefined,
     });
   }, [debouncedMin, debouncedMax, setFilters]);
 
@@ -39,7 +39,7 @@ export const usePriceRange = () => {
   };
 
   const resetPriceRange = () => {
-    setPriceRange([0, 10000]);
+    setPriceRange([0, 1000000]);
     setFilters({ min_price: undefined, max_price: undefined });
   };
 

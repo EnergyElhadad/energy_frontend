@@ -73,8 +73,6 @@
     "applied": "Applied",
     "applying": "Applying...",
     "discount": "Discount",
-    "offer_discount": "Offer Discount",
-    "promo_discount": "Promo Code Discount",
     "total": "Total",
     "tax_included": "Prices include tax",
     "checkout": "Checkout"
@@ -146,16 +144,7 @@
     "switch_lang": "Switch to Arabic",
     "wishlist_add_failed": "Failed to add product to wishlist",
     "wishlist_remove_failed": "Failed to remove product from wishlist",
-    "wishlist_added": "Added to wishlist",
-    "wishlist_removed": "Removed from wishlist",
-    "login_required": "You must login first",
-    "error_title": "Something went wrong",
-    "error_description": "We hit an unexpected error. Please try again, or head back to the home page.",
-    "error_retry": "Try again",
-    "error_go_home": "Go to home",
-    "not_found_title": "Page not found",
-    "not_found_description": "The page you’re looking for doesn’t exist or has been moved.",
-    "not_found_go_home": "Back to home"
+    "login_required": "You must login first"
   },
   "HomePage": {
     "welcome": "Welcome to Energy Elhadad",

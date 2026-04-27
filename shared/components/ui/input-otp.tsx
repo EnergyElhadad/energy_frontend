@@ -9,16 +9,13 @@ import { cn } from '@/shared/utils/index';
 function InputOTP({
   className,
   containerClassName,
-  dir: _dir,
   ...props
 }: React.ComponentProps<typeof OTPInput> & {
   containerClassName?: string;
 }) {
-  // Always fill OTP left-to-right regardless of page locale.
   return (
     <OTPInput
       data-slot="input-otp"
-      dir="ltr"
       containerClassName={cn('flex items-center gap-2 has-disabled:opacity-50', containerClassName)}
       className={cn('disabled:cursor-not-allowed', className)}
       {...props}

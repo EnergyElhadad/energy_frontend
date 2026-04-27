@@ -2,7 +2,7 @@ import { useSession } from 'next-auth/react';
 import { Dropdown } from '@/shared/components/ui/Dropdown';
 import { UserIcon } from '@/shared/components/icons/User';
 import { useTranslations } from 'next-intl';
-import { Link } from '@/core/i18n';
+import Link from 'next/link';
 import { BagIcon } from '@/shared/components/icons/Bag';
 import { HeartIcon } from '@/shared/components/icons/Heart';
 import { LogoutIcon } from '@/shared/components/icons/Logout';

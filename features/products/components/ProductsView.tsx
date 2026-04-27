@@ -10,10 +10,9 @@ import { ProductsResponse } from '../types/productsResponse';
 import { ProductGrid } from './ProductGrid';
 import { ProductsHeader } from './ProductsHeader';
 import { OfferModal } from '@/features/home/components/OfferModal';
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { ProductCardSkeleton } from '@/shared/components/skeletons/ProductCardSkeleton';
 import { useFiltersContext } from '../context/FiltersContext';
-import { useTranslations } from 'next-intl';
 
 interface ProductsViewProps {
   initialData: ProductsResponse | null;
@@ -22,12 +21,7 @@ interface ProductsViewProps {
 }
 
 export const ProductsView = ({ initialData, categeoryDescription, onOpenFilters }: ProductsViewProps) => {
-  const t = useTranslations('Products');
   const { filters, shouldUseInitialData } = useProductsView();
-
-  useEffect(() => {
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-  }, [filters]);
   const { products, fetchNextPage, hasNextPage, isFetchingNextPage, totalCount, isLoading } = useInfiniteProducts(filters, shouldUseInitialData ? initialData : null);
   const { filters: contextFilters } = useFiltersContext();
 
@@ -71,12 +65,10 @@ export const ProductsView = ({ initialData, categeoryDescription, onOpenFilters 
 
       {selectedProduct && <OfferModal product={selectedProduct} onClose={() => setSelectedProduct(null)} />}
       <Display when={hasNextPage}>
-        <div className="mt-8 flex justify-center">
-          <Button size="lg" variant="outline" onClick={() => fetchNextPage()} disabled={isFetchingNextPage} className="min-w-40 rounded-full bg-white border-primary text-primary  hover:bg-primary hover:text-white transition-colors shadow-none">
-            {isFetchingNextPage && <Spinner className="size-4" />}
-            <span>{isFetchingNextPage ? t('loading') : t('show_more')}</span>
-          </Button>
-        </div>
+        <Button variant="outline" onClick={() => fetchNextPage()} disabled={isFetchingNextPage}>
+          {isFetchingNextPage && <Spinner />}
+          <span>عرض المزيد</span>
+        </Button>
       </Display>
     </div>
   );

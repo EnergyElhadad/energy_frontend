@@ -6,7 +6,7 @@ import { WhyChooseUs } from '@/features/home/components/WhyChooseUs';
 import { Hero } from '@/features/home/components/hero';
 import { ProductBanners } from '@/features/home/components/productBanners';
 import { getCategories } from '@/shared/services/categories.server';
-import { getTranslations } from 'next-intl/server';
+import { getTranslations, setRequestLocale } from 'next-intl/server';
 
 import { getHomeFeatures } from '@/features/home/services/home.server';
 import { getBanners } from '@/features/home/services/banners.server';
@@ -14,8 +14,11 @@ import { Display } from '@/shared/components/layout/Display';
 import { HomeFeaturesList } from '@/features/home/components/HomeFeaturesList';
 import { getServerHomepageRatings } from '@/features/home/services/ratings.server';
 import { getContentImages } from '@/features/home/services/contentImages.server copy';
+import { SiteJsonLd } from '@/shared/components/seo/SiteJsonLd';
 
-export const dynamic = 'force-dynamic';
+// ISR: regenerate the home page at most every 10 minutes. Frequent enough for
+// fresh banners/categories, cheap enough to serve most traffic from cache.
+export const revalidate = 600;
 
 type Props = {
   params: Promise<{ locale: string }>;
@@ -31,7 +34,12 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   };
 }
 
-export default async function Home() {
+export default async function Home({ params }: Props) {
+  const { locale } = await params;
+  // Required for static/ISR rendering with next-intl. Without this,
+  // calls to getTranslations() opt the page into dynamic rendering on every
+  // request, silently disabling the `revalidate` cache above.
+  setRequestLocale(locale);
   const [heroData, categoriesData, homeFeaturesData, bannersData, reviewsData, contentImagesData] = await Promise.all([
     getBanners('header'),
     getCategories(),
@@ -43,6 +51,7 @@ export default async function Home() {
 
   return (
     <main className="space-y-8">
+      <SiteJsonLd locale={locale} />
       <Display when={heroData.result.length > 0}>
         <Hero data={heroData.result} />
       </Display>

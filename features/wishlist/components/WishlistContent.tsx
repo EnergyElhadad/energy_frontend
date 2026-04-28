@@ -45,7 +45,8 @@ export const WishlistContent = ({ initialData }: WishlistContentProps) => {
     initialData: shouldUseInitialData && initialData ? { pages: [initialData], pageParams: [1] } : undefined,
   });
 
-  const products = data?.pages.flatMap(page => page.result) || [];
+  // Guard every level — empty/error pages from the API shouldn't crash the tree.
+  const products = data?.pages?.flatMap(page => page?.result ?? []) ?? [];
   const totalCount = data?.pages?.[0]?.count ?? initialData?.count ?? 0;
 
   return (

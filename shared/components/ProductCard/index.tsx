@@ -4,7 +4,7 @@ import { Badge } from './components/Badge';
 import { BodyCard } from './components/BodyCard';
 import { HiddenIcons } from './components/HiddenIcons';
 import { Display } from '../layout/Display';
-import { Link } from '@/core/i18n';
+import Link from 'next/link';
 import { toSlug } from '@/shared/utils/slug';
 
 export type ProductT = {
@@ -22,23 +22,19 @@ export type ProductT = {
 
 export const ProductCard: React.FC<ProductT> = ({ id, title, image, originalPrice, oldPrice, badge, category, imageProps, onClick, is_in_wishlist }) => {
   return (
-    <div className="group border-Stroke hover:border-primary relative mx-auto flex w-full cursor-pointer flex-col overflow-hidden rounded-2xl border bg-white p-2 pb-3 transition-[border-color,box-shadow] duration-200 hover:shadow-[0_8px_24px_0_rgba(0,0,0,0.08)] [backface-visibility:hidden] [transform:translateZ(0)]">
+    <div className="group border-Stroke/50 hover:border-primary relative mx-auto flex w-full cursor-pointer flex-col overflow-hidden rounded-sm border bg-white p-2 pb-3 transition hover:shadow-[0_8px_24px_0_rgba(0,0,0,0.08)]">
       <Link href={`/products/${id}-${toSlug(title)}`} className="absolute inset-0 z-1" aria-label={`View ${title}`} />
 
       <HiddenIcons title={title} id={id} onView={onClick} />
-      <div className="flex h-40 max-h-63.75 w-full flex-col items-center justify-center overflow-hidden md:min-h-63.75">
+      <div className="flex max-h-63.75 min-h-63.75 w-full flex-col items-center justify-center overflow-hidden">
         <Display when={!!badge}>
           <Badge text={badge!} />
         </Display>
         <div className="relative w-full overflow-hidden rounded-xl">
-          {/* Default lazy loading: only the visible cards above the fold are
-              fetched eagerly by the browser; everything else loads on scroll.
-              Pass `imageProps={{ priority: true }}` from the page when a card
-              is the LCP element. */}
-          <Image src={image} alt={title} width={268} height={255} decoding="async" className="mx-auto" {...imageProps} />
+          <Image src={image} alt={title} width={268} height={255} className="mx-auto" {...imageProps} />
         </div>
       </div>
-      <BodyCard category={category} title={title} id={id} image={image} originalPrice={originalPrice} oldPrice={oldPrice} is_in_wishlist={is_in_wishlist} />
+      <BodyCard category={category} title={title} id={id} originalPrice={originalPrice} oldPrice={oldPrice} is_in_wishlist={is_in_wishlist} />
     </div>
   );
 };

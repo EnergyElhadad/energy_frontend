@@ -50,16 +50,6 @@
   [role='button']:not(:disabled) {
     cursor: pointer;
   }
-
-  /* Visible, brand-colored focus ring for keyboard users. `:focus-visible`
-     keeps mouse/touch users from seeing it on click — only Tab navigation
-     triggers it. Uses outline (not box-shadow) so it stacks cleanly with the
-     ring-* utility focus styles already on Buttons / inputs. */
-  :focus-visible {
-    outline: 2px solid var(--color-primary);
-    outline-offset: 2px;
-    border-radius: 2px;
-  }
 }
 
 @theme {

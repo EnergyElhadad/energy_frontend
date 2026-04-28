@@ -8,11 +8,10 @@ import { notFound } from 'next/navigation';
 export const dynamic = 'force-dynamic';
 
 interface OrderDetailPageProps {
-  params: Promise<{ id: string; locale: string; orderNumber: string }>;
+  params: { id: string; locale: string; orderNumber: string };
 }
 
-export async function generateMetadata({ params }: OrderDetailPageProps): Promise<Metadata> {
-  const { locale, orderNumber } = await params;
+export async function generateMetadata({ params: { locale, orderNumber } }: OrderDetailPageProps): Promise<Metadata> {
   const t = await getTranslations({ locale, namespace: 'OrderDetail' });
   return {
     title: t('title') + ` #${orderNumber}`,

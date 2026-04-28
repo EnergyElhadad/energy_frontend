@@ -10,10 +10,7 @@ export const getProducts = async (
   const response = await Axios.get<ProductsResponse>(
     `/products/items/`,
     {
-      params: {
-        ...params,
-        page_size: params.page_size || 9,
-      },
+      params,
     }
   );
 

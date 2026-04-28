@@ -26,8 +26,8 @@ export function VerifyOtpForm({ verifyFn, onSuccess, fallbackRoute }: VerifyOtpF
   return (
     <>
       <form className="w-full" onSubmit={handleSubmit}>
-        <InputOTP autoFocus maxLength={6} value={otp} disabled={isSubmitting} onComplete={handleSubmit} onChange={handleOtpChange}>
-          <div className="mb-6 flex w-full justify-center gap-4" dir="ltr">
+        <InputOTP autoFocus maxLength={6} value={otp} disabled={isSubmitting} onComplete={handleSubmit} onChange={handleOtpChange} dir={dir}>
+          <div className="mb-6 flex w-full justify-center gap-4">
             <InputOTPSlot index={0} />
             <InputOTPSlot index={1} />
             <InputOTPSlot index={2} />

@@ -6,26 +6,21 @@ import { WhyChooseUs } from '@/features/home/components/WhyChooseUs';
 import { Hero } from '@/features/home/components/hero';
 import { ProductBanners } from '@/features/home/components/productBanners';
 import { getCategories } from '@/shared/services/categories.server';
-import { getTranslations, setRequestLocale } from 'next-intl/server';
+import { getTranslations } from 'next-intl/server';
 
 import { getHomeFeatures } from '@/features/home/services/home.server';
 import { getBanners } from '@/features/home/services/banners.server';
 import { Display } from '@/shared/components/layout/Display';
 import { HomeFeaturesList } from '@/features/home/components/HomeFeaturesList';
 import { getServerHomepageRatings } from '@/features/home/services/ratings.server';
-import { getContentImages } from '@/features/home/services/contentImages.server copy';
-import { SiteJsonLd } from '@/shared/components/seo/SiteJsonLd';
 
-// ISR: regenerate the home page at most every 10 minutes. Frequent enough for
-// fresh banners/categories, cheap enough to serve most traffic from cache.
-export const revalidate = 600;
+export const dynamic = 'force-dynamic';
 
 type Props = {
-  params: Promise<{ locale: string }>;
+  params: { locale: string };
 };
 
-export async function generateMetadata({ params }: Props): Promise<Metadata> {
-  const { locale } = await params;
+export async function generateMetadata({ params: { locale } }: Props): Promise<Metadata> {
   const t = await getTranslations({ locale, namespace: 'HomePage' });
 
   return {
@@ -34,24 +29,15 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   };
 }
 
-export default async function Home({ params }: Props) {
-  const { locale } = await params;
-  // Required for static/ISR rendering with next-intl. Without this,
-  // calls to getTranslations() opt the page into dynamic rendering on every
-  // request, silently disabling the `revalidate` cache above.
-  setRequestLocale(locale);
-  const [heroData, categoriesData, homeFeaturesData, bannersData, reviewsData, contentImagesData] = await Promise.all([
-    getBanners('header'),
-    getCategories(),
-    getHomeFeatures(),
-    getBanners('footer'),
-    getServerHomepageRatings(),
-    getContentImages(),
-  ]);
+export default async function Home() {
+  const heroData = await getBanners('header');
+  const categoriesData = await getCategories();
+  const homeFeaturesData = await getHomeFeatures();
+  const bannersData = await getBanners('footer');
+  const reviewsData = await getServerHomepageRatings();
 
   return (
     <main className="space-y-8">
-      <SiteJsonLd locale={locale} />
       <Display when={heroData.result.length > 0}>
         <Hero data={heroData.result} />
       </Display>
@@ -61,12 +47,12 @@ export default async function Home({ params }: Props) {
       <Display when={homeFeaturesData.result.length > 0}>
         <HomeFeaturesList initialData={homeFeaturesData} />
       </Display>
-      <ProductBanners banners={contentImagesData.result} />
+      <ProductBanners banners={bannersData.result} />
       <WhyChooseUs />
       <Display when={reviewsData.result.length > 0}>
         <CustomerReviews reviews={reviewsData.result} />
       </Display>
-      <MainBanner data={bannersData.result} />
+      <MainBanner />
     </main>
   );
 }

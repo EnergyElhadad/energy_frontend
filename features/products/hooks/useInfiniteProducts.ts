@@ -11,13 +11,17 @@ export const useInfiniteProducts = (filters: ProductsQueryParams, initialData: P
   const { data, fetchNextPage, hasNextPage, isFetchingNextPage, isFetching, isLoading } = useInfiniteQuery({
     queryKey: ['products', filters],
     queryFn: async ({ pageParam }) => {
-      return getProducts({ ...filters, page: pageParam });
+      const result = await getProducts({ ...filters, page: pageParam });
+      window.scroll({
+        top: 0,
+        behavior: 'smooth',
+      });
+      return result;
     },
     initialPageParam: 1,
-    getNextPageParam: (lastPage: ProductsResponse, _allPages, lastPageParam) => {
-      const currentPage = lastPageParam as number;
-      if (currentPage < lastPage.num_pages) {
-        return currentPage + 1;
+    getNextPageParam: (lastPage: ProductsResponse) => {
+      if (lastPage.next && lastPage.current_page < lastPage.num_pages) {
+        return lastPage.current_page + 1;
       }
       return undefined;
     },

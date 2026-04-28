@@ -6,7 +6,7 @@ import { ShopingButtonCard } from './components/ShopingButtonCard';
 import { useEffect, useRef, useState } from 'react';
 import { useDebounce } from '@/shared/hooks/useDebounce';
 import { useTranslations } from 'next-intl';
-import { Link } from '@/core/i18n';
+import Link from 'next/link';
 import { toSlug } from '@/shared/utils/slug';
 
 interface ShopingCardProps {
@@ -43,23 +43,23 @@ export const ShopingCard: React.FC<ShopingCardProps> = ({ id, price, itemTotal, 
   }, [quantity]);
 
   return (
-    <div className="border-gray100 relative flex w-full max-w-223.5 flex-col gap-4 rounded-sm border bg-white p-4 md:flex-row md:items-center">
-      <div className="flex flex-1 items-start gap-4 md:items-center">
+    <div className="border-gray100 relative flex w-full max-w-223.5 items-center gap-2 rounded-sm border bg-white p-4 md:gap-4">
+      <div className="flex items-center gap-4">
         <Link
           href={productUrl}
-          className="border-Stroke relative aspect-square h-20 w-20 shrink-0 overflow-hidden rounded-sm border transition-opacity hover:opacity-80 md:aspect-auto md:h-20 md:w-29.25"
+          className="border-Stroke s relative aspect-square min-h-20 w-full min-w-29.25 shrink-0 overflow-hidden rounded-sm border transition-opacity hover:opacity-80 md:aspect-auto md:h-20 md:w-29.25"
         >
           <Image src={imageUrl} fill className="object-cover" alt="shoping-cart-image" />
         </Link>
-        <div className="flex flex-1 flex-col gap-2 md:items-start md:gap-1">
-          <Link href={productUrl} className="hover:text-primary transition-colors">
-            <ShopingCardDesc title={title} price={price} />
-          </Link>
-        </div>
+      </div>
+      <div className="flex flex-1 flex-col gap-2 md:items-start md:gap-1">
+        <Link href={productUrl} className="hover:text-primary transition-colors">
+          <ShopingCardDesc title={title} price={price} />
+        </Link>
       </div>
 
-      <div className="flex flex-wrap items-center justify-between gap-2 md:justify-end md:gap-4 lg:gap-8">
-        <Counter value={localQuantity} onChange={setLocalQuantity} variant="large" onDelete={() => removeItem(id)} />
+      <div className="flex flex-wrap items-center justify-end gap-2 md:gap-4 lg:gap-8">
+        <Counter value={localQuantity} onChange={setLocalQuantity} variant="large" />
         <p className="shrink-0 text-sm font-bold text-black md:text-base">
           {itemTotal || Number(price) * quantity} {t('egp')}
         </p>

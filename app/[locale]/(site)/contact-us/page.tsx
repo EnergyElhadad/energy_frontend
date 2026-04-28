@@ -1,15 +1,11 @@
 import { ContactUsSection } from '@/features/contact-us/ContactUsSection';
 import { HeaderPage } from '@/shared/components/ui/HeaderPage';
-import { getTranslations, setRequestLocale } from 'next-intl/server';
+import { useTranslations } from 'next-intl';
 
-interface ContactUsPageProps {
-  params: Promise<{ locale: string }>;
-}
+export const dynamic = 'force-dynamic';
 
-export default async function ContactUsPage({ params }: ContactUsPageProps) {
-  const { locale } = await params;
-  setRequestLocale(locale);
-  const t = await getTranslations('ContactUs');
+export default function ContactUsPage() {
+  const t = useTranslations('ContactUs');
 
   return (
     <main className="bg-Background pb-10">

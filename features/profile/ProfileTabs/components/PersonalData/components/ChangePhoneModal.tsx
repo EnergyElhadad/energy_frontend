@@ -122,8 +122,8 @@ export const ChangePhoneModal = ({ trigger }: ChangePhoneModalProps) => {
               <p className="mb-6 text-center text-gray-600">أدخل الكود المكون من 6 أرقام المرسل إلى رقم الهاتف</p>
 
               <div className="flex flex-col items-center space-y-6">
-                <InputOTP autoFocus maxLength={6} value={otp} onChange={setOtp} disabled={isConfirming}>
-                  <div className="flex w-full justify-center gap-2" dir="ltr">
+                <InputOTP autoFocus maxLength={6} value={otp} onChange={setOtp} disabled={isConfirming} dir={dir}>
+                  <div className="flex w-full justify-center gap-2">
                     <InputOTPSlot index={0} className="h-12 w-12 rounded-md border" />
                     <InputOTPSlot index={1} className="h-12 w-12 rounded-md border" />
                     <InputOTPSlot index={2} className="h-12 w-12 rounded-md border" />

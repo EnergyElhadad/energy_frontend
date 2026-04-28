@@ -4,7 +4,7 @@ import { useEffect, useRef, useState } from 'react';
 import Image from 'next/image';
 import { Counter } from '@/shared/components/ui/Counter';
 import { useDebounce } from '@/shared/hooks/useDebounce';
-import { Link } from '@/core/i18n';
+import Link from 'next/link';
 import { toSlug } from '@/shared/utils/slug';
 
 interface Product {
@@ -19,10 +19,9 @@ interface CartItemProps {
   product: Product;
   quantity: number;
   onQuantityChange: (val: number) => void;
-  onDelete?: () => void;
 }
 
-export const CartItem = ({ product, quantity, onQuantityChange, onDelete }: CartItemProps) => {
+export const CartItem = ({ product, quantity, onQuantityChange }: CartItemProps) => {
   const [localQuantity, setLocalQuantity] = useState(quantity);
   const debouncedQuantity = useDebounce(localQuantity, 500);
   const isMounted = useRef(false);
@@ -59,7 +58,7 @@ export const CartItem = ({ product, quantity, onQuantityChange, onDelete }: Cart
 
         <div className="flex items-center justify-between gap-2">
           <div className="w-full max-w-[110px] sm:max-w-[120px]">
-            <Counter value={localQuantity} onChange={setLocalQuantity} onDelete={onDelete} />
+            <Counter value={localQuantity} onChange={setLocalQuantity} />
           </div>
         </div>
       </div>

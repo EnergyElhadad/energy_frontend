@@ -13,7 +13,7 @@ export const MainHeader = async () => {
   return (
     <div className="container">
       <div className="hidden items-center justify-between gap-[61px] py-[20px] lg:flex">
-        <Logo src={socialMedia?.logo ?? '/images/header-logo.svg'} alt="Header Logo" width={149} height={48} />
+        <Logo src={socialMedia?.logo} alt="Header Logo" width={149} height={48} />
         <Search />
         <Toolbar />
       </div>

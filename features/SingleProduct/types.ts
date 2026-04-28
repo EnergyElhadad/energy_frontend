@@ -9,11 +9,6 @@ export interface ImagesData {
   is_primary: boolean;
 }
 
-export interface ProductSpecification {
-  spec_name: string;
-  spec_value: string;
-}
-
 export interface ProductData {
   id: number;
   name: string;
@@ -30,7 +25,6 @@ export interface ProductData {
   available_stock: number;
   ratings_count: number;
   images: ImagesData[];
-  specifications: ProductSpecification[];
   created_at: string;
   updated_at: string;
 }

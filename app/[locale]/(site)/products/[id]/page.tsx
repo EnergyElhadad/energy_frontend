@@ -4,17 +4,39 @@ import ProductSlider from '@/features/SingleProduct/components/ProductSlider';
 import { ProductDetails } from '@/features/SingleProduct/components/ProductDetails';
 import { getProductById } from '@/features/SingleProduct/services/product-service';
 import { ProductTabs } from '@/features/SingleProduct/components/ProductTabs';
-import { getIdFromSlug } from '@/shared/utils/slug';
+import { getIdFromSlug, toSlug } from '@/shared/utils/slug';
 import { getTranslations, setRequestLocale } from 'next-intl/server';
 import { ProductJsonLd } from '@/shared/components/seo/ProductJsonLd';
 import { BreadcrumbJsonLd } from '@/shared/components/seo/BreadcrumbJsonLd';
 import { SITE_URL } from '@/shared/utils/site-url';
 import { locales } from '@/core/i18n/i18n.config';
+import { getProducts } from '@/features/products/services/getProducts.server';
 
-// HOT FIX: see (home)/page.tsx note. The build container can't reach the API,
-// so prerender produced empty pages. Falling back to dynamic until build-time
-// API access is sorted, then we can re-enable ISR + generateStaticParams.
-export const dynamic = 'force-dynamic';
+// ISR: cache rendered product pages for 10 min, regenerate on demand. Inventory
+// & price changes show up within the window; auth/cart UI is client-driven so
+// per-user state isn't an issue here.
+export const revalidate = 600;
+
+// Prerender the first page of products at build so the hottest URLs serve as
+// plain static HTML with zero cold-start. Any product not in this list is
+// rendered on demand by ISR on first visit, then cached like the rest.
+export async function generateStaticParams() {
+  try {
+    const { result } = await getProducts({ page: 1, page_size: 20 });
+    return (result || []).flatMap(p =>
+      locales.map(locale => ({
+        locale,
+        id: `${p.id}-${toSlug(p.name)}`,
+      }))
+    );
+  } catch (err) {
+    console.error('generateStaticParams(products/[id]): failed to prerender', err);
+    return [];
+  }
+}
+
+// Allow ISR to render params that weren't prerendered at build time.
+export const dynamicParams = true;
 
 interface SingleProductPageProps {
   params: Promise<{ id: string; locale: string }>;

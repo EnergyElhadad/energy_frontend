@@ -16,11 +16,9 @@ import { getServerHomepageRatings } from '@/features/home/services/ratings.serve
 import { getContentImages } from '@/features/home/services/contentImages.server copy';
 import { SiteJsonLd } from '@/shared/components/seo/SiteJsonLd';
 
-// HOT FIX: Build-time prerender on prod was caching empty data because the
-// build container can't reach the API origin (likely an internal Docker host).
-// Falling back to dynamic rendering until NEXT_PUBLIC_API_URL is set to a
-// build-reachable URL — then we can re-enable ISR via `revalidate = 600`.
-export const dynamic = 'force-dynamic';
+// ISR: regenerate the home page at most every 10 minutes. Frequent enough for
+// fresh banners/categories, cheap enough to serve most traffic from cache.
+export const revalidate = 600;
 
 type Props = {
   params: Promise<{ locale: string }>;

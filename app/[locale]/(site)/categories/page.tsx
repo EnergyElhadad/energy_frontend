@@ -5,7 +5,8 @@ import { getTranslations, setRequestLocale } from 'next-intl/server';
 import { Breadcrumb } from '@/shared/components/layout/Breadcrumb';
 import { CollectionJsonLd, type CollectionItem } from '@/shared/components/seo/CollectionJsonLd';
 
-export const revalidate = 600;
+// HOT FIX: see (home)/page.tsx note.
+export const dynamic = 'force-dynamic';
 
 type Props = {
   params: Promise<{ locale: string }>;

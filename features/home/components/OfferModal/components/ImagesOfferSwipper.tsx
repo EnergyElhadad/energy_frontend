@@ -35,7 +35,7 @@ export const ImagesOfferSwipper = ({ images }: { images: Image[] }) => {
         {images.map(image => (
           <SwiperSlide key={image.id} className="max-w-full">
             <div className="flex h-100 w-100 items-center justify-center">
-              <Image src={image.image} alt={'image'} fill className="" />
+              <Image src={image.image} alt={'image'} fill className="object-contain" />
             </div>
           </SwiperSlide>
         ))}

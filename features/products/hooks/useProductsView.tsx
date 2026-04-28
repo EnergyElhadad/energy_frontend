@@ -14,7 +14,7 @@ export const useProductsView = () => {
       max_price: contextFilters.max_price ? Number(contextFilters.max_price) : undefined,
       search: contextFilters.search || undefined,
       rating: contextFilters.rating ? Number(contextFilters.rating) : undefined,
-      home_sections: contextFilters.home_sections ? Number(contextFilters.home_sections) : undefined,
+      home_section: contextFilters.home_section ? Number(contextFilters.home_section) : undefined,
     }),
     [contextFilters]
   );
@@ -26,7 +26,7 @@ export const useProductsView = () => {
     !contextFilters.ordering?.replace('id', '') &&
     !contextFilters.search &&
     !contextFilters.rating &&
-    !contextFilters.home_sections;
+    !contextFilters.home_section;
 
   return {
     filters,

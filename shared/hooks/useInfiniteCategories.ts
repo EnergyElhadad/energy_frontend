@@ -41,7 +41,7 @@ export const useInfiniteCategories = (
 
   const categories = useMemo(() => {
     const allCategories: Category[] =
-      data?.pages?.flatMap((page) => page?.result ?? []) ?? [];
+      data?.pages.flatMap((page) => page?.result || []) || [];
 
     return allCategories;
   }, [data]);

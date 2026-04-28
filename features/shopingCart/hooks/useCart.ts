@@ -43,12 +43,8 @@ export const useCart = (): UseCartReturn => {
     enabled: !isGuest,
   });
 
-  // Defensive: the cart response shape can vary (auth failure → error envelope
-  // without `result`, partial response, deployment skew between FE & BE, etc).
-  // A throw here unmounts the React tree and shows the generic "Application
-  // error" page, so guard every level of the access chain.
   const serverItems: CartItem[] =
-    data?.result?.items?.map(item => ({
+    data?.result.items.map(item => ({
       id: item.product.id,
       title: item.product.name,
       category: '', // TODO: API doesn't provide category for cart items yet
@@ -56,10 +52,10 @@ export const useCart = (): UseCartReturn => {
       quantity: item.quantity,
       price: item.product.offer_price,
       itemTotal: item.item_total,
-    })) ?? [];
+    })) || [];
 
   const items: CartItem[] = isGuest ? guestItems : serverItems;
-  const count = isGuest ? getGuestCartCount(guestItems) : data?.result?.items_count ?? 0;
+  const count = isGuest ? getGuestCartCount(guestItems) : data?.result.items_count || 0;
 
   const { mutate: addToCartMutation, isPending: isAddingToCart } = useMutation({
     mutationFn: addToCart,
@@ -151,8 +147,8 @@ export const useCart = (): UseCartReturn => {
     }
   };
 
-  const cartTotal = isGuest ? getGuestCartTotal(guestItems) : data?.result?.cart_total ?? 0;
-  const discountBreakdown = isGuest ? undefined : data?.result?.discount_breakdown;
+  const cartTotal = isGuest ? getGuestCartTotal(guestItems) : data?.result.cart_total || 0;
+  const discountBreakdown = isGuest ? undefined : data?.result.discount_breakdown;
 
   return {
     items,

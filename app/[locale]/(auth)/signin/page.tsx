@@ -20,7 +20,6 @@ export default async function SigninPage({ params }: { params: Promise<{ locale:
   const t = await getTranslations('Auth');
   return (
     <AuthLayout>
-      <HeaderForm title={t('signin_title')} subtitle={t('signin_subtitle')} />
       <SigninForm />
       <FooterForm title={t('no_account')} linkurl="/signup" linktext={t('signup_button')} />
     </AuthLayout>

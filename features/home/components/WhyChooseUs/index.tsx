@@ -18,7 +18,7 @@ export const WhyChooseUs = () => {
           <div className="grid grid-cols-2 gap-6 md:grid-cols-3">
             <CardWhyChooseUs className="flex-col items-center *:text-center" title={t('quality_title')} content={t('quality_content')} icon={<QualityIcon />} />
             <CardWhyChooseUs className="flex-col items-center *:text-center" title={t('support_title')} content={t('support_content')} icon={<SupportIcon />} />
-            <CardWhyChooseUs className="col-span-2 md:col-span-1" title={t('secure_payment_title')} content={t('secure_payment_content')} icon={<SaftyPayIcon />} />
+            <CardWhyChooseUs className="col-span-2 flex-col items-center *:text-center md:col-span-1" title={t('secure_payment_title')} content={t('secure_payment_content')} icon={<SaftyPayIcon />} />
           </div>
         </div>
       </div>

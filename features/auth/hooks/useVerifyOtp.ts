@@ -1,5 +1,5 @@
 'use client';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { useRouter } from '@/core/i18n';
 import { isAxiosError } from 'axios';
 import { toast } from 'sonner';
@@ -14,6 +14,7 @@ export type VerifyOtpConfig = {
 export const useVerifyOtp = ({ verifyFn, onSuccess, fallbackRoute }: VerifyOtpConfig) => {
   const router = useRouter();
   const [otp, setOtp] = useState('');
+  const otpRef = useRef('');
   const [phoneNumber, setPhoneNumber] = useState<string | null>(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
 
@@ -29,6 +30,7 @@ export const useVerifyOtp = ({ verifyFn, onSuccess, fallbackRoute }: VerifyOtpCo
   }, [router, fallbackRoute]);
 
   const handleOtpChange = (value: string) => {
+    otpRef.current = value;
     setOtp(value);
   };
 
@@ -43,7 +45,9 @@ export const useVerifyOtp = ({ verifyFn, onSuccess, fallbackRoute }: VerifyOtpCo
       return;
     }
 
-    if (otp.length !== 6) {
+    const currentOtp = otpRef.current;
+
+    if (currentOtp.length !== 6) {
       toast.error('Please enter a valid 6-digit OTP');
       return;
     }
@@ -53,11 +57,11 @@ export const useVerifyOtp = ({ verifyFn, onSuccess, fallbackRoute }: VerifyOtpCo
     try {
       const response = await verifyFn({
         phone_number: phoneNumber,
-        otp: otp,
+        otp: currentOtp,
       });
 
       toast.success(response.message || response.detail || 'Verified successfully');
-      onSuccess({ phone_number: phoneNumber, otp });
+      onSuccess({ phone_number: phoneNumber, otp: currentOtp });
       localStorage.removeItem('verify_phone_number');
     } catch (error: unknown) {
       if (isAxiosError(error)) {

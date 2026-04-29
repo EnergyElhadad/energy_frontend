@@ -10,7 +10,7 @@ type Props = {
 export const CardWhyChooseUs: React.FC<Props> = ({ icon, title, content, className }) => {
   return (
     <div className={`border-Stroke/7 flex items-center gap-3 rounded-lg border bg-white p-6 ${className}`}>
-      <div className="text-primary bg-primary/10 flex h-16 w-16 items-center justify-center rounded-full">{icon}</div>
+      <div className="text-primary bg-primary/10 flex h-16 w-16 shrink-0 items-center justify-center rounded-full">{icon}</div>
 
       <div>
         <h3 className="mb-2 text-lg font-semibold text-black">{title}</h3>

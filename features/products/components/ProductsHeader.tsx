@@ -47,7 +47,7 @@ export const ProductsHeader = ({ productsLength, title, onOpenFilters }: Product
         <DropdownMenu dir={isRTL ? 'rtl' : 'ltr'}>
           <DropdownMenuTrigger>
             <div className="text-WetGray border-Stroke hover:bg-primary flex h-10.5 w-fit items-center justify-center gap-1 rounded-sm border bg-white px-2 text-sm font-medium hover:border-none hover:text-white">
-              {t('sort_by')} <ArrowDownIcon />
+              {t('sort_by')} {t('price')}: {currentOrdering === '-price' ? t('descending') : t('ascending')} <ArrowDownIcon />
             </div>
           </DropdownMenuTrigger>
 

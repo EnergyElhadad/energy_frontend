@@ -18,7 +18,8 @@ jobs:
       - name: Pull Frontend
         run: |
           cd /opt/energy-staging/energy_frontend
-          git pull
+          git checkout staging
+          git pull origin staging
 
       - name: Pull Backend
         run: |

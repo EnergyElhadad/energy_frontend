@@ -6,7 +6,7 @@ import { useSearchParams } from 'next/navigation';
 export type FiltersState = {
   categoryId: string | undefined;
   categoryName: string | undefined;
-  ordering: 'id' | '-id';
+  ordering: 'price' | '-price';
   min_price: string | undefined;
   max_price: string | undefined;
   search: string | undefined;
@@ -33,7 +33,7 @@ export const useFiltersContext = () => {
 const parseFilters = (searchParams: URLSearchParams): FiltersState => ({
   categoryId: searchParams.get('categoryId') || undefined,
   categoryName: searchParams.get('categoryName') || undefined,
-  ordering: (searchParams.get('ordering') as 'id' | '-id') || 'id',
+  ordering: (searchParams.get('ordering') as 'price' | '-price') || 'price',
   min_price: searchParams.get('min_price') || undefined,
   max_price: searchParams.get('max_price') || undefined,
   search: searchParams.get('search') || undefined,
@@ -56,7 +56,7 @@ export const FiltersProvider = ({ children }: { children: ReactNode }) => {
     const params = new URLSearchParams();
     if (filters.categoryId) params.set('categoryId', filters.categoryId);
     if (filters.categoryName) params.set('categoryName', filters.categoryName);
-    if (filters.ordering && filters.ordering !== 'id') params.set('ordering', filters.ordering);
+    if (filters.ordering && filters.ordering !== 'price') params.set('ordering', filters.ordering);
     if (filters.min_price) params.set('min_price', filters.min_price);
     if (filters.max_price) params.set('max_price', filters.max_price);
     if (filters.search) params.set('search', filters.search);

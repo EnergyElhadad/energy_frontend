@@ -53,8 +53,8 @@ export const ProductsHeader = ({ productsLength, title, onOpenFilters }: Product
 
           <DropdownMenuContent>
             <DropdownMenuItem
-              onClick={() => updateOrdering('id')}
-              className={`hover:bg-primary! h-11.5 px-3 hover:text-white! ${currentOrdering === 'id' ? 'bg-primary text-white' : ''}`}
+              onClick={() => updateOrdering('price')}
+              className={`hover:bg-primary! h-11.5 px-3 hover:text-white! ${currentOrdering === 'price' ? 'bg-primary text-white' : ''}`}
             >
               {t('ascending')}
             </DropdownMenuItem>
@@ -62,8 +62,8 @@ export const ProductsHeader = ({ productsLength, title, onOpenFilters }: Product
             <DropdownMenuSeparator />
 
             <DropdownMenuItem
-              onClick={() => updateOrdering('-id')}
-              className={`hover:bg-primary! h-11.5 px-3 hover:text-white! ${currentOrdering === '-id' ? 'bg-primary text-white' : ''}`}
+              onClick={() => updateOrdering('-price')}
+              className={`hover:bg-primary! h-11.5 px-3 hover:text-white! ${currentOrdering === '-price' ? 'bg-primary text-white' : ''}`}
             >
               {t('descending')}
             </DropdownMenuItem>

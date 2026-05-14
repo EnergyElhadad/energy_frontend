@@ -53,7 +53,7 @@ export const ProductFilters: React.FC<ProductFiltersProps> = ({ initialCategorie
     setFilters({
       categoryId: undefined,
       categoryName: undefined,
-      ordering: 'price',
+      ordering: 'id',
       min_price: undefined,
       max_price: undefined,
       search: undefined,

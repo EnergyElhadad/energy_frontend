@@ -7,6 +7,6 @@ export interface ProductsQueryParams {
   max_price?: number;
   on_sale?: boolean;
   search?: string;
-  ordering?: 'price' | '-price';
+  ordering?: 'id' | 'price' | '-price';
   rating?: number;
 }

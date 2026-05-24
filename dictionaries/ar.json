@@ -109,7 +109,7 @@
     "no_ratings_yet": "لا توجد تقييمات حتى الآن",
     "be_the_first_to_rate": "كن أول من يقيّم",
     "anonymous_user": "مستخدم مجهول"
-  },
+    },
   "Products": {
     "meta_title": "المنتجات",
     "all_products": "كل المنتجات",
@@ -138,7 +138,9 @@
     "search_placeholder": "ابحث عن منتج",
     "no_products": "لا توجد منتجات متاحة بناءً على الفلاتر المحددة.",
     "add_to_cart": "أضف للسلة",
-    "egp": "ج.م"
+    "egp": "ج.م",
+    "similar_products": "منتجات مشابهة",
+    "no_similar_products": "لا توجد منتجات مشابهة"
   },
   "Common": {
     "link_copied": "تم نسخ الرابط",

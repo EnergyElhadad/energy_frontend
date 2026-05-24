@@ -108,7 +108,7 @@
     "post_comment": "Post Comment",
     "no_ratings_yet": "No ratings yet",
     "be_the_first_to_rate": "Be the first to rate",
-    "anonymous_user": "Anonymous User"
+    "anonymous_user": "Anonymous User"    
   },
   "Products": {
     "meta_title": "Products",
@@ -138,7 +138,9 @@
     "search_placeholder": "Search for a product",
     "no_products": "No products available based on the selected filters.",
     "add_to_cart": "Add to Cart",
-    "egp": "EGP"
+    "egp": "EGP",
+    "similar_products": "Similar Products",
+    "no_similar_products": "No Similar Products"
   },
   "Common": {
     "link_copied": "Link copied to clipboard",

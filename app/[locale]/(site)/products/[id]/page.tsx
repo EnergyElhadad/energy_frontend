@@ -10,6 +10,8 @@ import { ProductJsonLd } from '@/shared/components/seo/ProductJsonLd';
 import { BreadcrumbJsonLd } from '@/shared/components/seo/BreadcrumbJsonLd';
 import { SITE_URL } from '@/shared/utils/site-url';
 import { locales } from '@/core/i18n/i18n.config';
+import { SimilarProducts } from '@/features/SingleProduct/components/SimilarProducts';
+import { getSimilarProducts } from '@/features/SingleProduct/services/getSimilarProducts';
 
 // HOT FIX: see (home)/page.tsx note. The build container can't reach the API,
 // so prerender produced empty pages. Falling back to dynamic until build-time
@@ -62,7 +64,11 @@ const SingleProductPage: React.FC<SingleProductPageProps> = async ({ params }) =
   const { id, locale } = await params;
   setRequestLocale(locale);
   const productId = getIdFromSlug(id);
-  const data = await getProductById(productId);
+  const [data, similarProducts] = await Promise.all([
+    getProductById(productId),
+    getSimilarProducts(Number(productId)).catch(() => []),
+  ]);
+
   const { name, category, images, description, ratings_count, specifications } = data || {};
   const commonT = await getTranslations({ locale, namespace: 'Header' });
 
@@ -99,6 +105,8 @@ const SingleProductPage: React.FC<SingleProductPageProps> = async ({ params }) =
         <div className="mt-10">
           <ProductTabs generalDescription={description} specifications={specifications || []} reviewsCount={ratings_count || 0} productId={Number(productId)} />
         </div>
+        <SimilarProducts products={similarProducts} />
+
       </div>
     </main>
   );

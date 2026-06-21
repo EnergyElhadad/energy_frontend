@@ -29,7 +29,7 @@ export const MainBanner = ({ data }: MainBannerProps) => {
               />
             </picture>
 
-            <div className="absolute inset-0 bg-black/50" />
+            <div className="absolute inset-0 bg-black/5 md:bg-black/50" />
             <MainBannerContent
               title={banner?.title ?? t('main_banner_title')}
               desc1={banner?.banner_text ?? t('main_banner_desc1')}

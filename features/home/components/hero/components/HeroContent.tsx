@@ -36,8 +36,14 @@ export const HeroContent = ({ title, imageUrl, mobileImageUrl, description, link
       ) : (
         <Image src={imageUrl} alt="Hero Banner" fill priority={priority} sizes={HERO_SIZES} className="object-cover" />
       )}
-      <OverlayHero show={hasText} />
-      {hasText && <HeroDescription title={title} desc={description} linkUrl={linkUrl} linkText={linkText} />}
+      {/* Overlay + text are desktop-only. On mobile the banner shows as a clean
+          image (the artwork already carries its own text/CTA). */}
+      {hasText && (
+        <div className="hidden lg:block">
+          <OverlayHero show={hasText} />
+          <HeroDescription title={title} desc={description} linkUrl={linkUrl} linkText={linkText} />
+        </div>
+      )}
     </div>
   );
 };

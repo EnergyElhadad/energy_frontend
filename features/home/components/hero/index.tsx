@@ -17,7 +17,7 @@ interface HeroProps {
 export const Hero: React.FC<HeroProps> = ({ data }) => {
   return (
     <section className="relative w-full overflow-hidden">
-      <div className="group relative h-[300px] lg:h-auto lg:aspect-1440/405">
+      <div className="group relative aspect-square lg:aspect-1440/405">
         <Swiper
           modules={[Navigation, Pagination, Autoplay]}
           loop={false}

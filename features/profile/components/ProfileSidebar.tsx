@@ -2,14 +2,16 @@
 
 import { Link } from '@/core/i18n';
 import { usePathname } from 'next/navigation';
+import { useTranslations } from 'next-intl';
 import { cn } from '@/shared/utils';
 
 export const ProfileSidebar = () => {
   const pathname = usePathname();
+  const t = useTranslations('ProfileTabs');
 
   const links = [
     {
-      label: 'البيانات الشخصية',
+      label: t('personal_data'),
       href: '/profile',
       isActive: (path: string) => {
         // Check if it's strictly /profile (or /ar/profile)
@@ -19,12 +21,12 @@ export const ProfileSidebar = () => {
       },
     },
     {
-      label: 'العناوين',
+      label: t('addresses'),
       href: '/profile/addresses',
       isActive: (path: string) => path.includes('/profile/addresses'),
     },
     {
-      label: 'المدفوعات',
+      label: t('payments'),
       href: '/profile/payments',
       isActive: (path: string) => path.includes('/profile/payments'),
     },

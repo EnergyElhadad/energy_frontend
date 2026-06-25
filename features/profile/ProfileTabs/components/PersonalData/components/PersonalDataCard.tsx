@@ -1,5 +1,8 @@
+'use client';
+
 import { Button } from '@/shared/components/ui/Button';
 import React from 'react';
+import { useTranslations } from 'next-intl';
 import { PersonalDataModal } from './PersonalDataModal';
 
 // ... imports
@@ -15,6 +18,7 @@ type PersonalDataCardProps = {
 };
 
 export const PersonalDataCard: React.FC<PersonalDataCardProps> = ({ title, subtitle, onSave, modalTitle, inputType = 'text', customModal }) => {
+  const t = useTranslations('Profile');
   return (
     <div className="border-Stroke xs:flex-row xs:items-center flex flex-col justify-between gap-y-3 rounded-md border px-6 py-4">
       <div>
@@ -28,10 +32,10 @@ export const PersonalDataCard: React.FC<PersonalDataCardProps> = ({ title, subti
         <PersonalDataModal
           trigger={
             <Button variant={'outline'} className="border-signalGray text-signalGray rounded-sm border px-4 py-1 text-sm leading-relaxed font-medium">
-              تعديل
+              {t('edit')}
             </Button>
           }
-          title={modalTitle || `تعديل ${title}`}
+          title={modalTitle || t('edit_field', { field: title })}
           initialValue={subtitle}
           onSave={onSave}
           type={inputType}

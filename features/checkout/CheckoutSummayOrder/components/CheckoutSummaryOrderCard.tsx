@@ -4,12 +4,14 @@ interface CheckoutCardProps {
   price?: string | number;
   title: string;
   imageUrl: string;
+  currency?: string;
 }
 
 export const CheckoutSummaryOrderCard: React.FC<CheckoutCardProps> = ({
   imageUrl,
   title,
   price,
+  currency = "ج",
 }) => {
   return (
     <div className="relative flex w-full items-center justify-between gap-2 bg-transparent md:gap-4">
@@ -25,7 +27,7 @@ export const CheckoutSummaryOrderCard: React.FC<CheckoutCardProps> = ({
         <h3 className="text-WetGray text-sm font-normal">{title}</h3>
       </div>
       <p className="text-gray400 shrink-0 text-sm font-normal md:text-base">
-        {price} ج
+        {price} {currency}
       </p>
     </div>
   );

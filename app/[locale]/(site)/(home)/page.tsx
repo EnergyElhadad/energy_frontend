@@ -64,7 +64,7 @@ export default async function Home({ params }: Props) {
         <HomeFeaturesList initialData={homeFeaturesData} />
       </Display>
       <ProductBanners banners={contentImagesData.result} />
-      <WhyChooseUs />
+      {/* <WhyChooseUs /> */}
       <Display when={reviewsData.result.length > 0}>
         <CustomerReviews reviews={reviewsData.result} />
       </Display>

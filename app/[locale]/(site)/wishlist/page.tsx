@@ -3,15 +3,23 @@ import { WishlistContent } from '@/features/wishlist/components/WishlistContent'
 import { getWishlistProducts } from '@/features/wishlist/services/getWishlistProducts.server';
 import { WishlistProductsResponse } from '@/shared/services/wishlist';
 import { Metadata } from 'next';
+import { getTranslations } from 'next-intl/server';
 
 export const dynamic = 'force-dynamic';
 
-export const metadata: Metadata = {
-  title: 'المفضلة',
-  description: 'قائمة المنتجات المفضلة',
-};
+export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
+  const { locale } = await params;
+  const t = await getTranslations({ locale, namespace: 'Wishlist' });
+  return {
+    title: t('title'),
+    description: t('meta_description'),
+  };
+}
 
 export default async function WishlistPage() {
+  const t = await getTranslations('Wishlist');
+  const c = await getTranslations('Common');
+
   let initialData: WishlistProductsResponse | null = null;
 
   try {
@@ -20,7 +28,7 @@ export default async function WishlistPage() {
     console.error('Failed to fetch wishlist products:', error);
   }
 
-  const breadcrumbItems = [{ label: 'الرئيسية', href: '/' }, { label: 'المفضلة' }];
+  const breadcrumbItems = [{ label: c('home'), href: '/' }, { label: t('title') }];
 
   return (
     <main className="bg-Background">

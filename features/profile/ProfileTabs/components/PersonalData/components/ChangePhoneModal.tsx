@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useMemo, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
@@ -9,19 +9,21 @@ import { Button } from '@/shared/components/ui/Button';
 import { Input } from '@/shared/components/ui/input';
 import { InputOTP, InputOTPSlot } from '@/shared/components/ui/input-otp';
 import { useChangePhone } from '@/features/profile/hooks/useChangePhone';
-import { useLocale } from 'next-intl';
+import { useLocale, useTranslations } from 'next-intl';
 
-const phoneSchema = z.object({
-  new_phone_number: z.string().min(10, 'رقم الهاتف غير صحيح').regex(/^\d+$/, 'يجب أن يحتوي رقم الهاتف على أرقام فقط'),
-});
+const makePhoneSchema = (t: ReturnType<typeof useTranslations<'Profile'>>) =>
+  z.object({
+    new_phone_number: z.string().min(10, t('phone_invalid')).regex(/^\d+$/, t('phone_digits_only')),
+  });
 
-type ChangePhoneFormValues = z.infer<typeof phoneSchema>;
+type ChangePhoneFormValues = z.infer<ReturnType<typeof makePhoneSchema>>;
 
 interface ChangePhoneModalProps {
   trigger: React.ReactNode;
 }
 
 export const ChangePhoneModal = ({ trigger }: ChangePhoneModalProps) => {
+  const t = useTranslations('Profile');
   const [open, setOpen] = useState(false);
   const [step, setStep] = useState<'input' | 'verify'>('input');
   const [newPhone, setNewPhone] = useState('');
@@ -31,8 +33,7 @@ export const ChangePhoneModal = ({ trigger }: ChangePhoneModalProps) => {
 
   const { requestChangePhone, isRequesting, confirmChangePhone, isConfirming } = useChangePhone();
 
-  // Using useTranslations would be better, but sticking to hardcoded Arabic for consistency with previous components if no translation file is readily available,
-  // or I can try to use standard text. The user's prompt used Arabic in screenshots.
+  const phoneSchema = useMemo(() => makePhoneSchema(t), [t]);
 
   const {
     register,
@@ -90,36 +91,36 @@ export const ChangePhoneModal = ({ trigger }: ChangePhoneModalProps) => {
     <Dialog open={open} onOpenChange={handleOpenChange}>
       <DialogTrigger asChild>{trigger}</DialogTrigger>
       <DialogContent className="flex max-w-[480px] flex-col rounded-3xl border-0 bg-white p-0 shadow-2xl">
-        <DialogTitle className="sr-only">تغيير رقم الهاتف</DialogTitle>
+        <DialogTitle className="sr-only">{t('change_phone')}</DialogTitle>
 
         <div className="relative p-10">
           {step === 'input' ? (
             <>
-              <h2 className="mb-6 text-center text-xl font-bold text-black">اضافة رقم جديد</h2>
+              <h2 className="mb-6 text-center text-xl font-bold text-black">{t('add_new_phone')}</h2>
               <form onSubmit={handleSubmit(onSubmitPhone)} className="space-y-6">
                 <div>
                   <label className="mb-2 block text-right text-sm font-semibold" htmlFor="new_phone_number">
-                    رقم الهاتف
+                    {t('phone_field')}
                   </label>
                   <Input
                     id="new_phone_number"
                     {...register('new_phone_number')}
                     className={`bg-Background text-right ${errors.new_phone_number ? 'border-red-500 focus:ring-red-500' : ''}`}
-                    placeholder="رقم الهاتف"
-                    dir="rtl"
+                    placeholder={t('phone_field')}
+                    dir={dir}
                   />
                   {errors.new_phone_number && <p className="mt-1 text-right text-xs text-red-500">{errors.new_phone_number.message}</p>}
                 </div>
 
                 <Button type="submit" disabled={isRequesting} className="h-11.25 w-full bg-green-600 hover:bg-green-700">
-                  <span className="relative z-10">{isRequesting ? 'جاري الارسال...' : 'حفظ'}</span>
+                  <span className="relative z-10">{isRequesting ? t('sending') : t('save')}</span>
                 </Button>
               </form>
             </>
           ) : (
             <>
-              <h2 className="mb-2 text-center text-xl font-bold text-black">تحقق من هويتك</h2>
-              <p className="mb-6 text-center text-gray-600">أدخل الكود المكون من 6 أرقام المرسل إلى رقم الهاتف</p>
+              <h2 className="mb-2 text-center text-xl font-bold text-black">{t('verify_identity')}</h2>
+              <p className="mb-6 text-center text-gray-600">{t('otp_sent_hint')}</p>
 
               <div className="flex flex-col items-center space-y-6">
                 <InputOTP autoFocus maxLength={6} value={otp} onChange={setOtp} disabled={isConfirming}>
@@ -136,7 +137,7 @@ export const ChangePhoneModal = ({ trigger }: ChangePhoneModalProps) => {
                 {/* Counter or Timer placeholder if needed, skipping for now based on strict requirements */}
 
                 <Button onClick={handleVerify} disabled={isConfirming || otp.length !== 6} className="h-11.25 w-full bg-green-600 hover:bg-green-700">
-                  <span className="relative z-10">{isConfirming ? 'جاري التحقق...' : 'تحقق'}</span>
+                  <span className="relative z-10">{isConfirming ? t('verifying') : t('verify')}</span>
                 </Button>
 
                 <div className="flex w-full justify-center gap-4">
@@ -145,7 +146,7 @@ export const ChangePhoneModal = ({ trigger }: ChangePhoneModalProps) => {
                     onClick={() => setStep('input')}
                     className="rounded-full border border-gray-300 bg-white px-4 py-2 text-sm text-gray-500 hover:bg-gray-50"
                   >
-                    تغيير الرقم
+                    {t('change_number')}
                   </button>
                   <button
                     type="button"
@@ -153,7 +154,7 @@ export const ChangePhoneModal = ({ trigger }: ChangePhoneModalProps) => {
                     disabled={isRequesting}
                     className="rounded-full border border-green-600 bg-white px-4 py-2 text-sm text-green-600 hover:bg-green-50"
                   >
-                    اعادة ارسال
+                    {t('resend')}
                   </button>
                 </div>
               </div>

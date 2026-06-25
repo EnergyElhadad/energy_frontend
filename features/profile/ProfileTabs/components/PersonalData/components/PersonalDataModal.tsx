@@ -1,6 +1,7 @@
 'use client';
 
 import { useState } from 'react';
+import { useTranslations } from 'next-intl';
 import { Dialog, DialogClose, DialogContent, DialogTitle, DialogTrigger } from '@/shared/components/ui/dialog';
 import { Input } from '@/shared/components/ui/input';
 import { Button } from '@/shared/components/ui/Button';
@@ -15,7 +16,9 @@ interface PersonalDataModalProps {
   type?: string;
 }
 
-export const PersonalDataModal = ({ trigger, title = 'تعديل', initialValue = '', onSave, type = 'text' }: PersonalDataModalProps) => {
+export const PersonalDataModal = ({ trigger, title, initialValue = '', onSave, type = 'text' }: PersonalDataModalProps) => {
+  const t = useTranslations('Profile');
+  const resolvedTitle = title ?? t('edit');
   const [value, setValue] = useState(initialValue);
   const [isLoading, setIsLoading] = useState(false);
   const [isSaved, setIsSaved] = useState(false);
@@ -45,10 +48,10 @@ export const PersonalDataModal = ({ trigger, title = 'تعديل', initialValue 
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger asChild>{trigger}</DialogTrigger>
       <DialogContent className="flex max-w-[480px] flex-col rounded-3xl border-0 bg-white p-0 shadow-2xl">
-        <DialogTitle className="sr-only">{title}</DialogTitle>
+        <DialogTitle className="sr-only">{resolvedTitle}</DialogTitle>
 
         <div className="relative p-10">
-          <h2 className="mb-2 text-sm font-semibold text-black">{title}</h2>
+          <h2 className="mb-2 text-sm font-semibold text-black">{resolvedTitle}</h2>
           <form onSubmit={handleSubmit} className="space-y-6">
             <div className="relative">
               <Input
@@ -63,7 +66,7 @@ export const PersonalDataModal = ({ trigger, title = 'تعديل', initialValue 
             </div>
 
             <Button type="submit" disabled={isLoading} className="h-11.25 w-full">
-              <span className="relative z-10">{isSaved ? ' تم الحفظ' : isLoading ? 'جاري الحفظ...' : 'حفظ'}</span>
+              <span className="relative z-10">{isSaved ? t('saved') : isLoading ? t('saving') : t('save')}</span>
             </Button>
           </form>
         </div>

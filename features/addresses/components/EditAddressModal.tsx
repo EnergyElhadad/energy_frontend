@@ -11,21 +11,23 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@
 import { Textarea } from '@/shared/components/ui/textarea';
 import { useEditAddress } from '../hooks/useEditAddress';
 import { useAddress } from '../hooks/useAddress';
-import { useEffect, useState, useCallback } from 'react';
+import { useEffect, useMemo, useState, useCallback } from 'react';
+import { useTranslations } from 'next-intl';
 import { getCities, getCountries, Country, City } from '@/shared/services/location';
 
-const addressSchema = z.object({
-  country_id: z.string().min(1, 'Country is required'),
-  city_id: z.string().min(1, 'City is required'),
-  area: z.string().min(1, 'Area is required'),
-  street: z.string().min(1, 'Street is required'),
-  building: z.string().min(1, 'Building is required'),
-  apartment: z.string().min(1, 'Apartment is required'),
-  notes: z.string().optional(),
-  is_default: z.boolean().optional(),
-});
+const makeAddressSchema = (t: ReturnType<typeof useTranslations<'Addresses'>>) =>
+  z.object({
+    country_id: z.string().min(1, t('country_required')),
+    city_id: z.string().min(1, t('city_required')),
+    area: z.string().min(1, t('area_required')),
+    street: z.string().min(1, t('street_required')),
+    building: z.string().min(1, t('building_required')),
+    apartment: z.string().min(1, t('apartment_required')),
+    notes: z.string().optional(),
+    is_default: z.boolean().optional(),
+  });
 
-type AddressFormValues = z.infer<typeof addressSchema>;
+type AddressFormValues = z.infer<ReturnType<typeof makeAddressSchema>>;
 
 interface EditAddressModalProps {
   addressId: number | null;
@@ -34,11 +36,14 @@ interface EditAddressModalProps {
 }
 
 export const EditAddressModal = ({ addressId, open, onOpenChange }: EditAddressModalProps) => {
+  const t = useTranslations('Addresses');
   const [countries, setCountries] = useState<Country[]>([]);
   const [cities, setCities] = useState<City[]>([]);
 
   const { data: addressData, isLoading: isLoadingAddress } = useAddress(addressId);
   const { mutate: editAddress, isPending } = useEditAddress();
+
+  const addressSchema = useMemo(() => makeAddressSchema(t), [t]);
 
   const {
     register,
@@ -138,15 +143,15 @@ export const EditAddressModal = ({ addressId, open, onOpenChange }: EditAddressM
     <Dialog open={open} onOpenChange={onOpenChange}>
       <DialogContent className="max-h-[90vh] overflow-y-auto sm:max-w-[425px]">
         <DialogHeader>
-          <DialogTitle>تعديل العنوان</DialogTitle>
+          <DialogTitle>{t('edit_address')}</DialogTitle>
         </DialogHeader>
         {isLoadingAddress ? (
-          <div className="py-8 text-center">جاري تحميل البيانات...</div>
+          <div className="py-8 text-center">{t('loading_data')}</div>
         ) : (
           <form onSubmit={handleSubmit(onSubmit)} className="grid gap-4 py-4">
             <div className="grid grid-cols-2 gap-4">
               <div className="grid gap-2">
-                <Label htmlFor="country">الدولة</Label>
+                <Label htmlFor="country">{t('country')}</Label>
                 <Controller
                   control={control}
                   name="country_id"
@@ -160,7 +165,7 @@ export const EditAddressModal = ({ addressId, open, onOpenChange }: EditAddressM
                       value={field.value}
                     >
                       <SelectTrigger>
-                        <SelectValue placeholder="اختر الدولة" />
+                        <SelectValue placeholder={t('select_country')} />
                       </SelectTrigger>
                       <SelectContent>
                         {countries.map(country => (
@@ -176,14 +181,14 @@ export const EditAddressModal = ({ addressId, open, onOpenChange }: EditAddressM
               </div>
 
               <div className="grid gap-2">
-                <Label htmlFor="city">المدينة</Label>
+                <Label htmlFor="city">{t('city')}</Label>
                 <Controller
                   control={control}
                   name="city_id"
                   render={({ field }) => (
                     <Select onValueChange={field.onChange} value={field.value} disabled={!selectedCountryId}>
                       <SelectTrigger>
-                        <SelectValue placeholder="اختر المدينة" />
+                        <SelectValue placeholder={t('select_city')} />
                       </SelectTrigger>
                       <SelectContent>
                         {Array.isArray(cities) &&
@@ -201,42 +206,42 @@ export const EditAddressModal = ({ addressId, open, onOpenChange }: EditAddressM
             </div>
 
             <div className="grid gap-2">
-              <Label htmlFor="area">المنطقة</Label>
+              <Label htmlFor="area">{t('area')}</Label>
               <Input id="area" {...register('area')} />
               {errors.area && <p className="text-sm text-red-500">{errors.area.message}</p>}
             </div>
 
             <div className="grid gap-2">
-              <Label htmlFor="street">الشارع</Label>
+              <Label htmlFor="street">{t('street')}</Label>
               <Input id="street" {...register('street')} />
               {errors.street && <p className="text-sm text-red-500">{errors.street.message}</p>}
             </div>
 
             <div className="grid grid-cols-2 gap-4">
               <div className="grid gap-2">
-                <Label htmlFor="building">رقم المبنى</Label>
+                <Label htmlFor="building">{t('building')}</Label>
                 <Input id="building" {...register('building')} />
                 {errors.building && <p className="text-sm text-red-500">{errors.building.message}</p>}
               </div>
               <div className="grid gap-2">
-                <Label htmlFor="apartment">رقم الشقة</Label>
+                <Label htmlFor="apartment">{t('apartment')}</Label>
                 <Input id="apartment" {...register('apartment')} />
                 {errors.apartment && <p className="text-sm text-red-500">{errors.apartment.message}</p>}
               </div>
             </div>
 
             <div className="grid gap-2">
-              <Label htmlFor="notes">ملاحظات</Label>
+              <Label htmlFor="notes">{t('notes')}</Label>
               <Textarea id="notes" {...register('notes')} />
             </div>
 
             <div className="flex items-center gap-2">
               <input type="checkbox" id="is_default" className="accent-primary h-4 w-4" {...register('is_default')} />
-              <Label htmlFor="is_default">جعل هذا العنوان افتراضي</Label>
+              <Label htmlFor="is_default">{t('make_default')}</Label>
             </div>
 
             <Button type="submit" disabled={isPending}>
-              {isPending ? 'جاري الحفظ...' : 'حفظ التعديلات'}
+              {isPending ? t('saving') : t('save_changes')}
             </Button>
           </form>
         )}

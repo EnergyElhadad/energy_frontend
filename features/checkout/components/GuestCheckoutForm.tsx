@@ -2,6 +2,7 @@
 
 import { forwardRef, useEffect, useImperativeHandle } from 'react';
 import { Controller } from 'react-hook-form';
+import { useTranslations, useLocale } from 'next-intl';
 import { Input } from '@/shared/components/ui/input';
 import { Label } from '@/shared/components/ui/label';
 import { Textarea } from '@/shared/components/ui/textarea';
@@ -17,6 +18,9 @@ interface GuestCheckoutFormProps {
 }
 
 export const GuestCheckoutForm = forwardRef<GuestCheckoutFormRef, GuestCheckoutFormProps>(({ onCityChange }, ref) => {
+  const t = useTranslations('Checkout');
+  const locale = useLocale();
+  const dir = locale === 'ar' ? 'rtl' : 'ltr';
   const { form, countries, cities } = useGuestCheckoutForm();
 
   const {
@@ -44,21 +48,21 @@ export const GuestCheckoutForm = forwardRef<GuestCheckoutFormRef, GuestCheckoutF
 
   return (
     <>
-      <h2 className="text-base font-bold text-black">عنوان التوصيل</h2>
+      <h2 className="text-base font-bold text-black">{t('delivery_address')}</h2>
 
       <div className="flex flex-col gap-4">
         {/* First Name + Last Name */}
         <div className="grid grid-cols-2 gap-4">
           <div className="grid gap-2">
             <Label htmlFor="first_name" className="text-sm font-semibold text-black">
-              الاسم الأول
+              {t('first_name')} <span className="text-red-500">*</span>
             </Label>
             <Input id="first_name" {...register('first_name')} className="bg-Background border-Stroke rounded-sm border" autoComplete="given-name" />
             {errors.first_name && <p className="text-sm text-red-500">{errors.first_name.message}</p>}
           </div>
           <div className="grid gap-2">
             <Label htmlFor="last_name" className="text-sm font-semibold text-black">
-              الاسم الثاني
+              {t('last_name')} <span className="text-red-500">*</span>
             </Label>
             <Input id="last_name" {...register('last_name')} className="bg-Background border-Stroke rounded-sm border" autoComplete="family-name" />
             {errors.last_name && <p className="text-sm text-red-500">{errors.last_name.message}</p>}
@@ -68,7 +72,7 @@ export const GuestCheckoutForm = forwardRef<GuestCheckoutFormRef, GuestCheckoutF
         {/* Company Name (optional) */}
         <div className="grid gap-2">
           <Label htmlFor="company_name" className="text-sm font-semibold text-black">
-            اسم الشركة (اختياري)
+            {t('company_name')}
           </Label>
           <Input id="company_name" {...register('company_name')} className="bg-Background border-Stroke rounded-sm border" autoComplete="organization" />
         </div>
@@ -76,15 +80,15 @@ export const GuestCheckoutForm = forwardRef<GuestCheckoutFormRef, GuestCheckoutF
         {/* Country */}
         <div className="grid gap-2">
           <Label htmlFor="country_id" className="text-sm font-semibold text-black">
-            البلد
+            {t('country')} <span className="text-red-500">*</span>
           </Label>
           <Controller
             control={control}
             name="country_id"
             render={({ field }) => (
-              <Select dir="rtl" onValueChange={field.onChange} value={field.value}>
+              <Select dir={dir} onValueChange={field.onChange} value={field.value}>
                 <SelectTrigger className="bg-Background border-Stroke rounded-sm border">
-                  <SelectValue placeholder="اختر البلد" />
+                  <SelectValue placeholder={t('select_country')} />
                 </SelectTrigger>
                 <SelectContent>
                   {countries.map(country => (
@@ -102,15 +106,15 @@ export const GuestCheckoutForm = forwardRef<GuestCheckoutFormRef, GuestCheckoutF
         {/* City */}
         <div className="grid gap-2">
           <Label htmlFor="city_id" className="text-sm font-semibold text-black">
-            المدينة
+            {t('city')} <span className="text-red-500">*</span>
           </Label>
           <Controller
             control={control}
             name="city_id"
             render={({ field }) => (
-              <Select dir="rtl" onValueChange={field.onChange} value={field.value} disabled={!form.watch('country_id')}>
+              <Select dir={dir} onValueChange={field.onChange} value={field.value} disabled={!form.watch('country_id')}>
                 <SelectTrigger className="bg-Background border-Stroke rounded-sm border">
-                  <SelectValue placeholder="اختر المدينة" />
+                  <SelectValue placeholder={t('select_city')} />
                 </SelectTrigger>
                 <SelectContent>
                   {Array.isArray(cities) &&
@@ -129,7 +133,7 @@ export const GuestCheckoutForm = forwardRef<GuestCheckoutFormRef, GuestCheckoutF
         {/* Area */}
         <div className="grid gap-2">
           <Label htmlFor="area" className="text-sm font-semibold text-black">
-            المنطقة
+            {t('area')} <span className="text-red-500">*</span>
           </Label>
           <Input id="area" {...register('area')} className="bg-Background border-Stroke rounded-sm border" />
           {errors.area && <p className="text-sm text-red-500">{errors.area.message}</p>}
@@ -138,7 +142,7 @@ export const GuestCheckoutForm = forwardRef<GuestCheckoutFormRef, GuestCheckoutF
         {/* Street */}
         <div className="grid gap-2">
           <Label htmlFor="street" className="text-sm font-semibold text-black">
-            عنوان الشارع
+            {t('street')} <span className="text-red-500">*</span>
           </Label>
           <Input id="street" {...register('street')} className="bg-Background border-Stroke rounded-sm border" autoComplete="street-address" />
           {errors.street && <p className="text-sm text-red-500">{errors.street.message}</p>}
@@ -148,14 +152,14 @@ export const GuestCheckoutForm = forwardRef<GuestCheckoutFormRef, GuestCheckoutF
         <div className="grid grid-cols-2 gap-4">
           <div className="grid gap-2">
             <Label htmlFor="building" className="text-sm font-semibold text-black">
-              رقم المبنى
+              {t('building')}
             </Label>
             <Input id="building" {...register('building')} className="bg-Background border-Stroke rounded-sm border" />
             {errors.building && <p className="text-sm text-red-500">{errors.building.message}</p>}
           </div>
           <div className="grid gap-2">
             <Label htmlFor="apartment" className="text-sm font-semibold text-black">
-              رقم الشقة
+              {t('apartment')}
             </Label>
             <Input id="apartment" {...register('apartment')} className="bg-Background border-Stroke rounded-sm border" />
             {errors.apartment && <p className="text-sm text-red-500">{errors.apartment.message}</p>}
@@ -165,7 +169,7 @@ export const GuestCheckoutForm = forwardRef<GuestCheckoutFormRef, GuestCheckoutF
         {/* Phone */}
         <div className="grid gap-2">
           <Label htmlFor="phone_number" className="text-sm font-semibold text-black">
-            رقم الموبايل
+            {t('phone')} <span className="text-red-500">*</span>
           </Label>
           <Input id="phone_number" {...register('phone_number')} className="bg-Background border-Stroke rounded-sm border" autoComplete="tel" />
           {errors.phone_number && <p className="text-sm text-red-500">{errors.phone_number.message}</p>}
@@ -174,7 +178,7 @@ export const GuestCheckoutForm = forwardRef<GuestCheckoutFormRef, GuestCheckoutF
         {/* Email */}
         <div className="grid gap-2">
           <Label htmlFor="email" className="text-sm font-semibold text-black">
-            الايميل
+            {t('email')} <span className="text-red-500">*</span>
           </Label>
           <Input id="email" type="email" {...register('email')} className="bg-Background border-Stroke rounded-sm border" autoComplete="email" />
           {errors.email && <p className="text-sm text-red-500">{errors.email.message}</p>}
@@ -183,7 +187,7 @@ export const GuestCheckoutForm = forwardRef<GuestCheckoutFormRef, GuestCheckoutF
         {/* Notes */}
         <div className="grid gap-2">
           <Label htmlFor="notes" className="text-sm font-semibold text-black">
-            ملاحظات الطلب
+            {t('notes')}
           </Label>
           <Textarea id="notes" {...register('notes')} className="bg-Background border-Stroke min-h-24 resize-none rounded-sm border" rows={4} />
         </div>

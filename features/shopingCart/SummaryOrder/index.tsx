@@ -57,7 +57,6 @@ export const SummaryOrder = ({ total: initialTotal, itemsCount: initialCount }: 
 
       <Separator className="bg-gray100 my-4 h-px" />
       <Total title={t('total')} price={discountBreakdown?.final_total ? parseFloat(discountBreakdown.final_total) : displayTotal} />
-      <Tax title={t('tax_included')} />
       <Link href="/cart/checkout" className="bg-primary mt-4 flex h-15.5 w-full items-center justify-center rounded-sm text-white">
         {t('checkout')}
       </Link>

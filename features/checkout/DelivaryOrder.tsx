@@ -1,5 +1,6 @@
 'use client';
 import React from 'react';
+import { useTranslations } from 'next-intl';
 import { AddressLocationIcon } from '@/shared/components/icons/AddressLocation';
 import { NewAddressIcon } from '@/shared/components/icons/NewAddress';
 import { cn } from '@/shared/utils';
@@ -14,6 +15,7 @@ interface DelivaryOrderProps {
 }
 
 export const DelivaryOrder = ({ selectedAddressId, onSelectAddress }: DelivaryOrderProps) => {
+  const t = useTranslations('Checkout');
   const { addresses, isLoading } = useAddresses();
 
   const [hasSetInitial, setHasSetInitial] = React.useState(false);
@@ -39,7 +41,7 @@ export const DelivaryOrder = ({ selectedAddressId, onSelectAddress }: DelivaryOr
   return (
     <>
       <div className="flex items-center justify-between">
-        <h2 className="text-base font-bold text-black"> عنوان التوصيل </h2>
+        <h2 className="text-base font-bold text-black"> {t('delivery_address')} </h2>
       </div>
 
       {addresses.length === 0 ? (
@@ -47,7 +49,7 @@ export const DelivaryOrder = ({ selectedAddressId, onSelectAddress }: DelivaryOr
           <div className="flex h-20 w-20 items-center justify-center rounded-full bg-gray-50">
             <AddressLocationIcon className="h-10 w-10 text-gray-400" />
           </div>
-          <p className="font-medium text-gray-500">لا يوجد عناوين مسجلة</p>
+          <p className="font-medium text-gray-500">{t('no_addresses')}</p>
         </div>
       ) : (
         addresses.map((address: Address) => (
@@ -92,7 +94,7 @@ export const DelivaryOrder = ({ selectedAddressId, onSelectAddress }: DelivaryOr
         className="bg-primary hover:bg-primary/80 flex h-11.75 w-fit items-center justify-center gap-4 rounded-sm px-3 text-sm font-medium text-white"
       >
         <NewAddressIcon />
-        إضافة عنوان جديد
+        {t('add_new_address')}
       </Link>
     </>
   );

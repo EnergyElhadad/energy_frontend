@@ -4,6 +4,7 @@ import { CashIcon } from '@/shared/components/icons/Cash';
 import { cn } from '@/shared/utils';
 import { CreditCardIcon } from 'lucide-react';
 import React from 'react';
+import { useTranslations } from 'next-intl';
 import { usePaymentMethods } from '@/features/checkout/hooks/usePaymentMethods';
 import { PaymentMethod } from '@/features/checkout/services/payment';
 
@@ -13,6 +14,7 @@ interface PayMethodProps {
 }
 
 export const PayMethod = ({ selectedPaymentId, onSelectPayment }: PayMethodProps) => {
+  const t = useTranslations('Checkout');
   const { paymentMethods, isLoading } = usePaymentMethods();
 
   // Set default payment method when data loads
@@ -28,7 +30,7 @@ export const PayMethod = ({ selectedPaymentId, onSelectPayment }: PayMethodProps
 
   return (
     <div className="mb-2 sm:mb-6">
-      <h5 className="text-WetGray mt-4 mb-4 text-base font-bold">اختر طريقة الدفع</h5>
+      <h5 className="text-WetGray mt-4 mb-4 text-base font-bold">{t('select_payment_method')}</h5>
 
       <div className="xs:flex-row flex flex-col gap-2">
         {paymentMethods.map((method: PaymentMethod) => (

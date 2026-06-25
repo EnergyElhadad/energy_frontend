@@ -1,46 +1,27 @@
 'use client';
 
-import { useEffect, useState } from 'react';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { useSession } from 'next-auth/react';
 import { addToCart, getCartItems, removeCartItem, updateCartItem } from '../services/cart';
 import type { CartItem, Product, UseCartReturn } from '@/shared/types/cart';
 import { toast } from 'sonner';
 import { isAxiosError } from 'axios';
-import {
-  addToGuestCart,
-  getGuestCartCount,
-  getGuestCartTotal,
-  readGuestCart,
-  removeFromGuestCart,
-  updateGuestCartQuantity,
-} from '../utils/guestCart';
+import { useTranslations } from 'next-intl';
 
 export const useCart = (): UseCartReturn => {
   const queryClient = useQueryClient();
-  const { data: session, status } = useSession();
-  const isGuest = status !== 'loading' && !session?.user;
+  const { status } = useSession();
+  const t = useTranslations('Cart');
 
-  // ---- Guest (localStorage) cart state ----
-  const [guestItems, setGuestItems] = useState<CartItem[]>([]);
-
-  useEffect(() => {
-    if (!isGuest) return;
-    setGuestItems(readGuestCart());
-    const handler = () => setGuestItems(readGuestCart());
-    window.addEventListener('guest-cart-changed', handler);
-    window.addEventListener('storage', handler);
-    return () => {
-      window.removeEventListener('guest-cart-changed', handler);
-      window.removeEventListener('storage', handler);
-    };
-  }, [isGuest]);
-
-  // ---- Authenticated cart (server) ----
+  // Both guests and authenticated users use the server cart. The guest cart is
+  // keyed on the session cookie (Axios sends it via `withCredentials`), so items
+  // actually land in the backend cart — a prerequisite for apply-promo and
+  // checkout, which both read the server cart. We wait until the auth status is
+  // resolved so the request carries the right credentials (guest vs token).
   const { data } = useQuery({
     queryKey: ['cart'],
     queryFn: getCartItems,
-    enabled: !isGuest,
+    enabled: status !== 'loading',
   });
 
   // Defensive: the cart response shape can vary (auth failure → error envelope
@@ -58,8 +39,8 @@ export const useCart = (): UseCartReturn => {
       itemTotal: item.item_total,
     })) ?? [];
 
-  const items: CartItem[] = isGuest ? guestItems : serverItems;
-  const count = isGuest ? getGuestCartCount(guestItems) : data?.result?.items_count ?? 0;
+  const items: CartItem[] = serverItems;
+  const count = data?.result?.items_count ?? 0;
 
   const { mutate: addToCartMutation, isPending: isAddingToCart } = useMutation({
     mutationFn: addToCart,
@@ -69,9 +50,9 @@ export const useCart = (): UseCartReturn => {
     },
     onError: (error: unknown) => {
       if (isAxiosError(error)) {
-        toast.error(error.response?.data?.message || 'Something went wrong');
+        toast.error(error.response?.data?.message || t('something_wrong'));
       } else {
-        toast.error('Something went wrong');
+        toast.error(t('something_wrong'));
       }
     },
   });
@@ -89,12 +70,12 @@ export const useCart = (): UseCartReturn => {
         // requested quantity exceeds available stock — surface a clearer
         // message to the user.
         if (serverMsg === 'فشل تحديث العنصر في العربة') {
-          toast.error('لا يمكن طلب كمية أكبر من المتاح في المخزون');
+          toast.error(t('stock_limit_reached'));
           return;
         }
-        toast.error(serverMsg || 'Something went wrong');
+        toast.error(serverMsg || t('something_wrong'));
       } else {
-        toast.error('Something went wrong');
+        toast.error(t('something_wrong'));
       }
     },
   });
@@ -107,20 +88,14 @@ export const useCart = (): UseCartReturn => {
     },
     onError: (error: unknown) => {
       if (isAxiosError(error)) {
-        toast.error(error.response?.data?.message || 'Something went wrong');
+        toast.error(error.response?.data?.message || t('something_wrong'));
       } else {
-        toast.error('Something went wrong');
+        toast.error(t('something_wrong'));
       }
     },
   });
 
   const addItem = (product: Product, quantity: number = 1, options?: { onSuccess?: () => void }) => {
-    if (isGuest) {
-      addToGuestCart(product, quantity);
-      toast.success('تم إضافة العنصر إلى العربة بنجاح');
-      options?.onSuccess?.();
-      return;
-    }
     addToCartMutation(
       { product_id: product.id, quantity },
       {
@@ -132,18 +107,10 @@ export const useCart = (): UseCartReturn => {
   };
 
   const removeItem = (id: string | number) => {
-    if (isGuest) {
-      removeFromGuestCart(id);
-      return;
-    }
     removeCartItemMutation({ product_id: id });
   };
 
   const updateQuantity = (id: string | number, quantity: number) => {
-    if (isGuest) {
-      updateGuestCartQuantity(id, quantity);
-      return;
-    }
     if (quantity <= 0) {
       removeItem(id);
     } else {
@@ -151,8 +118,8 @@ export const useCart = (): UseCartReturn => {
     }
   };
 
-  const cartTotal = isGuest ? getGuestCartTotal(guestItems) : data?.result?.cart_total ?? 0;
-  const discountBreakdown = isGuest ? undefined : data?.result?.discount_breakdown;
+  const cartTotal = data?.result?.cart_total ?? 0;
+  const discountBreakdown = data?.result?.discount_breakdown;
 
   return {
     items,

@@ -1,6 +1,7 @@
 'use client';
 
 import React from 'react';
+import { useTranslations } from 'next-intl';
 import { ProfileAddressCard } from './components/ProfileAddressCard';
 import { ProfileTilte } from '../ProfileTilte';
 import { useAddresses } from '@/features/addresses/hooks/useAddresses';
@@ -14,6 +15,7 @@ import { DeleteAddressDialog } from '@/features/addresses/components/DeleteAddre
 import { useEditAddress } from '@/features/addresses/hooks/useEditAddress';
 
 export const ProfileAddresses = () => {
+  const t = useTranslations('Profile');
   const { addresses, isLoading } = useAddresses();
   const { mutate: deleteAddress, isPending: isDeleting } = useDeleteAddress();
   const { mutate: editAddress, isPending: isEditing } = useEditAddress();
@@ -52,7 +54,7 @@ export const ProfileAddresses = () => {
 
   return (
     <>
-      <ProfileTilte title="العناوين" />
+      <ProfileTilte title={t('addresses')} />
       <div className="flex flex-col gap-2">
         {addresses.map((address: Address) => (
           <ProfileAddressCard
@@ -66,7 +68,7 @@ export const ProfileAddresses = () => {
             isEditing={isEditing}
           />
         ))}
-        {addresses.length === 0 && <div className="py-4 text-center">لا توجد عناوين محفوظة</div>}
+        {addresses.length === 0 && <div className="py-4 text-center">{t('no_addresses')}</div>}
       </div>
       <AddAddressModal />
       {!!addressToEdit && <EditAddressModal open={!!addressToEdit} addressId={addressToEdit} onOpenChange={open => !open && setAddressToEdit(null)} />}

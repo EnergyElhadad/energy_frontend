@@ -1,5 +1,6 @@
 'use client';
 
+import { useTranslations } from 'next-intl';
 import {
   AlertDialog,
   AlertDialogAction,
@@ -19,15 +20,16 @@ interface DeleteAddressDialogProps {
 }
 
 export const DeleteAddressDialog = ({ open, onOpenChange, onConfirm, isPending }: DeleteAddressDialogProps) => {
+  const t = useTranslations('Addresses');
   return (
     <AlertDialog open={open} onOpenChange={onOpenChange}>
       <AlertDialogContent>
         <AlertDialogHeader>
-          <AlertDialogTitle>هل أنت متأكد من حذف هذا العنوان؟</AlertDialogTitle>
-          <AlertDialogDescription>لا يمكن التراجع عن هذا الإجراء. سيتم حذف العنوان نهائياً من قائمة عناوينك.</AlertDialogDescription>
+          <AlertDialogTitle>{t('delete_confirm_title')}</AlertDialogTitle>
+          <AlertDialogDescription>{t('delete_confirm_desc')}</AlertDialogDescription>
         </AlertDialogHeader>
         <AlertDialogFooter>
-          <AlertDialogCancel disabled={isPending}>إلغاء</AlertDialogCancel>
+          <AlertDialogCancel disabled={isPending}>{t('cancel')}</AlertDialogCancel>
           <AlertDialogAction
             onClick={e => {
               e.preventDefault();
@@ -36,7 +38,7 @@ export const DeleteAddressDialog = ({ open, onOpenChange, onConfirm, isPending }
             disabled={isPending}
             className="bg-red-600 text-white hover:bg-red-700 focus:ring-red-600 focus:ring-offset-red-600"
           >
-            {isPending ? 'جاري الحذف...' : 'حذف'}
+            {isPending ? t('deleting') : t('delete')}
           </AlertDialogAction>
         </AlertDialogFooter>
       </AlertDialogContent>

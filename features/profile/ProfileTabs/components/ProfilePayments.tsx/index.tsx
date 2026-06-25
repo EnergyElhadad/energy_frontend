@@ -1,15 +1,17 @@
 import React from 'react';
+import { getTranslations } from 'next-intl/server';
 import { ProfileTilte } from '../ProfileTilte';
 import { ProfilePaymentsCard } from './components/ProfilePaymentsCard';
 import { getTransactions } from '@/features/payments/services/payments.server';
 
 export const ProfilePayments = async () => {
+  const t = await getTranslations('Profile');
   const transactionsRes = await getTransactions();
   const transactions = transactionsRes.result || [];
 
   return (
     <>
-      <ProfileTilte title="المدفوعات" />
+      <ProfileTilte title={t('payments')} />
 
       <div className="flex flex-col gap-3">
         {transactions.map(payment => (

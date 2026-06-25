@@ -1,11 +1,19 @@
 import { TermsContent } from '@/features/terms/TermsContent';
 import { HeaderPage } from '@/shared/components/ui/HeaderPage';
-import { useTranslations } from 'next-intl';
+import { getTranslations, setRequestLocale } from 'next-intl/server';
 
 export const dynamic = 'force-static';
 
-export default function TermsAndConditionsPage() {
-  const t = useTranslations('Terms');
+interface TermsPageProps {
+  params: Promise<{ locale: string }>;
+}
+
+export default async function TermsAndConditionsPage({ params }: TermsPageProps) {
+  const { locale } = await params;
+  // Required for static rendering with next-intl — without it the page renders
+  // in the default locale regardless of the URL. See about/page.tsx.
+  setRequestLocale(locale);
+  const t = await getTranslations('Terms');
 
   const sections = t.raw('sections') as { title: string; items: string[] }[];
 

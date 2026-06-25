@@ -1,4 +1,7 @@
+'use client';
+
 import Image from "next/image";
+import { useTranslations } from "next-intl";
 import { OrderCardDesc } from "./components/OrderCardDesc";
 import { Button } from "@/shared/components/ui/Button";
 
@@ -15,6 +18,7 @@ export const OrderCardActions: React.FC<ShopingCardProps> = ({
   imageUrl,
   orderd,
 }) => {
+  const t = useTranslations("OrdersPage");
   return (
     <div className="border-gray100 xs:flex-row relative flex w-full flex-col items-center justify-between gap-2 rounded-sm border bg-white p-4 md:gap-4">
       <div className="xs:flex-row flex flex-col items-center gap-4">
@@ -38,7 +42,7 @@ export const OrderCardActions: React.FC<ShopingCardProps> = ({
           variant="outline"
           className="text-Alert border-Alert hover:bg-Alert h-8.5 rounded-sm px-4 text-sm font-medium hover:text-white"
         >
-          الغاء الطلب
+          {t('cancel_order')}
         </Button>
       ) : (
         <div className="flex flex-wrap items-center justify-center gap-4">
@@ -46,13 +50,13 @@ export const OrderCardActions: React.FC<ShopingCardProps> = ({
             variant="outline"
             className="text-primary border-primary hover:bg-primary h-8.5 rounded-sm px-4 text-sm font-medium hover:text-white"
           >
-            شراء مرة اخري
+            {t('rebuy')}
           </Button>
           <Button
             variant="outline"
             className="text-signalGray border-signalGray hover:bg-signalGray h-8.5 rounded-sm px-4 text-sm font-medium hover:text-white"
           >
-            عرض المنتج
+            {t('view_product')}
           </Button>
         </div>
       )}

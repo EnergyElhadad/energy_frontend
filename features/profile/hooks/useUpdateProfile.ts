@@ -1,10 +1,12 @@
 import { useMutation } from '@tanstack/react-query';
 import { useSession } from 'next-auth/react';
+import { useTranslations } from 'next-intl';
 import { toast } from 'sonner';
 import { updateProfile } from '../services/updateProfile';
 import { isAxiosError } from 'axios';
 
 export const useUpdateProfile = () => {
+  const t = useTranslations('Profile');
   const { data: session, update } = useSession();
 
   return useMutation({
@@ -26,7 +28,7 @@ export const useUpdateProfile = () => {
     },
     onError: (error: unknown) => {
       if (isAxiosError(error)) {
-        const message = error.response?.data?.message || 'حدث خطأ أثناء تحديث الملف الشخصي';
+        const message = error.response?.data?.message || t('update_profile_error');
         toast.error(message);
       }
     },

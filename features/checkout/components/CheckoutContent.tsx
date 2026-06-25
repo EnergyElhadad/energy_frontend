@@ -1,6 +1,7 @@
 'use client';
 
 import { useRef, useState } from 'react';
+import { useTranslations } from 'next-intl';
 import { DelivaryOrder } from '../DelivaryOrder';
 import { CheckoutSummaryOrder } from '../CheckoutSummayOrder';
 import { useCheckout } from '../hooks/useCheckout';
@@ -10,6 +11,7 @@ import { useSession } from 'next-auth/react';
 import { GuestCheckoutForm, GuestCheckoutFormRef } from './GuestCheckoutForm';
 
 export const CheckoutContent = () => {
+  const t = useTranslations('Checkout');
   const [selectedAddressId, setSelectedAddressId] = useState<number | null>(null);
   const [selectedPaymentId, setSelectedPaymentId] = useState<number | null>(null);
   const [selectedCityId, setSelectedCityId] = useState<number | null>(null);
@@ -21,13 +23,13 @@ export const CheckoutContent = () => {
 
   const handleSubmit = async () => {
     if (!selectedPaymentId) {
-      toast.error('الرجاء اختيار طريقة الدفع');
+      toast.error(t('select_payment_error'));
       return;
     }
 
     if (authStatus === 'authenticated') {
       if (!selectedAddressId) {
-        toast.error('الرجاء اختيار عنوان التوصيل');
+        toast.error(t('select_address_error'));
         return;
       }
 
@@ -51,8 +53,8 @@ export const CheckoutContent = () => {
           city_id: Number(guestData.city_id),
           area: guestData.area,
           street: guestData.street,
-          building: guestData.building,
-          apartment: guestData.apartment,
+          building: guestData.building || '',
+          apartment: guestData.apartment || '',
           notes: guestData.notes || '',
         },
       });

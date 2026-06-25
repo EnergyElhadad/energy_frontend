@@ -1,6 +1,6 @@
 'use client';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/shared/components/ui/tabs';
-import { useLocale } from 'next-intl';
+import { useLocale, useTranslations } from 'next-intl';
 import { OrderCardDesc } from './components/OrderCardDesc/indext';
 import { Order } from '../types/order';
 import { Link } from '@/core/i18n';
@@ -9,17 +9,17 @@ interface OrderTapsProps {
   orders: Order[];
 }
 
-const STATUS_LABELS: Record<Order['status'], string> = {
-  PENDING: 'قيد الانتظار',
-  CONFIRMED: 'تم التأكيد',
-  SHIPPED: 'تم الشحن',
-  DELIVERED: 'تم التوصيل',
-  CANCELLED: 'ملغي',
+const STATUS_KEYS: Record<Order['status'], string> = {
+  PENDING: 'status_pending',
+  CONFIRMED: 'status_confirmed',
+  SHIPPED: 'status_shipped',
+  DELIVERED: 'status_delivered',
+  CANCELLED: 'status_cancelled',
 };
 
-const formatDate = (dateStr: string) => {
+const formatDate = (dateStr: string, locale: string) => {
   const date = new Date(dateStr);
-  return date.toLocaleDateString('ar-EG', {
+  return date.toLocaleDateString(locale === 'ar' ? 'ar-EG' : 'en-US', {
     year: 'numeric',
     month: 'short',
     day: 'numeric',
@@ -28,6 +28,7 @@ const formatDate = (dateStr: string) => {
 
 export const OrderTaps: React.FC<OrderTapsProps> = ({ orders }) => {
   const locale = useLocale();
+  const t = useTranslations('OrdersPage');
 
   const currentOrders = orders.filter(o => o.status === 'PENDING' || o.status === 'CONFIRMED' || o.status === 'SHIPPED');
   const pastOrders = orders.filter(o => o.status === 'DELIVERED' || o.status === 'CANCELLED');
@@ -36,7 +37,7 @@ export const OrderTaps: React.FC<OrderTapsProps> = ({ orders }) => {
     if (list.length === 0) {
       return (
         <div className="flex flex-col items-center justify-center gap-2 py-12">
-          <p className="text-signalGray text-base font-medium">لا توجد طلبات</p>
+          <p className="text-signalGray text-base font-medium">{t('no_orders')}</p>
         </div>
       );
     }
@@ -46,11 +47,11 @@ export const OrderTaps: React.FC<OrderTapsProps> = ({ orders }) => {
         {list.map(order => (
           <Link key={order.order_number} href={`/orders/${order.order_number}`} className="flex flex-col gap-5 rounded-md bg-white p-4 transition-shadow hover:shadow-md">
             <OrderCardDesc
-              purchasedDate={formatDate(order.created_at)}
-              deliveryDate={order.delivered_at ? formatDate(order.delivered_at) : '—'}
-              price={`${order.total_amount} ج`}
+              purchasedDate={formatDate(order.created_at, locale)}
+              deliveryDate={order.delivered_at ? formatDate(order.delivered_at, locale) : '—'}
+              price={`${order.total_amount} ${t('currency')}`}
               orderCode={order.order_number}
-              status={STATUS_LABELS[order.status]}
+              status={t(STATUS_KEYS[order.status])}
             />
           </Link>
         ))}
@@ -65,13 +66,13 @@ export const OrderTaps: React.FC<OrderTapsProps> = ({ orders }) => {
           className="text-signalGray data-[state=active]:text-primary after:bg-primary xs:max-w-38 w-15 rounded-none px-6 py-2 text-base font-bold after:h-px data-[state=active]:bg-transparent"
           value="currentOrders"
         >
-          الطلبات الحالية
+          {t('current_orders')}
         </TabsTrigger>
         <TabsTrigger
           className="text-signalGray data-[state=active]:text-primary after:bg-primary xs:max-w-38 w-15 rounded-none px-6 py-2 text-base font-bold after:h-px data-[state=active]:bg-transparent"
           value="pastOrders"
         >
-          الطلبات السابقة
+          {t('previous_orders')}
         </TabsTrigger>
       </TabsList>
 

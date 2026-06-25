@@ -1,5 +1,6 @@
 'use client';
 
+import { useTranslations } from 'next-intl';
 import { CategoryCard } from './CategoryCard';
 import { Button } from '@/shared/components/ui/Button';
 import { Spinner } from '@/shared/components/ui/spinner';
@@ -12,6 +13,7 @@ interface CategoriesContentProps {
 }
 
 export const CategoriesContent = ({ initialCategories }: CategoriesContentProps) => {
+  const t = useTranslations('Products');
   const { categories, fetchNextPage, hasNextPage, isFetchingNextPage } = useInfiniteCategories(initialCategories);
 
   return (
@@ -26,7 +28,7 @@ export const CategoriesContent = ({ initialCategories }: CategoriesContentProps)
         <div className="mt-4 flex justify-center">
           <Button variant="outline" onClick={() => fetchNextPage()} disabled={isFetchingNextPage}>
             {isFetchingNextPage && <Spinner />}
-            <span>عرض المزيد</span>
+            <span>{t('show_more')}</span>
           </Button>
         </div>
       </Display>

@@ -1,5 +1,6 @@
 import { useMutation } from '@tanstack/react-query';
 import { useSession } from 'next-auth/react';
+import { useTranslations } from 'next-intl';
 import { toast } from 'sonner';
 import { requestChangePhone, confirmChangePhone } from '../services/changePhone';
 import { RequestChangePhonePayload, ConfirmChangePhonePayload } from '../services/types';
@@ -7,6 +8,7 @@ import { isAxiosError } from 'axios';
 import { useLogout } from '@/features/auth/hooks/useLogout';
 
 export const useChangePhone = () => {
+  const t = useTranslations('Profile');
   const { data: session } = useSession();
   const { logout } = useLogout();
 
@@ -26,10 +28,10 @@ export const useChangePhone = () => {
     },
     onError: (error: unknown) => {
       if (isAxiosError(error)) {
-        const message = error.response?.data?.message || 'حدث خطأ أثناء طلب تغيير رقم الهاتف';
+        const message = error.response?.data?.message || t('change_phone_request_error');
         toast.error(message);
       } else {
-        toast.error('An unexpected error occurred');
+        toast.error(t('unexpected_error'));
       }
     },
   });
@@ -51,10 +53,10 @@ export const useChangePhone = () => {
     },
     onError: (error: unknown) => {
       if (isAxiosError(error)) {
-        const message = error.response?.data?.message || 'حدث خطأ أثناء تأكيد تغيير رقم الهاتف';
+        const message = error.response?.data?.message || t('change_phone_confirm_error');
         toast.error(message);
       } else {
-        toast.error('An unexpected error occurred');
+        toast.error(t('unexpected_error'));
       }
     },
   });

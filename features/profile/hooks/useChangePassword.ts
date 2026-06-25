@@ -1,5 +1,6 @@
 import { useMutation } from '@tanstack/react-query';
 import { useSession } from 'next-auth/react';
+import { useTranslations } from 'next-intl';
 import { toast } from 'sonner';
 import { changePassword } from '../services/changePassword';
 import { ChangePasswordPayload } from '../services/types';
@@ -7,6 +8,7 @@ import { isAxiosError } from 'axios';
 import { useLogout } from '@/features/auth/hooks/useLogout';
 
 export const useChangePassword = () => {
+  const t = useTranslations('Profile');
   const { data: session } = useSession();
   const { logout } = useLogout();
 
@@ -27,10 +29,10 @@ export const useChangePassword = () => {
     },
     onError: (error: unknown) => {
       if (isAxiosError(error)) {
-        const message = error.response?.data?.message || 'حدث خطأ أثناء تغيير كلمة المرور';
+        const message = error.response?.data?.message || t('change_password_error');
         toast.error(message);
       } else {
-        toast.error('An unexpected error occurred');
+        toast.error(t('unexpected_error'));
       }
     },
   });

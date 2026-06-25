@@ -4,8 +4,10 @@ import { Link } from '@/core/i18n';
 import { LocationIcon } from '@/shared/components/icons/Location';
 import { MailIcon } from '@/shared/components/icons/Mail';
 import { PhoneIcon } from '@/shared/components/icons/Phone';
+import { LandlineIcon } from '@/shared/components/icons/Landline';
 import { useTranslations } from 'next-intl';
 import { ContactInfo } from '@/shared/services/content';
+
 
 interface FooterContactProps {
   contactInfo: ContactInfo | null;
@@ -14,7 +16,7 @@ interface FooterContactProps {
 export const FooterContact = ({ contactInfo }: FooterContactProps) => {
   const t = useTranslations('Footer');
 
-  const { address, phone_primary, email, map_url } = contactInfo || {};
+  const { address, phone_primary, phone_secondary,email, map_url } = contactInfo || {};
 
   const contactsLinks = [
     {
@@ -29,6 +31,12 @@ export const FooterContact = ({ contactInfo }: FooterContactProps) => {
       title: phone_primary,
       icon: <PhoneIcon className="text-primary" />,
       href: phone_primary ? `tel:${phone_primary}` : undefined,
+      ltr: true,
+    },
+    {
+      title: phone_secondary,
+      icon: <LandlineIcon className="text-primary" />,
+      href: phone_secondary ? `tel:${phone_secondary}` : undefined,
       ltr: true,
     },
     {

@@ -24,7 +24,7 @@ export const BannerCard: React.FC<Props> = ({ title, descritption, textLink, url
               // takes ~half the viewport, so cap to ~590px on the larger side.
               sizes="(max-width: 1024px) 100vw, 590px"
               alt="banner"
-              className="absolute inset-0 h-full w-full object-cover ltr:-scale-x-100"
+              className="absolute inset-0 h-full w-full object-cover"
             />
           </picture>
         ) : (
@@ -33,7 +33,7 @@ export const BannerCard: React.FC<Props> = ({ title, descritption, textLink, url
             fill
             sizes="(max-width: 1024px) 100vw, 590px"
             alt="banner"
-            className="absolute inset-0 h-full w-full object-cover ltr:-scale-x-100"
+            className="absolute inset-0 h-full w-full object-cover"
           />
         )}
 

@@ -79,7 +79,7 @@ export const Actions = ({
           type="button"
           onClick={handleAddToCart}
           disabled={isAddingToCart}
-          className="hover:bg-primary/90 border-primary text-primary flex min-h-full w-full cursor-pointer items-center justify-center gap-2 rounded border bg-transparent p-2 px-3 py-1.5 text-sm font-semibold transition hover:text-white disabled:cursor-not-allowed disabled:opacity-70"
+          className="hover:bg-primary/90 border-primary text-primary flex min-h-full w-full cursor-pointer items-center justify-center gap-2 rounded-xl border bg-transparent p-2 px-3 py-1.5 text-sm font-semibold transition hover:text-white disabled:cursor-not-allowed disabled:opacity-70"
         >
           {isAddingToCart && <Spinner />}
           {t('add_to_cart')}
@@ -96,7 +96,7 @@ export const Actions = ({
         disabled={isLoading}
         aria-label={isInWishlist ? 'Remove from wishlist' : 'Add to wishlist'}
         className={cn(
-          'cursor-pointer rounded border bg-transparent p-2 transition md:p-2.75',
+          'cursor-pointer rounded-xl border bg-transparent p-2 transition md:p-2.75',
           isInWishlist ? 'border-primary text-primary' : 'border-SmokyWhite hover:border-primary text-Stroke'
         )}
       >

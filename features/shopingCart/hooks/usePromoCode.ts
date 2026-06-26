@@ -2,9 +2,11 @@ import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { applyPromoCode } from '../services/promo';
 import { toast } from 'sonner';
 import { isAxiosError } from 'axios';
+import { useTranslations } from 'next-intl';
 
 export const usePromoCode = () => {
   const queryClient = useQueryClient();
+  const t = useTranslations('Cart');
 
   const { mutate: applyPromo, isPending } = useMutation({
     mutationFn: applyPromoCode,
@@ -15,9 +17,9 @@ export const usePromoCode = () => {
     },
     onError: (error: unknown) => {
       if (isAxiosError(error)) {
-        toast.error(error.response?.data?.message || 'Invalid promo code');
+        toast.error(t('promo_invalid'));
       } else {
-        toast.error('Something went wrong');
+        toast.error(t('promo_error'));
       }
     },
   });

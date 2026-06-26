@@ -46,7 +46,7 @@ export const CheckoutContent = () => {
         guest_info: {
           first_name: guestData.first_name,
           last_name: guestData.last_name,
-          email: guestData.email,
+          email: guestData.email || '',
           phone_number: guestData.phone_number,
         },
         guest_address: {

@@ -22,7 +22,7 @@ const makeGuestCheckoutSchema = (t: ReturnType<typeof useTranslations<'Checkout'
     building: z.string().optional(),
     apartment: z.string().optional(),
     phone_number: z.string().min(1, t('phone_required')),
-    email: z.string().email(t('email_invalid')),
+    email: z.string().email(t('email_invalid')).optional().or(z.literal('')),
     notes: z.string().optional(),
   });
 

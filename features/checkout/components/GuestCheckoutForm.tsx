@@ -78,7 +78,7 @@ export const GuestCheckoutForm = forwardRef<GuestCheckoutFormRef, GuestCheckoutF
         </div>
 
         {/* Country */}
-        <div className="grid gap-2">
+        <div className="hidden grid gap-2">
           <Label htmlFor="country_id" className="text-sm font-semibold text-black">
             {t('country')} <span className="text-red-500">*</span>
           </Label>
@@ -149,7 +149,7 @@ export const GuestCheckoutForm = forwardRef<GuestCheckoutFormRef, GuestCheckoutF
         </div>
 
         {/* Building + Apartment */}
-        <div className="grid grid-cols-2 gap-4">
+        <div className="hidden grid grid-cols-2 gap-4">
           <div className="grid gap-2">
             <Label htmlFor="building" className="text-sm font-semibold text-black">
               {t('building')}
@@ -178,7 +178,7 @@ export const GuestCheckoutForm = forwardRef<GuestCheckoutFormRef, GuestCheckoutF
         {/* Email */}
         <div className="grid gap-2">
           <Label htmlFor="email" className="text-sm font-semibold text-black">
-            {t('email')} <span className="text-red-500">*</span>
+            {t('email')} 
           </Label>
           <Input id="email" type="email" {...register('email')} className="bg-Background border-Stroke rounded-sm border" autoComplete="email" />
           {errors.email && <p className="text-sm text-red-500">{errors.email.message}</p>}

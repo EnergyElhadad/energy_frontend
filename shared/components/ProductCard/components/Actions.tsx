@@ -76,9 +76,9 @@ export const Actions = ({
           <button
             type="button"
             disabled
-            className="bg-SmokyWhite text-signalGray flex min-h-full w-full cursor-not-allowed items-center justify-center gap-2 rounded-xl p-2 px-3 py-1.5 text-sm font-semibold"
+            className="bg-SmokyWhite text-signalGray flex min-h-full w-full cursor-not-allowed items-center justify-center gap-1 rounded-xl px-2 py-1.5 text-xs font-semibold whitespace-nowrap sm:gap-2 sm:px-3 sm:text-sm"
           >
-            <Ban className="size-4" />
+            <Ban className="hidden size-4 sm:inline-block" />
             {t('currently_unavailable')}
           </button>
         ) : inCart ? (
@@ -96,7 +96,7 @@ export const Actions = ({
             type="button"
             onClick={handleAddToCart}
             disabled={isAddingToCart}
-            className="hover:bg-primary/90 border-primary text-primary flex min-h-full w-full cursor-pointer items-center justify-center gap-2 rounded-xl border bg-transparent p-2 px-3 py-1.5 text-sm font-semibold transition hover:text-white disabled:cursor-not-allowed disabled:opacity-70"
+            className="hover:bg-primary/90 border-primary text-primary flex min-h-full w-full cursor-pointer items-center justify-center gap-1 rounded-xl border bg-transparent px-2 py-1.5 text-xs font-semibold whitespace-nowrap transition hover:text-white disabled:cursor-not-allowed disabled:opacity-70 sm:gap-2 sm:px-3 sm:text-sm"
           >
             {isAddingToCart && <Spinner />}
             {t('add_to_cart')}

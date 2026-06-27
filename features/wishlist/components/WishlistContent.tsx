@@ -94,6 +94,8 @@ export const WishlistContent = ({ initialData }: WishlistContentProps) => {
                 badge={product.discount_label || undefined}
                 category={product.category?.name}
                 is_in_wishlist={true}
+                is_in_stock={product.available_stock > 0}
+                categoryId={product.category?.id}
               />
             ))}
           </div>

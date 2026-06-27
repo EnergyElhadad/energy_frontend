@@ -242,7 +242,7 @@
     "share_product": "مشاركة المنتج",
     "add_to_cart": "أضف إلى السلة",
     "quick_buy": "شراء سريع",
-    "out_of_stock": "نفدت الكمية",
+    "out_of_stock": "نفذت الكمية",
     "select_quantity": "اختر الكمية",
     "currency": "ج.م",
     "stock_limit_reached": "لا يمكن طلب كمية أكبر من المتاح في المخزون",
@@ -288,6 +288,9 @@
     "search_placeholder": "ابحث عن منتج",
     "no_products": "لا توجد منتجات متاحة بناءً على الفلاتر المحددة.",
     "add_to_cart": "أضف للسلة",
+    "out_of_stock": "نفذت الكمية",
+    "currently_unavailable": "غير متوفر حالياً",
+    "show_alternatives": "عرض البدائل",
     "egp": "ج.م",
     "similar_products": "منتجات مشابهة",
     "no_similar_products": "لا توجد منتجات مشابهة"

@@ -288,6 +288,9 @@
     "search_placeholder": "Search for a product",
     "no_products": "No products available based on the selected filters.",
     "add_to_cart": "Add to Cart",
+    "out_of_stock": "Out of Stock",
+    "currently_unavailable": "Currently unavailable",
+    "show_alternatives": "Show alternatives",
     "egp": "EGP",
     "similar_products": "Similar Products",
     "no_similar_products": "No Similar Products"

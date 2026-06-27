@@ -42,6 +42,8 @@ export const SimilarProducts = ({ products }: SimilarProductsProps) => {
                 oldPrice={Number(product.price)}
                 badge={product.discount_label}
                 is_in_wishlist={product.is_in_wishlist}
+                is_in_stock={product.available_stock > 0}
+                categoryId={product.category?.id}
                 onClick={() => setSelectedProduct(product)}
               />
             </SwiperSlide>

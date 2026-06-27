@@ -9,6 +9,8 @@ import { useTranslations } from 'next-intl';
 import { Spinner } from '@/shared/components/ui/spinner';
 import { Counter } from '@/shared/components/ui/Counter/Counter';
 import { useDebounce } from '@/shared/hooks/useDebounce';
+import { Link } from '@/core/i18n';
+import { Ban, ArrowLeft } from 'lucide-react';
 
 export const Actions = ({
   id,
@@ -17,13 +19,17 @@ export const Actions = ({
   price,
   category,
   is_in_wishlist,
+  is_in_stock,
+  categoryId,
 }: {
   id: number | string;
   title: string;
-  image?: string;
+  image?: string; 
   price?: number;
   category?: string;
   is_in_wishlist?: boolean;
+  is_in_stock?: boolean;
+  categoryId?: number;
 }) => {
   const { isInWishlist, toggleWishlist, isLoading } = useWishlistToggle(id, is_in_wishlist);
   const { items, addItem, updateQuantity, removeItem, isAddingToCart } = useCart();
@@ -61,47 +67,70 @@ export const Actions = ({
     e.stopPropagation();
     addItem({ id: Number(id), title, category: category ?? '', image: image ?? '', price });
   };
+  const outOfStock = is_in_stock === false;
 
-  return (
-    <div className="relative z-10 flex h-10.5 items-center justify-between gap-2 pointer-events-auto">
-      {inCart ? (
-        <div
-          className="flex min-h-full w-full items-center"
+    return (
+    <div className="relative z-10 flex min-h-23 flex-col justify-end gap-2 pointer-events-auto">
+      <div className="flex h-10.5 items-center justify-between gap-2">
+        {outOfStock ? (
+          <button
+            type="button"
+            disabled
+            className="bg-SmokyWhite text-signalGray flex min-h-full w-full cursor-not-allowed items-center justify-center gap-2 rounded-xl p-2 px-3 py-1.5 text-sm font-semibold"
+          >
+            <Ban className="size-4" />
+            {t('currently_unavailable')}
+          </button>
+        ) : inCart ? (
+          <div
+            className="flex min-h-full w-full items-center"
+            onClick={e => {
+              e.preventDefault();
+              e.stopPropagation();
+            }}
+          >
+            <Counter value={localQuantity} onChange={setLocalQuantity} min={1} fullWidth onDelete={() => removeItem(id)} />
+          </div>
+        ) : (
+          <button
+            type="button"
+            onClick={handleAddToCart}
+            disabled={isAddingToCart}
+            className="hover:bg-primary/90 border-primary text-primary flex min-h-full w-full cursor-pointer items-center justify-center gap-2 rounded-xl border bg-transparent p-2 px-3 py-1.5 text-sm font-semibold transition hover:text-white disabled:cursor-not-allowed disabled:opacity-70"
+          >
+            {isAddingToCart && <Spinner />}
+            {t('add_to_cart')}
+          </button>
+        )}
+
+        <button
+          type="button"
           onClick={e => {
             e.preventDefault();
             e.stopPropagation();
+            toggleWishlist();
           }}
+          disabled={isLoading}
+          aria-label={isInWishlist ? 'Remove from wishlist' : 'Add to wishlist'}
+          className={cn(
+            'cursor-pointer rounded-xl border bg-transparent p-2 transition md:p-2.75',
+            isInWishlist ? 'border-primary text-primary' : 'border-SmokyWhite hover:border-primary text-Stroke'
+          )}
         >
-          <Counter value={localQuantity} onChange={setLocalQuantity} min={1} fullWidth onDelete={() => removeItem(id)} />
-        </div>
-      ) : (
-        <button
-          type="button"
-          onClick={handleAddToCart}
-          disabled={isAddingToCart}
-          className="hover:bg-primary/90 border-primary text-primary flex min-h-full w-full cursor-pointer items-center justify-center gap-2 rounded-xl border bg-transparent p-2 px-3 py-1.5 text-sm font-semibold transition hover:text-white disabled:cursor-not-allowed disabled:opacity-70"
-        >
-          {isAddingToCart && <Spinner />}
-          {t('add_to_cart')}
+          <HeartIcon className={cn(isInWishlist && 'fill-current')} />
         </button>
-      )}
+      </div>
 
-      <button
-        type="button"
-        onClick={e => {
-          e.preventDefault();
-          e.stopPropagation();
-          toggleWishlist();
-        }}
-        disabled={isLoading}
-        aria-label={isInWishlist ? 'Remove from wishlist' : 'Add to wishlist'}
-        className={cn(
-          'cursor-pointer rounded-xl border bg-transparent p-2 transition md:p-2.75',
-          isInWishlist ? 'border-primary text-primary' : 'border-SmokyWhite hover:border-primary text-Stroke'
-        )}
-      >
-        <HeartIcon className={cn(isInWishlist && 'fill-current')} />
-      </button>
+      {outOfStock && (
+        <Link
+          href={{ pathname: '/products', query: categoryId ? { categoryId, categoryName: category ?? '' } : {} }}
+          onClick={e => e.stopPropagation()}
+          className="border-primary text-primary bg-primary-10 flex w-full items-center justify-center gap-2 rounded-xl border border-dashed py-2 text-sm font-semibold"
+        >
+          {t('show_alternatives')}
+          <ArrowLeft className="size-4 ltr:rotate-180" />
+        </Link>
+      )}
     </div>
   );
 };

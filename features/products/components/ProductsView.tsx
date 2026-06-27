@@ -65,6 +65,8 @@ export const ProductsView = ({ initialData, categeoryDescription, onOpenFilters 
             badge={product.discount_label}
             onClick={() => setSelectedProduct(product)}
             is_in_wishlist={product.is_in_wishlist}
+            is_in_stock={product.available_stock > 0}
+            categoryId={product.category?.id}
           />
         )}
       />

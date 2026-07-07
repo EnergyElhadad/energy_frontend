@@ -12,6 +12,8 @@ import QueryProvider from '@/core/providers/QueryProvider';
 import { Toaster } from '@/shared/components/ui/sonner';
 import { DirectionProvider } from '@/core/providers/direction-provider';
 import { SITE_URL } from '@/shared/utils/site-url';
+import { MetaPixelScript, MetaPixelNoScript } from '@/shared/components/analytics/MetaPixel';
+import { MetaPixelPageView } from '@/shared/components/analytics/MetaPixelPageView';
 
 export function generateStaticParams() {
   return locales.map(locale => ({ locale }));
@@ -120,8 +122,10 @@ export default async function RootLayout({
             <link rel="dns-prefetch" href={apiOrigin} />
           </>
         )}
+        <MetaPixelScript />
       </head>
       <body className={`${cairo.variable} antialiased`}>
+        <MetaPixelNoScript />
         <SessionProvider>
           <QueryProvider>
             <NextIntlClientProvider messages={messages}>
@@ -132,6 +136,7 @@ export default async function RootLayout({
             </NextIntlClientProvider>
           </QueryProvider>
         </SessionProvider>
+        <MetaPixelPageView />
       </body>
     </html>
   );

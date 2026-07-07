@@ -44,6 +44,8 @@ export interface SocialMedia {
   youtube_logo: string | null;
   whatsapp_url: string | null;
   whatsapp_logo: string | null;
+  tiktok_url: string | null;
+  tiktok_logo: string | null;
 }
 
 export interface SocialMediaResponse {

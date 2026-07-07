@@ -3,6 +3,7 @@ import { FacebookIcon } from '@/shared/components/icons/social/Facebook';
 import { InstagramIcon } from '@/shared/components/icons/social/Instagram';
 import { TwitterIcon } from '@/shared/components/icons/social/Twitter';
 import { YoutubeIcon } from '@/shared/components/icons/social/Youtube';
+import { TiktokIcon } from '@/shared/components/icons/social/Tiktok';
 import { useTranslations } from 'next-intl';
 import { SocialMedia } from '@/shared/services/content';
 
@@ -45,6 +46,14 @@ export const SocialList = ({ socialMedia }: SocialListProps) => {
       icon: <YoutubeIcon />,
       href: socialMedia.youtube_url,
       label: t('youtube_label'),
+    });
+  }
+
+  if (socialMedia?.tiktok_url) {
+    socialLinks.push({
+      icon: <TiktokIcon />,
+      href: socialMedia.tiktok_url,
+      label: t('tiktok_label'),
     });
   }
 

@@ -422,6 +422,7 @@
     "twitter_label": "Twitter",
     "instagram_label": "Instagram",
     "youtube_label": "YouTube",
+    "tiktok_label": "TikTok",
     "address_fallback": "123 Tahrir Street, Cairo, Egypt",
     "phone_fallback": "+20 123 456 7890",
     "email_fallback": "info@electrostore.com"

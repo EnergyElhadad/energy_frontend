@@ -30,4 +30,7 @@ jobs:
       - name: Redeploy Docker Compose
         run: |
           cd /opt/energy-staging/energy_backend
-          docker compose -f docker-compose.prod.yml down  && docker compose -f docker-compose.prod.yml up -d --build
+          # The frontend override must come after the prod file so its
+          # NEXT_PUBLIC_API_URL build arg (staging API) wins over the
+          # production URL hardcoded in docker-compose.prod.yml.
+          docker compose -f docker-compose.prod.yml down  && docker compose -f docker-compose.prod.yml -f ../energy_frontend/docker-compose.staging.yml up -d --build

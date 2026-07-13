@@ -10,6 +10,7 @@ import { useProductCounter } from '../ProductCounter/hooks/useProductCounter';
 import { useProductActions } from '../Actions/hooks/useProductActions';
 import { Display } from '@/shared/components/layout/Display';
 import { useTranslations } from 'next-intl';
+import { MetaPixelViewContent } from '@/shared/components/analytics/MetaPixelViewContent';
 
 interface ProductDetailsProps {
   product: ProductData;
@@ -32,6 +33,7 @@ export const ProductDetails = ({ product }: ProductDetailsProps) => {
 
   return (
     <>
+      <MetaPixelViewContent id={id} name={name} value={effectivePrice} />
       <ProductHeader name={name} available_stock={available_stock} />
       <ProductMeta name={name} rate_count={ratings_count} reviews_count={ratings_count} id={id} is_in_wishlist={product.is_in_wishlist} />
       <ProductInfo description={short_description} />

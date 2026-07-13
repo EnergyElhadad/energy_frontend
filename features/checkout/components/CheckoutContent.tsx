@@ -9,6 +9,7 @@ import { toast } from 'sonner';
 import { Display } from '@/shared/components/layout/Display';
 import { useSession } from 'next-auth/react';
 import { GuestCheckoutForm, GuestCheckoutFormRef } from './GuestCheckoutForm';
+import { MetaPixelInitiateCheckout } from '@/shared/components/analytics/MetaPixelInitiateCheckout';
 
 export const CheckoutContent = () => {
   const t = useTranslations('Checkout');
@@ -63,6 +64,7 @@ export const CheckoutContent = () => {
 
   return (
     <div className="flex flex-col gap-6 md:flex-row">
+      <MetaPixelInitiateCheckout />
       <div className="flex h-fit flex-1 flex-col gap-3 rounded-md bg-white p-6 shadow-[0_4px_12px_0_rgba(0,0,0,0.04)] sm:gap-7.25">
         <Display when={authStatus === 'authenticated'}>
           <DelivaryOrder selectedAddressId={selectedAddressId} onSelectAddress={setSelectedAddressId} />

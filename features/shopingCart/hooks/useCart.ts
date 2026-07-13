@@ -7,6 +7,7 @@ import type { CartItem, Product, UseCartReturn } from '@/shared/types/cart';
 import { toast } from 'sonner';
 import { isAxiosError } from 'axios';
 import { useTranslations } from 'next-intl';
+import { trackAddToCart } from '@/shared/components/analytics/metaPixelEvents';
 
 export const useCart = (): UseCartReturn => {
   const queryClient = useQueryClient();
@@ -100,6 +101,9 @@ export const useCart = (): UseCartReturn => {
       { product_id: product.id, quantity },
       {
         onSuccess: () => {
+          // Every add-to-cart entry point (product page, cards, offer modal)
+          // funnels through here, and only confirmed adds are counted.
+          trackAddToCart({ id: product.id, name: product.title, price: product.price, quantity });
           options?.onSuccess?.();
         },
       }

@@ -2,6 +2,7 @@
 
 import { Suspense, useEffect, useRef } from 'react';
 import { usePathname, useSearchParams } from 'next/navigation';
+import { trackMetaPixel } from './metaPixelEvents';
 
 // Intentionally the raw next/navigation hooks, NOT the @/core/i18n wrappers:
 // the next-intl usePathname strips the /ar | /en prefix, which would make
@@ -11,12 +12,6 @@ import { usePathname, useSearchParams } from 'next/navigation';
 // anything else (page, sort, filters, utm_*) do NOT count as a PageView —
 // agreed with marketing to avoid inflating counts with pagination/sorting.
 const NAVIGATION_PARAMS = ['categoryId', 'search'];
-
-declare global {
-  interface Window {
-    fbq?: (...args: unknown[]) => void;
-  }
-}
 
 const PageViewTracker = () => {
   const pathname = usePathname();
@@ -42,12 +37,9 @@ const PageViewTracker = () => {
       return;
     }
     lastTracked.current = url;
-    // Guard against the pixel bootstrap being unavailable (blocked inline
-    // script, future CSP). Note: if only fbevents.js is blocked, fbq still
-    // exists as the bootstrap's queueing stub and calls queue harmlessly.
-    if (typeof window.fbq === 'function') {
-      window.fbq('track', 'PageView');
-    }
+    // Note: if only fbevents.js is blocked, fbq still exists as the
+    // bootstrap's queueing stub and calls queue harmlessly.
+    trackMetaPixel('PageView');
   }, [url]);
 
   return null;

@@ -227,7 +227,9 @@
     "building_required": "Building number is required",
     "apartment_required": "Apartment number is required",
     "phone_required": "Phone number is required",
-    "email_invalid": "Invalid email"
+    "email_invalid": "Invalid email",
+    "checkout_failed": "Could not place your order. Please review your details and try again",
+    "something_went_wrong": "An unexpected error occurred. Please try again"
   },
   "SingleProduct": {
     "meta_title": "Product Details",

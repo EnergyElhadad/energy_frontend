@@ -227,7 +227,9 @@
     "building_required": "رقم المبنى مطلوب",
     "apartment_required": "رقم الشقة مطلوب",
     "phone_required": "رقم الموبايل مطلوب",
-    "email_invalid": "الايميل غير صالح"
+    "email_invalid": "الايميل غير صالح",
+    "checkout_failed": "تعذّر إتمام الطلب، برجاء مراجعة البيانات والمحاولة مرة أخرى",
+    "something_went_wrong": "حدث خطأ غير متوقع، برجاء المحاولة مرة أخرى"
   },
   "SingleProduct": {
     "meta_title": "تفاصيل المنتج",

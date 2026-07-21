@@ -2,7 +2,7 @@ import Rating from '@/features/home/components/CustomerReviews/components/Rating
 import { HeartIcon } from '@/shared/components/icons/Heart';
 import { ShareProductIcon } from '@/shared/components/icons/ShareProduct';
 import { useShare } from '@/shared/hooks/useShare';
-import { useTranslations } from 'next-intl';
+import { useLocale, useTranslations } from 'next-intl';
 import { useWishlistToggle } from '@/shared/hooks/useWishlistToggle';
 import { Loader2 } from 'lucide-react';
 import { cn } from '@/shared/utils';
@@ -17,6 +17,7 @@ interface ProductMetaProps {
 
 export const ProductMeta = ({ name, rate_count, reviews_count, id, is_in_wishlist }: ProductMetaProps) => {
   const t = useTranslations('SingleProduct');
+  const locale = useLocale();
   const { handleShare } = useShare();
   const { isInWishlist, toggleWishlist, isLoading } = useWishlistToggle(id || 0, is_in_wishlist);
 
@@ -40,7 +41,10 @@ export const ProductMeta = ({ name, rate_count, reviews_count, id, is_in_wishlis
           </p>
         </div>
       </button>
-      <div className="flex cursor-pointer space-x-2 border-s ps-4" onClick={() => handleShare({ title: name })}>
+      <div
+        className="flex cursor-pointer space-x-2 border-s ps-4"
+        onClick={() => handleShare({ title: name, url: `${window.location.origin}/${locale}/products/${id}` })}
+      >
         <div className="text-signalGray hover:text-primary">
           <ShareProductIcon />
         </div>

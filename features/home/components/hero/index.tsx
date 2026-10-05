@@ -1,5 +1,6 @@
 'use client';
 
+import { useEffect, useState } from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Navigation, Pagination, Autoplay } from 'swiper/modules';
 import 'swiper/css';
@@ -14,7 +15,38 @@ interface HeroProps {
   data: Banner[];
 }
 
+// Slides 2..N are mounted only after the page has loaded and the main thread
+// is idle. Native loading="lazy" uses a ~1250px+ distance threshold, so a slide
+// sitting just off-screen beside slide 1 would otherwise start downloading
+// immediately and compete with the LCP image.
+const useDeferredMount = () => {
+  const [ready, setReady] = useState(false);
+
+  useEffect(() => {
+    let idleId: number | undefined;
+    let timeoutId: ReturnType<typeof setTimeout> | undefined;
+    const schedule = () => {
+      if ('requestIdleCallback' in window) idleId = window.requestIdleCallback(() => setReady(true), { timeout: 2000 });
+      else timeoutId = setTimeout(() => setReady(true), 1500);
+    };
+
+    if (document.readyState === 'complete') schedule();
+    else window.addEventListener('load', schedule, { once: true });
+
+    return () => {
+      window.removeEventListener('load', schedule);
+      if (idleId !== undefined) window.cancelIdleCallback(idleId);
+      if (timeoutId !== undefined) clearTimeout(timeoutId);
+    };
+  }, []);
+
+  return ready;
+};
+
 export const Hero: React.FC<HeroProps> = ({ data }) => {
+  const showAllSlides = useDeferredMount();
+  const slides = showAllSlides ? data : data?.slice(0, 1);
+
   return (
     <section className="relative w-full overflow-hidden">
       <div className="group relative aspect-square lg:aspect-1440/405">
@@ -32,7 +64,7 @@ export const Hero: React.FC<HeroProps> = ({ data }) => {
           }}
           className="h-full w-full"
         >
-          {data?.map((item, index) => (
+          {slides?.map((item, index) => (
             <SwiperSlide key={item.id}>
               <HeroContent
                 title={item.title}

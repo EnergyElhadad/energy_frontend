@@ -58,7 +58,7 @@ export const MobileMenuDrawer = ({ categoriesData }: MobileMenuDrawerProps) => {
         <div className="flex w-full items-center justify-between border-b border-gray-100 px-4 py-3">
           <DrawerClose asChild>
             <Link href="/" className="flex items-center" aria-label="Home">
-              <Image src="/images/header-logo.svg" alt="Logo" width={110} height={35} priority />
+              <Image src="/images/logo.png" alt="Logo" width={110} height={35} priority />
             </Link>
           </DrawerClose>
           <DrawerClose asChild>

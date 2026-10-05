@@ -1,10 +1,13 @@
-import logo from '@/public/images/header-logo.svg';
 import { Logo } from './Logo';
 import { Search } from './Search';
 import { Toolbar } from './Toolbar';
 import { MobileMenuDrawer } from './MobileMenuDrawer';
 import { getCategories } from '@/shared/services/categories.server';
 import { getSocialMedia } from '@/shared/services/content';
+
+// Raster logo served through next/image (AVIF/WebP, a few KB). The .svg
+// versions are just this PNG base64-embedded (~66 KB) and bypass the optimizer.
+const LOGO_FALLBACK = '/images/logo.png';
 
 export const MainHeader = async () => {
   const [categoriesData, socialMediaResponse] = await Promise.all([getCategories(), getSocialMedia()]);
@@ -13,7 +16,7 @@ export const MainHeader = async () => {
   return (
     <div className="container">
       <div className="hidden items-center justify-between gap-[61px] py-[20px] lg:flex">
-        <Logo src={socialMedia?.logo ?? '/images/header-logo.svg'} alt="Header Logo" width={149} height={48} />
+        <Logo src={socialMedia?.logo ?? LOGO_FALLBACK} alt="Header Logo" width={149} height={48} />
         <Search />
         <Toolbar />
       </div>
@@ -25,7 +28,7 @@ export const MainHeader = async () => {
           <MobileMenuDrawer categoriesData={categoriesData} />
         </div>
         <div className="order-1">
-          <Logo src={socialMedia?.logo || logo} alt={socialMedia?.slogan || 'Logo'} width={120} height={38} />
+          <Logo src={socialMedia?.logo || LOGO_FALLBACK} alt={socialMedia?.slogan || 'Logo'} width={120} height={38} />
         </div>
       </div>
     </div>

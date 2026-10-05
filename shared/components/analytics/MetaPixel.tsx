@@ -12,6 +12,11 @@ export const META_PIXEL_ID = '2497929610647135';
  * is present in the server-rendered HTML (view-source acceptance criterion).
  * The snippet's own `if(f.fbq)return` guard prevents double initialization.
  * Route-change PageViews are handled by <MetaPixelPageView />.
+ *
+ * Deviation from Meta's stock snippet: fbevents.js (~250 KB) is injected only
+ * after window `load`, so it doesn't compete with the LCP image. The fbq stub
+ * and its queue are still created immediately, so init/PageView and any early
+ * tracking calls are buffered and flushed once the library arrives.
  */
 export const MetaPixelScript = () => (
   <script
@@ -22,9 +27,10 @@ export const MetaPixelScript = () => (
 {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
 n.callMethod.apply(n,arguments):n.queue.push(arguments)};
 if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
-n.queue=[];t=b.createElement(e);t.async=!0;
+n.queue=[];function l(){t=b.createElement(e);t.async=!0;
 t.src=v;s=b.getElementsByTagName(e)[0];
-s.parentNode.insertBefore(t,s)}(window, document,'script',
+s.parentNode.insertBefore(t,s)}
+b.readyState==='complete'?l():f.addEventListener('load',l,{once:!0})}(window, document,'script',
 'https://connect.facebook.net/en_US/fbevents.js');
 fbq('init', '${META_PIXEL_ID}');
 fbq('track', 'PageView');`,

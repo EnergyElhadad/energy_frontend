@@ -1,4 +1,4 @@
-import Image from 'next/image';
+import { ArtDirectedImage } from '@/shared/components/ui/ArtDirectedImage';
 import { MainBannerContent } from './components/MainBannerContent';
 import { useTranslations } from 'next-intl';
 import { Banner } from '@/features/home/types/banner';
@@ -15,19 +15,15 @@ export const MainBanner = ({ data }: MainBannerProps) => {
       <div className="container">
         <div className="overflow-hidden rounded-lg" aria-label="main banner ">
           <div className="relative z-2 min-h-81.25 w-full items-center">
-            <picture>
-              <source media="(max-width: 767px)" srcSet={banner?.mobile_image ?? banner?.image ?? '/images/banner-mobile.webp'} />
-              <source media="(min-width: 768px)" srcSet={banner?.image ?? '/images/hero.webp'} />
-              <Image
-                src={banner?.image ?? '/images/hero.webp'}
-                fill
-                // Banner sits inside the .container which clamps width — full
-                // width on mobile, capped to ~1200 on desktop.
-                sizes="(max-width: 1200px) 100vw, 1200px"
-                alt={banner?.title ?? 'main banner'}
-                className="absolute inset-0 h-full w-full object-cover"
-              />
-            </picture>
+            <ArtDirectedImage
+              src={banner?.image ?? '/images/hero.webp'}
+              mobileSrc={banner?.mobile_image ?? (banner ? undefined : '/images/banner-mobile.webp')}
+              // Banner sits inside the .container which clamps width — full
+              // width on mobile, capped to ~1200 on desktop.
+              sizes="(max-width: 1200px) 100vw, 1200px"
+              alt={banner?.title ?? 'main banner'}
+              className="absolute inset-0 h-full w-full object-cover"
+            />
 
             <div className="absolute inset-0 bg-black/5 md:bg-black/50" />
             <MainBannerContent

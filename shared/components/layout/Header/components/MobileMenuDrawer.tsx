@@ -41,8 +41,8 @@ export const MobileMenuDrawer = ({ categoriesData }: MobileMenuDrawerProps) => {
   const linksAfterCategories = [
     { href: '/products', label: t('all_products') },
     { href: '/about', label: t('company_profile') },
-    { href: '/quality-policy', label: t('quality_policy') },
-    { href: '/contact', label: t('contact_us') },
+    { href: '/terms-and-conditions', label: t('quality_policy') },
+    { href: '/contact-us', label: t('contact_us') },
   ];
 
   return (
